@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>blog - cnewbie's 	 blog</title>
+    <title>cnewbie's 	 blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,8 +10,7 @@
 
 
 
-    <meta name="author" content="cnewbie" />
-    <meta name="keywords" content="blog" />
+        <meta name="author" content="cnewbie" />
 
     <!-- Open Graph tags -->
         <meta property="og:site_name" content="cnewbie's 	 blog" />
@@ -52,7 +51,7 @@ cnewbie's 	 blog            </a>
                          <li><a href="https://cnewbie.github.io/others/pages/about.html">
                              About
                           </a></li>
-                        <li class="active">
+                        <li >
                             <a href="https://cnewbie.github.io/others/category/blog.html">Blog</a>
                         </li>
             </ul>
@@ -68,88 +67,12 @@ cnewbie's 	 blog            </a>
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-            <article>
-                <h2><a href="https://cnewbie.github.io/posts/2017/06/iptables-firewall.html">iptables firewall</a></h2>
-                <div class="summary"><h1>iptables防火墙</h1>
-<h2>filter,nat,mangle 规则表</h2>
-<h3>filter表</h3>
-<p>数据包过滤,根据规则决定是否放行数据包（DROP,ACCEPT,REJECT,LOG）</p>
-<p>三条规则链</p>
-<ul>
-<li>INPUT 进入本地的包</li>
-<li>FORWARD 不是本地产生且负责转发的包</li>
-<li>OUTPUT 本地产生的包</li>
-</ul>
-<h3>nat表</h3>
-<p>修改数据包ip地址、端口等信息（SNAT,DNAT,MASQUERADE,REDIRECT）</p>
-<p>三条规则链</p>
-<ul>
-<li>PREROUTING 改变进入数据包的目的地址</li>
-<li>OUTPUT 改变本地产生包的目的地址</li>
-<li>POSTROUTING 改变发出数据包的源地址</li>
-</ul>
-<h3>mangle表</h3>
-<p>修改数据包的TOS，TTL及数据包的Mark。
-五个规则链 PREROUTING，POSTROUTING，INPUT，OUTPUT，FORWARD</p>
-<h3>raw表</h3>
-<p>决定数据包是否被状态跟踪机制处理
-两条规则链 OUTPUT,PREROUTING</p>
-<p>四种状态</p>
-<ul>
-<li>NEW 开始一个连接 …</li></ul>
-                    <a class="btn btn-default btn-xs" href="https://cnewbie.github.io/posts/2017/06/iptables-firewall.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="https://cnewbie.github.io/posts/2017/04/introduction-of-genetic-algorithm.html">Introduction of Genetic Algorithm</a></h2>
-                <div class="summary"><h1>Genetic Algorithm</h1>
-<h2>outline of GA</h2>
-<p>Outline of the Basic Genetic Algorithm</p>
-<ul>
-<li>[Start] Generate random population of n chromosomes (suitable solutions for the problem)</li>
-<li>[Fitness] Evaluate the fitness f(x) of each chromosome x in the population</li>
-<li>[New population] Create a new population by repeating following steps until the new population …</li></ul>
-                    <a class="btn btn-default btn-xs" href="https://cnewbie.github.io/posts/2017/04/introduction-of-genetic-algorithm.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="https://cnewbie.github.io/posts/2017/03/git-note.html">Git Note</a></h2>
-                <div class="summary"><h1>Git Note</h1>
-<h2>Git Basics</h2>
-<p>This chapter covers ervry basic command.</p>
-<h3>Getting a Git Repository</h3>
-<p>Initialzing a Repository in an existing directory</p>
-<blockquote>
-<p>git init</p>
-</blockquote>
-<p>Cloning an existing repository</p>
-<blockquote>
-<p>git clone [url]</p>
-</blockquote>
-<h3>Recording Changes to the Repository</h3>
-<p>Checking the Status of Yours Files</p>
-<blockquote>
-<p>git status</p>
-</blockquote>
-<p>Tracking New Files</p>
-<blockquote>
-<p>git add [filename]</p>
-</blockquote>
-<p>Staging …</p>
-                    <a class="btn btn-default btn-xs" href="https://cnewbie.github.io/posts/2017/03/git-note.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="https://cnewbie.github.io/posts/2017/03/hello-world.html">Hello World!!!</a></h2>
-                <div class="summary"><p>Hello World!!!</p>
-                    <a class="btn btn-default btn-xs" href="https://cnewbie.github.io/posts/2017/03/hello-world.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
+<h1>Archives for June 2017</h1>
 
+<dl>
+    <dt>2017 June 30 Fri</dt>
+    <dd><a href="https://cnewbie.github.io/posts/2017/06/iptables-firewall.html">iptables firewall</a></dd>
+</dl>
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>
