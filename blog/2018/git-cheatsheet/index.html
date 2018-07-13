@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Git Cheatsheet - cnewbie's Blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="https://cnewbie.github.io/blog/2018/git-cheatsheet/">
+
+        <meta name="author" content="cnewbie" />
+        <meta name="keywords" content="Git" />
+        <meta name="description" content="Git 命令速查" />
+
+        <meta property="og:site_name" content="cnewbie's Blog" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Git Cheatsheet"/>
+        <meta property="og:url" content="https://cnewbie.github.io/blog/2018/git-cheatsheet/"/>
+        <meta property="og:description" content="Git 命令速查"/>
+        <meta property="article:published_time" content="2018-07-13" />
+            <meta property="article:section" content="Tech" />
+            <meta property="article:tag" content="Git" />
+            <meta property="article:author" content="cnewbie" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://cnewbie.github.io/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="https://cnewbie.github.io/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://cnewbie.github.io/theme/css/pygments/solarizeddark.css" rel="stylesheet">
+    <link href="https://cnewbie.github.io/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cnewbie.github.io/theme/css/style.css" type="text/css"/>
+
+        <link href="https://cnewbie.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="cnewbie's Blog ATOM Feed"/>
+
+
+
+        <link href="https://cnewbie.github.io/feeds/tech.atom.xml" type="application/atom+xml" rel="alternate"
+              title="cnewbie's Blog Tech ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="https://cnewbie.github.io/" class="navbar-brand">
+cnewbie's Blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="https://cnewbie.github.io/pages/about.html">
+                             About
+                          </a></li>
+                        <li class="active">
+                            <a href="https://cnewbie.github.io/categories/tech/">Tech</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+              <li><a href="https://cnewbie.github.io/blog/"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-sm-push-3">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="https://cnewbie.github.io/blog/2018/git-cheatsheet/"
+                       rel="bookmark"
+                       title="Permalink to Git Cheatsheet">
+                        Git Cheatsheet
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2018-07-13T00:00:00+08:00"> 2018 Jul 13</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="https://cnewbie.github.io/tags/git/">Git</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h1 id="git">Git 基础</h1>
+<h2 id="_1">基础操作</h2>
+<p>初始化仓库  </p>
+<p><code>git init</code><br/>
+<code>git clone [url]</code> </p>
+<p>检查文件状态  </p>
+<p><code>git status</code> </p>
+<p>跟踪文件  </p>
+<p><code>git add [file name]</code> 跟踪新文件/暂存已修改文件  </p>
+<p>对比文件修改内容  </p>
+<p><code>git diff [file name]</code><br/>
+<code>git diff --cached/staged [file name]</code> 对比暂存区文件  </p>
+<p>提交更新  </p>
+<p><code>git commit</code><br/>
+<code>git commit -m [message]</code>  更新纪录<br/>
+<code>git commit -a -m [message]</code>  跳过暂存文件步骤直接提交  </p>
+<p>移除文件  </p>
+<p><code>git rm [file name]</code> 删除文件并取消跟踪<br/>
+<code>git rm --cached [file name]</code> 取消跟踪文件  </p>
+<p>重命名文件  </p>
+<p><code>git mv [file name]</code> </p>
+<div class="highlight"><pre><span></span>mv old_name new_name  
+git rm old_name  
+git add new_name  
+</pre></div>
+<p>查看提交历史  </p>
+<p><code>git log</code> <a href="https://git-scm.com/docs/git-log">git log</a> <br/>
+<code>git log --pretty=format: "%h %s" --graph</code> </p>
+<p>撤销提交  </p>
+<p><code>git commmit --amend</code><br/>
+<code>git rebase -i</code> </p>
+<p>撤销暂存文件  </p>
+<p><code>git reset HEAD [file name]</code> <br/>
+<code>git reset --hard [file name]</code> 当前文件修改丢失  </p>
+<p>撤销文件修改  </p>
+<p><code>git checkout -- [file name]</code> </p>
+<h2 id="_2">远程仓库</h2>
+<p>查看远程仓库  </p>
+<p><code>git remote -v</code> </p>
+<p>添加远程仓库  </p>
+<p><code>git remote add [short name] [url]</code> </p>
+<p>从远程仓库获取文件  </p>
+<p><code>git fetch [remote name]</code> </p>
+<p>推送到远程分支   </p>
+<p><code>git push [remote name] [branch name]</code> </p>
+<p>查看远程仓库  </p>
+<p><code>git remote show [remote-name]</code> </p>
+<p>远程仓库重命名   </p>
+<p><code>git remote rename [old name] [new name]</code> </p>
+<p>删除远程仓库  </p>
+<p><code>git rm [remote name]</code> </p>
+<h2 id="_3">标签</h2>
+<p>查看标签  </p>
+<p><code>git tag</code> </p>
+<p>添加附注标签  </p>
+<p><code>git tag -a [tag name] -m [message]</code> </p>
+<p>查看标签详情  </p>
+<p><code>git show [tag name]</code> </p>
+<p>添加轻量标签  </p>
+<p><code>git tag [tag name]</code> </p>
+<p>推送标签至远程服务器  </p>
+<p><code>git push [remote branch name] [tag name]</code> </p>
+<p>推送所有标签  </p>
+<p><code>git push [remote branch name] --tags</code> </p>
+<p>特定标签上建立分支  </p>
+<p><code>git checkout -b [branch name] [tag name]</code> </p>
+<h1 id="git_2">Git 分支</h1>
+<h2 id="_4">分支基本操作</h2>
+<p>分支创建  </p>
+<p><code>git branch [branch name]</code> </p>
+<p>分支切换  </p>
+<p><code>git checkout [branch name]</code> </p>
+<p>查看分支历史  </p>
+<p><code>git log --oneline --decorate --graph --all</code> </p>
+<p>合并分支  </p>
+<p><code>git merge [branch name]</code> </p>
+<p>删除分支  </p>
+<p><code>git branch -d [branch name]</code> </p>
+<h2 id="_5">远程分支</h2>
+<p>查看远程分支  </p>
+<p><code>git ls-remote</code> or <code>git remote show [remote name]</code> </p>
+<p>推送分支  </p>
+<p><code>git push [remote] [local branch]  == git push [remote] [local branch:remote branch name]</code> </p>
+<p>跟踪分支  </p>
+<p><code>git chenckout -b [branch] [remote name]/[branch]</code> </p>
+<p>设置上游分支  </p>
+<p><code>git branch -u [remote name]/[branch]</code> </p>
+<p>查看跟踪分支  </p>
+<p><code>git branch -vv</code> </p>
+<p>抓取分支更新  </p>
+<p><code>git fetch --all</code> </p>
+<p>删除远程分支  </p>
+<p><code>git push [remote] --delete [branch name]</code> or <code>git push [remote] :[branch naem]</code> </p>
+<p><a href="https://git-scm.com/docs/git-push#_examples">example</a> </p>
+<p>分支合并  </p>
+<p><code>git rebase/merge</code><br/>
+<code>rebase</code>历史纪录更简洁  <a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing">变基</a> </p>
+<h1 id="git_4">Git 工具</h1>
+<p>引用日志  </p>
+<p>查看分支引用的历史纪录<br/>
+<code>git reflog</code> </p>
+<p>提交区间  </p>
+<p>双点语法,查看后者引用中特定的提交  </p>
+<p><code>git log [ref name1]..[ref name2]</code> </p>
+<p>多点语法,不包含最后引用的提交  </p>
+<p><code>git log refA refB ^refC == git log refA refB --not refC</code> </p>
+<p>三点语法,查看两引用的差异提交  </p>
+<p><code>git log [ref name1]...[ref name2]</code> </p>
+<h2 id="_6">储藏与清理</h2>
+<p>储藏工作空间  </p>
+<p><code>git stash save</code> </p>
+<p>查看储藏列表  </p>
+<p><code>git stash list</code> </p>
+<p>应用储藏  </p>
+<p><code>git stash apply [ref]</code> </p>
+<p>删除储藏  </p>
+<p><code>git stash drop [ref]</code> </p>
+<p>不储藏暂存区文件  </p>
+<p><code>git stash save --kep-index</code> </p>
+<p>应用储藏包括暂存区  </p>
+<p><code>git stash apply --index</code> </p>
+<p>储藏包含未跟踪的文件  </p>
+<p><code>git stash -u/--include-untracked</code> </p>
+<p>新建分支并应用储藏  </p>
+<p><code>git stash branch [nranch name]</code> </p>
+<p>移除为跟踪文件  </p>
+<p><code>git clean</code> </p>
+<p>移除所用文件并储藏  </p>
+<p><code>git stash --all</code> </p>
+<h2 id="_7">重写历史</h2>
+<p>修改最后一次提交  </p>
+<p><code>git commit --amend</code> </p>
+<p>交互式修改ref开始的所有提交  </p>
+<p><code>git rebase -i [ref]</code> </p>
+<p>批量修改提交  </p>
+<p><code>git filter-branch --tree-filter [command] [ref]</code> </p>
+<p>切换根目录  </p>
+<p><code>git filter-branch --subdirectory-filter [directory name] [ref]</code> </p>
+<h2 id="_8">重置对比</h2>
+<p>相反操作操作提交指针  </p>
+<p><code>git reset --soft HEAD~  |  git commit</code> </p>
+<p>相反操作暂存区  </p>
+<p><code>git reset [file name]  |  git add [file name]</code> </p>
+<p>撤销所有修改包括工作区  </p>
+<p><code>git reset --hard HEAD~</code> </p>
+<p>恢复暂存区文件版本其他不变  <a href="https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#Squashing">精简历史</a> </p>
+<p><code>git reset [ref] -- [file name]</code> </p>
+<p>切换HEAD指针不丢弃工作目录修改  </p>
+<p><code>git checkout [branch name]</code> </p>
+<p>丢弃文件修改  <a href="https://github.com/geeeeeeeeek/git-recipes/wiki/5.2-%E4%BB%A3%E7%A0%81%E5%9B%9E%E6%BB%9A%EF%BC%9AReset%E3%80%81Checkout%E3%80%81Revert-%E7%9A%84%E9%80%89%E6%8B%A9">reset,checkout,revert</a> </p>
+<p><code>git checkout -- [file name]</code> </p>
+<h2 id="_9">子模块</h2>
+<p>添加子模块  </p>
+<p><code>git submodule add  [url]</code> </p>
+<p>抓取后初始化模块  </p>
+<p><code>git submodule init</code> </p>
+<p>抓取后更新子模块  </p>
+<p><code>git submodule update --remote</code> </p>
+<p>查看子模块日志  </p>
+<p><code>git log -p --submodule</code> </p>
+<p>更新合并  </p>
+<p><code>git submodule update --remote --merge/--rebase</code> </p>
+<p>检查子模块是否推送  </p>
+<p><code>git push --recurse-submodules=check</code> </p>
+<p>批量操作子模块  </p>
+<p><code>git submodule foreach [command]</code> </p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3 col-sm-pull-9" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm ">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/cnewbie"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="https://cnewbie.github.io/tags/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group " id="tags">
+    <li class="list-group-item tag-1">
+      <a href="https://cnewbie.github.io/tags/git/">Git</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://cnewbie.github.io/tags/algorithm/">Algorithm</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://cnewbie.github.io/tags/iptables/">iptables</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://cnewbie.github.io/tags/linux/">linux</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/TOC -->
+<li class="list-group-item">
+  <h4><i class="fa fa-list-ul fa-lg"></i><span class="icon-label">Content</span></h4>
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="Git Cheatsheet">Git Cheatsheet</a><ul><li><a class="toc-href" href="#git" title="Git 基础">Git 基础</a><ul><li><a class="toc-href" href="#_1" title="基础操作">基础操作</a></li><li><a class="toc-href" href="#_2" title="远程仓库">远程仓库</a></li><li><a class="toc-href" href="#_3" title="标签">标签</a></li></ul></li><li><a class="toc-href" href="#git_2" title="Git 分支">Git 分支</a><ul><li><a class="toc-href" href="#_4" title="分支基本操作">分支基本操作</a></li><li><a class="toc-href" href="#_5" title="远程分支">远程分支</a></li></ul></li><li><a class="toc-href" href="#git_4" title="Git 工具">Git 工具</a><ul><li><a class="toc-href" href="#_6" title="储藏与清理">储藏与清理</a></li><li><a class="toc-href" href="#_7" title="重写历史">重写历史</a></li><li><a class="toc-href" href="#_8" title="重置对比">重置对比</a></li><li><a class="toc-href" href="#_9" title="子模块">子模块</a></li></ul></li></ul></li></ul></div>
+</li>
+<!-- End Sidebar/TOC -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 cnewbie
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">Creative Commons Attribution-ShareAlike 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="https://cnewbie.github.io/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://cnewbie.github.io/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="https://cnewbie.github.io/theme/js/respond.min.js"></script>
+
+
+
+
+</body>
+</html>
