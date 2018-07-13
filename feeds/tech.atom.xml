@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>cnewbie's Blog - Tech</title><link href="https://cnewbie.github.io/" rel="alternate"></link><link href="https://cnewbie.github.io/feeds/tech.atom.xml" rel="self"></link><id>https://cnewbie.github.io/</id><updated>2018-07-06T00:00:00+08:00</updated><entry><title>Iptables Firewall</title><link href="https://cnewbie.github.io/blog/2017/iptables-firewall/" rel="alternate"></link><published>2017-06-30T00:00:00+08:00</published><updated>2018-07-06T00:00:00+08:00</updated><author><name>cnewbie</name></author><id>tag:cnewbie.github.io,2017-06-30:/blog/2017/iptables-firewall/</id><summary type="html">&lt;p&gt;Iptables 配置操作&lt;/p&gt;</summary><content type="html">&lt;h1 id="filternatmangle"&gt;filter,nat,mangle 规则表&lt;/h1&gt;
+&lt;h2 id="filter"&gt;filter表&lt;/h2&gt;
+&lt;p&gt;数据包过滤,根据规则决定是否放行数据包（DROP,ACCEPT,REJECT,LOG）&lt;/p&gt;
+&lt;p&gt;三条规则链&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;INPUT 进入本地的包&lt;/li&gt;
+&lt;li&gt;FORWARD 不是本地产生且负责转发的包&lt;/li&gt;
+&lt;li&gt;OUTPUT 本地产生的包&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="nat"&gt;nat表&lt;/h2&gt;
+&lt;p&gt;修改数据包ip地址、端口等信息（SNAT,DNAT,MASQUERADE,REDIRECT）&lt;/p&gt;
+&lt;p&gt;三条规则链&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PREROUTING 改变进入数据包的目的地址&lt;/li&gt;
+&lt;li&gt;OUTPUT 改变本地产生包的目的地址&lt;/li&gt;
+&lt;li&gt;POSTROUTING 改变发出数据包的源地址&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="mangle"&gt;mangle表&lt;/h2&gt;
+&lt;p&gt;修改数据包的TOS，TTL及数据包的Mark&lt;br/&gt;
+五个规则链 PREROUTING，POSTROUTING，INPUT，OUTPUT，FORWARD&lt;/p&gt;
+&lt;h2 id="raw"&gt;raw表&lt;/h2&gt;
+&lt;p&gt;决定数据包是否被状态跟踪机制处理&lt;br/&gt;
+两条规则链 OUTPUT,PREROUTING  &lt;/p&gt;
+&lt;p&gt;四种状态&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;NEW 开始一个连接&lt;/li&gt;
+&lt;li&gt;RELATED 某个已经建立的连接所建立的新连接&lt;/li&gt;
+&lt;li&gt;ESTABLISHED 发送后接到应答的数据包&lt;/li&gt;
+&lt;li&gt;INVALID 无法识别的数据包&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id="_2"&gt;规则链和规则&lt;/h1&gt;
+&lt;p&gt;在处理各种数据包时，根据防火墙规则的不同时机，iptables供涉及5种默认规则链：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;INPUT 当接收到防火墙本机地址的数据包（入站）时,应用此链中的规则。。&lt;/li&gt;
+&lt;li&gt;OUTPUT 当防火墙本机向外发送数据包（出站）时，应用此链中的规则。&lt;/li&gt;
+&lt;li&gt;FORWARD 当接收到需要通过防火墙发送给其他地址的数据包（转发）时，应用此链中的规则。&lt;/li&gt;
+&lt;li&gt;PREROUTING 在对数据包作路由选择之前，应用此链中的规则，如DNAT。&lt;/li&gt;
+&lt;li&gt;POSTROUTING 在对数据包作路由选择之后，应用此链中的规则，如SNAT。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;--&amp;gt;PREROUTING--&amp;gt;[ROUTE]--&amp;gt;FORWARD--&amp;gt;POSTROUTING--&amp;gt;
+     mangle        |       mangle        ^ mangle
+      nat          |       filter        |  nat
+                   |                     |
+                   |                     |
+                   v                     |
+                 INPUT                 OUTPUT
+                   | mangle              ^ mangle
+                   | filter              |  nat
+                   v ------&amp;gt;local-------&amp;gt;| filter
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;防火墙处理数据包的方式（规则）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ACCEPT：允许数据包通过&lt;/li&gt;
+&lt;li&gt;DROP：直接丢弃数据包，不给任何回应信息&lt;/li&gt;
+&lt;li&gt;REJECT：拒绝数据包通过，必要时会给数据发送端一个响应的信息。&lt;/li&gt;
+&lt;li&gt;SNAT：源地址转换。在进入路由层面的route之前，重新改写源地址，目标地址不变，并在本机建立NAT表项，当数据返回时，根据NAT表将目的地址数据改写为数据发送出去时候的源地址，并发送给主机。解决内网用户用同一个公网地址上网的问题。&lt;/li&gt;
+&lt;li&gt;MASQUERADE，是SNAT的一种特殊形式，适用于像adsl这种临时会变的ip上&lt;/li&gt;
+&lt;li&gt;DNAT:目标地址转换。和SNAT相反，IP包经过route之后、出本地的网络栈之前，重新修改目标地址，源地址不变，在本机建立NAT表项，当数据返回时，根据NAT表将源地址修改为数据发送过来时的目标地址，并发给远程主机。可以隐藏后端服务器的真实地址。&lt;/li&gt;
+&lt;li&gt;REDIRECT：是DNAT的一种特殊形式，将网络包转发到本地host上（不管IP头部指定的目标地址是啥），方便在本机做端口转发。&lt;/li&gt;
+&lt;li&gt;LOG：在/var/log/messages文件中记录日志信息，然后将数据包传递给下一条规则&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;除去最后一个LOG，前3条规则匹配数据包后，该数据包不会再往下继续匹配了，所以编写的规则顺序极其关键。&lt;/p&gt;
+&lt;p&gt;Linux数据包路由原理&lt;/p&gt;
+&lt;p&gt;&lt;img alt="数据包流程" src="https://cnewbie.github.io/images/2017-packetflow.jpg"/&gt;&lt;/p&gt;
+&lt;h1 id="iptables"&gt;iptables编写规则&lt;/h1&gt;
+&lt;p&gt;&lt;img alt="命令格式" src="https://cnewbie.github.io/images/2017-iptables.png"/&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;[-t 表名]：该规则所操作的哪个表，可以使用filter、nat等，如果没有指定则默认为filter&lt;/li&gt;
+&lt;li&gt;-A：新增一条规则，到该规则链列表的最后一行&lt;/li&gt;
+&lt;li&gt;-I：插入一条规则，原本该位置上的规则会往后顺序移动，没有指定编号则为1&lt;/li&gt;
+&lt;li&gt;-D：从规则链中删除一条规则，要么输入完整的规则，或者指定规则编号加以删除&lt;/li&gt;
+&lt;li&gt;-R：替换某条规则，规则替换不会改变顺序，而且必须指定编号。&lt;/li&gt;
+&lt;li&gt;-P：设置某条规则链的默认动作&lt;/li&gt;
+&lt;li&gt;-nL：-L、-n，查看当前运行的防火墙规则列表&lt;/li&gt;
+&lt;li&gt;chain名：指定规则表的哪个链，如INPUT、OUPUT、FORWARD、PREROUTING等&lt;/li&gt;
+&lt;li&gt;[规则编号]：插入、删除、替换规则时用，--line-numbers显示号码&lt;/li&gt;
+&lt;li&gt;[-i|o 网卡名称]：i是指定数据包从哪块网卡进入，o是指定数据包从哪块网卡输出&lt;/li&gt;
+&lt;li&gt;[-p 协议类型]：可以指定规则应用的协议，包含tcp、udp和icmp等&lt;/li&gt;
+&lt;li&gt;[-s 源IP地址]：源主机的IP地址或子网地址&lt;/li&gt;
+&lt;li&gt;[--sport 源端口号]：数据包的IP的源端口号&lt;/li&gt;
+&lt;li&gt;[-d目标IP地址]：目标主机的IP地址或子网地址&lt;/li&gt;
+&lt;li&gt;[--dport目标端口号]：数据包的IP的目标端口号&lt;/li&gt;
+&lt;li&gt;-m：extend matches，这个选项用于提供更多的匹配参数，如：&lt;ul&gt;
+&lt;li&gt;-m state &amp;ndash;state ESTABLISHED,RELATED&lt;/li&gt;
+&lt;li&gt;-m tcp &amp;ndash;dport 22&lt;/li&gt;
+&lt;li&gt;-m multiport &amp;ndash;dports 80,8080&lt;/li&gt;
+&lt;li&gt;-m icmp &amp;ndash;icmp-type 8&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&amp;lt;-j 动作&amp;gt;：处理数据包的动作，包括ACCEPT、DROP、REJECT等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id="iptables_1"&gt;iptables常用实例备查&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;iptables -P INPUT DROP
+iptables -P FORWARD ACCEPT
+iptables -P OUTPUT ACCEPT
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;限制&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;iptables -I INPUT 1 -m state --state RELATED,ESTABLISHED -j ACCEPT&lt;/code&gt; &lt;br/&gt;
+把这条语句插在input链的最前面（第一条），对状态为ESTABLISHED,RELATED的连接放行。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT&lt;/code&gt; &lt;br/&gt;
+开放指定端口&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;iptables -I INPUT 2 -i lo -j ACCEPT&lt;/code&gt; &lt;br/&gt;
+允许loopback，本地回环是主机内部发送和接收&lt;/p&gt;
+&lt;p&gt;删除&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;iptables -D chain  number&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;丢弃非法连接&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;iptables -A INPUT -m state &amp;ndash;state INVALID -j DROP
+iptables -A OUTPUT -m state &amp;ndash;state INVALID -j DROP
+iptables-A FORWARD -m state &amp;ndash;state INVALID -j DROP
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;日志&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;iptables -R INPUT 1 -p tcp --dport 22 -m limit --limit 3/minute --limit-burst 8 -j LOG&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Dos&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;iptables -N syn-flood   (如果您的防火墙默认配置有&amp;ldquo; :syn-flood - [0:0] &amp;rdquo;则不许要该项，因为重复了)
+iptables -A INPUT -p tcp --syn -j syn-flood   
+iptables -I syn-flood -p tcp -m limit --limit 2/s --limit-burst 5 -j RETURN   
+iptables -A syn-flood -j REJECT   
+# 防止DOS太多连接进来,可以允许外网网卡每个IP最多15个初始连接,超过的丢弃
+
+# 需要iptables v1.4.19以上版本：iptables -V
+iptables -A INPUT -p tcp --syn -i eth0 --dport 80 -m connlimit --connlimit-above 20 --connlimit-mask 24 -j DROP   
+
+#用Iptables抵御DDOS (参数与上相同)   
+iptables -A INPUT -p tcp --syn -m limit --limit 5/s --limit-burst 10 -j ACCEPT  
+iptables -A FORWARD -p tcp --syn -m limit --limit 1/s -j ACCEPT
+iptables -A FORWARD -p icmp -m limit --limit 2/s --limit-burst 10 -j ACCEPT
+iptables -A INPUT -p icmp --icmp-type 0 -s ! 172.29.73.0/24 -j DROP
+&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id="_3"&gt;引用&lt;/h1&gt;
+&lt;p&gt;&lt;a href="http://seanlook.com/2014/02/23/iptables-understand/"&gt;Seanlook&lt;/a&gt;&lt;/p&gt;</content><category term="iptables"></category><category term="linux"></category></entry><entry><title>Introduction of Genetic Algorithm</title><link href="https://cnewbie.github.io/blog/2017/introduction-of-genetic-algorithm-en/" rel="alternate"></link><published>2017-04-12T00:00:00+08:00</published><updated>2018-07-05T00:00:00+08:00</updated><author><name>cnewbie</name></author><id>tag:cnewbie.github.io,2017-04-12:/blog/2017/introduction-of-genetic-algorithm-en/</id><summary type="html">&lt;p&gt;Introduction of the Basic Genetic Algorithm&lt;/p&gt;</summary><content type="html">&lt;h1 id="outline-of-ga"&gt;Outline of GA&lt;/h1&gt;
+&lt;p&gt;Outline of the Basic Genetic Algorithm&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;[Start] Generate random population of n chromosomes (suitable solutions for the problem)&lt;/li&gt;
+&lt;li&gt;[Fitness] Evaluate the fitness f(x) of each chromosome x in the population&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;[New population] Create a new population by repeating following steps until the new population is complete&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;[Selection] Select two parent chromosomes from a population according to their fitness (the better fitness, the bigger chance to be selected)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;[Crossover] With a crossover probability cross over the parents to form a new offspring (children). If no crossover was performed, offspring is an exact copy of parents.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;[Mutation] With a mutation probability mutate new offspring at each locus (position in chromosome).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;[Accepting] Place new offspring in a new population&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;[Replace] Use new generated population for a further run of algorithm&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;[Test] If the end condition is satisfied, stop, and return the best solution in current population&lt;/li&gt;
+&lt;li&gt;[Loop] Go to step 2&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id="selection"&gt;Selection&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Roulette Wheel Selection&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This method have problems when the fitnesses differs very much.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Rank Selection&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This method can lead to slower convergence, because the best chromosomes do not differ so much from other ones.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Steady-state Selection&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Main idea of this selection is that big part of chromosomes should survive to next generation.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Elitism&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Elitism is name of method, which first copies the best chromosome (or a few best chromosomes) to new population. The rest is done in classical way. Elitism can very rapidly increase performance of GA, because it prevents losing the best found solution.&lt;/p&gt;
+&lt;h1 id="encoding"&gt;Encoding&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Binary Encoding&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Binary encoding is the most common, mainly because first works about GA used this type of encoding.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Permutation Encoding&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Permutation encoding can be used in ordering problems, such as traveling salesman problem or task ordering problem.&lt;/p&gt;
+&lt;p&gt;Permutation encoding is only useful for ordering problems. Even for this problems for some types of crossover and mutation corrections must be made to leave the chromosome consistent (i.e. have real sequence in it).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Value Encoding&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Direct value encoding can be used in problems, where some complicated value, such as real numbers, are used. Use of binary encoding for this type of problems would be very difficult.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Tree Encoding&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Tree encoding is used mainly for evolving programs or expressions, for genetic programming.&lt;/p&gt;
+&lt;p&gt;Tree encoding is good for evolving programs. Programing language LISP is often used to this, because programs in it are represented in this form and can be easily parsed as a tree, so the crossover and mutation can be done relatively easily.&lt;/p&gt;
+&lt;h1 id="crossover-and-mutation"&gt;Crossover and Mutation&lt;/h1&gt;
+&lt;h2 id="binary-encoding"&gt;Binary Encoding&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Crossover&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Single point crossover - one crossover point is selected, binary string from beginning of chromosome to the crossover point is copied from one parent, the rest is copied from the second parent&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Two point crossover - two crossover point are selected, binary string from beginning of chromosome to the first crossover point is copied from one parent, the part from the first to the second crossover point is copied from the second parent and the rest is copied from the first parent&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Uniform crossover - bits are randomly copied from the first or from the second parent  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Arithmetic crossover - some arithmetic operation is performed to make a new offspring&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Mutation&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Bit inversion - selected bits are inverted&lt;/p&gt;
+&lt;h3 id="permutation-encoding"&gt;Permutation Encoding&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Crossover&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Single point crossover - one crossover point is selected, till this point the permutation is copied from the first parent, then the second parent is scanned and if the number is not yet in the offspring it is added&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Mutation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Order changing - two numbers are selected and exchanged&lt;/p&gt;
+&lt;h2 id="value-encoding_1"&gt;Value Encoding&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Crossover&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All crossovers from binary encoding can be used&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Mutation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Adding a small number (for real value encoding) - to selected values is added (or subtracted) a small number&lt;/p&gt;
+&lt;h2 id="tree-encoding"&gt;Tree Encoding&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Crossover&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Tree crossover - in both parent one crossover point is selected, parents are divided in that point and exchange part below crossover point to produce new offspring&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Mutation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Changing operator, number - selected nodes are changed&lt;/p&gt;
+&lt;h1 id="references_1"&gt;References&lt;/h1&gt;
+&lt;p&gt;&lt;a href="http://www.cnblogs.com/biaoyu/archive/2012/10/02/2710267.html"&gt;Traveling Salesman Problem&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.obitko.com/tutorials/genetic-algorithms/"&gt;Genetic Algorithm&lt;/a&gt;&lt;/p&gt;</content><category term="Algorithm"></category></entry><entry><title>Git Pro</title><link href="https://cnewbie.github.io/blog/2017/git-pro-en/" rel="alternate"></link><published>2017-03-25T00:00:00+08:00</published><updated>2018-07-06T00:00:00+08:00</updated><author><name>cnewbie</name></author><id>tag:cnewbie.github.io,2017-03-25:/blog/2017/git-pro-en/</id><summary type="html">&lt;p&gt;Pro Git note&lt;/p&gt;</summary><content type="html">&lt;h1 id="git-basics"&gt;Git Basics&lt;/h1&gt;
+&lt;p&gt;This chapter covers every basic command.&lt;/p&gt;
+&lt;h2 id="getting-a-git-repository"&gt;Getting a Git Repository&lt;/h2&gt;
+&lt;p&gt;Initialzing a Repository in an existing directory&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git init&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Cloning an existing repository&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git clone [url]&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id="recording-changes-to-the-repository"&gt;Recording Changes to the Repository&lt;/h2&gt;
+&lt;p&gt;Checking the Status of Yours Files&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git status&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Tracking New Files&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git add [filename]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Staging Modified Files&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git add [filename]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Short Status&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git status -s&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Ignoring files&lt;/p&gt;
+&lt;p&gt;.gitignore file save file patterns to match them.&lt;/p&gt;
+&lt;p&gt;The rules for the patterns you can put in the .gitignore file are as follows:
+- Blank lines or lines starting with # are ignored.
+- Standard glob patterns work.
+- You can start patterns with a forward slash (/) to avoid recursivity.
+- You can end patterns with a forward slash (/) to specify a directory.
+- You can negate a pattern by starting it with an exclamation point (!).&lt;/p&gt;
+&lt;p&gt;Viewing Your Staged and Unstaged Changes&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git status &lt;span class="p"&gt;&amp;amp;&lt;/span&gt; git diff
+git diff --staged  &lt;span class="c1"&gt;# see what you've staged that will go into your next commit.&lt;/span&gt;
+git diff --cached &lt;span class="c1"&gt;# see that you've statged so far.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Committing Your Changes&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git commit -m 'balabala'&lt;/code&gt; type commit message inline&lt;/p&gt;
+&lt;p&gt;Skipping the Staging Area&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git commit -a -m 'balabala'&lt;/code&gt; Git automatically stage every file that is already tracked before doing the commit,letting you skip the git add part.&lt;/p&gt;
+&lt;p&gt;Removing Files&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git rm&lt;/code&gt; remove file from your tracked files ,and also removes the file from your working directory.&lt;/p&gt;
+&lt;p&gt;if you modified the file and added it to the index already,you must force the removal with the -f option.&lt;/p&gt;
+&lt;p&gt;another userful thing you may want to do is to keep the file in your tree but remove it from your staging area. To do this ,use the &lt;code&gt;--cached&lt;/code&gt; option.&lt;/p&gt;
+&lt;p&gt;Moving Files&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git mv [oldfilename] [newfilename]&lt;/code&gt; = &lt;code&gt;mv [oldfilename] [newfilename]&lt;/code&gt; + &lt;code&gt;git rm [newfilename]&lt;/code&gt; + &lt;code&gt;git add [newfilename]&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id="viewing-the-commit-history"&gt;Viewing the Commit History&lt;/h2&gt;
+&lt;p&gt;By default,with no arguments,&lt;code&gt;git log&lt;/code&gt; lists the commits made in that repository in reverse chronological order - that is ,the most recent commits show up first.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git log -p -[number]&lt;/code&gt; &lt;/p&gt;
+&lt;p&gt;shows the difference introduced in each commit.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git log --stat&lt;/code&gt; &lt;/p&gt;
+&lt;p&gt;shows some abbreviated stats for each commit.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git log --pretty=[online,short,full,fuller,format]&lt;/code&gt; &lt;/p&gt;
+&lt;p&gt;option 'format' which allows you to specify your own log output fotmat.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History##pretty_format"&gt;Userful options for git log --pretty=format&lt;/a&gt; &amp;amp; &lt;a href="https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History##log_options"&gt;Common option to git log&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Limiting log Output&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git log -Sfunction_name&lt;/code&gt; &lt;/p&gt;
+&lt;p&gt;&lt;a href="https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History##limit_options"&gt;Options to limit the output of git log&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="undoing-things"&gt;Undoing Things&lt;/h2&gt;
+&lt;p&gt;One of the common undos takes place when you commit too early and possibly forget to add some files or you mess up your commit message.if you want to try that commit again,you can run commit with the --amend ooption.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git commit --amend&lt;/code&gt; &lt;/p&gt;
+&lt;p&gt;This command takes your staging area and uses it for the commit.&lt;/p&gt;
+&lt;p&gt;Unstaging a Staged File&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git reset HEAD [filename]&lt;/code&gt; &lt;/p&gt;
+&lt;p&gt;Unmodifying a Modified File&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git checkout -- [filename]&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id="working-with-remotes"&gt;Working with Remotes&lt;/h2&gt;
+&lt;p&gt;To be able to collaborate on any Git project,you need to know how to manage your remote repositories.&lt;/p&gt;
+&lt;p&gt;Showing Your Remotes &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git remote -v&lt;/code&gt; shows you the URLs that git has stored for the shortname to be used when reading and writing to that remote.&lt;/p&gt;
+&lt;p&gt;Adding Remote Repositories&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git remote add [shortname] [url]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Fetching and Pulling from your Remotes&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git fetch [remote-name]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Pushing to Your Remotes&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git push [remote-name] [branch-name]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Inspecting a Remote&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git remote show [remote-name]&lt;/code&gt; shows more information about a particular remote.&lt;/p&gt;
+&lt;p&gt;Removing and Renaming Remotes&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git remote rename [old-name] [new-name]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git remote remove/rm [remote-name]&lt;/code&gt; remove a remote &lt;/p&gt;
+&lt;h2 id="tagging"&gt;Tagging&lt;/h2&gt;
+&lt;p&gt;Git has the ability to tag specific points in history as being important.
+Listing Your Tags&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git tag&lt;/code&gt; lists the tags in alphabetical order&lt;/p&gt;
+&lt;p&gt;Creating Tags
+Git uses two main types of tags:lightweight and annotated.
+A loghtweight tag is very much like a branch that doesn't change - it's just a pointer to a specific commit.
+Annotated tags,however,are stored as full objects in the Git database.They're checksummed;contain the tagger name,email,and date;have a tagging message; and can be signed and verified with GNU Privacy Guard (GPG). &lt;/p&gt;
+&lt;p&gt;Annotated Tags&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git tag -a [tagname] -m "message"&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Lightweight Tags&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git tag [tagname]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Tagging Later&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git tag -a [tagname] [sha1code]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Sharing Tags&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git push orign [tagname]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git push orign --tags&lt;/code&gt; transfer all of your tags to the remote server that are not already there.&lt;/p&gt;
+&lt;p&gt;Checking out Tags
+git checkout -b [branchname] [tagname]&lt;/p&gt;
+&lt;h2 id="git-aliases"&gt;Git Aliases&lt;/h2&gt;
+&lt;p&gt;If you don't want to type the entire text of each of the Git commands,you can easily set up an alias for each command using &lt;code&gt;git config&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git config --global/local alias.[aliasname] [command]&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id="git-branching_1"&gt;Git Branching&lt;/h1&gt;
+&lt;p&gt;Branching means you diberge from the main line of development and continue to do work without messing with that main line.&lt;/p&gt;
+&lt;h2 id="branches-in-a-nutshell"&gt;Branches in a Nutshell&lt;/h2&gt;
+&lt;p&gt;When you make a commit, Git stores a commit object that contains a pointer to the snapshot of the content you staged.&lt;/p&gt;
+&lt;p&gt;Creating a New Branch&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git branch [branchname]&lt;/code&gt; create a new branch called testing&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git log --oneline --decorate&lt;/code&gt;  shows you where rhe branch pointers are pointing.&lt;/p&gt;
+&lt;p&gt;Switching Branches&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git checkout [branchname]&lt;/code&gt; this moves &lt;code&gt;HEAD&lt;/code&gt; to point to the branch.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git log --oneline --decorate --graph --all&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell#divergent_history"&gt;Divergent history&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="basic-branching-and-merging"&gt;Basic Branching and Merging&lt;/h2&gt;
+&lt;p&gt;Basic Branching&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git checkout -b &lt;span class="o"&gt;[&lt;/span&gt;branchname&lt;span class="o"&gt;]&lt;/span&gt; switch branch
+git merge &lt;span class="o"&gt;[&lt;/span&gt;branchname&lt;span class="o"&gt;]&lt;/span&gt; merge branch 
+git branch -d &lt;span class="o"&gt;[&lt;/span&gt;branchname&lt;span class="o"&gt;]&lt;/span&gt; delete branch
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Basic Merging&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git merge [branchname]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Basic Merge Conflicts
+Occasionally,this process doesn't go smoothly.If you changed the same part of the same file differently in the two branches you're merging together.Git hasn&amp;rsquo;t automatically created a new merge commit. It has paused the process while you resolve the conflict. &lt;/p&gt;
+&lt;p&gt;If you want to use a graphical tool to resolve these issues, you can run &lt;code&gt;git mergetool&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git mergetool&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging#_advanced_merging"&gt;Advanced Merging&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="branch-management"&gt;Branch Management&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;git branch&lt;/code&gt; command does more than just create and detele branches.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git branch -v &lt;span class="c1"&gt;#shows the last commit on each branch.&lt;/span&gt;
+git branch --merged/nomerged &lt;span class="c1"&gt;# filter this list to branches &lt;/span&gt;
+git branch -d &lt;span class="o"&gt;[&lt;/span&gt;branchname&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# detele the branch and lose that work.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id="branching-workflows"&gt;Branching Workflows&lt;/h2&gt;
+&lt;p&gt;cover some common workflows that this lightweight branching makes possible.
+&lt;a href="https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows"&gt;Brancheing Workflows&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="remote-branches"&gt;Remote Branches&lt;/h2&gt;
+&lt;p&gt;Remote references are references in your remote repositories,includeing branches,tags,and so on.
+you can get a full list of remote references explicitly with &lt;code&gt;git ls-remote [remote]&lt;/code&gt; or `git remote show [remote] gor remote branches as well as more information.&lt;/p&gt;
+&lt;p&gt;Pushing&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git push [remote] [branch]/[localbranch]:[remotebranch]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;The next time one of yoour collaborators fetches from the server.It's important to note that when you do a fetch that brings down new remote-tracking branches,you don't qutomatically have local,editable copies of them.&lt;/p&gt;
+&lt;p&gt;To merge this work into your current working branch,you can run &lt;code&gt;git merge origin/[branchmane]&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git checkout -b [branchname] orgin/[branchname]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;create local branch base on remote branch&lt;/p&gt;
+&lt;p&gt;Tracking Branches&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git checkout --track orgin/[branchname]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;In fact,this is so common that there's even a shortcut for that shortcut.if the branch name you're trying to checkout doesn't exist add exactly matches a name on only one remote.Git will create a tracking branch for you.&lt;/p&gt;
+&lt;p&gt;If you already have a local brach and want to set it to a remote branch you just pulled down,or want to change the upsteam branch you're tracking.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git branch -u origin/&lt;span class="o"&gt;[&lt;/span&gt;branchname&lt;span class="o"&gt;]&lt;/span&gt; 
+git branch -vv &lt;span class="c1"&gt;# show what tracking branches you have set up.&lt;/span&gt;
+git fetch --all&lt;span class="p"&gt;;&lt;/span&gt;git branch -vv &lt;span class="c1"&gt;# fetch from all your remotes &lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Pulling&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git pull&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Deleting Remote Branches&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git push origin --delete [branchname]&lt;/code&gt; detele remote branch&lt;/p&gt;
+&lt;h2 id="rebasing"&gt;Rebasing&lt;/h2&gt;
+&lt;p&gt;In Git, there are two main ways to integrate changes from one branch into another: the &lt;code&gt;merge&lt;/code&gt; and the &lt;code&gt;rebase&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The Basic Rebase&lt;/p&gt;
+&lt;p&gt;rebase a branch to master &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git checkout &lt;span class="o"&gt;[&lt;/span&gt;branchname&lt;span class="o"&gt;]&lt;/span&gt;
+git rebase master
+git checkout master
+git merge &lt;span class="o"&gt;[&lt;/span&gt;branchname&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;There is no difference in the end product of the integration,but rebasing makes for a cleaner history.
+Rebasing replays changes from one line of work onto another in the order they were introduced,whereas merging takes the endpoints and merges them together.&lt;/p&gt;
+&lt;p&gt;More Intersting Rebases&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git rebase --onto master [firstbranchname] [secondbranchname]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Take the &lt;code&gt;second branch&lt;/code&gt;forgure out the patches since it diverged from the &lt;code&gt;first branch&lt;/code&gt;,and replay these patches in the &lt;code&gt;secondbranch&lt;/code&gt; as if it was based directly off &lt;code&gt;master branch&lt;/code&gt;instead. &lt;/p&gt;
+&lt;p&gt;&lt;a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing#rbdiag_e"&gt;A history with a topic branch off another topic branch&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The Perils of Rebasing&lt;/p&gt;
+&lt;p&gt;Don not rebase commits that exist outside your repository
+&lt;a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing#rbdiag_i"&gt;Figure&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Rebase vs. Merge
+In general the way to get the best of both worlds is to rebase local changes you've made but haven't shared yet before you puch them in order to clean up your story,but never rebase anything you've pushed somewhere.&lt;/p&gt;
+&lt;h1 id="distributed-git_1"&gt;Distributed Git&lt;/h1&gt;
+&lt;p&gt;Git in a distributed environment as a contributor and an integretor.&lt;/p&gt;
+&lt;h2 id="distributed-workflows"&gt;Distributed Workflows&lt;/h2&gt;
+&lt;p&gt;Integration-Mannger Workflows
+&lt;a href="https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#wfdiag_b"&gt;Integration-Manager Workflow Figure&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;TODO&lt;/p&gt;
+&lt;h1 id="git-tools_1"&gt;Git Tools&lt;/h1&gt;
+&lt;h2 id="revision-selection"&gt;Revision Selection&lt;/h2&gt;
+&lt;p&gt;Short SHA-1&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git log --abbrev-commit --pretty=oneline&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git show [shasum]&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id="commit-ranges"&gt;Commit Ranges&lt;/h2&gt;
+&lt;p&gt;Double Dot&lt;/p&gt;
+&lt;p&gt;This basically asks Git to resolve a range of commits that are reachable from one commit but aren&amp;rsquo;t reachable from another.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git log master..experiment&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;show a log of just those commits with &lt;code&gt;master..experiment&lt;/code&gt;&amp;thinsp;&amp;mdash;&amp;thinsp;that means &amp;ldquo;all commits reachable from experiment that aren&amp;rsquo;t reachable from master.&lt;/p&gt;
+&lt;p&gt;Multiple Points&lt;/p&gt;
+&lt;p&gt;Git allows you to do this by using either the ^ character or --not before any reference from which you don&amp;rsquo;t want to see reachable commits.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git log refA..refB  
+git log ^refA refB  
+git log refB --not refA  
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Triple Dot&lt;/p&gt;
+&lt;p&gt;specifies all the commits that are reachable by either of two references but not by both of them.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git log master...experiment&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;see what is in master or experiment but not any common references&lt;/p&gt;
+&lt;h1 id="reference_1"&gt;Reference&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://git-scm.com/book/en/v2"&gt;Pro Git&lt;/a&gt;&lt;/p&gt;</content><category term="Git"></category></entry><entry><title>Hello World</title><link href="https://cnewbie.github.io/blog/2017/hello-world-en/" rel="alternate"></link><published>2017-03-23T00:00:00+08:00</published><updated>2018-05-01T00:00:00+08:00</updated><author><name>cnewbie</name></author><id>tag:cnewbie.github.io,2017-03-23:/blog/2017/hello-world-en/</id><summary type="html">&lt;p&gt;Hello World!!!&lt;/p&gt;</summary><content type="html">&lt;p&gt;Hello World!!!&lt;/p&gt;</content></entry></feed>
