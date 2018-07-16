@@ -1,10 +1,10 @@
-Title: Pandoc Markdown 文档  
-Tags: markdown,pandoc  
-lang: zh  
-Slug: pandoc-markdown  
-Summary: Pandoc Markdown 文档  
-Date: 2018-07-15  
-Modified: 2018-07-16  
+Title: Pandoc Markdown 文档
+Tags: markdown,pandoc
+lang: zh
+Slug: pandoc-markdown
+Summary: Pandoc Markdown 文档
+Date: 2018-07-15
+Modified: 2018-07-16
 
 
 ---
@@ -1096,22 +1096,22 @@ Extension `compact_definition_lists`
 
 ## markdown_phpextra(PHP Markdown Extra)
 
-> 
-footnotes, pipe_tables, raw_html, markdown_attribute, fenced_code_blocks, definition_lists, intraword_underscores, header_attributes, link_attributes, abbreviations, shortcut_reference_links, spaced_reference_links. 
+>
+footnotes, pipe_tables, raw_html, markdown_attribute, fenced_code_blocks, definition_lists, intraword_underscores, header_attributes, link_attributes, abbreviations, shortcut_reference_links, spaced_reference_links.
 
 ## markdown_mmd(MultiMarkdown)
 
-> 
+>
 pipe_tables, raw_html, markdown_attribute, mmd_link_attributes, tex_math_double_backslash, intraword_underscores, mmd_title_block, footnotes, definition_lists, all_symbols_escapable, implicit_header_references, auto_identifiers, mmd_header_identifiers, shortcut_reference_links, implicit_figures, superscript, subscript, backtick_code_blocks, spaced_reference_links, raw_attribute.
 
 ## markdown_strict(Markdown.pl)
 
-> 
-raw_html, shortcut_reference_links, spaced_reference_links. 
+>
+raw_html, shortcut_reference_links, spaced_reference_links.
 
 ## gfm(GitHub-Flavored Markdown)
 
-> 
+>
 pipe_tables, raw_html, fenced_code_blocks, auto_identifiers, ascii_identifiers, backtick_code_blocks, autolink_bare_uris, intraword_underscores, strikeout, hard_line_breaks, emoji, shortcut_reference_links, angle_brackets_escapable.
 
 # 引用

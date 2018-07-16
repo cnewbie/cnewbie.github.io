@@ -1,8 +1,8 @@
-Title: Git Pro  
-Tags: Git  
-lang: en  
-Summary: Pro Git note  
-Date: 2017-03-25  
+Title: Git Pro
+Tags: Git
+lang: en
+Summary: Pro Git note
+Date: 2017-03-25
 Modified: 2018-07-06
 
 ---
@@ -43,9 +43,10 @@ Short Status
 
 Ignoring files
 
-.gitignore file save file patterns to match them.
+`.gitignore` file save file patterns to match them.
 
 The rules for the patterns you can put in the .gitignore file are as follows:
+
 - Blank lines or lines starting with # are ignored.
 - Standard glob patterns work.
 - You can start patterns with a forward slash (/) to avoid recursivity.
@@ -53,11 +54,13 @@ The rules for the patterns you can put in the .gitignore file are as follows:
 - You can negate a pattern by starting it with an exclamation point (!).
 
 Viewing Your Staged and Unstaged Changes
+
 ```bash
 git status & git diff
 git diff --staged  # see what you've staged that will go into your next commit.
 git diff --cached # see that you've statged so far.
 ```
+
 Committing Your Changes
 
 `git commit -m 'balabala'` type commit message inline
@@ -82,15 +85,15 @@ Moving Files
 By default,with no arguments,`git log` lists the commits made in that repository in reverse chronological order - that is ,the most recent commits show up first.
 
 
-`git log -p -[number]` 
+`git log -p -[number]`
 
 shows the difference introduced in each commit.
 
-`git log --stat` 
+`git log --stat`
 
 shows some abbreviated stats for each commit.
 
-`git log --pretty=[online,short,full,fuller,format]` 
+`git log --pretty=[online,short,full,fuller,format]`
 
 option 'format' which allows you to specify your own log output fotmat.
 
@@ -99,20 +102,20 @@ option 'format' which allows you to specify your own log output fotmat.
 
 Limiting log Output
 
-`git log -Sfunction_name` 
+`git log -Sfunction_name`
 
 [Options to limit the output of git log](https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History##limit_options)
 
 ## Undoing Things
-One of the common undos takes place when you commit too early and possibly forget to add some files or you mess up your commit message.if you want to try that commit again,you can run commit with the --amend ooption.
+One of the common undos takes place when you commit too early and possibly forget to add some files or you mess up your commit message.if you want to try that commit again,you can run commit with the `--amend` ooption.
 
-`git commit --amend` 
+`git commit --amend`
 
 This command takes your staging area and uses it for the commit.
 
 Unstaging a Staged File
 
-`git reset HEAD [filename]` 
+`git reset HEAD [filename]`
 
 Unmodifying a Modified File
 
@@ -121,7 +124,7 @@ Unmodifying a Modified File
 ## Working with Remotes
 To be able to collaborate on any Git project,you need to know how to manage your remote repositories.
 
-Showing Your Remotes 
+Showing Your Remotes
 
 `git remote -v` shows you the URLs that git has stored for the shortname to be used when reading and writing to that remote.
 
@@ -145,7 +148,7 @@ Removing and Renaming Remotes
 
 `git remote rename [old-name] [new-name]`
 
-`git remote remove/rm [remote-name]` remove a remote 
+`git remote remove/rm [remote-name]` remove a remote
 
 ## Tagging
 Git has the ability to tag specific points in history as being important.
@@ -156,7 +159,8 @@ Listing Your Tags
 Creating Tags
 Git uses two main types of tags:lightweight and annotated.
 A loghtweight tag is very much like a branch that doesn't change - it's just a pointer to a specific commit.
-Annotated tags,however,are stored as full objects in the Git database.They're checksummed;contain the tagger name,email,and date;have a tagging message; and can be signed and verified with GNU Privacy Guard (GPG). 
+
+Annotated tags,however,are stored as full objects in the Git database.They're checksummed;contain the tagger name,email,and date;have a tagging message; and can be signed and verified with GNU Privacy Guard (GPG).
 
 Annotated Tags
 
@@ -177,7 +181,8 @@ Sharing Tags
 `git push orign --tags` transfer all of your tags to the remote server that are not already there.
 
 Checking out Tags
-git checkout -b [branchname] [tagname]
+
+`git checkout -b [branchname] [tagname]`
 
 ## Git Aliases
 If you don't want to type the entire text of each of the Git commands,you can easily set up an alias for each command using `git config`.
@@ -209,15 +214,16 @@ Basic Branching
 
 ```bash
 git checkout -b [branchname] switch branch
-git merge [branchname] merge branch 
+git merge [branchname] merge branch
 git branch -d [branchname] delete branch
 ```
+
 Basic Merging
 
 `git merge [branchname]`
 
 Basic Merge Conflicts
-Occasionally,this process doesn't go smoothly.If you changed the same part of the same file differently in the two branches you're merging together.Git hasn’t automatically created a new merge commit. It has paused the process while you resolve the conflict. 
+Occasionally,this process doesn't go smoothly.If you changed the same part of the same file differently in the two branches you're merging together.Git hasn’t automatically created a new merge commit. It has paused the process while you resolve the conflict.
 
 If you want to use a graphical tool to resolve these issues, you can run `git mergetool`.
 
@@ -230,7 +236,7 @@ The `git branch` command does more than just create and detele branches.
 
 ```bash
 git branch -v #shows the last commit on each branch.
-git branch --merged/nomerged # filter this list to branches 
+git branch --merged/nomerged # filter this list to branches
 git branch -d [branchname] # detele the branch and lose that work.
 ```
 
@@ -263,9 +269,9 @@ In fact,this is so common that there's even a shortcut for that shortcut.if the 
 If you already have a local brach and want to set it to a remote branch you just pulled down,or want to change the upsteam branch you're tracking.
 
 ```bash
-git branch -u origin/[branchname] 
+git branch -u origin/[branchname]
 git branch -vv # show what tracking branches you have set up.
-git fetch --all;git branch -vv # fetch from all your remotes 
+git fetch --all;git branch -vv # fetch from all your remotes
 ```
 Pulling
 
@@ -280,7 +286,7 @@ In Git, there are two main ways to integrate changes from one branch into anothe
 
 The Basic Rebase
 
-rebase a branch to master 
+rebase a branch to master
 
 ```bash
 git checkout [branchname]
@@ -296,7 +302,7 @@ More Intersting Rebases
 
 `git rebase --onto master [firstbranchname] [secondbranchname]`
 
-Take the `second branch`forgure out the patches since it diverged from the `first branch`,and replay these patches in the `secondbranch` as if it was based directly off `master branch`instead. 
+Take the `second branch`forgure out the patches since it diverged from the `first branch`,and replay these patches in the `secondbranch` as if it was based directly off `master branch`instead.
 
 [A history with a topic branch off another topic branch](https://git-scm.com/book/en/v2/Git-Branching-Rebasing#rbdiag_e)
 
@@ -340,9 +346,9 @@ Multiple Points
 Git allows you to do this by using either the ^ character or --not before any reference from which you don’t want to see reachable commits.
 
 ```bash
-git log refA..refB  
-git log ^refA refB  
-git log refB --not refA  
+git log refA..refB
+git log ^refA refB
+git log refB --not refA
 ```
 
 Triple Dot
@@ -354,5 +360,5 @@ specifies all the commits that are reachable by either of two references but not
 see what is in master or experiment but not any common references
 
 
-# Reference  
+# Reference
 [Pro Git](https://git-scm.com/book/en/v2)

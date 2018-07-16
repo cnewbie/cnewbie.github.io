@@ -1,9 +1,9 @@
-Title: Introduction of Genetic Algorithm  
-Tags: Algorithm  
-lang: en  
-Summary: Introduction of the Basic Genetic Algorithm  
-Date: 2017-04-12  
-Modified: 2018-07-05  
+Title: Introduction of Genetic Algorithm
+Tags: Algorithm
+lang: en
+Summary: Introduction of the Basic Genetic Algorithm
+Date: 2017-04-12
+Modified: 2018-07-05
 
 ---
 title: Introduction of Genetic Algorithm
@@ -82,7 +82,7 @@ Tree encoding is good for evolving programs. Programing language LISP is often u
 
     - Two point crossover - two crossover point are selected, binary string from beginning of chromosome to the first crossover point is copied from one parent, the part from the first to the second crossover point is copied from the second parent and the rest is copied from the first parent
 
-    - Uniform crossover - bits are randomly copied from the first or from the second parent  
+    - Uniform crossover - bits are randomly copied from the first or from the second parent
 
     - Arithmetic crossover - some arithmetic operation is performed to make a new offspring
 
@@ -121,7 +121,7 @@ Tree crossover - in both parent one crossover point is selected, parents are div
 Changing operator, number - selected nodes are changed
 
 
-# References  
+# References
 [Traveling Salesman Problem](http://www.cnblogs.com/biaoyu/archive/2012/10/02/2710267.html)
 
 [Genetic Algorithm](http://www.obitko.com/tutorials/genetic-algorithms/)
