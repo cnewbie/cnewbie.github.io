@@ -12,32 +12,51 @@ PATH = 'content'
 # basic config
 USE_FOLDER_AS_CATEGORY = False
 DEFAULT_CATEGORY = 'Tech'
-#DOCUTILS_SETTINGS = {}
 IGNORE_FILES = ['.#*', '.*' ]
-MARKDOWN = {
-    'extension_configs': {
-        'markdown.extensions.codehilite': {'css_class': 'highlight'},
-        'markdown.extensions.extra': {},
-        'markdown.extensions.meta': {},
-        'markdown.extensions.toc': {},
-    },
-    'output_format': 'html5',
-    'lazy_ol': False,  # See: https://pythonhosted.org/Markdown/reference.html#lazy_ol
-}
+# MARKDOWN = {
+#     'extension_configs': {
+#         'markdown.extensions.codehilite': {'css_class': 'highlight'},
+#         'markdown.extensions.extra': {},
+#         'markdown.extensions.meta': {},
+#         'markdown.extensions.toc': {},
+#     },
+#     'output_format': 'html5',
+#     'lazy_ol': False,  # See: https://pythonhosted.org/Markdown/reference.html#lazy_ol
+# }
 
 
 # path config
 ARTICLE_PATHS = ['blog']
 PLUGIN_PATHS = ['plugins']
 STATIC_PATHS = ['images', 'static',]
-PLUGINS = ['i18n_subsites', 'tag_cloud', 'sitemap', 
-            'tipue_search', 'pelican-toc', 'render_math',
-            'readtime',  
+PLUGINS = ['i18n_subsites', 
+            'tag_cloud', 
+            'sitemap', 
+            'tipue_search', 
+#            'render_math',
+            'readtime', 
+            'pandoc_reader', 
             ]
 JINJA_ENVIRONMENT = {
     'extensions': ['jinja2.ext.i18n', ],
 }
+PANDOC_ARGS = [
+  '--standalone',
+  '--mathjax',
+  '--toc',
+  '--toc-depth=2',
+  '--number-sections',
+]
 
+PANDOC_EXTENSIONS = [
+  '+smart',
+  '+hard_line_breaks',
+  '-citations',
+  '+yaml_metadata_block',
+  '-pandoc_title_block',
+  '+mmd_title_block',
+  '+tex_math_dollars',
+]
 
 # URL config
 INDEX_STRING = 'index.html'
@@ -77,10 +96,6 @@ TIMEZONE = 'Asia/Shanghai'
 DEFAULT_LANG = 'zh'
 DEFAULT_DATE = 'fs'
 DEFAULT_DATE_FORMAT = '%Y %b %d'
-#DATE_FORMATS = {
-#    'en': ('en_US','%d %b %Y'),
-#    'zh': ('zh_CN','%Y年%m月%d日'),
-#}
 DIRECT_TEMPLATES = ['index', 'tags',
                     'categories',
                     'archives',
@@ -113,7 +128,7 @@ SHOW_DATE_MODIFIED = True
 PYGMENTS_STYLE = 'solarizeddark'
 USE_PAGER = True
 SIDEBAR_ON_LEFT = True
-DISPLAY_TOC_ON_SIDEBAR = True
+#DISPLAY_TOC_ON_SIDEBAR = True
 #SEARCH_URL = '/pages/search.html'
 #MAIN_MENU = True
 #MENUITEMS = (

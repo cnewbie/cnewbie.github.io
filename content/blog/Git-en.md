@@ -5,6 +5,13 @@ Summary: Pro Git note
 Date: 2017-03-25  
 Modified: 2018-07-06
 
+---
+title: Git Pro Doc
+
+---
+
+-----------------------------
+
 # Git Basics
 This chapter covers every basic command.
 ## Getting a Git Repository

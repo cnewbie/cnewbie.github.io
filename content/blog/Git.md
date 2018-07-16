@@ -2,7 +2,15 @@ Title: Git Cheatsheet
 Tags: Git
 lang: zh
 Summary: Git 命令速查  
-Date: 2018-07-13
+Date: 2018-07-14  
+Modified: 2018-07-16  
+
+---
+title: Git Cheatsheet
+
+---
+
+-----------------------------
 
 # Git 基础
 
@@ -40,10 +48,11 @@ Date: 2018-07-13
 重命名文件  
 
 `git mv [file name]`  
+
 ```bash
-mv old_name new_name  
-git rm old_name  
-git add new_name  
+mv old_name new_name
+git rm old_name
+git add new_name
 ```
 
 查看提交历史  
