@@ -115,19 +115,139 @@ cnewbie's Blog            </a>
 
 
 
+    <span class="label label-default">Read Time</span>
+    <span>
+        <i class="fa fa-clock-o"></i>
+        <time> 10 min </time>
+    </span>
+
 <span class="label label-default">Tags</span>
 	<a href="https://cnewbie.github.io/tags/git/">Git</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <h1 id="git-basics">Git Basics</h1>
-<p>This chapter covers every basic command.</p>
-<h2 id="getting-a-git-repository">Getting a Git Repository</h2>
+                <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Git Pro Doc</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Git Pro Doc</h1>
+</header>
+<nav id="TOC">
+<ul>
+<li><a href="#git-basics"><span class="toc-section-number">1</span> Git Basics</a><ul>
+<li><a href="#recording-changes-to-the-repository"><span class="toc-section-number">1.1</span> Recording Changes to the Repository</a></li>
+<li><a href="#viewing-the-commit-history"><span class="toc-section-number">1.2</span> Viewing the Commit History</a></li>
+<li><a href="#undoing-things"><span class="toc-section-number">1.3</span> Undoing Things</a></li>
+<li><a href="#working-with-remotes"><span class="toc-section-number">1.4</span> Working with Remotes</a></li>
+<li><a href="#tagging"><span class="toc-section-number">1.5</span> Tagging</a></li>
+<li><a href="#git-aliases"><span class="toc-section-number">1.6</span> Git Aliases</a></li>
+</ul></li>
+<li><a href="#git-branching"><span class="toc-section-number">2</span> Git Branching</a><ul>
+<li><a href="#basic-branching-and-merging"><span class="toc-section-number">2.1</span> Basic Branching and Merging</a></li>
+<li><a href="#branch-management"><span class="toc-section-number">2.2</span> Branch Management</a></li>
+<li><a href="#branching-workflows"><span class="toc-section-number">2.3</span> Branching Workflows</a></li>
+<li><a href="#remote-branches"><span class="toc-section-number">2.4</span> Remote Branches</a></li>
+<li><a href="#rebasing"><span class="toc-section-number">2.5</span> Rebasing</a></li>
+</ul></li>
+<li><a href="#distributed-git"><span class="toc-section-number">3</span> Distributed Git</a><ul>
+<li><a href="#distributed-workflows"><span class="toc-section-number">3.1</span> Distributed Workflows</a></li>
+</ul></li>
+<li><a href="#git-tools"><span class="toc-section-number">4</span> Git Tools</a><ul>
+<li><a href="#revision-selection"><span class="toc-section-number">4.1</span> Revision Selection</a></li>
+<li><a href="#commit-ranges"><span class="toc-section-number">4.2</span> Commit Ranges</a></li>
+</ul></li>
+<li><a href="#reference"><span class="toc-section-number">5</span> Reference</a></li>
+</ul>
+</nav>
+<hr />
+<h1 id="git-basics"><span class="header-section-number">1</span> Git Basics</h1>
+<p>This chapter covers every basic command.<br />
+## Getting a Git Repository</p>
 <p>Initialzing a Repository in an existing directory</p>
 <p><code>git init</code></p>
 <p>Cloning an existing repository</p>
 <p><code>git clone [url]</code></p>
-<h2 id="recording-changes-to-the-repository">Recording Changes to the Repository</h2>
+<h2 id="recording-changes-to-the-repository"><span class="header-section-number">1.1</span> Recording Changes to the Repository</h2>
 <p>Checking the Status of Yours Files</p>
 <p><code>git status</code></p>
 <p>Tracking New Files</p>
@@ -138,17 +258,16 @@ cnewbie's Blog            </a>
 <p><code>git status -s</code></p>
 <p>Ignoring files</p>
 <p>.gitignore file save file patterns to match them.</p>
-<p>The rules for the patterns you can put in the .gitignore file are as follows:
-- Blank lines or lines starting with # are ignored.
-- Standard glob patterns work.
-- You can start patterns with a forward slash (/) to avoid recursivity.
-- You can end patterns with a forward slash (/) to specify a directory.
+<p>The rules for the patterns you can put in the .gitignore file are as follows:<br />
+- Blank lines or lines starting with # are ignored.<br />
+- Standard glob patterns work.<br />
+- You can start patterns with a forward slash (/) to avoid recursivity.<br />
+- You can end patterns with a forward slash (/) to specify a directory.<br />
 - You can negate a pattern by starting it with an exclamation point (!).</p>
 <p>Viewing Your Staged and Unstaged Changes</p>
-<div class="highlight"><pre><span></span>git status <span class="p">&amp;</span> git diff
-git diff --staged  <span class="c1"># see what you've staged that will go into your next commit.</span>
-git diff --cached <span class="c1"># see that you've statged so far.</span>
-</pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="fu">git</span> status <span class="kw">&amp;</span> <span class="fu">git</span> diff</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="fu">git</span> diff --staged  # see what you<span class="st">&#39;ve staged that will go into your next commit.</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="st">git diff --cached # see that you&#39;</span>ve statged so far.</a></code></pre></div>
 <p>Committing Your Changes</p>
 <p><code>git commit -m 'balabala'</code> type commit message inline</p>
 <p>Skipping the Staging Area</p>
@@ -159,29 +278,29 @@ git diff --cached <span class="c1"># see that you've statged so far.</span>
 <p>another userful thing you may want to do is to keep the file in your tree but remove it from your staging area. To do this ,use the <code>--cached</code> option.</p>
 <p>Moving Files</p>
 <p><code>git mv [oldfilename] [newfilename]</code> = <code>mv [oldfilename] [newfilename]</code> + <code>git rm [newfilename]</code> + <code>git add [newfilename]</code></p>
-<h2 id="viewing-the-commit-history">Viewing the Commit History</h2>
+<h2 id="viewing-the-commit-history"><span class="header-section-number">1.2</span> Viewing the Commit History</h2>
 <p>By default,with no arguments,<code>git log</code> lists the commits made in that repository in reverse chronological order - that is ,the most recent commits show up first.</p>
-<p><code>git log -p -[number]</code> </p>
+<p><code>git log -p -[number]</code></p>
 <p>shows the difference introduced in each commit.</p>
-<p><code>git log --stat</code> </p>
+<p><code>git log --stat</code></p>
 <p>shows some abbreviated stats for each commit.</p>
-<p><code>git log --pretty=[online,short,full,fuller,format]</code> </p>
-<p>option 'format' which allows you to specify your own log output fotmat.</p>
-<p><a href="https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History##pretty_format">Userful options for git log --pretty=format</a> &amp; <a href="https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History##log_options">Common option to git log</a></p>
+<p><code>git log --pretty=[online,short,full,fuller,format]</code></p>
+<p>option ‘format’ which allows you to specify your own log output fotmat.</p>
+<p><a href="https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History##pretty_format">Userful options for git log –pretty=format</a> &amp; <a href="https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History##log_options">Common option to git log</a></p>
 <p>Limiting log Output</p>
-<p><code>git log -Sfunction_name</code> </p>
+<p><code>git log -Sfunction_name</code></p>
 <p><a href="https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History##limit_options">Options to limit the output of git log</a></p>
-<h2 id="undoing-things">Undoing Things</h2>
-<p>One of the common undos takes place when you commit too early and possibly forget to add some files or you mess up your commit message.if you want to try that commit again,you can run commit with the --amend ooption.</p>
-<p><code>git commit --amend</code> </p>
+<h2 id="undoing-things"><span class="header-section-number">1.3</span> Undoing Things</h2>
+<p>One of the common undos takes place when you commit too early and possibly forget to add some files or you mess up your commit message.if you want to try that commit again,you can run commit with the –amend ooption.</p>
+<p><code>git commit --amend</code></p>
 <p>This command takes your staging area and uses it for the commit.</p>
 <p>Unstaging a Staged File</p>
-<p><code>git reset HEAD [filename]</code> </p>
+<p><code>git reset HEAD [filename]</code></p>
 <p>Unmodifying a Modified File</p>
 <p><code>git checkout -- [filename]</code></p>
-<h2 id="working-with-remotes">Working with Remotes</h2>
+<h2 id="working-with-remotes"><span class="header-section-number">1.4</span> Working with Remotes</h2>
 <p>To be able to collaborate on any Git project,you need to know how to manage your remote repositories.</p>
-<p>Showing Your Remotes </p>
+<p>Showing Your Remotes</p>
 <p><code>git remote -v</code> shows you the URLs that git has stored for the shortname to be used when reading and writing to that remote.</p>
 <p>Adding Remote Repositories</p>
 <p><code>git remote add [shortname] [url]</code></p>
@@ -193,17 +312,17 @@ git diff --cached <span class="c1"># see that you've statged so far.</span>
 <p><code>git remote show [remote-name]</code> shows more information about a particular remote.</p>
 <p>Removing and Renaming Remotes</p>
 <p><code>git remote rename [old-name] [new-name]</code></p>
-<p><code>git remote remove/rm [remote-name]</code> remove a remote </p>
-<h2 id="tagging">Tagging</h2>
-<p>Git has the ability to tag specific points in history as being important.
+<p><code>git remote remove/rm [remote-name]</code> remove a remote</p>
+<h2 id="tagging"><span class="header-section-number">1.5</span> Tagging</h2>
+<p>Git has the ability to tag specific points in history as being important.<br />
 Listing Your Tags</p>
 <p><code>git tag</code> lists the tags in alphabetical order</p>
-<p>Creating Tags
-Git uses two main types of tags:lightweight and annotated.
-A loghtweight tag is very much like a branch that doesn't change - it's just a pointer to a specific commit.
-Annotated tags,however,are stored as full objects in the Git database.They're checksummed;contain the tagger name,email,and date;have a tagging message; and can be signed and verified with GNU Privacy Guard (GPG). </p>
+<p>Creating Tags<br />
+Git uses two main types of tags:lightweight and annotated.<br />
+A loghtweight tag is very much like a branch that doesn’t change - it’s just a pointer to a specific commit.<br />
+Annotated tags,however,are stored as full objects in the Git database.They’re checksummed;contain the tagger name,email,and date;have a tagging message; and can be signed and verified with GNU Privacy Guard (GPG).</p>
 <p>Annotated Tags</p>
-<p><code>git tag -a [tagname] -m "message"</code></p>
+<p><code>git tag -a [tagname] -m &quot;message&quot;</code></p>
 <p>Lightweight Tags</p>
 <p><code>git tag [tagname]</code></p>
 <p>Tagging Later</p>
@@ -211,113 +330,111 @@ Annotated tags,however,are stored as full objects in the Git database.They're ch
 <p>Sharing Tags</p>
 <p><code>git push orign [tagname]</code></p>
 <p><code>git push orign --tags</code> transfer all of your tags to the remote server that are not already there.</p>
-<p>Checking out Tags
+<p>Checking out Tags<br />
 git checkout -b [branchname] [tagname]</p>
-<h2 id="git-aliases">Git Aliases</h2>
-<p>If you don't want to type the entire text of each of the Git commands,you can easily set up an alias for each command using <code>git config</code>.</p>
+<h2 id="git-aliases"><span class="header-section-number">1.6</span> Git Aliases</h2>
+<p>If you don’t want to type the entire text of each of the Git commands,you can easily set up an alias for each command using <code>git config</code>.</p>
 <p><code>git config --global/local alias.[aliasname] [command]</code></p>
-<h1 id="git-branching_1">Git Branching</h1>
-<p>Branching means you diberge from the main line of development and continue to do work without messing with that main line.</p>
-<h2 id="branches-in-a-nutshell">Branches in a Nutshell</h2>
-<p>When you make a commit, Git stores a commit object that contains a pointer to the snapshot of the content you staged.</p>
+<h1 id="git-branching"><span class="header-section-number">2</span> Git Branching</h1>
+<p>Branching means you diberge from the main line of development and continue to do work without messing with that main line.<br />
+## Branches in a Nutshell<br />
+When you make a commit, Git stores a commit object that contains a pointer to the snapshot of the content you staged.</p>
 <p>Creating a New Branch</p>
 <p><code>git branch [branchname]</code> create a new branch called testing</p>
-<p><code>git log --oneline --decorate</code>  shows you where rhe branch pointers are pointing.</p>
+<p><code>git log --oneline --decorate</code> shows you where rhe branch pointers are pointing.</p>
 <p>Switching Branches</p>
 <p><code>git checkout [branchname]</code> this moves <code>HEAD</code> to point to the branch.</p>
 <p><code>git log --oneline --decorate --graph --all</code></p>
 <p><a href="https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell#divergent_history">Divergent history</a></p>
-<h2 id="basic-branching-and-merging">Basic Branching and Merging</h2>
+<h2 id="basic-branching-and-merging"><span class="header-section-number">2.1</span> Basic Branching and Merging</h2>
 <p>Basic Branching</p>
-<div class="highlight"><pre><span></span>git checkout -b <span class="o">[</span>branchname<span class="o">]</span> switch branch
-git merge <span class="o">[</span>branchname<span class="o">]</span> merge branch 
-git branch -d <span class="o">[</span>branchname<span class="o">]</span> delete branch
-</pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">git</span> checkout -b [branchname] switch branch</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="fu">git</span> merge [branchname] merge branch </a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="fu">git</span> branch -d [branchname] delete branch</a></code></pre></div>
 <p>Basic Merging</p>
 <p><code>git merge [branchname]</code></p>
-<p>Basic Merge Conflicts
-Occasionally,this process doesn't go smoothly.If you changed the same part of the same file differently in the two branches you're merging together.Git hasn&rsquo;t automatically created a new merge commit. It has paused the process while you resolve the conflict. </p>
+<p>Basic Merge Conflicts<br />
+Occasionally,this process doesn’t go smoothly.If you changed the same part of the same file differently in the two branches you’re merging together.Git hasn’t automatically created a new merge commit. It has paused the process while you resolve the conflict.</p>
 <p>If you want to use a graphical tool to resolve these issues, you can run <code>git mergetool</code>.</p>
 <p><code>git mergetool</code></p>
 <p><a href="https://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging#_advanced_merging">Advanced Merging</a></p>
-<h2 id="branch-management">Branch Management</h2>
+<h2 id="branch-management"><span class="header-section-number">2.2</span> Branch Management</h2>
 <p>The <code>git branch</code> command does more than just create and detele branches.</p>
-<div class="highlight"><pre><span></span>git branch -v <span class="c1">#shows the last commit on each branch.</span>
-git branch --merged/nomerged <span class="c1"># filter this list to branches </span>
-git branch -d <span class="o">[</span>branchname<span class="o">]</span> <span class="c1"># detele the branch and lose that work.</span>
-</pre></div>
-<h2 id="branching-workflows">Branching Workflows</h2>
-<p>cover some common workflows that this lightweight branching makes possible.
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">git</span> branch -v <span class="co">#shows the last commit on each branch.</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="fu">git</span> branch --merged/nomerged <span class="co"># filter this list to branches </span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="fu">git</span> branch -d [branchname] <span class="co"># detele the branch and lose that work.</span></a></code></pre></div>
+<h2 id="branching-workflows"><span class="header-section-number">2.3</span> Branching Workflows</h2>
+<p>cover some common workflows that this lightweight branching makes possible.<br />
 <a href="https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows">Brancheing Workflows</a></p>
-<h2 id="remote-branches">Remote Branches</h2>
-<p>Remote references are references in your remote repositories,includeing branches,tags,and so on.
+<h2 id="remote-branches"><span class="header-section-number">2.4</span> Remote Branches</h2>
+<p>Remote references are references in your remote repositories,includeing branches,tags,and so on.<br />
 you can get a full list of remote references explicitly with <code>git ls-remote [remote]</code> or `git remote show [remote] gor remote branches as well as more information.</p>
 <p>Pushing</p>
 <p><code>git push [remote] [branch]/[localbranch]:[remotebranch]</code></p>
-<p>The next time one of yoour collaborators fetches from the server.It's important to note that when you do a fetch that brings down new remote-tracking branches,you don't qutomatically have local,editable copies of them.</p>
+<p>The next time one of yoour collaborators fetches from the server.It’s important to note that when you do a fetch that brings down new remote-tracking branches,you don’t qutomatically have local,editable copies of them.</p>
 <p>To merge this work into your current working branch,you can run <code>git merge origin/[branchmane]</code>.</p>
 <p><code>git checkout -b [branchname] orgin/[branchname]</code></p>
 <p>create local branch base on remote branch</p>
 <p>Tracking Branches</p>
 <p><code>git checkout --track orgin/[branchname]</code></p>
-<p>In fact,this is so common that there's even a shortcut for that shortcut.if the branch name you're trying to checkout doesn't exist add exactly matches a name on only one remote.Git will create a tracking branch for you.</p>
-<p>If you already have a local brach and want to set it to a remote branch you just pulled down,or want to change the upsteam branch you're tracking.</p>
-<div class="highlight"><pre><span></span>git branch -u origin/<span class="o">[</span>branchname<span class="o">]</span> 
-git branch -vv <span class="c1"># show what tracking branches you have set up.</span>
-git fetch --all<span class="p">;</span>git branch -vv <span class="c1"># fetch from all your remotes </span>
-</pre></div>
+<p>In fact,this is so common that there’s even a shortcut for that shortcut.if the branch name you’re trying to checkout doesn’t exist add exactly matches a name on only one remote.Git will create a tracking branch for you.</p>
+<p>If you already have a local brach and want to set it to a remote branch you just pulled down,or want to change the upsteam branch you’re tracking.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="fu">git</span> branch -u origin/[branchname] </a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="fu">git</span> branch -vv <span class="co"># show what tracking branches you have set up.</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="fu">git</span> fetch --all<span class="kw">;</span><span class="fu">git</span> branch -vv <span class="co"># fetch from all your remotes </span></a></code></pre></div>
 <p>Pulling</p>
 <p><code>git pull</code></p>
 <p>Deleting Remote Branches</p>
 <p><code>git push origin --delete [branchname]</code> detele remote branch</p>
-<h2 id="rebasing">Rebasing</h2>
+<h2 id="rebasing"><span class="header-section-number">2.5</span> Rebasing</h2>
 <p>In Git, there are two main ways to integrate changes from one branch into another: the <code>merge</code> and the <code>rebase</code>.</p>
 <p>The Basic Rebase</p>
-<p>rebase a branch to master </p>
-<div class="highlight"><pre><span></span>git checkout <span class="o">[</span>branchname<span class="o">]</span>
-git rebase master
-git checkout master
-git merge <span class="o">[</span>branchname<span class="o">]</span>
-</pre></div>
-<p>There is no difference in the end product of the integration,but rebasing makes for a cleaner history.
+<p>rebase a branch to master</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="fu">git</span> checkout [branchname]</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="fu">git</span> rebase master</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="fu">git</span> checkout master</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="fu">git</span> merge [branchname]</a></code></pre></div>
+<p>There is no difference in the end product of the integration,but rebasing makes for a cleaner history.<br />
 Rebasing replays changes from one line of work onto another in the order they were introduced,whereas merging takes the endpoints and merges them together.</p>
 <p>More Intersting Rebases</p>
 <p><code>git rebase --onto master [firstbranchname] [secondbranchname]</code></p>
-<p>Take the <code>second branch</code>forgure out the patches since it diverged from the <code>first branch</code>,and replay these patches in the <code>secondbranch</code> as if it was based directly off <code>master branch</code>instead. </p>
+<p>Take the <code>second branch</code>forgure out the patches since it diverged from the <code>first branch</code>,and replay these patches in the <code>secondbranch</code> as if it was based directly off <code>master branch</code>instead.</p>
 <p><a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing#rbdiag_e">A history with a topic branch off another topic branch</a></p>
 <p>The Perils of Rebasing</p>
-<p>Don not rebase commits that exist outside your repository
+<p>Don not rebase commits that exist outside your repository<br />
 <a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing#rbdiag_i">Figure</a></p>
-<p>Rebase vs. Merge
-In general the way to get the best of both worlds is to rebase local changes you've made but haven't shared yet before you puch them in order to clean up your story,but never rebase anything you've pushed somewhere.</p>
-<h1 id="distributed-git_1">Distributed Git</h1>
+<p>Rebase vs. Merge<br />
+In general the way to get the best of both worlds is to rebase local changes you’ve made but haven’t shared yet before you puch them in order to clean up your story,but never rebase anything you’ve pushed somewhere.</p>
+<h1 id="distributed-git"><span class="header-section-number">3</span> Distributed Git</h1>
 <p>Git in a distributed environment as a contributor and an integretor.</p>
-<h2 id="distributed-workflows">Distributed Workflows</h2>
-<p>Integration-Mannger Workflows
+<h2 id="distributed-workflows"><span class="header-section-number">3.1</span> Distributed Workflows</h2>
+<p>Integration-Mannger Workflows<br />
 <a href="https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#wfdiag_b">Integration-Manager Workflow Figure</a></p>
 <p>TODO</p>
-<h1 id="git-tools_1">Git Tools</h1>
-<h2 id="revision-selection">Revision Selection</h2>
+<h1 id="git-tools"><span class="header-section-number">4</span> Git Tools</h1>
+<h2 id="revision-selection"><span class="header-section-number">4.1</span> Revision Selection</h2>
 <p>Short SHA-1</p>
 <p><code>git log --abbrev-commit --pretty=oneline</code></p>
 <p><code>git show [shasum]</code></p>
-<h2 id="commit-ranges">Commit Ranges</h2>
+<h2 id="commit-ranges"><span class="header-section-number">4.2</span> Commit Ranges</h2>
 <p>Double Dot</p>
-<p>This basically asks Git to resolve a range of commits that are reachable from one commit but aren&rsquo;t reachable from another.</p>
+<p>This basically asks Git to resolve a range of commits that are reachable from one commit but aren’t reachable from another.</p>
 <p><code>git log master..experiment</code></p>
-<p>show a log of just those commits with <code>master..experiment</code>&thinsp;&mdash;&thinsp;that means &ldquo;all commits reachable from experiment that aren&rsquo;t reachable from master.</p>
+<p>show a log of just those commits with <code>master..experiment</code> — that means “all commits reachable from experiment that aren’t reachable from master.</p>
 <p>Multiple Points</p>
-<p>Git allows you to do this by using either the ^ character or --not before any reference from which you don&rsquo;t want to see reachable commits.</p>
-<div class="highlight"><pre><span></span>git log refA..refB  
-git log ^refA refB  
-git log refB --not refA  
-</pre></div>
+<p>Git allows you to do this by using either the ^ character or –not before any reference from which you don’t want to see reachable commits.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="fu">git</span> log refA..refB  </a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="fu">git</span> log ^refA refB  </a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="fu">git</span> log refB --not refA  </a></code></pre></div>
 <p>Triple Dot</p>
 <p>specifies all the commits that are reachable by either of two references but not by both of them.</p>
 <p><code>git log master...experiment</code></p>
 <p>see what is in master or experiment but not any common references</p>
-<h1 id="reference_1">Reference</h1>
+<h1 id="reference"><span class="header-section-number">5</span> Reference</h1>
 <p><a href="https://git-scm.com/book/en/v2">Pro Git</a></p>
+</body>
+</html>
+
             </div>
             <!-- /.entry-content -->
         </article>
@@ -347,10 +464,16 @@ git log refB --not refA
       <a href="https://cnewbie.github.io/tags/git/">Git</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="https://cnewbie.github.io/tags/algorithm/">Algorithm</a>
+      <a href="https://cnewbie.github.io/tags/markdown/">markdown</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://cnewbie.github.io/tags/pandoc/">pandoc</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="https://cnewbie.github.io/tags/iptables/">iptables</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://cnewbie.github.io/tags/algorithm/">Algorithm</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="https://cnewbie.github.io/tags/linux/">linux</a>
@@ -358,13 +481,6 @@ git log refB --not refA
   </ul>
 </li>
 <!-- End Sidebar/Tag Cloud -->
-
-<!-- Sidebar/TOC -->
-<li class="list-group-item">
-  <h4><i class="fa fa-list-ul fa-lg"></i><span class="icon-label">Content</span></h4>
-    <div id="toc"><ul><li><a class="toc-href" href="#" title="Git Pro">Git Pro</a><ul><li><a class="toc-href" href="#git-basics" title="Git Basics">Git Basics</a><ul><li><a class="toc-href" href="#getting-a-git-repository" title="Getting a Git Repository">Getting a Git Repository</a></li><li><a class="toc-href" href="#recording-changes-to-the-repository" title="Recording Changes to the Repository">Recording Changes to the Repository</a></li><li><a class="toc-href" href="#viewing-the-commit-history" title="Viewing the Commit History">Viewing the Commit History</a></li><li><a class="toc-href" href="#undoing-things" title="Undoing Things">Undoing Things</a></li><li><a class="toc-href" href="#working-with-remotes" title="Working with Remotes">Working with Remotes</a></li><li><a class="toc-href" href="#tagging" title="Tagging">Tagging</a></li><li><a class="toc-href" href="#git-aliases" title="Git Aliases">Git Aliases</a></li></ul></li><li><a class="toc-href" href="#git-branching_1" title="Git Branching">Git Branching</a><ul><li><a class="toc-href" href="#branches-in-a-nutshell" title="Branches in a Nutshell">Branches in a Nutshell</a></li><li><a class="toc-href" href="#basic-branching-and-merging" title="Basic Branching and Merging">Basic Branching and Merging</a></li><li><a class="toc-href" href="#branch-management" title="Branch Management">Branch Management</a></li><li><a class="toc-href" href="#branching-workflows" title="Branching Workflows">Branching Workflows</a></li><li><a class="toc-href" href="#remote-branches" title="Remote Branches">Remote Branches</a></li><li><a class="toc-href" href="#rebasing" title="Rebasing">Rebasing</a></li></ul></li><li><a class="toc-href" href="#distributed-git_1" title="Distributed Git">Distributed Git</a><ul><li><a class="toc-href" href="#distributed-workflows" title="Distributed Workflows">Distributed Workflows</a></li></ul></li><li><a class="toc-href" href="#git-tools_1" title="Git Tools">Git Tools</a><ul><li><a class="toc-href" href="#revision-selection" title="Revision Selection">Revision Selection</a></li><li><a class="toc-href" href="#commit-ranges" title="Commit Ranges">Commit Ranges</a></li></ul></li><li><a class="toc-href" href="#reference_1" title="Reference">Reference</a></li></ul></li></ul></div>
-</li>
-<!-- End Sidebar/TOC -->
   </ul>
 </section>
 <!-- End Sidebar -->            </aside>

@@ -13,13 +13,13 @@
 
         <meta name="author" content="cnewbie" />
         <meta name="keywords" content="iptables,linux" />
-        <meta name="description" content="Iptables 配置操作" />
+        <meta name="description" content="Iptables 配置" />
 
         <meta property="og:site_name" content="cnewbie's Blog" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Iptables Firewall"/>
         <meta property="og:url" content="https://cnewbie.github.io/blog/2017/iptables-firewall/"/>
-        <meta property="og:description" content="Iptables 配置操作"/>
+        <meta property="og:description" content="Iptables 配置"/>
         <meta property="article:published_time" content="2017-06-30" />
             <meta property="article:section" content="Tech" />
             <meta property="article:tag" content="iptables" />
@@ -109,12 +109,18 @@ cnewbie's Blog            </a>
     </span>
           <span class="label label-default">Modified</span>
             <span class="modified">
-                <i class="fa fa-calendar"></i><time datetime="2018-07-06T00:00:00+08:00"> 2018 Jul 06</time>
+                <i class="fa fa-calendar"></i><time datetime="2018-07-16T00:00:00+08:00"> 2018 Jul 16</time>
             </span>
 
 
 
 
+
+    <span class="label label-default">Read Time</span>
+    <span>
+        <i class="fa fa-clock-o"></i>
+        <time> 4 min </time>
+    </span>
 
 <span class="label label-default">Tags</span>
 	<a href="https://cnewbie.github.io/tags/iptables/">iptables</a>
@@ -123,8 +129,109 @@ cnewbie's Blog            </a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <h1 id="filternatmangle">filter,nat,mangle 规则表</h1>
-<h2 id="filter">filter表</h2>
+                <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Iptables 防火墙配置</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Iptables 防火墙配置</h1>
+</header>
+<nav id="TOC">
+<ul>
+<li><a href="#filternatmangle-规则表"><span class="toc-section-number">1</span> filter,nat,mangle 规则表</a><ul>
+<li><a href="#filter表"><span class="toc-section-number">1.1</span> filter表</a></li>
+<li><a href="#nat表"><span class="toc-section-number">1.2</span> nat表</a></li>
+<li><a href="#mangle表"><span class="toc-section-number">1.3</span> mangle表</a></li>
+<li><a href="#raw表"><span class="toc-section-number">1.4</span> raw表</a></li>
+</ul></li>
+<li><a href="#规则链和规则"><span class="toc-section-number">2</span> 规则链和规则</a></li>
+<li><a href="#iptables编写规则"><span class="toc-section-number">3</span> iptables编写规则</a></li>
+<li><a href="#iptables常用实例备查"><span class="toc-section-number">4</span> iptables常用实例备查</a></li>
+<li><a href="#引用"><span class="toc-section-number">5</span> 引用</a></li>
+</ul>
+</nav>
+<hr />
+<h1 id="filternatmangle-规则表"><span class="header-section-number">1</span> filter,nat,mangle 规则表</h1>
+<h2 id="filter表"><span class="header-section-number">1.1</span> filter表</h2>
 <p>数据包过滤,根据规则决定是否放行数据包（DROP,ACCEPT,REJECT,LOG）</p>
 <p>三条规则链</p>
 <ul>
@@ -132,7 +239,7 @@ cnewbie's Blog            </a>
 <li>FORWARD 不是本地产生且负责转发的包</li>
 <li>OUTPUT 本地产生的包</li>
 </ul>
-<h2 id="nat">nat表</h2>
+<h2 id="nat表"><span class="header-section-number">1.2</span> nat表</h2>
 <p>修改数据包ip地址、端口等信息（SNAT,DNAT,MASQUERADE,REDIRECT）</p>
 <p>三条规则链</p>
 <ul>
@@ -140,12 +247,12 @@ cnewbie's Blog            </a>
 <li>OUTPUT 改变本地产生包的目的地址</li>
 <li>POSTROUTING 改变发出数据包的源地址</li>
 </ul>
-<h2 id="mangle">mangle表</h2>
-<p>修改数据包的TOS，TTL及数据包的Mark<br/>
-五个规则链 PREROUTING，POSTROUTING，INPUT，OUTPUT，FORWARD</p>
-<h2 id="raw">raw表</h2>
-<p>决定数据包是否被状态跟踪机制处理<br/>
-两条规则链 OUTPUT,PREROUTING  </p>
+<h2 id="mangle表"><span class="header-section-number">1.3</span> mangle表</h2>
+<p>修改数据包的TOS，TTL及数据包的Mark</p>
+<p>五个规则链 PREROUTING，POSTROUTING，INPUT，OUTPUT，FORWARD</p>
+<h2 id="raw表"><span class="header-section-number">1.4</span> raw表</h2>
+<p>决定数据包是否被状态跟踪机制处理</p>
+<p>两条规则链 OUTPUT,PREROUTING</p>
 <p>四种状态</p>
 <ul>
 <li>NEW 开始一个连接</li>
@@ -153,7 +260,7 @@ cnewbie's Blog            </a>
 <li>ESTABLISHED 发送后接到应答的数据包</li>
 <li>INVALID 无法识别的数据包</li>
 </ul>
-<h1 id="_2">规则链和规则</h1>
+<h1 id="规则链和规则"><span class="header-section-number">2</span> 规则链和规则</h1>
 <p>在处理各种数据包时，根据防火墙规则的不同时机，iptables供涉及5种默认规则链：</p>
 <ul>
 <li>INPUT 当接收到防火墙本机地址的数据包（入站）时,应用此链中的规则。。</li>
@@ -162,7 +269,7 @@ cnewbie's Blog            </a>
 <li>PREROUTING 在对数据包作路由选择之前，应用此链中的规则，如DNAT。</li>
 <li>POSTROUTING 在对数据包作路由选择之后，应用此链中的规则，如SNAT。</li>
 </ul>
-<div class="highlight"><pre><span></span>--&gt;PREROUTING--&gt;[ROUTE]--&gt;FORWARD--&gt;POSTROUTING--&gt;
+<pre><code>--&gt;PREROUTING--&gt;[ROUTE]--&gt;FORWARD--&gt;POSTROUTING--&gt;
      mangle        |       mangle        ^ mangle
       nat          |       filter        |  nat
                    |                     |
@@ -171,8 +278,7 @@ cnewbie's Blog            </a>
                  INPUT                 OUTPUT
                    | mangle              ^ mangle
                    | filter              |  nat
-                   v ------&gt;local-------&gt;| filter
-</pre></div>
+                   v ------&gt;local-------&gt;| filter</code></pre>
 <p>防火墙处理数据包的方式（规则）：</p>
 <ul>
 <li>ACCEPT：允许数据包通过</li>
@@ -186,9 +292,13 @@ cnewbie's Blog            </a>
 </ul>
 <p>除去最后一个LOG，前3条规则匹配数据包后，该数据包不会再往下继续匹配了，所以编写的规则顺序极其关键。</p>
 <p>Linux数据包路由原理</p>
-<p><img alt="数据包流程" src="https://cnewbie.github.io/images/2017-packetflow.jpg"/></p>
-<h1 id="iptables">iptables编写规则</h1>
-<p><img alt="命令格式" src="https://cnewbie.github.io/images/2017-iptables.png"/></p>
+<figure>
+<img src="/images/2017-packetflow.jpg" alt="数据包流程" /><figcaption>数据包流程</figcaption>
+</figure>
+<h1 id="iptables编写规则"><span class="header-section-number">3</span> iptables编写规则</h1>
+<figure>
+<img src="/images/2017-iptables.png" alt="命令格式" /><figcaption>命令格式</figcaption>
+</figure>
 <ul>
 <li>[-t 表名]：该规则所操作的哪个表，可以使用filter、nat等，如果没有指定则默认为filter</li>
 <li>-A：新增一条规则，到该规则链列表的最后一行</li>
@@ -198,61 +308,61 @@ cnewbie's Blog            </a>
 <li>-P：设置某条规则链的默认动作</li>
 <li>-nL：-L、-n，查看当前运行的防火墙规则列表</li>
 <li>chain名：指定规则表的哪个链，如INPUT、OUPUT、FORWARD、PREROUTING等</li>
-<li>[规则编号]：插入、删除、替换规则时用，--line-numbers显示号码</li>
+<li>[规则编号]：插入、删除、替换规则时用，–line-numbers显示号码</li>
 <li>[-i|o 网卡名称]：i是指定数据包从哪块网卡进入，o是指定数据包从哪块网卡输出</li>
 <li>[-p 协议类型]：可以指定规则应用的协议，包含tcp、udp和icmp等</li>
 <li>[-s 源IP地址]：源主机的IP地址或子网地址</li>
-<li>[--sport 源端口号]：数据包的IP的源端口号</li>
+<li>[–sport 源端口号]：数据包的IP的源端口号</li>
 <li>[-d目标IP地址]：目标主机的IP地址或子网地址</li>
-<li>[--dport目标端口号]：数据包的IP的目标端口号</li>
-<li>-m：extend matches，这个选项用于提供更多的匹配参数，如：<ul>
-<li>-m state &ndash;state ESTABLISHED,RELATED</li>
-<li>-m tcp &ndash;dport 22</li>
-<li>-m multiport &ndash;dports 80,8080</li>
-<li>-m icmp &ndash;icmp-type 8</li>
-</ul>
-</li>
+<li>[–dport目标端口号]：数据包的IP的目标端口号</li>
+<li>-m：extend matches，这个选项用于提供更多的匹配参数，如：
+<ul>
+<li>-m state –state ESTABLISHED,RELATED</li>
+<li>-m tcp –dport 22</li>
+<li>-m multiport –dports 80,8080</li>
+<li>-m icmp –icmp-type 8</li>
+</ul></li>
 <li>&lt;-j 动作&gt;：处理数据包的动作，包括ACCEPT、DROP、REJECT等</li>
 </ul>
-<h1 id="iptables_1">iptables常用实例备查</h1>
-<div class="highlight"><pre><span></span>iptables -P INPUT DROP
-iptables -P FORWARD ACCEPT
-iptables -P OUTPUT ACCEPT
-</pre></div>
+<h1 id="iptables常用实例备查"><span class="header-section-number">4</span> iptables常用实例备查</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ex">iptables</span> -P INPUT DROP</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="ex">iptables</span> -P FORWARD ACCEPT</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="ex">iptables</span> -P OUTPUT ACCEPT</a></code></pre></div>
 <p>限制</p>
-<p><code>iptables -I INPUT 1 -m state --state RELATED,ESTABLISHED -j ACCEPT</code> <br/>
-把这条语句插在input链的最前面（第一条），对状态为ESTABLISHED,RELATED的连接放行。</p>
-<p><code>iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT</code> <br/>
-开放指定端口</p>
-<p><code>iptables -I INPUT 2 -i lo -j ACCEPT</code> <br/>
-允许loopback，本地回环是主机内部发送和接收</p>
+<p><code>iptables -I INPUT 1 -m state --state RELATED,ESTABLISHED -j ACCEPT</code></p>
+<p>把这条语句插在input链的最前面（第一条），对状态为ESTABLISHED,RELATED的连接放行</p>
+<p><code>iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT</code></p>
+<p>开放指定端口</p>
+<p><code>iptables -I INPUT 2 -i lo -j ACCEPT</code></p>
+<p>允许loopback，本地回环是主机内部发送和接收</p>
 <p>删除</p>
 <p><code>iptables -D chain  number</code></p>
 <p>丢弃非法连接</p>
-<div class="highlight"><pre><span></span>iptables -A INPUT -m state &ndash;state INVALID -j DROP
-iptables -A OUTPUT -m state &ndash;state INVALID -j DROP
-iptables-A FORWARD -m state &ndash;state INVALID -j DROP
-</pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ex">iptables</span> -A INPUT -m state –state INVALID -j DROP</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="ex">iptables</span> -A OUTPUT -m state –state INVALID -j DROP</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="ex">iptables-A</span> FORWARD -m state –state INVALID -j DROP</a></code></pre></div>
 <p>日志</p>
 <p><code>iptables -R INPUT 1 -p tcp --dport 22 -m limit --limit 3/minute --limit-burst 8 -j LOG</code></p>
 <p>Dos</p>
-<div class="highlight"><pre><span></span>iptables -N syn-flood   (如果您的防火墙默认配置有&ldquo; :syn-flood - [0:0] &rdquo;则不许要该项，因为重复了)
-iptables -A INPUT -p tcp --syn -j syn-flood   
-iptables -I syn-flood -p tcp -m limit --limit 2/s --limit-burst 5 -j RETURN   
-iptables -A syn-flood -j REJECT   
-# 防止DOS太多连接进来,可以允许外网网卡每个IP最多15个初始连接,超过的丢弃
-
-# 需要iptables v1.4.19以上版本：iptables -V
-iptables -A INPUT -p tcp --syn -i eth0 --dport 80 -m connlimit --connlimit-above 20 --connlimit-mask 24 -j DROP   
-
-#用Iptables抵御DDOS (参数与上相同)   
-iptables -A INPUT -p tcp --syn -m limit --limit 5/s --limit-burst 10 -j ACCEPT  
-iptables -A FORWARD -p tcp --syn -m limit --limit 1/s -j ACCEPT
-iptables -A FORWARD -p icmp -m limit --limit 2/s --limit-burst 10 -j ACCEPT
-iptables -A INPUT -p icmp --icmp-type 0 -s ! 172.29.73.0/24 -j DROP
-</pre></div>
-<h1 id="_3">引用</h1>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="ex">iptables</span> -N syn-flood   (如果您的防火墙默认配置有“ :syn-flood - [0:0] ”则不许要该项，因为重复了)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="ex">iptables</span> -A INPUT -p tcp --syn -j syn-flood</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="ex">iptables</span> -I syn-flood -p tcp -m limit --limit 2/s --limit-burst 5 -j RETURN   </a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="ex">iptables</span> -A syn-flood -j REJECT</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co"># 防止DOS太多连接进来,可以允许外网网卡每个IP最多15个初始连接,超过的丢弃</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co"># 需要iptables v1.4.19以上版本：iptables -V</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="ex">iptables</span> -A INPUT -p tcp --syn -i eth0 --dport 80 -m connlimit --connlimit-above 20 --connlimit-mask 24 -j DROP</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#用Iptables抵御DDOS (参数与上相同)</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="ex">iptables</span> -A INPUT -p tcp --syn -m limit --limit 5/s --limit-burst 10 -j ACCEPT  </a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="ex">iptables</span> -A FORWARD -p tcp --syn -m limit --limit 1/s -j ACCEPT</a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="ex">iptables</span> -A FORWARD -p icmp -m limit --limit 2/s --limit-burst 10 -j ACCEPT</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="ex">iptables</span> -A INPUT -p icmp --icmp-type 0 -s ! 172.29.73.0/24 -j DROP</a></code></pre></div>
+<h1 id="引用"><span class="header-section-number">5</span> 引用</h1>
 <p><a href="http://seanlook.com/2014/02/23/iptables-understand/">Seanlook</a></p>
+</body>
+</html>
+
             </div>
             <!-- /.entry-content -->
         </article>
@@ -282,10 +392,16 @@ iptables -A INPUT -p icmp --icmp-type 0 -s ! 172.29.73.0/24 -j DROP
       <a href="https://cnewbie.github.io/tags/git/">Git</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="https://cnewbie.github.io/tags/algorithm/">Algorithm</a>
+      <a href="https://cnewbie.github.io/tags/markdown/">markdown</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://cnewbie.github.io/tags/pandoc/">pandoc</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="https://cnewbie.github.io/tags/iptables/">iptables</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://cnewbie.github.io/tags/algorithm/">Algorithm</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="https://cnewbie.github.io/tags/linux/">linux</a>
@@ -293,13 +409,6 @@ iptables -A INPUT -p icmp --icmp-type 0 -s ! 172.29.73.0/24 -j DROP
   </ul>
 </li>
 <!-- End Sidebar/Tag Cloud -->
-
-<!-- Sidebar/TOC -->
-<li class="list-group-item">
-  <h4><i class="fa fa-list-ul fa-lg"></i><span class="icon-label">Content</span></h4>
-    <div id="toc"><ul><li><a class="toc-href" href="#" title="Iptables Firewall">Iptables Firewall</a><ul><li><a class="toc-href" href="#filternatmangle" title="filter,nat,mangle 规则表">filter,nat,mangle 规则表</a><ul><li><a class="toc-href" href="#filter" title="filter表">filter表</a></li><li><a class="toc-href" href="#nat" title="nat表">nat表</a></li><li><a class="toc-href" href="#mangle" title="mangle表">mangle表</a></li><li><a class="toc-href" href="#raw" title="raw表">raw表</a></li></ul></li><li><a class="toc-href" href="#_2" title="规则链和规则">规则链和规则</a></li><li><a class="toc-href" href="#iptables" title="iptables编写规则">iptables编写规则</a></li><li><a class="toc-href" href="#iptables_1" title="iptables常用实例备查">iptables常用实例备查</a></li><li><a class="toc-href" href="#_3" title="引用">引用</a></li></ul></li></ul></div>
-</li>
-<!-- End Sidebar/TOC -->
   </ul>
 </section>
 <!-- End Sidebar -->            </aside>
