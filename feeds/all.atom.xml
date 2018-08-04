@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>cnewbie's Blog</title><link href="https://cnewbie.github.io/" rel="alternate"></link><link href="https://cnewbie.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cnewbie.github.io/</id><updated>2018-07-16T00:00:00+08:00</updated><entry><title>Pandoc Markdown 文档</title><link href="https://cnewbie.github.io/blog/2018/pandoc-markdown/" rel="alternate"></link><published>2018-07-15T00:00:00+08:00</published><updated>2018-07-16T00:00:00+08:00</updated><author><name>cnewbie</name></author><id>tag:cnewbie.github.io,2018-07-15:/blog/2018/pandoc-markdown/</id><summary type="html">Pandoc Markdown 文档</summary><content type="html">&lt;!DOCTYPE html&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>cnewbie's Blog</title><link href="https://cnewbie.github.io/" rel="alternate"></link><link href="https://cnewbie.github.io/feeds/all.atom.xml" rel="self"></link><id>https://cnewbie.github.io/</id><updated>2018-08-05T00:00:00+08:00</updated><entry><title>Sort Algorithms</title><link href="https://cnewbie.github.io/blog/2018/sort-algorithms/" rel="alternate"></link><published>2018-08-05T00:00:00+08:00</published><updated>2018-08-05T00:00:00+08:00</updated><author><name>cnewbie</name></author><id>tag:cnewbie.github.io,2018-08-05:/blog/2018/sort-algorithms/</id><summary type="html">常用排序算法总结</summary><content type="html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang=""&gt;
 &lt;head&gt;
   &lt;meta charset="utf-8" /&gt;
   &lt;meta name="generator" content="pandoc" /&gt;
   &lt;meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" /&gt;
-  &lt;title&gt;Pandoc Markdown 文档&lt;/title&gt;
+  &lt;title&gt;Untitled&lt;/title&gt;
   &lt;style type="text/css"&gt;
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -15,7 +15,7 @@
   &lt;style type="text/css"&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -28,13 +28,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -82,79 +80,625 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   &lt;![endif]--&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;header&gt;
-&lt;h1 class="title"&gt;Pandoc Markdown 文档&lt;/h1&gt;
-&lt;/header&gt;
 &lt;nav id="TOC"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#philosophy-哲学"&gt;&lt;span class="toc-section-number"&gt;1&lt;/span&gt; Philosophy 哲学&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#paragraphs-段落"&gt;&lt;span class="toc-section-number"&gt;2&lt;/span&gt; Paragraphs 段落&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#headers-标题"&gt;&lt;span class="toc-section-number"&gt;3&lt;/span&gt; Headers 标题&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#标题风格"&gt;&lt;span class="toc-section-number"&gt;3.1&lt;/span&gt; 标题风格&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#header-identifiers-标题标识符"&gt;&lt;span class="toc-section-number"&gt;3.2&lt;/span&gt; Header identifiers 标题标识符&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#block-quotations-块引用"&gt;&lt;span class="toc-section-number"&gt;4&lt;/span&gt; Block quotations 块引用&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#verbatimcode-blocks-代码块"&gt;&lt;span class="toc-section-number"&gt;5&lt;/span&gt; Verbatim(code) blocks 代码块&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#indented-code-blocks-缩进代码块"&gt;&lt;span class="toc-section-number"&gt;5.1&lt;/span&gt; Indented code blocks 缩进代码块&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#fenced-code-blocks-围栏代码块"&gt;&lt;span class="toc-section-number"&gt;5.2&lt;/span&gt; Fenced code blocks 围栏代码块&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#line-blocks-行块"&gt;&lt;span class="toc-section-number"&gt;6&lt;/span&gt; Line blocks 行块&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#lists-列表"&gt;&lt;span class="toc-section-number"&gt;7&lt;/span&gt; Lists 列表&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#bullet-lists-项目列表无序列表"&gt;&lt;span class="toc-section-number"&gt;7.1&lt;/span&gt; Bullet lists 项目列表／无序列表&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#block-content-in-list-items-列表内的块"&gt;&lt;span class="toc-section-number"&gt;7.2&lt;/span&gt; Block content In list items 列表内的块&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#ordered-lists-有序列表"&gt;&lt;span class="toc-section-number"&gt;7.3&lt;/span&gt; Ordered lists 有序列表&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#definition-lists-列表定义"&gt;&lt;span class="toc-section-number"&gt;7.4&lt;/span&gt; Definition lists 列表定义&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#numbered-example-lists-编号示例列表"&gt;&lt;span class="toc-section-number"&gt;7.5&lt;/span&gt; Numbered example lists 编号示例列表&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#compact-and-loose-lists-紧凑稀疏列表"&gt;&lt;span class="toc-section-number"&gt;7.6&lt;/span&gt; Compact and loose lists 紧凑／稀疏列表&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#ending-a-list-结束列表"&gt;&lt;span class="toc-section-number"&gt;7.7&lt;/span&gt; Ending a list 结束列表&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#horzontal-rules-水平分隔线"&gt;&lt;span class="toc-section-number"&gt;8&lt;/span&gt; Horzontal rules 水平分隔线&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#tables-表格"&gt;&lt;span class="toc-section-number"&gt;9&lt;/span&gt; Tables 表格&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#metadata-blocks-元数据块"&gt;&lt;span class="toc-section-number"&gt;10&lt;/span&gt; Metadata blocks 元数据块&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#backslash-escapes-反斜杠转义"&gt;&lt;span class="toc-section-number"&gt;11&lt;/span&gt; Backslash escapes 反斜杠转义&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#inline-formatting-内联样式"&gt;&lt;span class="toc-section-number"&gt;12&lt;/span&gt; Inline formatting 内联样式&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#emphasis-强调"&gt;&lt;span class="toc-section-number"&gt;12.1&lt;/span&gt; Emphasis 强调&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#strikeout-删除线"&gt;&lt;span class="toc-section-number"&gt;12.2&lt;/span&gt; Strikeout 删除线&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#superscripts-and-subscripts-上下标"&gt;&lt;span class="toc-section-number"&gt;12.3&lt;/span&gt; Superscripts and subscripts 上下标&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#verbatim"&gt;&lt;span class="toc-section-number"&gt;12.4&lt;/span&gt; Verbatim&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#math-数学公式"&gt;&lt;span class="toc-section-number"&gt;13&lt;/span&gt; Math 数学公式&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#raw-html"&gt;&lt;span class="toc-section-number"&gt;14&lt;/span&gt; Raw HTML&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#generic-raw-attribute"&gt;&lt;span class="toc-section-number"&gt;15&lt;/span&gt; Generic raw attribute&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#latex-macros"&gt;&lt;span class="toc-section-number"&gt;16&lt;/span&gt; LaTeX macros&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#links-链接"&gt;&lt;span class="toc-section-number"&gt;17&lt;/span&gt; Links 链接&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#automatic-links-自动链接"&gt;&lt;span class="toc-section-number"&gt;17.1&lt;/span&gt; Automatic links 自动链接&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#inline-links-内联链接"&gt;&lt;span class="toc-section-number"&gt;17.2&lt;/span&gt; Inline links 内联链接&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#reference-links-参考链接"&gt;&lt;span class="toc-section-number"&gt;17.3&lt;/span&gt; Reference links 参考链接&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#internal-links-内部链接"&gt;&lt;span class="toc-section-number"&gt;17.4&lt;/span&gt; Internal links 内部链接&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#images-图片"&gt;&lt;span class="toc-section-number"&gt;18&lt;/span&gt; Images 图片&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#divs-and-spans"&gt;&lt;span class="toc-section-number"&gt;19&lt;/span&gt; Divs and Spans&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#footnotes-脚注"&gt;&lt;span class="toc-section-number"&gt;20&lt;/span&gt; Footnotes 脚注&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#citations-引用"&gt;&lt;span class="toc-section-number"&gt;21&lt;/span&gt; Citations 引用&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#non-pandoc-extensions"&gt;&lt;span class="toc-section-number"&gt;22&lt;/span&gt; Non-pandoc extensions&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#markdown-variants-markdwon-变种"&gt;&lt;span class="toc-section-number"&gt;23&lt;/span&gt; Markdown variants Markdwon 变种&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#markdown_phpextraphp-markdown-extra"&gt;&lt;span class="toc-section-number"&gt;23.1&lt;/span&gt; markdown_phpextra(PHP Markdown Extra)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#markdown_mmdmultimarkdown"&gt;&lt;span class="toc-section-number"&gt;23.2&lt;/span&gt; markdown_mmd(MultiMarkdown)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#markdown_strictmarkdown.pl"&gt;&lt;span class="toc-section-number"&gt;23.3&lt;/span&gt; markdown_strict(Markdown.pl)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#gfmgithub-flavored-markdown"&gt;&lt;span class="toc-section-number"&gt;23.4&lt;/span&gt; gfm(GitHub-Flavored Markdown)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#引用"&gt;&lt;span class="toc-section-number"&gt;24&lt;/span&gt; 引用&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#工具函数"&gt;工具函数&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#bubble-sort-冒泡排序"&gt;Bubble Sort 冒泡排序&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#cocktail-sort-鸡尾酒排序"&gt;Cocktail Sort 鸡尾酒排序&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#selection-sort-选择排序"&gt;Selection Sort 选择排序&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#insertion-sort-插入排序"&gt;Insertion Sort 插入排序&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#shell-sort-希尔排序"&gt;Shell Sort 希尔排序&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#merge-sort归并排序"&gt;Merge Sort归并排序&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#qucik-sort-快速排序"&gt;Qucik Sort 快速排序&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#heap-sort-堆排序"&gt;Heap Sort 堆排序&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#counting-sort-计数排序"&gt;Counting Sort 计数排序&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#算法对比"&gt;算法对比&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#引用"&gt;引用&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/nav&gt;
 &lt;hr /&gt;
-&lt;h1 id="philosophy-哲学"&gt;&lt;span class="header-section-number"&gt;1&lt;/span&gt; Philosophy 哲学&lt;/h1&gt;
+&lt;h1 id="工具函数"&gt;工具函数&lt;/h1&gt;
+&lt;div class="sourceCode" id="cb1"&gt;&lt;pre class="sourceCode cpp"&gt;&lt;code class="sourceCode cpp"&gt;&lt;a class="sourceLine" id="cb1-1" data-line-number="1"&gt;&lt;span class="pp"&gt;#include &lt;/span&gt;&lt;span class="im"&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb1-2" data-line-number="2"&gt;&lt;span class="pp"&gt;#include &lt;/span&gt;&lt;span class="im"&gt;&amp;lt;ctime&amp;gt;&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb1-3" data-line-number="3"&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb1-4" data-line-number="4"&gt;&lt;span class="kw"&gt;using&lt;/span&gt; &lt;span class="kw"&gt;namespace&lt;/span&gt; std;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb1-5" data-line-number="5"&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb1-6" data-line-number="6"&gt;&lt;span class="dt"&gt;void&lt;/span&gt; swap(&lt;span class="dt"&gt;int&lt;/span&gt; &amp;amp;a,&lt;span class="dt"&gt;int&lt;/span&gt; &amp;amp;b){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb1-7" data-line-number="7"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; tmp = a;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb1-8" data-line-number="8"&gt;    a = b;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb1-9" data-line-number="9"&gt;    b = tmp;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb1-10" data-line-number="10"&gt;}&lt;/a&gt;
+&lt;a class="sourceLine" id="cb1-11" data-line-number="11"&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb1-12" data-line-number="12"&gt;&lt;span class="dt"&gt;void&lt;/span&gt; printarr(&lt;span class="dt"&gt;int&lt;/span&gt; *a,&lt;span class="dt"&gt;int&lt;/span&gt; n){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb1-13" data-line-number="13"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt;(&lt;span class="dt"&gt;size_t&lt;/span&gt; i = &lt;span class="dv"&gt;0&lt;/span&gt;; i &amp;lt; n; i++)&lt;/a&gt;
+&lt;a class="sourceLine" id="cb1-14" data-line-number="14"&gt;    {&lt;/a&gt;
+&lt;a class="sourceLine" id="cb1-15" data-line-number="15"&gt;        cout &amp;lt;&amp;lt; a[i] &amp;lt;&amp;lt; &lt;span class="st"&gt;&amp;quot; &amp;quot;&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb1-16" data-line-number="16"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb1-17" data-line-number="17"&gt;    cout &amp;lt;&amp;lt; endl;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb1-18" data-line-number="18"&gt;}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id="bubble-sort-冒泡排序"&gt;Bubble Sort 冒泡排序&lt;/h1&gt;
+&lt;div class="sourceCode" id="cb2"&gt;&lt;pre class="sourceCode cpp"&gt;&lt;code class="sourceCode cpp"&gt;&lt;a class="sourceLine" id="cb2-1" data-line-number="1"&gt;&lt;span class="dt"&gt;void&lt;/span&gt; bubble_sort(&lt;span class="dt"&gt;int&lt;/span&gt; *a, &lt;span class="dt"&gt;int&lt;/span&gt; n){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-2" data-line-number="2"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt;(&lt;span class="dt"&gt;size_t&lt;/span&gt; i = n&lt;span class="dv"&gt;-1&lt;/span&gt;; i &amp;gt; &lt;span class="dv"&gt;0&lt;/span&gt;;--i){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-3" data-line-number="3"&gt;        &lt;span class="cf"&gt;for&lt;/span&gt;(&lt;span class="dt"&gt;size_t&lt;/span&gt; j = i; j &amp;gt; &lt;span class="dv"&gt;0&lt;/span&gt;;--j)&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-4" data-line-number="4"&gt;        {&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-5" data-line-number="5"&gt;            &lt;span class="cf"&gt;if&lt;/span&gt;(a[j] &amp;lt; a[j&lt;span class="dv"&gt;-1&lt;/span&gt;])&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-6" data-line-number="6"&gt;                swap(a[j],a[j&lt;span class="dv"&gt;-1&lt;/span&gt;]);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-7" data-line-number="7"&gt;        }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-8" data-line-number="8"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-9" data-line-number="9"&gt;}&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-10" data-line-number="10"&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-11" data-line-number="11"&gt;&lt;span class="dt"&gt;void&lt;/span&gt; bubble_sort_speedup(&lt;span class="dt"&gt;int&lt;/span&gt; *a, &lt;span class="dt"&gt;int&lt;/span&gt; n){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-12" data-line-number="12"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt;(&lt;span class="dt"&gt;size_t&lt;/span&gt; i = &lt;span class="dv"&gt;0&lt;/span&gt;; i &amp;lt; n&lt;span class="dv"&gt;-1&lt;/span&gt;; i++){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-13" data-line-number="13"&gt;        &lt;span class="dt"&gt;int&lt;/span&gt; flag = &lt;span class="dv"&gt;0&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-14" data-line-number="14"&gt;        &lt;span class="cf"&gt;for&lt;/span&gt;(&lt;span class="dt"&gt;size_t&lt;/span&gt; j = &lt;span class="dv"&gt;0&lt;/span&gt;; j &amp;lt; n&lt;span class="dv"&gt;-1&lt;/span&gt;-i; ++j){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-15" data-line-number="15"&gt;            &lt;span class="cf"&gt;if&lt;/span&gt;(a[j] &amp;gt; a[j&lt;span class="dv"&gt;+1&lt;/span&gt;]){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-16" data-line-number="16"&gt;                swap(a[j],a[j&lt;span class="dv"&gt;+1&lt;/span&gt;]);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-17" data-line-number="17"&gt;                flag = &lt;span class="dv"&gt;1&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-18" data-line-number="18"&gt;            }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-19" data-line-number="19"&gt;        }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-20" data-line-number="20"&gt;        &lt;span class="cf"&gt;if&lt;/span&gt;(!flag)&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-21" data-line-number="21"&gt;            &lt;span class="cf"&gt;break&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-22" data-line-number="22"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-23" data-line-number="23"&gt;}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id="cocktail-sort-鸡尾酒排序"&gt;Cocktail Sort 鸡尾酒排序&lt;/h1&gt;
+&lt;div class="sourceCode" id="cb3"&gt;&lt;pre class="sourceCode cpp"&gt;&lt;code class="sourceCode cpp"&gt;&lt;a class="sourceLine" id="cb3-1" data-line-number="1"&gt;&lt;span class="dt"&gt;void&lt;/span&gt; cocktail_sort(&lt;span class="dt"&gt;int&lt;/span&gt; *a,&lt;span class="dt"&gt;int&lt;/span&gt; n){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb3-2" data-line-number="2"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; left = &lt;span class="dv"&gt;0&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb3-3" data-line-number="3"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; right = n&lt;span class="dv"&gt;-1&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb3-4" data-line-number="4"&gt;    &lt;span class="cf"&gt;while&lt;/span&gt;(left &amp;lt; right){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb3-5" data-line-number="5"&gt;        &lt;span class="cf"&gt;for&lt;/span&gt;(&lt;span class="dt"&gt;size_t&lt;/span&gt; i = left; i&amp;lt;right;++i){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb3-6" data-line-number="6"&gt;            &lt;span class="cf"&gt;if&lt;/span&gt;(a[i] &amp;gt; a[i&lt;span class="dv"&gt;+1&lt;/span&gt;])&lt;/a&gt;
+&lt;a class="sourceLine" id="cb3-7" data-line-number="7"&gt;                swap(a[i],a[i&lt;span class="dv"&gt;+1&lt;/span&gt;]);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb3-8" data-line-number="8"&gt;        }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb3-9" data-line-number="9"&gt;        right--;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb3-10" data-line-number="10"&gt;        &lt;span class="cf"&gt;for&lt;/span&gt;(&lt;span class="dt"&gt;size_t&lt;/span&gt; j = right;j&amp;gt;left;--j){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb3-11" data-line-number="11"&gt;            &lt;span class="cf"&gt;if&lt;/span&gt;(a[j&lt;span class="dv"&gt;-1&lt;/span&gt;] &amp;gt; a[j]){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb3-12" data-line-number="12"&gt;                swap(a[j&lt;span class="dv"&gt;-1&lt;/span&gt;],a[j]);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb3-13" data-line-number="13"&gt;            }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb3-14" data-line-number="14"&gt;        }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb3-15" data-line-number="15"&gt;        left++;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb3-16" data-line-number="16"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb3-17" data-line-number="17"&gt;}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="sourceCode" id="cb4"&gt;&lt;pre class="sourceCode cpp"&gt;&lt;code class="sourceCode cpp"&gt;&lt;a class="sourceLine" id="cb4-1" data-line-number="1"&gt;&lt;span class="dt"&gt;void&lt;/span&gt; cocktail_sort_speedup(&lt;span class="dt"&gt;int&lt;/span&gt; *a,&lt;span class="dt"&gt;int&lt;/span&gt; n){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-2" data-line-number="2"&gt;    &lt;span class="dt"&gt;bool&lt;/span&gt; sorted = &lt;span class="kw"&gt;false&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-3" data-line-number="3"&gt;    &lt;span class="cf"&gt;while&lt;/span&gt;(!sorted){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-4" data-line-number="4"&gt;        sorted = &lt;span class="kw"&gt;true&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-5" data-line-number="5"&gt;        &lt;span class="cf"&gt;for&lt;/span&gt;( &lt;span class="dt"&gt;int&lt;/span&gt; i = &lt;span class="dv"&gt;0&lt;/span&gt;; i &amp;lt; n - &lt;span class="dv"&gt;1&lt;/span&gt;; i++ ){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-6" data-line-number="6"&gt;            &lt;span class="cf"&gt;if&lt;/span&gt;( a[i] &amp;gt; a[i + &lt;span class="dv"&gt;1&lt;/span&gt;] ){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-7" data-line-number="7"&gt;                swap( a[i], a[i + &lt;span class="dv"&gt;1&lt;/span&gt;] );&lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-8" data-line-number="8"&gt;                sorted = &lt;span class="kw"&gt;false&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-9" data-line-number="9"&gt;            }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-10" data-line-number="10"&gt;        }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-11" data-line-number="11"&gt;        &lt;span class="cf"&gt;if&lt;/span&gt;(sorted)&lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-12" data-line-number="12"&gt;            &lt;span class="cf"&gt;break&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-13" data-line-number="13"&gt;        sorted = &lt;span class="kw"&gt;true&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-14" data-line-number="14"&gt;        &lt;span class="cf"&gt;for&lt;/span&gt;( &lt;span class="dt"&gt;int&lt;/span&gt; j = n - &lt;span class="dv"&gt;1&lt;/span&gt;; j &amp;gt; &lt;span class="dv"&gt;0&lt;/span&gt;; j-- ){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-15" data-line-number="15"&gt;            &lt;span class="cf"&gt;if&lt;/span&gt;( a[j - &lt;span class="dv"&gt;1&lt;/span&gt;] &amp;gt; a[j] ){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-16" data-line-number="16"&gt;                swap( a[j], a[j - &lt;span class="dv"&gt;1&lt;/span&gt;] );&lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-17" data-line-number="17"&gt;                sorted = &lt;span class="kw"&gt;false&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-18" data-line-number="18"&gt;            }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-19" data-line-number="19"&gt;        }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-20" data-line-number="20"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-21" data-line-number="21"&gt;}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id="selection-sort-选择排序"&gt;Selection Sort 选择排序&lt;/h1&gt;
+&lt;div class="sourceCode" id="cb5"&gt;&lt;pre class="sourceCode cpp"&gt;&lt;code class="sourceCode cpp"&gt;&lt;a class="sourceLine" id="cb5-1" data-line-number="1"&gt;&lt;span class="dt"&gt;void&lt;/span&gt; selection_sort(&lt;span class="dt"&gt;int&lt;/span&gt; *a, &lt;span class="dt"&gt;int&lt;/span&gt; n){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb5-2" data-line-number="2"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt;(&lt;span class="dt"&gt;size_t&lt;/span&gt; i = &lt;span class="dv"&gt;0&lt;/span&gt;;i &amp;lt; n&lt;span class="dv"&gt;-1&lt;/span&gt;;i++){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb5-3" data-line-number="3"&gt;        &lt;span class="dt"&gt;int&lt;/span&gt; index = i;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb5-4" data-line-number="4"&gt;        &lt;span class="cf"&gt;for&lt;/span&gt;(&lt;span class="dt"&gt;size_t&lt;/span&gt; j = i&lt;span class="dv"&gt;+1&lt;/span&gt;;j &amp;lt; n;j++){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb5-5" data-line-number="5"&gt;            &lt;span class="cf"&gt;if&lt;/span&gt;(a[j] &amp;lt; a[index])&lt;/a&gt;
+&lt;a class="sourceLine" id="cb5-6" data-line-number="6"&gt;                index = j;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb5-7" data-line-number="7"&gt;        }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb5-8" data-line-number="8"&gt;        &lt;span class="cf"&gt;if&lt;/span&gt;(i!=index)&lt;/a&gt;
+&lt;a class="sourceLine" id="cb5-9" data-line-number="9"&gt;            swap(a[i],a[index]);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb5-10" data-line-number="10"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb5-11" data-line-number="11"&gt;}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id="insertion-sort-插入排序"&gt;Insertion Sort 插入排序&lt;/h1&gt;
+&lt;div class="sourceCode" id="cb6"&gt;&lt;pre class="sourceCode cpp"&gt;&lt;code class="sourceCode cpp"&gt;&lt;a class="sourceLine" id="cb6-1" data-line-number="1"&gt;&lt;span class="dt"&gt;void&lt;/span&gt; insertion_sort(&lt;span class="dt"&gt;int&lt;/span&gt; *a, &lt;span class="dt"&gt;int&lt;/span&gt; n){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb6-2" data-line-number="2"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt;(&lt;span class="dt"&gt;size_t&lt;/span&gt; i = &lt;span class="dv"&gt;1&lt;/span&gt;;i &amp;lt; n;i++){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb6-3" data-line-number="3"&gt;        &lt;span class="dt"&gt;int&lt;/span&gt; tmp = a[i];&lt;/a&gt;
+&lt;a class="sourceLine" id="cb6-4" data-line-number="4"&gt;        &lt;span class="dt"&gt;size_t&lt;/span&gt; j = i;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb6-5" data-line-number="5"&gt;        &lt;span class="cf"&gt;while&lt;/span&gt;(j &amp;gt; &lt;span class="dv"&gt;0&lt;/span&gt; &amp;amp;&amp;amp; tmp &amp;lt; a[j&lt;span class="dv"&gt;-1&lt;/span&gt;]){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb6-6" data-line-number="6"&gt;            a[j] = a[j&lt;span class="dv"&gt;-1&lt;/span&gt;];&lt;/a&gt;
+&lt;a class="sourceLine" id="cb6-7" data-line-number="7"&gt;            --j;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb6-8" data-line-number="8"&gt;        }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb6-9" data-line-number="9"&gt;        a[j] = tmp;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb6-10" data-line-number="10"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb6-11" data-line-number="11"&gt;}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id="shell-sort-希尔排序"&gt;Shell Sort 希尔排序&lt;/h1&gt;
+&lt;div class="sourceCode" id="cb7"&gt;&lt;pre class="sourceCode cpp"&gt;&lt;code class="sourceCode cpp"&gt;&lt;a class="sourceLine" id="cb7-1" data-line-number="1"&gt;&lt;span class="dt"&gt;void&lt;/span&gt; shell_sort(&lt;span class="dt"&gt;int&lt;/span&gt; *a,&lt;span class="dt"&gt;int&lt;/span&gt; n){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb7-2" data-line-number="2"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; h,i,j,t;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb7-3" data-line-number="3"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt;(h = n;h/=&lt;span class="dv"&gt;2&lt;/span&gt;;){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb7-4" data-line-number="4"&gt;        &lt;span class="co"&gt;// iterator&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb7-5" data-line-number="5"&gt;        &lt;span class="cf"&gt;for&lt;/span&gt;(i=h;i&amp;lt;n;i++){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb7-6" data-line-number="6"&gt;            t=a[i];&lt;/a&gt;
+&lt;a class="sourceLine" id="cb7-7" data-line-number="7"&gt;            &lt;span class="cf"&gt;for&lt;/span&gt;(j=i;j&amp;gt;=h &amp;amp;&amp;amp; t&amp;lt;a[j-h];j-=h){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb7-8" data-line-number="8"&gt;                a[j] = a[j-h];&lt;/a&gt;
+&lt;a class="sourceLine" id="cb7-9" data-line-number="9"&gt;            }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb7-10" data-line-number="10"&gt;            a[j] = t;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb7-11" data-line-number="11"&gt;        }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb7-12" data-line-number="12"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb7-13" data-line-number="13"&gt;}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="sourceCode" id="cb8"&gt;&lt;pre class="sourceCode cpp"&gt;&lt;code class="sourceCode cpp"&gt;&lt;a class="sourceLine" id="cb8-1" data-line-number="1"&gt;&lt;span class="dt"&gt;void&lt;/span&gt; shell_sort_speedup(&lt;span class="dt"&gt;int&lt;/span&gt; *a,&lt;span class="dt"&gt;int&lt;/span&gt; n){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb8-2" data-line-number="2"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; i,j,tmp,step;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb8-3" data-line-number="3"&gt;    step = n;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb8-4" data-line-number="4"&gt;    &lt;span class="cf"&gt;while&lt;/span&gt;(step&amp;gt;&lt;span class="dv"&gt;1&lt;/span&gt;){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb8-5" data-line-number="5"&gt;        step = step/&lt;span class="dv"&gt;3+1&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb8-6" data-line-number="6"&gt;        &lt;span class="co"&gt;// insert sort&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb8-7" data-line-number="7"&gt;        &lt;span class="cf"&gt;for&lt;/span&gt;(i=step;i&amp;lt;n;i++){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb8-8" data-line-number="8"&gt;            tmp = a[i];&lt;/a&gt;
+&lt;a class="sourceLine" id="cb8-9" data-line-number="9"&gt;            &lt;span class="cf"&gt;for&lt;/span&gt;(j=i;j&amp;gt;&lt;span class="dv"&gt;0&lt;/span&gt; &amp;amp;&amp;amp; a[j] &amp;lt; a[j-step];j-=step){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb8-10" data-line-number="10"&gt;                a[j] = a[j-step];&lt;/a&gt;
+&lt;a class="sourceLine" id="cb8-11" data-line-number="11"&gt;            }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb8-12" data-line-number="12"&gt;            a[j] = tmp;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb8-13" data-line-number="13"&gt;        }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb8-14" data-line-number="14"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb8-15" data-line-number="15"&gt;}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id="merge-sort归并排序"&gt;Merge Sort归并排序&lt;/h1&gt;
+&lt;p&gt;递归版本&lt;/p&gt;
+&lt;div class="sourceCode" id="cb9"&gt;&lt;pre class="sourceCode cpp"&gt;&lt;code class="sourceCode cpp"&gt;&lt;a class="sourceLine" id="cb9-1" data-line-number="1"&gt;&lt;span class="dt"&gt;void&lt;/span&gt; merge_arr(&lt;span class="dt"&gt;int&lt;/span&gt; *a,&lt;span class="dt"&gt;int&lt;/span&gt; m,&lt;span class="dt"&gt;int&lt;/span&gt; n){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-2" data-line-number="2"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; i,j,k;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-3" data-line-number="3"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; *temp = &lt;span class="kw"&gt;new&lt;/span&gt; &lt;span class="dt"&gt;int&lt;/span&gt;[n];&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-4" data-line-number="4"&gt;    &lt;span class="co"&gt;// 0 ---&amp;gt; n&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-5" data-line-number="5"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt;(i=&lt;span class="dv"&gt;0&lt;/span&gt;,j=m,k=&lt;span class="dv"&gt;0&lt;/span&gt;;k&amp;lt;n;k++){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-6" data-line-number="6"&gt;        temp[k] = j == n ?&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-7" data-line-number="7"&gt;            a[i++]:i == m ?&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-8" data-line-number="8"&gt;            a[j++]:a[j] &amp;lt; a[i]?&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-9" data-line-number="9"&gt;            a[j++]:a[i++];&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-10" data-line-number="10"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-11" data-line-number="11"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt;(k=&lt;span class="dv"&gt;0&lt;/span&gt;;k&amp;lt;n;k++){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-12" data-line-number="12"&gt;        a[k] = temp[k];&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-13" data-line-number="13"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-14" data-line-number="14"&gt;    &lt;span class="kw"&gt;delete&lt;/span&gt; [] temp;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-15" data-line-number="15"&gt;}&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-16" data-line-number="16"&gt;&lt;span class="dt"&gt;void&lt;/span&gt; merge_sort(&lt;span class="dt"&gt;int&lt;/span&gt; *a,&lt;span class="dt"&gt;int&lt;/span&gt; n){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-17" data-line-number="17"&gt;    &lt;span class="cf"&gt;if&lt;/span&gt;(n &amp;lt; &lt;span class="dv"&gt;2&lt;/span&gt;)&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-18" data-line-number="18"&gt;        &lt;span class="cf"&gt;return&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-19" data-line-number="19"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; m = n/&lt;span class="dv"&gt;2&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-20" data-line-number="20"&gt;    merge_sort(a,m);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-21" data-line-number="21"&gt;    merge_sort(a+m,n-m);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-22" data-line-number="22"&gt;    merge_arr(a,m,n);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb9-23" data-line-number="23"&gt;}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;非递归版本&lt;/p&gt;
+&lt;div class="sourceCode" id="cb10"&gt;&lt;pre class="sourceCode cpp"&gt;&lt;code class="sourceCode cpp"&gt;&lt;a class="sourceLine" id="cb10-1" data-line-number="1"&gt;&lt;span class="dt"&gt;void&lt;/span&gt; merge_arr2(&lt;span class="dt"&gt;int&lt;/span&gt; *a,&lt;span class="dt"&gt;int&lt;/span&gt; left,&lt;span class="dt"&gt;int&lt;/span&gt; mid,&lt;span class="dt"&gt;int&lt;/span&gt; right){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-2" data-line-number="2"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; i = left;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-3" data-line-number="3"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; j = mid + &lt;span class="dv"&gt;1&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-4" data-line-number="4"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; k = &lt;span class="dv"&gt;0&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-5" data-line-number="5"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; len = right-left&lt;span class="dv"&gt;+1&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-6" data-line-number="6"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; *temp = &lt;span class="kw"&gt;new&lt;/span&gt; &lt;span class="dt"&gt;int&lt;/span&gt;[len];&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-7" data-line-number="7"&gt;    &lt;span class="co"&gt;// while(i &amp;lt;= mid &amp;amp;&amp;amp; j &amp;lt;= right){&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-8" data-line-number="8"&gt;    &lt;span class="co"&gt;//     temp[k++] = a[i] &amp;lt;= a[j] ? a[i++] : a[j++];&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-9" data-line-number="9"&gt;    &lt;span class="co"&gt;// }&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-10" data-line-number="10"&gt;    &lt;span class="co"&gt;// while(i &amp;lt;= mid){&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-11" data-line-number="11"&gt;    &lt;span class="co"&gt;//     temp[k++] = a[i++];&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-12" data-line-number="12"&gt;    &lt;span class="co"&gt;// }&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-13" data-line-number="13"&gt;    &lt;span class="co"&gt;// while(j &amp;lt;= right){&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-14" data-line-number="14"&gt;    &lt;span class="co"&gt;//     temp[k++] = a[j++];&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-15" data-line-number="15"&gt;    &lt;span class="co"&gt;// }&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-16" data-line-number="16"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt;(;k&amp;lt;len;k++){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-17" data-line-number="17"&gt;        temp[k] = j &amp;gt; right?&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-18" data-line-number="18"&gt;                a[i++]:i &amp;gt; mid?&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-19" data-line-number="19"&gt;                a[j++]:a[i] &amp;lt; a[j]?&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-20" data-line-number="20"&gt;                a[i++]:a[j++];&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-21" data-line-number="21"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-22" data-line-number="22"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt;(k = &lt;span class="dv"&gt;0&lt;/span&gt;; k&amp;lt; len;){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-23" data-line-number="23"&gt;        a[left++] = temp[k++];&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-24" data-line-number="24"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-25" data-line-number="25"&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-26" data-line-number="26"&gt;    &lt;span class="kw"&gt;delete&lt;/span&gt; [] temp;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-27" data-line-number="27"&gt;}&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-28" data-line-number="28"&gt;&lt;span class="dt"&gt;void&lt;/span&gt; merge_sort(&lt;span class="dt"&gt;int&lt;/span&gt; *a,&lt;span class="dt"&gt;int&lt;/span&gt; len){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-29" data-line-number="29"&gt;    &lt;span class="co"&gt;// int left,mid,right,n;&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-30" data-line-number="30"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; left,n;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-31" data-line-number="31"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt;(&lt;span class="dt"&gt;int&lt;/span&gt; i = &lt;span class="dv"&gt;2&lt;/span&gt;;i/&lt;span class="dv"&gt;2&lt;/span&gt; &amp;lt; len;i*=&lt;span class="dv"&gt;2&lt;/span&gt;){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-32" data-line-number="32"&gt;        &lt;span class="co"&gt;// left = 0;&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-33" data-line-number="33"&gt;        &lt;span class="co"&gt;// for(left=0;left+i&amp;lt;len;){&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-34" data-line-number="34"&gt;        &lt;span class="co"&gt;//     mid = left + i - 1;&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-35" data-line-number="35"&gt;        &lt;span class="co"&gt;//     right = mid + i &amp;lt; len ? mid + i : len - 1;&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-36" data-line-number="36"&gt;        &lt;span class="co"&gt;//     n = mid + i &amp;lt; len ? 2*i : len - left+1;&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-37" data-line-number="37"&gt;        &lt;span class="co"&gt;//     merge_arr(a+left,mid,n);&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-38" data-line-number="38"&gt;        &lt;span class="co"&gt;//     left = right + 1 ;&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-39" data-line-number="39"&gt;        &lt;span class="co"&gt;// }&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-40" data-line-number="40"&gt;        &lt;span class="cf"&gt;for&lt;/span&gt;(left = &lt;span class="dv"&gt;0&lt;/span&gt;;left &amp;lt; len;left+=i){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-41" data-line-number="41"&gt;            &lt;span class="co"&gt;// mid = left + i/2;&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-42" data-line-number="42"&gt;            n = left + i &amp;lt; len?i:len-left;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-43" data-line-number="43"&gt;            merge_arr(a+left,i/&lt;span class="dv"&gt;2&lt;/span&gt;,n);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-44" data-line-number="44"&gt;        }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-45" data-line-number="45"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb10-46" data-line-number="46"&gt;}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id="qucik-sort-快速排序"&gt;Qucik Sort 快速排序&lt;/h1&gt;
+&lt;div class="sourceCode" id="cb11"&gt;&lt;pre class="sourceCode cpp"&gt;&lt;code class="sourceCode cpp"&gt;&lt;a class="sourceLine" id="cb11-1" data-line-number="1"&gt;&lt;span class="dt"&gt;void&lt;/span&gt; quick_sort(&lt;span class="dt"&gt;int&lt;/span&gt; *a,&lt;span class="dt"&gt;int&lt;/span&gt; len){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb11-2" data-line-number="2"&gt;    &lt;span class="cf"&gt;if&lt;/span&gt;(len&amp;lt;&lt;span class="dv"&gt;2&lt;/span&gt;)&lt;/a&gt;
+&lt;a class="sourceLine" id="cb11-3" data-line-number="3"&gt;        &lt;span class="cf"&gt;return&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb11-4" data-line-number="4"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; i,j;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb11-5" data-line-number="5"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; pivot = a[len/&lt;span class="dv"&gt;2&lt;/span&gt;];&lt;/a&gt;
+&lt;a class="sourceLine" id="cb11-6" data-line-number="6"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt;(i=&lt;span class="dv"&gt;0&lt;/span&gt;,j=len&lt;span class="dv"&gt;-1&lt;/span&gt;;;i++,j--){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb11-7" data-line-number="7"&gt;        &lt;span class="cf"&gt;while&lt;/span&gt;(a[i] &amp;lt; pivot) i++;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb11-8" data-line-number="8"&gt;        &lt;span class="cf"&gt;while&lt;/span&gt;(a[j] &amp;gt; pivot) j--;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb11-9" data-line-number="9"&gt;        &lt;span class="cf"&gt;if&lt;/span&gt;(i &amp;gt;= j) &lt;span class="cf"&gt;break&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb11-10" data-line-number="10"&gt;        &lt;span class="co"&gt;// swap value&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb11-11" data-line-number="11"&gt;        swap(a[i],a[j]);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb11-12" data-line-number="12"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb11-13" data-line-number="13"&gt;    quick_sort(a,i);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb11-14" data-line-number="14"&gt;    quick_sort(a+i,len-i);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb11-15" data-line-number="15"&gt;}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="sourceCode" id="cb12"&gt;&lt;pre class="sourceCode cpp"&gt;&lt;code class="sourceCode cpp"&gt;&lt;a class="sourceLine" id="cb12-1" data-line-number="1"&gt;&lt;span class="dt"&gt;void&lt;/span&gt; quick_sort2(&lt;span class="dt"&gt;int&lt;/span&gt; *a,&lt;span class="dt"&gt;int&lt;/span&gt; n){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb12-2" data-line-number="2"&gt;    &lt;span class="cf"&gt;if&lt;/span&gt;(n&amp;lt;&lt;span class="dv"&gt;2&lt;/span&gt;) &lt;span class="cf"&gt;return&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb12-3" data-line-number="3"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; mid=a[&lt;span class="dv"&gt;0&lt;/span&gt;]; &lt;span class="co"&gt;// pivot&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb12-4" data-line-number="4"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; i=&lt;span class="dv"&gt;0&lt;/span&gt;,j=n&lt;span class="dv"&gt;-1&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb12-5" data-line-number="5"&gt;    &lt;span class="cf"&gt;while&lt;/span&gt;(i&amp;lt;j){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb12-6" data-line-number="6"&gt;        &lt;span class="cf"&gt;while&lt;/span&gt;(j&amp;gt;i &amp;amp;&amp;amp; a[j]&amp;gt;=mid) j--;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb12-7" data-line-number="7"&gt;        &lt;span class="cf"&gt;if&lt;/span&gt;(j&amp;gt;i){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb12-8" data-line-number="8"&gt;            a[i]=a[j];&lt;/a&gt;
+&lt;a class="sourceLine" id="cb12-9" data-line-number="9"&gt;            i++;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb12-10" data-line-number="10"&gt;        }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb12-11" data-line-number="11"&gt;        &lt;span class="cf"&gt;while&lt;/span&gt;(i&amp;lt;j &amp;amp;&amp;amp; a[i]&amp;lt;mid) i++;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb12-12" data-line-number="12"&gt;        &lt;span class="cf"&gt;if&lt;/span&gt;(i&amp;lt;j){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb12-13" data-line-number="13"&gt;            a[j]=a[i];&lt;/a&gt;
+&lt;a class="sourceLine" id="cb12-14" data-line-number="14"&gt;            j--;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb12-15" data-line-number="15"&gt;        }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb12-16" data-line-number="16"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb12-17" data-line-number="17"&gt;    a[i]=mid;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb12-18" data-line-number="18"&gt;    quick_sort2(a,i);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb12-19" data-line-number="19"&gt;    quick_sort2(a+i&lt;span class="dv"&gt;+1&lt;/span&gt;,n-i&lt;span class="dv"&gt;-1&lt;/span&gt;);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb12-20" data-line-number="20"&gt;}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id="heap-sort-堆排序"&gt;Heap Sort 堆排序&lt;/h1&gt;
+&lt;p&gt;递归版本&lt;/p&gt;
+&lt;div class="sourceCode" id="cb13"&gt;&lt;pre class="sourceCode cpp"&gt;&lt;code class="sourceCode cpp"&gt;&lt;a class="sourceLine" id="cb13-1" data-line-number="1"&gt;&lt;span class="co"&gt;// i is index of array,the left child index is 2*i+1,the right one is 2*i+2,the father index is floor((i-1)/2)&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-2" data-line-number="2"&gt;&lt;span class="dt"&gt;void&lt;/span&gt; siftDown(&lt;span class="dt"&gt;int&lt;/span&gt; *a, &lt;span class="dt"&gt;int&lt;/span&gt; i, &lt;span class="dt"&gt;int&lt;/span&gt; n)&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-3" data-line-number="3"&gt;{&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-4" data-line-number="4"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; lhs=&lt;span class="dv"&gt;2&lt;/span&gt;*i&lt;span class="dv"&gt;+1&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-5" data-line-number="5"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; rhs=&lt;span class="dv"&gt;2&lt;/span&gt;*i&lt;span class="dv"&gt;+2&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-6" data-line-number="6"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; maxid=i;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-7" data-line-number="7"&gt;    &lt;span class="cf"&gt;if&lt;/span&gt;(lhs&amp;lt;n &amp;amp;&amp;amp; a[maxid]&amp;lt;a[lhs]) maxid=lhs;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-8" data-line-number="8"&gt;    &lt;span class="cf"&gt;if&lt;/span&gt;(rhs&amp;lt;n &amp;amp;&amp;amp; a[maxid]&amp;lt;a[rhs]) maxid=rhs;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-9" data-line-number="9"&gt;    &lt;span class="cf"&gt;if&lt;/span&gt;(maxid!=i)&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-10" data-line-number="10"&gt;    {&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-11" data-line-number="11"&gt;        swap(a[i],a[maxid]);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-12" data-line-number="12"&gt;        siftDown(a,maxid,n);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-13" data-line-number="13"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-14" data-line-number="14"&gt;}&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-15" data-line-number="15"&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-16" data-line-number="16"&gt;&lt;span class="co"&gt;// void makeHeap(int *a, int n){&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-17" data-line-number="17"&gt;&lt;span class="co"&gt;//     for(int i=n/2-1; i&amp;gt;=0; i--)&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-18" data-line-number="18"&gt;&lt;span class="co"&gt;//     {&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-19" data-line-number="19"&gt;&lt;span class="co"&gt;//         siftDown(a,i,n);&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-20" data-line-number="20"&gt;&lt;span class="co"&gt;//     }&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-21" data-line-number="21"&gt;&lt;span class="co"&gt;// }&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-22" data-line-number="22"&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-23" data-line-number="23"&gt;&lt;span class="dt"&gt;void&lt;/span&gt; heap_sort(&lt;span class="dt"&gt;int&lt;/span&gt; *a,&lt;span class="dt"&gt;int&lt;/span&gt; n){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-24" data-line-number="24"&gt;    &lt;span class="co"&gt;// makeHeap(a,n);&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-25" data-line-number="25"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt;(&lt;span class="dt"&gt;int&lt;/span&gt; i=n/&lt;span class="dv"&gt;2-1&lt;/span&gt;; i&amp;gt;=&lt;span class="dv"&gt;0&lt;/span&gt;; i--){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-26" data-line-number="26"&gt;        siftDown(a,i,n);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-27" data-line-number="27"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-28" data-line-number="28"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt;(&lt;span class="dt"&gt;int&lt;/span&gt; i=n&lt;span class="dv"&gt;-1&lt;/span&gt;; i&amp;gt;&lt;span class="dv"&gt;0&lt;/span&gt;; i--){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-29" data-line-number="29"&gt;        swap(a[&lt;span class="dv"&gt;0&lt;/span&gt;],a[i]);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-30" data-line-number="30"&gt;        siftDown(a,&lt;span class="dv"&gt;0&lt;/span&gt;,i);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-31" data-line-number="31"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb13-32" data-line-number="32"&gt;}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;非递归版本&lt;/p&gt;
+&lt;div class="sourceCode" id="cb14"&gt;&lt;pre class="sourceCode cpp"&gt;&lt;code class="sourceCode cpp"&gt;&lt;a class="sourceLine" id="cb14-1" data-line-number="1"&gt;&lt;span class="dt"&gt;void&lt;/span&gt; heap_down(&lt;span class="dt"&gt;int&lt;/span&gt; *a,&lt;span class="dt"&gt;int&lt;/span&gt; i,&lt;span class="dt"&gt;int&lt;/span&gt; n){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-2" data-line-number="2"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; lc = &lt;span class="dv"&gt;2&lt;/span&gt;*i&lt;span class="dv"&gt;+1&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-3" data-line-number="3"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt;(;lc&amp;lt;n;i=lc,lc=&lt;span class="dv"&gt;2&lt;/span&gt;*i&lt;span class="dv"&gt;+1&lt;/span&gt;){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-4" data-line-number="4"&gt;        &lt;span class="co"&gt;// lc + 1 &amp;lt; n right chid index can&amp;#39;t greater than the array length&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-5" data-line-number="5"&gt;        &lt;span class="cf"&gt;if&lt;/span&gt;(lc&lt;span class="dv"&gt;+1&lt;/span&gt; &amp;lt; n &amp;amp;&amp;amp; a[lc]&amp;lt;a[lc&lt;span class="dv"&gt;+1&lt;/span&gt;])&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-6" data-line-number="6"&gt;            lc++;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-7" data-line-number="7"&gt;        &lt;span class="cf"&gt;if&lt;/span&gt;(a[i] &amp;gt;= a[lc])&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-8" data-line-number="8"&gt;            &lt;span class="cf"&gt;break&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-9" data-line-number="9"&gt;        &lt;span class="cf"&gt;else&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-10" data-line-number="10"&gt;            swap(a[i],a[lc]);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-11" data-line-number="11"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-12" data-line-number="12"&gt;}&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-13" data-line-number="13"&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-14" data-line-number="14"&gt;&lt;span class="dt"&gt;void&lt;/span&gt; heap_sort2(&lt;span class="dt"&gt;int&lt;/span&gt; *a,&lt;span class="dt"&gt;int&lt;/span&gt; n){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-15" data-line-number="15"&gt;    &lt;span class="co"&gt;// makeHeap(a,n);&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-16" data-line-number="16"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt;(&lt;span class="dt"&gt;int&lt;/span&gt; i=n/&lt;span class="dv"&gt;2-1&lt;/span&gt;; i&amp;gt;=&lt;span class="dv"&gt;0&lt;/span&gt;; i--){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-17" data-line-number="17"&gt;        heap_down(a,i,n);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-18" data-line-number="18"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-19" data-line-number="19"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt;(&lt;span class="dt"&gt;int&lt;/span&gt; i=n&lt;span class="dv"&gt;-1&lt;/span&gt;; i&amp;gt;&lt;span class="dv"&gt;0&lt;/span&gt;; i--){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-20" data-line-number="20"&gt;        swap(a[&lt;span class="dv"&gt;0&lt;/span&gt;],a[i]);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-21" data-line-number="21"&gt;        heap_down(a,&lt;span class="dv"&gt;0&lt;/span&gt;,i);&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-22" data-line-number="22"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb14-23" data-line-number="23"&gt;}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id="counting-sort-计数排序"&gt;Counting Sort 计数排序&lt;/h1&gt;
+&lt;div class="sourceCode" id="cb15"&gt;&lt;pre class="sourceCode cpp"&gt;&lt;code class="sourceCode cpp"&gt;&lt;a class="sourceLine" id="cb15-1" data-line-number="1"&gt;&lt;span class="dt"&gt;void&lt;/span&gt; couting_sort(&lt;span class="dt"&gt;int&lt;/span&gt; *a,&lt;span class="dt"&gt;int&lt;/span&gt; n){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-2" data-line-number="2"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; range = &lt;span class="dv"&gt;20&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-3" data-line-number="3"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; *C = &lt;span class="kw"&gt;new&lt;/span&gt; &lt;span class="dt"&gt;int&lt;/span&gt;[range];&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-4" data-line-number="4"&gt;    &lt;span class="dt"&gt;int&lt;/span&gt; *temp = &lt;span class="kw"&gt;new&lt;/span&gt; &lt;span class="dt"&gt;int&lt;/span&gt;[n];&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-5" data-line-number="5"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt;(&lt;span class="dt"&gt;int&lt;/span&gt; i = &lt;span class="dv"&gt;0&lt;/span&gt;;i &amp;lt; range;i++){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-6" data-line-number="6"&gt;        C[i] = &lt;span class="dv"&gt;0&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-7" data-line-number="7"&gt;        &lt;span class="cf"&gt;if&lt;/span&gt;(i&amp;lt;n)&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-8" data-line-number="8"&gt;            temp[i]=&lt;span class="dv"&gt;0&lt;/span&gt;;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-9" data-line-number="9"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-10" data-line-number="10"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt;(&lt;span class="dt"&gt;int&lt;/span&gt; j = &lt;span class="dv"&gt;0&lt;/span&gt;;j &amp;lt; n;j++){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-11" data-line-number="11"&gt;        C[a[j]]++;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-12" data-line-number="12"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-13" data-line-number="13"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt;(&lt;span class="dt"&gt;int&lt;/span&gt; i = &lt;span class="dv"&gt;1&lt;/span&gt;;i &amp;lt; range;i++){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-14" data-line-number="14"&gt;        C[i]+=C[i&lt;span class="dv"&gt;-1&lt;/span&gt;];&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-15" data-line-number="15"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-16" data-line-number="16"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt;(&lt;span class="dt"&gt;int&lt;/span&gt; j = n&lt;span class="dv"&gt;-1&lt;/span&gt;;j &amp;gt;= &lt;span class="dv"&gt;0&lt;/span&gt;;j--){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-17" data-line-number="17"&gt;        temp[--C[a[j]]] = a[j];&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-18" data-line-number="18"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-19" data-line-number="19"&gt;    &lt;span class="cf"&gt;for&lt;/span&gt; (&lt;span class="dt"&gt;int&lt;/span&gt; j = &lt;span class="dv"&gt;0&lt;/span&gt;; j &amp;lt; n; j++){&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-20" data-line-number="20"&gt;        a[j] = temp[j];&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-21" data-line-number="21"&gt;    }&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-22" data-line-number="22"&gt;    &lt;span class="kw"&gt;delete&lt;/span&gt; [] C;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-23" data-line-number="23"&gt;    &lt;span class="kw"&gt;delete&lt;/span&gt; [] temp;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb15-24" data-line-number="24"&gt;}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id="算法对比"&gt;算法对比&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;稳定：如果a原本在b前面，而a=b，排序之后a仍然在b的前面。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;不稳定：如果a原本在b的前面，而a=b，排序之后 a 可能会出现在 b 的后面。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;时间复杂度：对排序数据的总的操作次数。反映当n变化时，操作次数呈现什么规律。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;空间复杂度：是指算法在计算机内执行时所需存储空间的度量，它也是数据规模n的函数。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class="header"&gt;
+&lt;th style="text-align: left;"&gt;算法名称&lt;/th&gt;
+&lt;th style="text-align: center;"&gt;时间复杂度（最好）&lt;/th&gt;
+&lt;th style="text-align: center;"&gt;时间复杂度（平均）&lt;/th&gt;
+&lt;th style="text-align: center;"&gt;时间复杂度（最坏）&lt;/th&gt;
+&lt;th style="text-align: center;"&gt;空间复杂度&lt;/th&gt;
+&lt;th style="text-align: center;"&gt;稳定性&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class="odd"&gt;
+&lt;td style="text-align: left;"&gt;Insertion Sort&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n^2)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n^2)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(1)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;稳定&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="even"&gt;
+&lt;td style="text-align: left;"&gt;Shell Sort&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n^1.3)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n^2)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(1)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;不稳定&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="odd"&gt;
+&lt;td style="text-align: left;"&gt;Selection Sort&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n^2)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n^2)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n^2)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(1)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;不稳定&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="even"&gt;
+&lt;td style="text-align: left;"&gt;Heap Sort&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(nlog n)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(nlog n)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(nlog n)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(1)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;稳定&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="odd"&gt;
+&lt;td style="text-align: left;"&gt;Bubble Sort&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n^2)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n^2)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(1)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;稳定&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="even"&gt;
+&lt;td style="text-align: left;"&gt;Cocktail Sort&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n^2)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n^2)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(1)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;稳定&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="odd"&gt;
+&lt;td style="text-align: left;"&gt;Qucik Sort&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(nlog n)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(nlog n)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n^2)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(nlog n)~O(n)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;不稳定&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="even"&gt;
+&lt;td style="text-align: left;"&gt;Merge Sort&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(nlog n)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(nlog n)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(nlog n)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;稳定&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="odd"&gt;
+&lt;td style="text-align: left;"&gt;Counting Sort&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n+k)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n+k)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n+k)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n+k)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;稳定&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="even"&gt;
+&lt;td style="text-align: left;"&gt;Bucket Sort&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n+k)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n^2)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n+k)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;稳定&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="odd"&gt;
+&lt;td style="text-align: left;"&gt;Radix Sort&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n*k)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n*k)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n*k)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;O(n+k)&lt;/td&gt;
+&lt;td style="text-align: center;"&gt;稳定&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id="引用"&gt;引用&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://liaoxl.github.io/blog/20140907/sort/"&gt;Moondark&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.cnblogs.com/eniac12/p/5329396.html"&gt;SteveWang&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://rosettacode.org/wiki/Sorting_algorithms"&gt;rosettacode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.cnblogs.com/onepixel/articles/7674659.html"&gt;一像素&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</content><category term="Algorithm"></category><category term="Cpp"></category></entry><entry><title>Pandoc Markdown 文档</title><link href="https://cnewbie.github.io/blog/2018/pandoc-markdown/" rel="alternate"></link><published>2018-07-15T00:00:00+08:00</published><updated>2018-08-04T00:00:00+08:00</updated><author><name>cnewbie</name></author><id>tag:cnewbie.github.io,2018-07-15:/blog/2018/pandoc-markdown/</id><summary type="html">Pandoc Markdown 文档</summary><content type="html">&lt;!DOCTYPE html&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang=""&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8" /&gt;
+  &lt;meta name="generator" content="pandoc" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" /&gt;
+  &lt;title&gt;Untitled&lt;/title&gt;
+  &lt;style type="text/css"&gt;
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  &lt;/style&gt;
+  &lt;style type="text/css"&gt;
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  &lt;/style&gt;
+  &lt;!--[if lt IE 9]&gt;
+    &lt;script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"&gt;&lt;/script&gt;
+  &lt;![endif]--&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;nav id="TOC"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#philosophy-哲学"&gt;Philosophy 哲学&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#paragraphs-段落"&gt;Paragraphs 段落&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#headers-标题"&gt;Headers 标题&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#标题风格"&gt;标题风格&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#header-identifiers-标题标识符"&gt;Header identifiers 标题标识符&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#block-quotations-块引用"&gt;Block quotations 块引用&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#verbatimcode-blocks-代码块"&gt;Verbatim(code) blocks 代码块&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#indented-code-blocks-缩进代码块"&gt;Indented code blocks 缩进代码块&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#fenced-code-blocks-围栏代码块"&gt;Fenced code blocks 围栏代码块&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#line-blocks-行块"&gt;Line blocks 行块&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#lists-列表"&gt;Lists 列表&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#bullet-lists-项目列表无序列表"&gt;Bullet lists 项目列表／无序列表&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#block-content-in-list-items-列表内的块"&gt;Block content In list items 列表内的块&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#ordered-lists-有序列表"&gt;Ordered lists 有序列表&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#definition-lists-列表定义"&gt;Definition lists 列表定义&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#numbered-example-lists-编号示例列表"&gt;Numbered example lists 编号示例列表&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#compact-and-loose-lists-紧凑稀疏列表"&gt;Compact and loose lists 紧凑／稀疏列表&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#ending-a-list-结束列表"&gt;Ending a list 结束列表&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#horzontal-rules-水平分隔线"&gt;Horzontal rules 水平分隔线&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#tables-表格"&gt;Tables 表格&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#metadata-blocks-元数据块"&gt;Metadata blocks 元数据块&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#backslash-escapes-反斜杠转义"&gt;Backslash escapes 反斜杠转义&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#inline-formatting-内联样式"&gt;Inline formatting 内联样式&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#emphasis-强调"&gt;Emphasis 强调&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#strikeout-删除线"&gt;Strikeout 删除线&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#superscripts-and-subscripts-上下标"&gt;Superscripts and subscripts 上下标&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#verbatim"&gt;Verbatim&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#math-数学公式"&gt;Math 数学公式&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#raw-html"&gt;Raw HTML&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#generic-raw-attribute"&gt;Generic raw attribute&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#latex-macros"&gt;LaTeX macros&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#links-链接"&gt;Links 链接&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#automatic-links-自动链接"&gt;Automatic links 自动链接&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#inline-links-内联链接"&gt;Inline links 内联链接&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#reference-links-参考链接"&gt;Reference links 参考链接&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#internal-links-内部链接"&gt;Internal links 内部链接&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#images-图片"&gt;Images 图片&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#divs-and-spans"&gt;Divs and Spans&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#footnotes-脚注"&gt;Footnotes 脚注&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#citations-引用"&gt;Citations 引用&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#non-pandoc-extensions"&gt;Non-pandoc extensions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#markdown-variants-markdwon-变种"&gt;Markdown variants Markdwon 变种&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#markdown_phpextraphp-markdown-extra"&gt;markdown_phpextra(PHP Markdown Extra)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#markdown_mmdmultimarkdown"&gt;markdown_mmd(MultiMarkdown)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#markdown_strictmarkdown.pl"&gt;markdown_strict(Markdown.pl)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#gfmgithub-flavored-markdown"&gt;gfm(GitHub-Flavored Markdown)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#常用语法高亮"&gt;常用语法高亮&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#引用"&gt;引用&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/nav&gt;
+&lt;hr /&gt;
+&lt;h1 id="philosophy-哲学"&gt;Philosophy 哲学&lt;/h1&gt;
 &lt;p&gt;Markdown is designed to be easy to write,and,even more importantly,easy to read.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;A Markdown-formatted document should be publishable as-is,as plain text,without looking like it’s been marked up with tags or formatting instructions. - &lt;a href="http://daringfireball.net/projects/markdown/syntax#philosophy"&gt;John Gruber&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1 id="paragraphs-段落"&gt;&lt;span class="header-section-number"&gt;2&lt;/span&gt; Paragraphs 段落&lt;/h1&gt;
+&lt;h1 id="paragraphs-段落"&gt;Paragraphs 段落&lt;/h1&gt;
 &lt;p&gt;一个段落包含一行或多行文字，通过行后跟随一个或多个空白行，换行符（newlines）和空格（spaces）作用一样，如果需要硬换行（hard line break），在行后添加两个以上的空格。&lt;/p&gt;
 &lt;p&gt;Extension &lt;code&gt;escaped_line_breaks&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;反斜杠（backslash）后跟随换行符也是一种硬换行&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; 在多行和表格中，这种方式是唯一的方式进行硬换行，因为表格中空格会被忽略。&lt;/p&gt;
-&lt;h1 id="headers-标题"&gt;&lt;span class="header-section-number"&gt;3&lt;/span&gt; Headers 标题&lt;/h1&gt;
-&lt;h2 id="标题风格"&gt;&lt;span class="header-section-number"&gt;3.1&lt;/span&gt; 标题风格&lt;/h2&gt;
+&lt;h1 id="headers-标题"&gt;Headers 标题&lt;/h1&gt;
+&lt;h2 id="标题风格"&gt;标题风格&lt;/h2&gt;
 &lt;p&gt;两种风格的标题 Setext 和 ATX&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Setext 风格&lt;/li&gt;
@@ -178,7 +722,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class="sourceLine" id="cb3-2" data-line-number="2"&gt;#22, for example, and #5.&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Extension &lt;code&gt;space_in_atx_header&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;大多数 Markdown 语法不需要在&lt;code&gt;#&lt;/code&gt;与标题文字间添加 &lt;strong&gt;空格&lt;/strong&gt;，但是Pandoc需要空格。&lt;/p&gt;
-&lt;h2 id="header-identifiers-标题标识符"&gt;&lt;span class="header-section-number"&gt;3.2&lt;/span&gt; Header identifiers 标题标识符&lt;/h2&gt;
+&lt;h2 id="header-identifiers-标题标识符"&gt;Header identifiers 标题标识符&lt;/h2&gt;
 &lt;p&gt;Extension &lt;code&gt;header_attributes&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;可以标题文字后添加属性，&lt;code&gt;{#identifier .class .class key=value key=value}&lt;/code&gt;。本语法兼容&lt;a href="https://michelf.ca/projects/php-markdown/extra/"&gt;PHP Markdown Extra&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;添加的属性通常用于 &lt;strong&gt;HTML&lt;/strong&gt; 或基于 &lt;strong&gt;HTML&lt;/strong&gt; 的格式文件如 &lt;strong&gt;EPUB&lt;/strong&gt;。&lt;/p&gt;
@@ -192,7 +736,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class="sourceLine" id="cb4-6" data-line-number="6"&gt;HTML]&lt;/a&gt;
 &lt;a class="sourceLine" id="cb4-7" data-line-number="7"&gt;or&lt;/a&gt;
 &lt;a class="sourceLine" id="cb4-8" data-line-number="8"&gt;&lt;span class="ot"&gt;[Header identifiers in HTML](#header-identifiers-in-html)&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id="block-quotations-块引用"&gt;&lt;span class="header-section-number"&gt;4&lt;/span&gt; Block quotations 块引用&lt;/h1&gt;
+&lt;h1 id="block-quotations-块引用"&gt;Block quotations 块引用&lt;/h1&gt;
 &lt;p&gt;Markdown 使用 email 传统引用文字，&lt;br /&gt;
 每行前面都有一个&lt;code&gt;&amp;gt;&lt;/code&gt;字符和一个可选空格，&lt;code&gt;&amp;gt;&lt;/code&gt;符号不需要从最左边开始，但是不应该缩进超过三个空格。&lt;/p&gt;
 &lt;div class="sourceCode" id="cb5"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb5-1" data-line-number="1"&gt;&amp;gt;&lt;span class="dt"&gt; This is a block quote. This&lt;/span&gt;&lt;/a&gt;
@@ -215,11 +759,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;标准语法不需要在块引用前添加 &lt;strong&gt;空白行&lt;/strong&gt;，Pandoc需要（除了文档开头），原因是自动断行造成歧义，除非指定&lt;code&gt;markdown_strict&lt;/code&gt;标志，Pandoc不认为以下代码是引用嵌套。&lt;/p&gt;
 &lt;div class="sourceCode" id="cb8"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb8-1" data-line-number="1"&gt;&amp;gt;&lt;span class="dt"&gt; This is a block quote.&lt;/span&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb8-2" data-line-number="2"&gt;&lt;span class="dt"&gt;&amp;gt;&amp;gt; Nested.&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id="verbatimcode-blocks-代码块"&gt;&lt;span class="header-section-number"&gt;5&lt;/span&gt; Verbatim(code) blocks 代码块&lt;/h1&gt;
-&lt;h2 id="indented-code-blocks-缩进代码块"&gt;&lt;span class="header-section-number"&gt;5.1&lt;/span&gt; Indented code blocks 缩进代码块&lt;/h2&gt;
+&lt;h1 id="verbatimcode-blocks-代码块"&gt;Verbatim(code) blocks 代码块&lt;/h1&gt;
+&lt;h2 id="indented-code-blocks-缩进代码块"&gt;Indented code blocks 缩进代码块&lt;/h2&gt;
 &lt;p&gt;文本缩进四个空格或一个tab键，将被视为代码块，保留空格、换行，特殊字符不会触发样式。初始缩进 &lt;strong&gt;四个空格或tab&lt;/strong&gt; 将在输出中移除。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; 代码块中空白行不需要四个空格缩进&lt;/p&gt;
-&lt;h2 id="fenced-code-blocks-围栏代码块"&gt;&lt;span class="header-section-number"&gt;5.2&lt;/span&gt; Fenced code blocks 围栏代码块&lt;/h2&gt;
+&lt;h2 id="fenced-code-blocks-围栏代码块"&gt;Fenced code blocks 围栏代码块&lt;/h2&gt;
 &lt;p&gt;Extension &lt;code&gt;fenced_code_blocks&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;除了标准缩进代码块，Pandoc支持围栏代码块，使用&lt;code&gt;~&lt;/code&gt;符号，在代码块前后添加一行符号，后行长度至少和起始行一样。&lt;/p&gt;
 &lt;div class="sourceCode" id="cb9"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb9-1" data-line-number="1"&gt;~~~~~&lt;/a&gt;
@@ -252,7 +796,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class="sourceLine" id="cb12-6" data-line-number="6"&gt;qsort [] = []&lt;/a&gt;
 &lt;a class="sourceLine" id="cb12-7" data-line-number="7"&gt;~~~&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;如果 &lt;code&gt;fenced_code_attributes&lt;/code&gt; 拓展关闭，但是文本中包含属性值，这些属性将会被打印。&lt;/p&gt;
-&lt;h1 id="line-blocks-行块"&gt;&lt;span class="header-section-number"&gt;6&lt;/span&gt; Line blocks 行块&lt;/h1&gt;
+&lt;h1 id="line-blocks-行块"&gt;Line blocks 行块&lt;/h1&gt;
 &lt;p&gt;Extension &lt;code&gt;line_blocks&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;行块是一系列以垂直符&lt;code&gt;|&lt;/code&gt;开头后接空格的文本行，断行、空格将被保留。用于诗词和地址。借鉴与&lt;a href="http://docutils.sourceforge.net/docs/ref/rst/introduction.html"&gt;reStructuredText&lt;/a&gt;&lt;/p&gt;
 &lt;div class="sourceCode" id="cb13"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb13-1" data-line-number="1"&gt;| The limerick packs laughs anatomical&lt;/a&gt;
@@ -263,8 +807,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class="sourceLine" id="cb13-6" data-line-number="6"&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb13-7" data-line-number="7"&gt;| 200 Main St.&lt;/a&gt;
 &lt;a class="sourceLine" id="cb13-8" data-line-number="8"&gt;| Berkeley, CA 94718&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id="lists-列表"&gt;&lt;span class="header-section-number"&gt;7&lt;/span&gt; Lists 列表&lt;/h1&gt;
-&lt;h2 id="bullet-lists-项目列表无序列表"&gt;&lt;span class="header-section-number"&gt;7.1&lt;/span&gt; Bullet lists 项目列表／无序列表&lt;/h2&gt;
+&lt;h1 id="lists-列表"&gt;Lists 列表&lt;/h1&gt;
+&lt;h2 id="bullet-lists-项目列表无序列表"&gt;Bullet lists 项目列表／无序列表&lt;/h2&gt;
 &lt;p&gt;项目列表使用项目符（&lt;code&gt;*&lt;/code&gt;,&lt;code&gt;+&lt;/code&gt;,&lt;code&gt;-&lt;/code&gt;）开头。&lt;/p&gt;
 &lt;div class="sourceCode" id="cb14"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb14-1" data-line-number="1"&gt;* &lt;span class="fl"&gt;one&lt;/span&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb14-2" data-line-number="2"&gt;&lt;span class="fl"&gt;* two&lt;/span&gt;&lt;/a&gt;
@@ -276,7 +820,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class="sourceLine" id="cb15-4" data-line-number="4"&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb15-5" data-line-number="5"&gt;* &lt;span class="fl"&gt;three&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; 列表不需要左边缘对齐，可以使用一到三个空格缩进，&lt;strong&gt;项目列表符后必须有空格&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id="block-content-in-list-items-列表内的块"&gt;&lt;span class="header-section-number"&gt;7.2&lt;/span&gt; Block content In list items 列表内的块&lt;/h2&gt;
+&lt;h2 id="block-content-in-list-items-列表内的块"&gt;Block content In list items 列表内的块&lt;/h2&gt;
 &lt;p&gt;列表项可能包含多个段落或块级内容，然而后续段落必须以 &lt;strong&gt;空白行开头并且缩进以列表标记之后的第一个非空格内容对齐&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="sourceCode" id="cb16"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb16-1" data-line-number="1"&gt;  * First paragraph.&lt;/a&gt;
 &lt;a class="sourceLine" id="cb16-2" data-line-number="2"&gt;&lt;/a&gt;
@@ -309,7 +853,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class="sourceLine" id="cb19-6" data-line-number="6"&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb19-7" data-line-number="7"&gt;&lt;span class="bn"&gt;    Second paragraph of second&lt;/span&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb19-8" data-line-number="8"&gt;list item.&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id="ordered-lists-有序列表"&gt;&lt;span class="header-section-number"&gt;7.3&lt;/span&gt; Ordered lists 有序列表&lt;/h2&gt;
+&lt;h2 id="ordered-lists-有序列表"&gt;Ordered lists 有序列表&lt;/h2&gt;
 &lt;p&gt;标准 Markdown 语法，序号是十进制数字后加 &lt;strong&gt;&lt;code&gt;.&lt;/code&gt;和空格&lt;/strong&gt;，序号数字会被忽略。&lt;/p&gt;
 &lt;div class="sourceCode" id="cb20"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb20-1" data-line-number="1"&gt;1. &lt;span class="fl"&gt; one&lt;/span&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb20-2" data-line-number="2"&gt;&lt;span class="fl"&gt;2.  two&lt;/span&gt;&lt;/a&gt;
@@ -335,7 +879,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class="sourceLine" id="cb23-2" data-line-number="2"&gt;(5) Three&lt;/a&gt;
 &lt;a class="sourceLine" id="cb23-3" data-line-number="3"&gt;1. &lt;span class="fl"&gt;Four&lt;/span&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb23-4" data-line-number="4"&gt;&lt;span class="fl"&gt;*  Five&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id="definition-lists-列表定义"&gt;&lt;span class="header-section-number"&gt;7.4&lt;/span&gt; Definition lists 列表定义&lt;/h2&gt;
+&lt;h2 id="definition-lists-列表定义"&gt;Definition lists 列表定义&lt;/h2&gt;
 &lt;p&gt;Extension &lt;code&gt;definition_lists&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Pandoc 支持定义列表，使用&lt;a href="https://michelf.ca/projects/php-markdown/extra/"&gt;PHP Markdown Extra&lt;/a&gt;&lt;/p&gt;
 &lt;div class="sourceCode" id="cb24"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb24-1" data-line-number="1"&gt;Term 1&lt;/a&gt;
@@ -351,7 +895,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class="sourceLine" id="cb24-11" data-line-number="11"&gt;&lt;span class="bn"&gt;    Third paragraph of definition 2.&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;每行定义一个术语，后面可存在空白行，但必须存在一个或多个定义，定义始于冒号或波浪号，可能会存在缩进一两个空格。&lt;/p&gt;
 &lt;p&gt;TODO&lt;/p&gt;
-&lt;h2 id="numbered-example-lists-编号示例列表"&gt;&lt;span class="header-section-number"&gt;7.5&lt;/span&gt; Numbered example lists 编号示例列表&lt;/h2&gt;
+&lt;h2 id="numbered-example-lists-编号示例列表"&gt;Numbered example lists 编号示例列表&lt;/h2&gt;
 &lt;p&gt;Extension &lt;code&gt;example_lists&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;特殊列表标记符&lt;code&gt;@&lt;/code&gt;，列表会依次编号横跨整个文档，后续的新列表使用&lt;code&gt;@&lt;/code&gt;标记符，会续接之前的编号&lt;/p&gt;
 &lt;div class="sourceCode" id="cb25"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb25-1" data-line-number="1"&gt;(@)  My first example will be numbered (1).&lt;/a&gt;
@@ -366,7 +910,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class="sourceLine" id="cb26-3" data-line-number="3"&gt;As (@good) illustrates, ...&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;标签可以使用任何字母数字下划线和连字符&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; 连续段落在示例列表中 &lt;strong&gt;必须缩进四个空格&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id="compact-and-loose-lists-紧凑稀疏列表"&gt;&lt;span class="header-section-number"&gt;7.6&lt;/span&gt; Compact and loose lists 紧凑／稀疏列表&lt;/h2&gt;
+&lt;h2 id="compact-and-loose-lists-紧凑稀疏列表"&gt;Compact and loose lists 紧凑／稀疏列表&lt;/h2&gt;
 &lt;p&gt;Pandoc 与 &lt;code&gt;Markdown.pl&lt;/code&gt; 在“边缘情况”(edge cases)表现不同&lt;/p&gt;
 &lt;div class="sourceCode" id="cb27"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb27-1" data-line-number="1"&gt;+ &lt;span class="fl"&gt;  First&lt;/span&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb27-2" data-line-number="2"&gt;&lt;span class="fl"&gt;+   Second:&lt;/span&gt;&lt;/a&gt;
@@ -376,7 +920,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class="sourceLine" id="cb27-6" data-line-number="6"&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb27-7" data-line-number="7"&gt;+ &lt;span class="fl"&gt;  Third&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Pandoc 解释为紧凑列表（&lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt; 不包围 &lt;strong&gt;First&lt;/strong&gt;, &lt;strong&gt;Second&lt;/strong&gt;, &lt;strong&gt;Third&lt;/strong&gt; 而 Markdown 不包围 &lt;strong&gt;First&lt;/strong&gt; ）因为 &lt;strong&gt;Third&lt;/strong&gt; 的空格。Pandoc 遵循简单的规则：如果文本后跟随空格视为段落，&lt;strong&gt;Second&lt;/strong&gt; 后没有空行后接列表视为非段落。事实上列表后接空白行是无关的。&lt;/p&gt;
-&lt;h2 id="ending-a-list-结束列表"&gt;&lt;span class="header-section-number"&gt;7.7&lt;/span&gt; Ending a list 结束列表&lt;/h2&gt;
+&lt;h2 id="ending-a-list-结束列表"&gt;Ending a list 结束列表&lt;/h2&gt;
 &lt;div class="sourceCode" id="cb28"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb28-1" data-line-number="1"&gt;- &lt;span class="fl"&gt;  item one&lt;/span&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb28-2" data-line-number="2"&gt;&lt;span class="fl"&gt;-   item two&lt;/span&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb28-3" data-line-number="3"&gt;&lt;/a&gt;
@@ -399,12 +943,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class="sourceLine" id="cb30-7" data-line-number="7"&gt;1. &lt;span class="fl"&gt; uno&lt;/span&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb30-8" data-line-number="8"&gt;&lt;span class="fl"&gt;2.  dos&lt;/span&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb30-9" data-line-number="9"&gt;&lt;span class="fl"&gt;3.  tres&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id="horzontal-rules-水平分隔线"&gt;&lt;span class="header-section-number"&gt;8&lt;/span&gt; Horzontal rules 水平分隔线&lt;/h1&gt;
+&lt;h1 id="horzontal-rules-水平分隔线"&gt;Horzontal rules 水平分隔线&lt;/h1&gt;
 &lt;p&gt;一行包含三个以上 &lt;code&gt;*&lt;/code&gt;,&lt;code&gt;-&lt;/code&gt;,&lt;code&gt;_&lt;/code&gt; 字符，字符间可插入空格，视为水平分割线&lt;/p&gt;
 &lt;div class="sourceCode" id="cb31"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb31-1" data-line-number="1"&gt;* &lt;span class="fl"&gt; *  *  *&lt;/span&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb31-2" data-line-number="2"&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb31-3" data-line-number="3"&gt;---------------&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id="tables-表格"&gt;&lt;span class="header-section-number"&gt;9&lt;/span&gt; Tables 表格&lt;/h1&gt;
+&lt;h1 id="tables-表格"&gt;Tables 表格&lt;/h1&gt;
 &lt;p&gt;四种列表样式，前三种要求等宽（fixed-width）字体,最后一种可以使用等比例（proportionally spaced）字体&lt;/p&gt;
 &lt;p&gt;Extension &lt;code&gt;table_captions&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;选择为所有4种表格提供题注。题注是以字符串Table:(或只是:)开头的段落，它将被剥离,它可能出现在表格之前或之后。&lt;/p&gt;
@@ -493,7 +1037,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class="sourceLine" id="cb39-4" data-line-number="4"&gt;pear|1.37&lt;/a&gt;
 &lt;a class="sourceLine" id="cb39-5" data-line-number="5"&gt;orange|3.09&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;表的单元格不能包含段落和列表等块元素，也不能跨越多行。如果表包含可打印内容宽于列宽的行，则表将占用全文宽度，单元格内容将换行，相对单元格宽度由在表格表头与表格主体分隔的行中虚线数量确定。另一方面，如果没有行宽于列宽，则单元格内容将不会包裹，单元格将根据其内容确定大小&lt;/p&gt;
-&lt;h1 id="metadata-blocks-元数据块"&gt;&lt;span class="header-section-number"&gt;10&lt;/span&gt; Metadata blocks 元数据块&lt;/h1&gt;
+&lt;h1 id="metadata-blocks-元数据块"&gt;Metadata blocks 元数据块&lt;/h1&gt;
 &lt;p&gt;Extension &lt;code&gt;pandoc_title_block&lt;/code&gt;&lt;/p&gt;
 &lt;div class="sourceCode" id="cb40"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb40-1" data-line-number="1"&gt;% title&lt;/a&gt;
 &lt;a class="sourceLine" id="cb40-2" data-line-number="2"&gt;% author(s) (separated by semicolons)&lt;/a&gt;
@@ -534,7 +1078,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class="sourceLine" id="cb44-10" data-line-number="10"&gt;  It consists of two paragraphs.&lt;/a&gt;
 &lt;a class="sourceLine" id="cb44-11" data-line-number="11"&gt;...&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;TODO &lt;code&gt;Template variables&lt;/code&gt;&lt;/p&gt;
-&lt;h1 id="backslash-escapes-反斜杠转义"&gt;&lt;span class="header-section-number"&gt;11&lt;/span&gt; Backslash escapes 反斜杠转义&lt;/h1&gt;
+&lt;h1 id="backslash-escapes-反斜杠转义"&gt;Backslash escapes 反斜杠转义&lt;/h1&gt;
 &lt;p&gt;Extension &lt;code&gt;all_symbols_escapable&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;除了代码块或内联代码之外，任何以反斜杠开头的标点符号或空格字符都将按字面处理，即使它表示格式。&lt;/p&gt;
 &lt;div class="sourceCode" id="cb45"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb45-1" data-line-number="1"&gt;*\*hello\**&lt;/a&gt;
@@ -549,8 +1093,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;转义字符&lt;code&gt;\`*_{}[]()&amp;gt;#+-.!&lt;/code&gt;，反斜杠转义空格被解析为不间断空格&lt;/p&gt;
 &lt;p&gt;反斜杠转义的换行符（即在行尾发生的反斜杠）被解析为硬换行。这是Markdown的“隐形”换行方式，和行后尾随两个空格作用相同&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; 反斜杠转义在代码块种不起作用&lt;/p&gt;
-&lt;h1 id="inline-formatting-内联样式"&gt;&lt;span class="header-section-number"&gt;12&lt;/span&gt; Inline formatting 内联样式&lt;/h1&gt;
-&lt;h2 id="emphasis-强调"&gt;&lt;span class="header-section-number"&gt;12.1&lt;/span&gt; Emphasis 强调&lt;/h2&gt;
+&lt;h1 id="inline-formatting-内联样式"&gt;Inline formatting 内联样式&lt;/h1&gt;
+&lt;h2 id="emphasis-强调"&gt;Emphasis 强调&lt;/h2&gt;
 &lt;p&gt;单个&lt;code&gt;*&lt;/code&gt;或&lt;code&gt;_&lt;/code&gt;包围文本表示斜体&lt;/p&gt;
 &lt;pre class="markdwon"&gt;&lt;code&gt;This text is _emphasized with underscores_, and this
 is *emphasized with asterisks*.&lt;/code&gt;&lt;/pre&gt;
@@ -561,16 +1105,16 @@ is *emphasized with asterisks*.&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Extension &lt;code&gt;intraword_underscores&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;因为&lt;code&gt;_&lt;/code&gt;有时在单词和标识符中使用，所以Pandoc不会将由字母、数字包围的名称&lt;code&gt;_&lt;/code&gt;处理为斜体，使用&lt;code&gt;*&lt;/code&gt;代替&lt;/p&gt;
 &lt;div class="sourceCode" id="cb49"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb49-1" data-line-number="1"&gt;feas*ible*, not feas*able*.&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id="strikeout-删除线"&gt;&lt;span class="header-section-number"&gt;12.2&lt;/span&gt; Strikeout 删除线&lt;/h2&gt;
+&lt;h2 id="strikeout-删除线"&gt;Strikeout 删除线&lt;/h2&gt;
 &lt;p&gt;Extension &lt;code&gt;strikeout&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;用 &lt;code&gt;~~&lt;/code&gt; 开始和结束&lt;/p&gt;
 &lt;div class="sourceCode" id="cb50"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb50-1" data-line-number="1"&gt;This ~~is deleted text.~~&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id="superscripts-and-subscripts-上下标"&gt;&lt;span class="header-section-number"&gt;12.3&lt;/span&gt; Superscripts and subscripts 上下标&lt;/h2&gt;
+&lt;h2 id="superscripts-and-subscripts-上下标"&gt;Superscripts and subscripts 上下标&lt;/h2&gt;
 &lt;p&gt;Extension &lt;code&gt;superscript&lt;/code&gt; &lt;code&gt;subscript&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;通过&lt;code&gt;^&lt;/code&gt;字符包围上标文本来表示上标; 可以通过&lt;code&gt;〜&lt;/code&gt;字符围绕下标文本来表示下标&lt;/p&gt;
 &lt;div class="sourceCode" id="cb51"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb51-1" data-line-number="1"&gt;H~2~O is a liquid.  2^10^ is 1024.&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;如果上标或下标文本包含空格，则必须使用反斜杠转义这些空格&lt;/p&gt;
-&lt;h2 id="verbatim"&gt;&lt;span class="header-section-number"&gt;12.4&lt;/span&gt; Verbatim&lt;/h2&gt;
+&lt;h2 id="verbatim"&gt;Verbatim&lt;/h2&gt;
 &lt;p&gt;文本放在反引号&lt;code&gt;`&lt;/code&gt;中，默认保留所有格式&lt;/p&gt;
 &lt;div class="sourceCode" id="cb52"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb52-1" data-line-number="1"&gt;What is the difference between &lt;span class="bn"&gt;`&amp;gt;&amp;gt;=`&lt;/span&gt; and &lt;span class="bn"&gt;`&amp;gt;&amp;gt;`&lt;/span&gt;?&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;如果文本中包含反引号&lt;code&gt;`&lt;/code&gt;,使用&lt;code&gt;``&lt;/code&gt;代替，包围的前后空格会被忽略&lt;/p&gt;
@@ -579,10 +1123,10 @@ is *emphasized with asterisks*.&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Extension &lt;code&gt;inline_code_attributes&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;类似于围栏代码块&lt;/p&gt;
 &lt;div class="sourceCode" id="cb54"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb54-1" data-line-number="1"&gt;&lt;span class="bn"&gt;`&amp;lt;$&amp;gt;`&lt;/span&gt;{.haskell}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id="math-数学公式"&gt;&lt;span class="header-section-number"&gt;13&lt;/span&gt; Math 数学公式&lt;/h1&gt;
+&lt;h1 id="math-数学公式"&gt;Math 数学公式&lt;/h1&gt;
 &lt;p&gt;Extension &lt;code&gt;tex_math_dollars&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;两个&lt;code&gt;$&lt;/code&gt;字符之间的任何内容都将被视为TeX数学公式。开头&lt;code&gt;$&lt;/code&gt;必须在其右边有一个非空格字符，而结束&lt;code&gt;$&lt;/code&gt;必须在其左边有一个非空格字符，并且不能立即跟随一个数字。 如果由于某种原因你需要包含文本&lt;code&gt;$&lt;/code&gt;字符中，则反斜杠&lt;code&gt;\&lt;/code&gt;转义它们.&lt;/p&gt;
-&lt;h1 id="raw-html"&gt;&lt;span class="header-section-number"&gt;14&lt;/span&gt; Raw HTML&lt;/h1&gt;
+&lt;h1 id="raw-html"&gt;Raw HTML&lt;/h1&gt;
 &lt;p&gt;Extension &lt;code&gt;raw_html&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Markdown允许您在文档中的任何位置插入原始HTML（其中&amp;lt;，&amp;gt;和＆按字面解释）&lt;/p&gt;
 &lt;p&gt;Extension &lt;code&gt;markdown_in_html_blocks&lt;/code&gt;&lt;/p&gt;
@@ -596,29 +1140,29 @@ is *emphasized with asterisks*.&lt;/code&gt;&lt;/pre&gt;
 &lt;a class="sourceLine" id="cb55-4" data-line-number="4"&gt;26--35  &amp;amp; 33 \\&lt;/a&gt;
 &lt;a class="sourceLine" id="cb55-5" data-line-number="5"&gt;36--45  &amp;amp; 22 \\ \hline&lt;/a&gt;
 &lt;a class="sourceLine" id="cb55-6" data-line-number="6"&gt;\end{tabular}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id="generic-raw-attribute"&gt;&lt;span class="header-section-number"&gt;15&lt;/span&gt; Generic raw attribute&lt;/h1&gt;
+&lt;h1 id="generic-raw-attribute"&gt;Generic raw attribute&lt;/h1&gt;
 &lt;p&gt;Extension &lt;code&gt;raw_attribute&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;具有特殊属性的内联 &lt;code&gt;spans&lt;/code&gt; 和围栏代码块将被解析为具有指定格式的内容 &lt;strong&gt;?&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="sourceCode" id="cb56"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb56-1" data-line-number="1"&gt;\```{=ms}&lt;/a&gt;
-&lt;a class="sourceLine" id="cb56-2" data-line-number="2"&gt;.MYMACRO&lt;/a&gt;
-&lt;a class="sourceLine" id="cb56-3" data-line-number="3"&gt;blah blah&lt;/a&gt;
-&lt;a class="sourceLine" id="cb56-4" data-line-number="4"&gt;\```&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id="latex-macros"&gt;&lt;span class="header-section-number"&gt;16&lt;/span&gt; LaTeX macros&lt;/h1&gt;
-&lt;p&gt;Extension &lt;code&gt;line_blocks&lt;/code&gt;&lt;/p&gt;
+&lt;div class="sourceCode" id="cb56"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb56-1" data-line-number="1"&gt;\&lt;span class="bn"&gt;```{=ms}&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb56-2" data-line-number="2"&gt;&lt;span class="bn"&gt;.MYMACRO&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb56-3" data-line-number="3"&gt;&lt;span class="bn"&gt;blah blah&lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb56-4" data-line-number="4"&gt;&lt;span class="bn"&gt;\```&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id="latex-macros"&gt;LaTeX macros&lt;/h1&gt;
+&lt;p&gt;Extension &lt;code&gt;latex_macros&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;TODO&lt;/p&gt;
-&lt;h1 id="links-链接"&gt;&lt;span class="header-section-number"&gt;17&lt;/span&gt; Links 链接&lt;/h1&gt;
-&lt;h2 id="automatic-links-自动链接"&gt;&lt;span class="header-section-number"&gt;17.1&lt;/span&gt; Automatic links 自动链接&lt;/h2&gt;
+&lt;h1 id="links-链接"&gt;Links 链接&lt;/h1&gt;
+&lt;h2 id="automatic-links-自动链接"&gt;Automatic links 自动链接&lt;/h2&gt;
 &lt;p&gt;将&lt;code&gt;URL&lt;/code&gt;或&lt;code&gt;email&lt;/code&gt; 放在尖括号中&lt;/p&gt;
 &lt;div class="sourceCode" id="cb57"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb57-1" data-line-number="1"&gt;&lt;span class="ot"&gt;&amp;lt;http://google.com&amp;gt;&lt;/span&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb57-2" data-line-number="2"&gt;&lt;span class="ot"&gt;&amp;lt;sam@green.eggs.ham&amp;gt;&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id="inline-links-内联链接"&gt;&lt;span class="header-section-number"&gt;17.2&lt;/span&gt; Inline links 内联链接&lt;/h2&gt;
+&lt;h2 id="inline-links-内联链接"&gt;Inline links 内联链接&lt;/h2&gt;
 &lt;p&gt;内联链接由方括号中的链接文本组成，后跟圆括号的URL。（URL后面可以跟引号中的链接标题。）&lt;/p&gt;
 &lt;div class="sourceCode" id="cb58"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb58-1" data-line-number="1"&gt;This is an &lt;span class="ot"&gt;[inline link](/url)&lt;/span&gt;, and here&amp;#39;s [one with&lt;/a&gt;
 &lt;a class="sourceLine" id="cb58-2" data-line-number="2"&gt;a title](http://fsf.org &amp;quot;click here for a good time!&amp;quot;).&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;方括号部分和圆括号部分之间不能有空格&lt;/strong&gt; 链接文本可以包含格式，但标题&lt;code&gt;tilte&lt;/code&gt;不能。&lt;/p&gt;
 &lt;p&gt;内联链接中的电子邮件地址不会被自动检测，因此必须以&lt;code&gt;mailto&lt;/code&gt;为前缀&lt;/p&gt;
 &lt;div class="sourceCode" id="cb59"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb59-1" data-line-number="1"&gt;&lt;span class="ot"&gt;[Write me!](mailto:sam@green.eggs.ham)&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id="reference-links-参考链接"&gt;&lt;span class="header-section-number"&gt;17.3&lt;/span&gt; Reference links 参考链接&lt;/h2&gt;
+&lt;h2 id="reference-links-参考链接"&gt;Reference links 参考链接&lt;/h2&gt;
 &lt;p&gt;显式参考链接有两个部分，链接本身和链接定义&lt;/p&gt;
 &lt;p&gt;链接由方括号的链接文本，后跟方括号中的标签组成。 链接定义包括方括号标签，后跟 &lt;strong&gt;冒号和空格&lt;/strong&gt;，后跟URL，以及可省略的引号或括号中的链接标签。&lt;strong&gt;引用优先于链接标签&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="sourceCode" id="cb60"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb60-1" data-line-number="1"&gt;&lt;span class="ot"&gt;[my label 1]: /foo/bar.html  &amp;quot;My title, optional&amp;quot;&lt;/span&gt;&lt;/a&gt;
@@ -645,14 +1189,14 @@ is *emphasized with asterisks*.&lt;/code&gt;&lt;/pre&gt;
 &lt;div class="sourceCode" id="cb64"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb64-1" data-line-number="1"&gt;See [my website].&lt;/a&gt;
 &lt;a class="sourceLine" id="cb64-2" data-line-number="2"&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb64-3" data-line-number="3"&gt;&lt;span class="ot"&gt;[my website]: http://foo.bar.baz&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id="internal-links-内部链接"&gt;&lt;span class="header-section-number"&gt;17.4&lt;/span&gt; Internal links 内部链接&lt;/h2&gt;
+&lt;h2 id="internal-links-内部链接"&gt;Internal links 内部链接&lt;/h2&gt;
 &lt;p&gt;内部链接支持链接到自动生成的标题识别符&lt;/p&gt;
 &lt;div class="sourceCode" id="cb65"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb65-1" data-line-number="1"&gt;See the &lt;span class="ot"&gt;[Introduction](#introduction)&lt;/span&gt;.&lt;/a&gt;
 &lt;a class="sourceLine" id="cb65-2" data-line-number="2"&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb65-3" data-line-number="3"&gt;See the [Introduction].&lt;/a&gt;
 &lt;a class="sourceLine" id="cb65-4" data-line-number="4"&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb65-5" data-line-number="5"&gt;&lt;span class="ot"&gt;[Introduction]: #introduction&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id="images-图片"&gt;&lt;span class="header-section-number"&gt;18&lt;/span&gt; Images 图片&lt;/h1&gt;
+&lt;h1 id="images-图片"&gt;Images 图片&lt;/h1&gt;
 &lt;p&gt;一个链接紧接着一个&lt;code&gt;!&lt;/code&gt;将被视为插入图像，链接文本将用图像替代文字&lt;/p&gt;
 &lt;div class="sourceCode" id="cb66"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb66-1" data-line-number="1"&gt;&lt;span class="al"&gt;![la lune](lalune.jpg &amp;quot;Voyage to the moon&amp;quot;)&lt;/span&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb66-2" data-line-number="2"&gt;&lt;/a&gt;
@@ -668,7 +1212,7 @@ is *emphasized with asterisks*.&lt;/code&gt;&lt;/pre&gt;
 &lt;a class="sourceLine" id="cb68-2" data-line-number="2"&gt;and a reference &lt;span class="al"&gt;![image][ref]&lt;/span&gt; with attributes.&lt;/a&gt;
 &lt;a class="sourceLine" id="cb68-3" data-line-number="3"&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb68-4" data-line-number="4"&gt;&lt;span class="ot"&gt;[ref]: foo.jpg &amp;quot;optional title&amp;quot;&lt;/span&gt; {#id .class key=val key2=&amp;quot;val 2&amp;quot;}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id="divs-and-spans"&gt;&lt;span class="header-section-number"&gt;19&lt;/span&gt; Divs and Spans&lt;/h1&gt;
+&lt;h1 id="divs-and-spans"&gt;Divs and Spans&lt;/h1&gt;
 &lt;p&gt;Extension &lt;code&gt;fenced_divs&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Pandoc 支持围栏 &lt;code&gt;div&lt;/code&gt; 语法,连续三个冒号，后面可跟随属性样式&lt;/p&gt;
 &lt;div class="sourceCode" id="cb69"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb69-1" data-line-number="1"&gt;::::: {#special .sidebar}&lt;/a&gt;
@@ -687,7 +1231,7 @@ is *emphasized with asterisks*.&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Extension &lt;code&gt;bracketed_spans&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;行内方括号包围文字可以解释为链接，如果后面跟随属性样式将会解析为 &lt;code&gt;Span&lt;/code&gt; 标签&lt;/p&gt;
 &lt;div class="sourceCode" id="cb71"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb71-1" data-line-number="1"&gt;[This is *some text*]{.class key=&amp;quot;val&amp;quot;}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id="footnotes-脚注"&gt;&lt;span class="header-section-number"&gt;20&lt;/span&gt; Footnotes 脚注&lt;/h1&gt;
+&lt;h1 id="footnotes-脚注"&gt;Footnotes 脚注&lt;/h1&gt;
 &lt;p&gt;Extension &lt;code&gt;footnotes&lt;/code&gt;&lt;/p&gt;
 &lt;div class="sourceCode" id="cb72"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb72-1" data-line-number="1"&gt;Here is a footnote reference,&lt;span class="ot"&gt;[^1]&lt;/span&gt; and another.&lt;span class="ot"&gt;[^longnote]&lt;/span&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb72-2" data-line-number="2"&gt;&lt;/a&gt;
@@ -712,12 +1256,12 @@ is *emphasized with asterisks*.&lt;/code&gt;&lt;/pre&gt;
 &lt;div class="sourceCode" id="cb73"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb73-1" data-line-number="1"&gt;Here is an inline note.^[Inlines notes are easier to write, since&lt;/a&gt;
 &lt;a class="sourceLine" id="cb73-2" data-line-number="2"&gt;you don&amp;#39;t have to pick an identifier and move down to type the&lt;/a&gt;
 &lt;a class="sourceLine" id="cb73-3" data-line-number="3"&gt;note.]&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id="citations-引用"&gt;&lt;span class="header-section-number"&gt;21&lt;/span&gt; Citations 引用&lt;/h1&gt;
+&lt;h1 id="citations-引用"&gt;Citations 引用&lt;/h1&gt;
 &lt;p&gt;Extension &lt;code&gt;citations&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Pandoc 使用以下命令可以自动生成引用和参考目录&lt;/p&gt;
 &lt;div class="sourceCode" id="cb74"&gt;&lt;pre class="sourceCode bash"&gt;&lt;code class="sourceCode bash"&gt;&lt;a class="sourceLine" id="cb74-1" data-line-number="1"&gt;&lt;span class="ex"&gt;pandoc&lt;/span&gt; --filter pandoc-citeproc myinput.txt&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;TODO&lt;/p&gt;
-&lt;h1 id="non-pandoc-extensions"&gt;&lt;span class="header-section-number"&gt;22&lt;/span&gt; Non-pandoc extensions&lt;/h1&gt;
+&lt;h1 id="non-pandoc-extensions"&gt;Non-pandoc extensions&lt;/h1&gt;
 &lt;p&gt;以下拓展可以默认未开启，如需使用需要在 &lt;code&gt;+EXTENSION&lt;/code&gt; 后输入拓展名&lt;/p&gt;
 &lt;p&gt;Extension &lt;code&gt;old_dashes&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;智能解析 &lt;code&gt;-&lt;/code&gt; 和 &lt;code&gt;--&lt;/code&gt; 符号，pandoc &amp;lt;= 1.8.2.1, &lt;code&gt;textile&lt;/code&gt; 输出默认选中&lt;/p&gt;
@@ -763,34 +1307,87 @@ is *emphasized with asterisks*.&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Extension &lt;code&gt;mmd_header_identifiers&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Extension &lt;code&gt;compact_definition_lists&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;兼容性定义列表，pandoc &amp;lt;= 1.2*&lt;/p&gt;
-&lt;h1 id="markdown-variants-markdwon-变种"&gt;&lt;span class="header-section-number"&gt;23&lt;/span&gt; Markdown variants Markdwon 变种&lt;/h1&gt;
-&lt;h2 id="markdown_phpextraphp-markdown-extra"&gt;&lt;span class="header-section-number"&gt;23.1&lt;/span&gt; markdown_phpextra(PHP Markdown Extra)&lt;/h2&gt;
+&lt;h1 id="markdown-variants-markdwon-变种"&gt;Markdown variants Markdwon 变种&lt;/h1&gt;
+&lt;h2 id="markdown_phpextraphp-markdown-extra"&gt;markdown_phpextra(PHP Markdown Extra)&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;footnotes, pipe_tables, raw_html, markdown_attribute, fenced_code_blocks, definition_lists, intraword_underscores, header_attributes, link_attributes, abbreviations, shortcut_reference_links, spaced_reference_links.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id="markdown_mmdmultimarkdown"&gt;&lt;span class="header-section-number"&gt;23.2&lt;/span&gt; markdown_mmd(MultiMarkdown)&lt;/h2&gt;
+&lt;h2 id="markdown_mmdmultimarkdown"&gt;markdown_mmd(MultiMarkdown)&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;pipe_tables, raw_html, markdown_attribute, mmd_link_attributes, tex_math_double_backslash, intraword_underscores, mmd_title_block, footnotes, definition_lists, all_symbols_escapable, implicit_header_references, auto_identifiers, mmd_header_identifiers, shortcut_reference_links, implicit_figures, superscript, subscript, backtick_code_blocks, spaced_reference_links, raw_attribute.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id="markdown_strictmarkdown.pl"&gt;&lt;span class="header-section-number"&gt;23.3&lt;/span&gt; markdown_strict(Markdown.pl)&lt;/h2&gt;
+&lt;h2 id="markdown_strictmarkdown.pl"&gt;markdown_strict(Markdown.pl)&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;raw_html, shortcut_reference_links, spaced_reference_links.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id="gfmgithub-flavored-markdown"&gt;&lt;span class="header-section-number"&gt;23.4&lt;/span&gt; gfm(GitHub-Flavored Markdown)&lt;/h2&gt;
+&lt;h2 id="gfmgithub-flavored-markdown"&gt;gfm(GitHub-Flavored Markdown)&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;pipe_tables, raw_html, fenced_code_blocks, auto_identifiers, ascii_identifiers, backtick_code_blocks, autolink_bare_uris, intraword_underscores, strikeout, hard_line_breaks, emoji, shortcut_reference_links, angle_brackets_escapable.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1 id="引用"&gt;&lt;span class="header-section-number"&gt;24&lt;/span&gt; 引用&lt;/h1&gt;
+&lt;h1 id="常用语法高亮"&gt;常用语法高亮&lt;/h1&gt;
+&lt;p&gt;常用语法高亮&lt;/p&gt;
+&lt;div class="sourceCode" id="cb78"&gt;&lt;pre class="sourceCode markdown"&gt;&lt;code class="sourceCode markdown"&gt;&lt;a class="sourceLine" id="cb78-1" data-line-number="1"&gt;awk&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-2" data-line-number="2"&gt;bash&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-3" data-line-number="3"&gt;bibtex&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-4" data-line-number="4"&gt;c&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-5" data-line-number="5"&gt;cpp&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-6" data-line-number="6"&gt;cmake&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-7" data-line-number="7"&gt;css&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-8" data-line-number="8"&gt;changelog&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-9" data-line-number="9"&gt;coffee&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-10" data-line-number="10"&gt;diff&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-11" data-line-number="11"&gt;djangotemplate&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-12" data-line-number="12"&gt;dockerfile&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-13" data-line-number="13"&gt;doxygen&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-14" data-line-number="14"&gt;doxygenlua&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-15" data-line-number="15"&gt;email&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-16" data-line-number="16"&gt;erlang&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-17" data-line-number="17"&gt;gcc&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-18" data-line-number="18"&gt;go&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-19" data-line-number="19"&gt;html&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-20" data-line-number="20"&gt;haskell&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-21" data-line-number="21"&gt;ini&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-22" data-line-number="22"&gt;json&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-23" data-line-number="23"&gt;jsp&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-24" data-line-number="24"&gt;java&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-25" data-line-number="25"&gt;javascript&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-26" data-line-number="26"&gt;javadoc&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-27" data-line-number="27"&gt;kotlin&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-28" data-line-number="28"&gt;llvm&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-29" data-line-number="29"&gt;latex&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-30" data-line-number="30"&gt;lua&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-31" data-line-number="31"&gt;makefile&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-32" data-line-number="32"&gt;markdown&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-33" data-line-number="33"&gt;matlab&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-34" data-line-number="34"&gt;php&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-35" data-line-number="35"&gt;perl&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-36" data-line-number="36"&gt;postscript&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-37" data-line-number="37"&gt;powershell&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-38" data-line-number="38"&gt;python&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-39" data-line-number="39"&gt;ruby&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-40" data-line-number="40"&gt;sql&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-41" data-line-number="41"&gt;sqlmysql&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-42" data-line-number="42"&gt;scala&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-43" data-line-number="43"&gt;scheme&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-44" data-line-number="44"&gt;texinfo&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-45" data-line-number="45"&gt;mandoc&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-46" data-line-number="46"&gt;xml&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-47" data-line-number="47"&gt;yaml&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-48" data-line-number="48"&gt;zsh&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-49" data-line-number="49"&gt;dot&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-50" data-line-number="50"&gt;sed&lt;/a&gt;
+&lt;a class="sourceLine" id="cb78-51" data-line-number="51"&gt;xorg&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id="引用"&gt;引用&lt;/h1&gt;
 &lt;p&gt;&lt;a href="http://pandoc.org/MANUAL.html#pandocs-markdown"&gt;Pandoc&lt;/a&gt;&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</content><category term="markdown"></category><category term="pandoc"></category></entry><entry><title>Git Cheatsheet</title><link href="https://cnewbie.github.io/blog/2018/git-cheatsheet/" rel="alternate"></link><published>2018-07-14T00:00:00+08:00</published><updated>2018-07-16T00:00:00+08:00</updated><author><name>cnewbie</name></author><id>tag:cnewbie.github.io,2018-07-14:/blog/2018/git-cheatsheet/</id><summary type="html">Git 命令速查</summary><content type="html">&lt;!DOCTYPE html&gt;
+</content><category term="Markdown"></category><category term="Pandoc"></category></entry><entry><title>Git Cheatsheet</title><link href="https://cnewbie.github.io/blog/2018/git-cheatsheet/" rel="alternate"></link><published>2018-07-14T00:00:00+08:00</published><updated>2018-07-16T00:00:00+08:00</updated><author><name>cnewbie</name></author><id>tag:cnewbie.github.io,2018-07-14:/blog/2018/git-cheatsheet/</id><summary type="html">Git 命令速查</summary><content type="html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang=""&gt;
 &lt;head&gt;
   &lt;meta charset="utf-8" /&gt;
   &lt;meta name="generator" content="pandoc" /&gt;
   &lt;meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" /&gt;
-  &lt;title&gt;Git Cheatsheet&lt;/title&gt;
+  &lt;title&gt;Untitled&lt;/title&gt;
   &lt;style type="text/css"&gt;
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -800,7 +1397,7 @@ is *emphasized with asterisks*.&lt;/code&gt;&lt;/pre&gt;
   &lt;style type="text/css"&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -813,13 +1410,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -867,65 +1462,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   &lt;![endif]--&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;header&gt;
-&lt;h1 class="title"&gt;Git Cheatsheet&lt;/h1&gt;
-&lt;/header&gt;
 &lt;nav id="TOC"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#git-基础"&gt;&lt;span class="toc-section-number"&gt;1&lt;/span&gt; Git 基础&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#基础操作"&gt;&lt;span class="toc-section-number"&gt;1.1&lt;/span&gt; 基础操作&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#远程仓库"&gt;&lt;span class="toc-section-number"&gt;1.2&lt;/span&gt; 远程仓库&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#标签"&gt;&lt;span class="toc-section-number"&gt;1.3&lt;/span&gt; 标签&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#git-基础"&gt;Git 基础&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#基础操作"&gt;基础操作&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#远程仓库"&gt;远程仓库&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#标签"&gt;标签&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#git-分支"&gt;&lt;span class="toc-section-number"&gt;2&lt;/span&gt; Git 分支&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#分支基本操作"&gt;&lt;span class="toc-section-number"&gt;2.1&lt;/span&gt; 分支基本操作&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#远程分支"&gt;&lt;span class="toc-section-number"&gt;2.2&lt;/span&gt; 远程分支&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#git-分支"&gt;Git 分支&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#分支基本操作"&gt;分支基本操作&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#远程分支"&gt;远程分支&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#git-工具"&gt;&lt;span class="toc-section-number"&gt;3&lt;/span&gt; Git 工具&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#储藏与清理"&gt;&lt;span class="toc-section-number"&gt;3.1&lt;/span&gt; 储藏与清理&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#重写历史"&gt;&lt;span class="toc-section-number"&gt;3.2&lt;/span&gt; 重写历史&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#重置对比"&gt;&lt;span class="toc-section-number"&gt;3.3&lt;/span&gt; 重置对比&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#子模块"&gt;&lt;span class="toc-section-number"&gt;3.4&lt;/span&gt; 子模块&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#git-工具"&gt;Git 工具&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#储藏与清理"&gt;储藏与清理&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#重写历史"&gt;重写历史&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#重置对比"&gt;重置对比&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#子模块"&gt;子模块&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/nav&gt;
 &lt;hr /&gt;
-&lt;h1 id="git-基础"&gt;&lt;span class="header-section-number"&gt;1&lt;/span&gt; Git 基础&lt;/h1&gt;
-&lt;h2 id="基础操作"&gt;&lt;span class="header-section-number"&gt;1.1&lt;/span&gt; 基础操作&lt;/h2&gt;
+&lt;h1 id="git-基础"&gt;Git 基础&lt;/h1&gt;
+&lt;h2 id="基础操作"&gt;基础操作&lt;/h2&gt;
 &lt;p&gt;初始化仓库&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;git init&lt;/code&gt;&lt;br /&gt;
-&lt;code&gt;git clone [url]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git init&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git clone [url]&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;检查文件状态&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git status&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;跟踪文件&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git add [file name]&lt;/code&gt; 跟踪新文件/暂存已修改文件&lt;/p&gt;
 &lt;p&gt;对比文件修改内容&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;git diff [file name]&lt;/code&gt;&lt;br /&gt;
-&lt;code&gt;git diff --cached/staged [file name]&lt;/code&gt; 对比暂存区文件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git diff [file name]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git diff --cached/staged [file name]&lt;/code&gt; 对比暂存区文件&lt;/p&gt;
 &lt;p&gt;提交更新&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;git commit&lt;/code&gt;&lt;br /&gt;
-&lt;code&gt;git commit -m [message]&lt;/code&gt; 更新纪录&lt;br /&gt;
-&lt;code&gt;git commit -a -m [message]&lt;/code&gt; 跳过暂存文件步骤直接提交&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git commit&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git commit -m [message]&lt;/code&gt; 更新纪录&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git commit -a -m [message]&lt;/code&gt; 跳过暂存文件步骤直接提交&lt;/p&gt;
 &lt;p&gt;移除文件&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;git rm [file name]&lt;/code&gt; 删除文件并取消跟踪&lt;br /&gt;
-&lt;code&gt;git rm --cached [file name]&lt;/code&gt; 取消跟踪文件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git rm [file name]&lt;/code&gt; 删除文件并取消跟踪&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git rm --cached [file name]&lt;/code&gt; 取消跟踪文件&lt;/p&gt;
 &lt;p&gt;重命名文件&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git mv [file name]&lt;/code&gt;&lt;/p&gt;
 &lt;div class="sourceCode" id="cb1"&gt;&lt;pre class="sourceCode bash"&gt;&lt;code class="sourceCode bash"&gt;&lt;a class="sourceLine" id="cb1-1" data-line-number="1"&gt;&lt;span class="fu"&gt;mv&lt;/span&gt; old_name new_name&lt;/a&gt;
 &lt;a class="sourceLine" id="cb1-2" data-line-number="2"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; rm old_name&lt;/a&gt;
 &lt;a class="sourceLine" id="cb1-3" data-line-number="3"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; add new_name&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;查看提交历史&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;git log&lt;/code&gt; &lt;a href="https://git-scm.com/docs/git-log"&gt;git log&lt;/a&gt;&lt;br /&gt;
-&lt;code&gt;git log --pretty=format: &amp;quot;%h %s&amp;quot; --graph&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git log&lt;/code&gt; &lt;a href="https://git-scm.com/docs/git-log"&gt;git log&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git log --pretty=format: &amp;quot;%h %s&amp;quot; --graph&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;撤销提交&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;git commmit --amend&lt;/code&gt;&lt;br /&gt;
-&lt;code&gt;git rebase -i&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git commmit --amend&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git rebase -i&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;撤销暂存文件&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;git reset HEAD [file name]&lt;/code&gt;&lt;br /&gt;
-&lt;code&gt;git reset --hard [file name]&lt;/code&gt; 当前文件修改丢失&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git reset HEAD [file name]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git reset --hard [file name]&lt;/code&gt; 当前文件修改丢失&lt;/p&gt;
 &lt;p&gt;撤销文件修改&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git checkout -- [file name]&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id="远程仓库"&gt;&lt;span class="header-section-number"&gt;1.2&lt;/span&gt; 远程仓库&lt;/h2&gt;
+&lt;h2 id="远程仓库"&gt;远程仓库&lt;/h2&gt;
 &lt;p&gt;查看远程仓库&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git remote -v&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;添加远程仓库&lt;/p&gt;
@@ -940,7 +1532,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;&lt;code&gt;git remote rename [old name] [new name]&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;删除远程仓库&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git rm [remote name]&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id="标签"&gt;&lt;span class="header-section-number"&gt;1.3&lt;/span&gt; 标签&lt;/h2&gt;
+&lt;h2 id="标签"&gt;标签&lt;/h2&gt;
 &lt;p&gt;查看标签&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git tag&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;添加附注标签&lt;/p&gt;
@@ -955,8 +1547,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;&lt;code&gt;git push [remote branch name] --tags&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;特定标签上建立分支&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git checkout -b [branch name] [tag name]&lt;/code&gt;&lt;/p&gt;
-&lt;h1 id="git-分支"&gt;&lt;span class="header-section-number"&gt;2&lt;/span&gt; Git 分支&lt;/h1&gt;
-&lt;h2 id="分支基本操作"&gt;&lt;span class="header-section-number"&gt;2.1&lt;/span&gt; 分支基本操作&lt;/h2&gt;
+&lt;h1 id="git-分支"&gt;Git 分支&lt;/h1&gt;
+&lt;h2 id="分支基本操作"&gt;分支基本操作&lt;/h2&gt;
 &lt;p&gt;分支创建&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git branch [branch name]&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;分支切换&lt;/p&gt;
@@ -967,7 +1559,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;&lt;code&gt;git merge [branch name]&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;删除分支&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git branch -d [branch name]&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id="远程分支"&gt;&lt;span class="header-section-number"&gt;2.2&lt;/span&gt; 远程分支&lt;/h2&gt;
+&lt;h2 id="远程分支"&gt;远程分支&lt;/h2&gt;
 &lt;p&gt;查看远程分支&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git ls-remote&lt;/code&gt; or &lt;code&gt;git remote show [remote name]&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;推送分支&lt;/p&gt;
@@ -986,10 +1578,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;分支合并&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git rebase/merge&lt;/code&gt;&lt;br /&gt;
 &lt;code&gt;rebase&lt;/code&gt;历史纪录更简洁 &lt;a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing"&gt;变基&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id="git-工具"&gt;&lt;span class="header-section-number"&gt;3&lt;/span&gt; Git 工具&lt;/h1&gt;
+&lt;h1 id="git-工具"&gt;Git 工具&lt;/h1&gt;
 &lt;p&gt;引用日志&lt;/p&gt;
-&lt;p&gt;查看分支引用的历史纪录&lt;br /&gt;
-&lt;code&gt;git reflog&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;查看分支引用的历史纪录&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git reflog&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;提交区间&lt;/p&gt;
 &lt;p&gt;双点语法,查看后者引用中特定的提交&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git log [ref name1]..[ref name2]&lt;/code&gt;&lt;/p&gt;
@@ -997,7 +1589,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;&lt;code&gt;git log refA refB ^refC == git log refA refB --not refC&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;三点语法,查看两引用的差异提交&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git log [ref name1]...[ref name2]&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id="储藏与清理"&gt;&lt;span class="header-section-number"&gt;3.1&lt;/span&gt; 储藏与清理&lt;/h2&gt;
+&lt;h2 id="储藏与清理"&gt;储藏与清理&lt;/h2&gt;
 &lt;p&gt;储藏工作空间&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git stash save&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;查看储藏列表&lt;/p&gt;
@@ -1018,7 +1610,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;&lt;code&gt;git clean&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;移除所用文件并储藏&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git stash --all&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id="重写历史"&gt;&lt;span class="header-section-number"&gt;3.2&lt;/span&gt; 重写历史&lt;/h2&gt;
+&lt;h2 id="重写历史"&gt;重写历史&lt;/h2&gt;
 &lt;p&gt;修改最后一次提交&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git commit --amend&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;交互式修改ref开始的所有提交&lt;/p&gt;
@@ -1027,7 +1619,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;&lt;code&gt;git filter-branch --tree-filter [command] [ref]&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;切换根目录&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git filter-branch --subdirectory-filter [directory name] [ref]&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id="重置对比"&gt;&lt;span class="header-section-number"&gt;3.3&lt;/span&gt; 重置对比&lt;/h2&gt;
+&lt;h2 id="重置对比"&gt;重置对比&lt;/h2&gt;
 &lt;p&gt;相反操作操作提交指针&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git reset --soft HEAD~  |  git commit&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;相反操作暂存区&lt;/p&gt;
@@ -1040,7 +1632,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;&lt;code&gt;git checkout [branch name]&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;丢弃文件修改 &lt;a href="https://github.com/geeeeeeeeek/git-recipes/wiki/5.2-%E4%BB%A3%E7%A0%81%E5%9B%9E%E6%BB%9A%EF%BC%9AReset%E3%80%81Checkout%E3%80%81Revert-%E7%9A%84%E9%80%89%E6%8B%A9"&gt;reset,checkout,revert&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git checkout -- [file name]&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id="子模块"&gt;&lt;span class="header-section-number"&gt;3.4&lt;/span&gt; 子模块&lt;/h2&gt;
+&lt;h2 id="子模块"&gt;子模块&lt;/h2&gt;
 &lt;p&gt;添加子模块&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git submodule add  [url]&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;抓取后初始化模块&lt;/p&gt;
@@ -1057,13 +1649,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;&lt;code&gt;git submodule foreach [command]&lt;/code&gt;&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</content><category term="Git"></category></entry><entry><title>Iptables Firewall</title><link href="https://cnewbie.github.io/blog/2017/iptables-firewall/" rel="alternate"></link><published>2017-06-30T00:00:00+08:00</published><updated>2018-07-16T00:00:00+08:00</updated><author><name>cnewbie</name></author><id>tag:cnewbie.github.io,2017-06-30:/blog/2017/iptables-firewall/</id><summary type="html">Iptables 配置</summary><content type="html">&lt;!DOCTYPE html&gt;
+</content><category term="Git"></category><category term="Linux"></category></entry><entry><title>Iptables</title><link href="https://cnewbie.github.io/blog/2017/iptables-firewall/" rel="alternate"></link><published>2017-06-30T00:00:00+08:00</published><updated>2018-07-16T00:00:00+08:00</updated><author><name>cnewbie</name></author><id>tag:cnewbie.github.io,2017-06-30:/blog/2017/iptables-firewall/</id><summary type="html">Iptables 防火墙配置</summary><content type="html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang=""&gt;
 &lt;head&gt;
   &lt;meta charset="utf-8" /&gt;
   &lt;meta name="generator" content="pandoc" /&gt;
   &lt;meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" /&gt;
-  &lt;title&gt;Iptables 防火墙配置&lt;/title&gt;
+  &lt;title&gt;Untitled&lt;/title&gt;
   &lt;style type="text/css"&gt;
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -1073,7 +1665,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   &lt;style type="text/css"&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -1086,13 +1678,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -1140,26 +1730,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   &lt;![endif]--&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;header&gt;
-&lt;h1 class="title"&gt;Iptables 防火墙配置&lt;/h1&gt;
-&lt;/header&gt;
 &lt;nav id="TOC"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#filternatmangle-规则表"&gt;&lt;span class="toc-section-number"&gt;1&lt;/span&gt; filter,nat,mangle 规则表&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#filter表"&gt;&lt;span class="toc-section-number"&gt;1.1&lt;/span&gt; filter表&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#nat表"&gt;&lt;span class="toc-section-number"&gt;1.2&lt;/span&gt; nat表&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#mangle表"&gt;&lt;span class="toc-section-number"&gt;1.3&lt;/span&gt; mangle表&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#raw表"&gt;&lt;span class="toc-section-number"&gt;1.4&lt;/span&gt; raw表&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#filternatmangle-规则表"&gt;filter,nat,mangle 规则表&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#filter表"&gt;filter表&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#nat表"&gt;nat表&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#mangle表"&gt;mangle表&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#raw表"&gt;raw表&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#规则链和规则"&gt;&lt;span class="toc-section-number"&gt;2&lt;/span&gt; 规则链和规则&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#iptables编写规则"&gt;&lt;span class="toc-section-number"&gt;3&lt;/span&gt; iptables编写规则&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#iptables常用实例备查"&gt;&lt;span class="toc-section-number"&gt;4&lt;/span&gt; iptables常用实例备查&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#引用"&gt;&lt;span class="toc-section-number"&gt;5&lt;/span&gt; 引用&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#规则链和规则"&gt;规则链和规则&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#iptables编写规则"&gt;iptables编写规则&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#iptables常用实例备查"&gt;iptables常用实例备查&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#引用"&gt;引用&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/nav&gt;
 &lt;hr /&gt;
-&lt;h1 id="filternatmangle-规则表"&gt;&lt;span class="header-section-number"&gt;1&lt;/span&gt; filter,nat,mangle 规则表&lt;/h1&gt;
-&lt;h2 id="filter表"&gt;&lt;span class="header-section-number"&gt;1.1&lt;/span&gt; filter表&lt;/h2&gt;
+&lt;h1 id="filternatmangle-规则表"&gt;filter,nat,mangle 规则表&lt;/h1&gt;
+&lt;h2 id="filter表"&gt;filter表&lt;/h2&gt;
 &lt;p&gt;数据包过滤,根据规则决定是否放行数据包（DROP,ACCEPT,REJECT,LOG）&lt;/p&gt;
 &lt;p&gt;三条规则链&lt;/p&gt;
 &lt;ul&gt;
@@ -1167,7 +1754,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;li&gt;FORWARD 不是本地产生且负责转发的包&lt;/li&gt;
 &lt;li&gt;OUTPUT 本地产生的包&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="nat表"&gt;&lt;span class="header-section-number"&gt;1.2&lt;/span&gt; nat表&lt;/h2&gt;
+&lt;h2 id="nat表"&gt;nat表&lt;/h2&gt;
 &lt;p&gt;修改数据包ip地址、端口等信息（SNAT,DNAT,MASQUERADE,REDIRECT）&lt;/p&gt;
 &lt;p&gt;三条规则链&lt;/p&gt;
 &lt;ul&gt;
@@ -1175,10 +1762,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;li&gt;OUTPUT 改变本地产生包的目的地址&lt;/li&gt;
 &lt;li&gt;POSTROUTING 改变发出数据包的源地址&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="mangle表"&gt;&lt;span class="header-section-number"&gt;1.3&lt;/span&gt; mangle表&lt;/h2&gt;
+&lt;h2 id="mangle表"&gt;mangle表&lt;/h2&gt;
 &lt;p&gt;修改数据包的TOS，TTL及数据包的Mark&lt;/p&gt;
 &lt;p&gt;五个规则链 PREROUTING，POSTROUTING，INPUT，OUTPUT，FORWARD&lt;/p&gt;
-&lt;h2 id="raw表"&gt;&lt;span class="header-section-number"&gt;1.4&lt;/span&gt; raw表&lt;/h2&gt;
+&lt;h2 id="raw表"&gt;raw表&lt;/h2&gt;
 &lt;p&gt;决定数据包是否被状态跟踪机制处理&lt;/p&gt;
 &lt;p&gt;两条规则链 OUTPUT,PREROUTING&lt;/p&gt;
 &lt;p&gt;四种状态&lt;/p&gt;
@@ -1188,7 +1775,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;li&gt;ESTABLISHED 发送后接到应答的数据包&lt;/li&gt;
 &lt;li&gt;INVALID 无法识别的数据包&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id="规则链和规则"&gt;&lt;span class="header-section-number"&gt;2&lt;/span&gt; 规则链和规则&lt;/h1&gt;
+&lt;h1 id="规则链和规则"&gt;规则链和规则&lt;/h1&gt;
 &lt;p&gt;在处理各种数据包时，根据防火墙规则的不同时机，iptables供涉及5种默认规则链：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;INPUT 当接收到防火墙本机地址的数据包（入站）时,应用此链中的规则。。&lt;/li&gt;
@@ -1223,7 +1810,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;figure&gt;
 &lt;img src="/images/2017-packetflow.jpg" alt="数据包流程" /&gt;&lt;figcaption&gt;数据包流程&lt;/figcaption&gt;
 &lt;/figure&gt;
-&lt;h1 id="iptables编写规则"&gt;&lt;span class="header-section-number"&gt;3&lt;/span&gt; iptables编写规则&lt;/h1&gt;
+&lt;h1 id="iptables编写规则"&gt;iptables编写规则&lt;/h1&gt;
 &lt;figure&gt;
 &lt;img src="/images/2017-iptables.png" alt="命令格式" /&gt;&lt;figcaption&gt;命令格式&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -1252,7 +1839,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;&amp;lt;-j 动作&amp;gt;：处理数据包的动作，包括ACCEPT、DROP、REJECT等&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id="iptables常用实例备查"&gt;&lt;span class="header-section-number"&gt;4&lt;/span&gt; iptables常用实例备查&lt;/h1&gt;
+&lt;h1 id="iptables常用实例备查"&gt;iptables常用实例备查&lt;/h1&gt;
 &lt;div class="sourceCode" id="cb2"&gt;&lt;pre class="sourceCode bash"&gt;&lt;code class="sourceCode bash"&gt;&lt;a class="sourceLine" id="cb2-1" data-line-number="1"&gt;&lt;span class="ex"&gt;iptables&lt;/span&gt; -P INPUT DROP&lt;/a&gt;
 &lt;a class="sourceLine" id="cb2-2" data-line-number="2"&gt;&lt;span class="ex"&gt;iptables&lt;/span&gt; -P FORWARD ACCEPT&lt;/a&gt;
 &lt;a class="sourceLine" id="cb2-3" data-line-number="3"&gt;&lt;span class="ex"&gt;iptables&lt;/span&gt; -P OUTPUT ACCEPT&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -1274,7 +1861,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;Dos&lt;/p&gt;
 &lt;div class="sourceCode" id="cb4"&gt;&lt;pre class="sourceCode bash"&gt;&lt;code class="sourceCode bash"&gt;&lt;a class="sourceLine" id="cb4-1" data-line-number="1"&gt;&lt;span class="ex"&gt;iptables&lt;/span&gt; -N syn-flood   (如果您的防火墙默认配置有“ :syn-flood - [0:0] ”则不许要该项，因为重复了)&lt;/a&gt;
 &lt;a class="sourceLine" id="cb4-2" data-line-number="2"&gt;&lt;span class="ex"&gt;iptables&lt;/span&gt; -A INPUT -p tcp --syn -j syn-flood&lt;/a&gt;
-&lt;a class="sourceLine" id="cb4-3" data-line-number="3"&gt;&lt;span class="ex"&gt;iptables&lt;/span&gt; -I syn-flood -p tcp -m limit --limit 2/s --limit-burst 5 -j RETURN   &lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-3" data-line-number="3"&gt;&lt;span class="ex"&gt;iptables&lt;/span&gt; -I syn-flood -p tcp -m limit --limit 2/s --limit-burst 5 -j RETURN&lt;/a&gt;
 &lt;a class="sourceLine" id="cb4-4" data-line-number="4"&gt;&lt;span class="ex"&gt;iptables&lt;/span&gt; -A syn-flood -j REJECT&lt;/a&gt;
 &lt;a class="sourceLine" id="cb4-5" data-line-number="5"&gt;&lt;span class="co"&gt;# 防止DOS太多连接进来,可以允许外网网卡每个IP最多15个初始连接,超过的丢弃&lt;/span&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb4-6" data-line-number="6"&gt;&lt;/a&gt;
@@ -1282,21 +1869,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class="sourceLine" id="cb4-8" data-line-number="8"&gt;&lt;span class="ex"&gt;iptables&lt;/span&gt; -A INPUT -p tcp --syn -i eth0 --dport 80 -m connlimit --connlimit-above 20 --connlimit-mask 24 -j DROP&lt;/a&gt;
 &lt;a class="sourceLine" id="cb4-9" data-line-number="9"&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb4-10" data-line-number="10"&gt;&lt;span class="co"&gt;#用Iptables抵御DDOS (参数与上相同)&lt;/span&gt;&lt;/a&gt;
-&lt;a class="sourceLine" id="cb4-11" data-line-number="11"&gt;&lt;span class="ex"&gt;iptables&lt;/span&gt; -A INPUT -p tcp --syn -m limit --limit 5/s --limit-burst 10 -j ACCEPT  &lt;/a&gt;
+&lt;a class="sourceLine" id="cb4-11" data-line-number="11"&gt;&lt;span class="ex"&gt;iptables&lt;/span&gt; -A INPUT -p tcp --syn -m limit --limit 5/s --limit-burst 10 -j ACCEPT&lt;/a&gt;
 &lt;a class="sourceLine" id="cb4-12" data-line-number="12"&gt;&lt;span class="ex"&gt;iptables&lt;/span&gt; -A FORWARD -p tcp --syn -m limit --limit 1/s -j ACCEPT&lt;/a&gt;
 &lt;a class="sourceLine" id="cb4-13" data-line-number="13"&gt;&lt;span class="ex"&gt;iptables&lt;/span&gt; -A FORWARD -p icmp -m limit --limit 2/s --limit-burst 10 -j ACCEPT&lt;/a&gt;
 &lt;a class="sourceLine" id="cb4-14" data-line-number="14"&gt;&lt;span class="ex"&gt;iptables&lt;/span&gt; -A INPUT -p icmp --icmp-type 0 -s ! 172.29.73.0/24 -j DROP&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id="引用"&gt;&lt;span class="header-section-number"&gt;5&lt;/span&gt; 引用&lt;/h1&gt;
+&lt;h1 id="引用"&gt;引用&lt;/h1&gt;
 &lt;p&gt;&lt;a href="http://seanlook.com/2014/02/23/iptables-understand/"&gt;Seanlook&lt;/a&gt;&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</content><category term="iptables"></category><category term="linux"></category></entry><entry><title>Introduction of Genetic Algorithm</title><link href="https://cnewbie.github.io/blog/2017/introduction-of-genetic-algorithm-en/" rel="alternate"></link><published>2017-04-12T00:00:00+08:00</published><updated>2018-07-05T00:00:00+08:00</updated><author><name>cnewbie</name></author><id>tag:cnewbie.github.io,2017-04-12:/blog/2017/introduction-of-genetic-algorithm-en/</id><summary type="html">Introduction of the Basic Genetic Algorithm</summary><content type="html">&lt;!DOCTYPE html&gt;
+</content><category term="Iptables"></category><category term="Linux"></category></entry><entry><title>Introduction of Genetic Algorithm</title><link href="https://cnewbie.github.io/blog/2017/gentic-algorithm-en/" rel="alternate"></link><published>2017-04-12T00:00:00+08:00</published><updated>2018-07-05T00:00:00+08:00</updated><author><name>cnewbie</name></author><id>tag:cnewbie.github.io,2017-04-12:/blog/2017/gentic-algorithm-en/</id><summary type="html">Introduction of the Basic Genetic Algorithm</summary><content type="html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang=""&gt;
 &lt;head&gt;
   &lt;meta charset="utf-8" /&gt;
   &lt;meta name="generator" content="pandoc" /&gt;
   &lt;meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" /&gt;
-  &lt;title&gt;Introduction of Genetic Algorithm&lt;/title&gt;
+  &lt;title&gt;Untitled&lt;/title&gt;
   &lt;style type="text/css"&gt;
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -1308,24 +1895,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   &lt;![endif]--&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;header&gt;
-&lt;h1 class="title"&gt;Introduction of Genetic Algorithm&lt;/h1&gt;
-&lt;/header&gt;
 &lt;nav id="TOC"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#outline-of-ga"&gt;&lt;span class="toc-section-number"&gt;1&lt;/span&gt; Outline of GA&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#selection"&gt;&lt;span class="toc-section-number"&gt;2&lt;/span&gt; Selection&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#encoding"&gt;&lt;span class="toc-section-number"&gt;3&lt;/span&gt; Encoding&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#crossover-and-mutation"&gt;&lt;span class="toc-section-number"&gt;4&lt;/span&gt; Crossover and Mutation&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#binary-encoding"&gt;&lt;span class="toc-section-number"&gt;4.1&lt;/span&gt; Binary Encoding&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#value-encoding"&gt;&lt;span class="toc-section-number"&gt;4.2&lt;/span&gt; Value Encoding&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#tree-encoding"&gt;&lt;span class="toc-section-number"&gt;4.3&lt;/span&gt; Tree Encoding&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#outline-of-ga"&gt;Outline of GA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#selection"&gt;Selection&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#encoding"&gt;Encoding&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#crossover-and-mutation"&gt;Crossover and Mutation&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#binary-encoding"&gt;Binary Encoding&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#value-encoding"&gt;Value Encoding&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#tree-encoding"&gt;Tree Encoding&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#references"&gt;&lt;span class="toc-section-number"&gt;5&lt;/span&gt; References&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#references"&gt;References&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/nav&gt;
 &lt;hr /&gt;
-&lt;h1 id="outline-of-ga"&gt;&lt;span class="header-section-number"&gt;1&lt;/span&gt; Outline of GA&lt;/h1&gt;
+&lt;h1 id="outline-of-ga"&gt;Outline of GA&lt;/h1&gt;
 &lt;p&gt;Outline of the Basic Genetic Algorithm&lt;/p&gt;
 &lt;ol type="1"&gt;
 &lt;li&gt;[Start] Generate random population of n chromosomes (suitable solutions for the problem)&lt;/li&gt;
@@ -1341,7 +1925,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;li&gt;[Test] If the end condition is satisfied, stop, and return the best solution in current population&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;[Loop] Go to step 2&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h1 id="selection"&gt;&lt;span class="header-section-number"&gt;2&lt;/span&gt; Selection&lt;/h1&gt;
+&lt;h1 id="selection"&gt;Selection&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;Roulette Wheel Selection&lt;/li&gt;
 &lt;/ul&gt;
@@ -1358,7 +1942,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;li&gt;Elitism&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Elitism is name of method, which first copies the best chromosome (or a few best chromosomes) to new population. The rest is done in classical way. Elitism can very rapidly increase performance of GA, because it prevents losing the best found solution.&lt;/p&gt;
-&lt;h1 id="encoding"&gt;&lt;span class="header-section-number"&gt;3&lt;/span&gt; Encoding&lt;/h1&gt;
+&lt;h1 id="encoding"&gt;Encoding&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;Binary Encoding&lt;/li&gt;
 &lt;/ul&gt;
@@ -1377,8 +1961,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;/ul&gt;
 &lt;p&gt;Tree encoding is used mainly for evolving programs or expressions, for genetic programming.&lt;/p&gt;
 &lt;p&gt;Tree encoding is good for evolving programs. Programing language LISP is often used to this, because programs in it are represented in this form and can be easily parsed as a tree, so the crossover and mutation can be done relatively easily.&lt;/p&gt;
-&lt;h1 id="crossover-and-mutation"&gt;&lt;span class="header-section-number"&gt;4&lt;/span&gt; Crossover and Mutation&lt;/h1&gt;
-&lt;h2 id="binary-encoding"&gt;&lt;span class="header-section-number"&gt;4.1&lt;/span&gt; Binary Encoding&lt;/h2&gt;
+&lt;h1 id="crossover-and-mutation"&gt;Crossover and Mutation&lt;/h1&gt;
+&lt;h2 id="binary-encoding"&gt;Binary Encoding&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;Crossover&lt;/p&gt;
 &lt;ul&gt;
@@ -1399,7 +1983,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;li&gt;Mutation&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Order changing - two numbers are selected and exchanged&lt;/p&gt;
-&lt;h2 id="value-encoding"&gt;&lt;span class="header-section-number"&gt;4.2&lt;/span&gt; Value Encoding&lt;/h2&gt;
+&lt;h2 id="value-encoding"&gt;Value Encoding&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Crossover&lt;/li&gt;
 &lt;/ul&gt;
@@ -1408,7 +1992,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;li&gt;Mutation&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Adding a small number (for real value encoding) - to selected values is added (or subtracted) a small number&lt;/p&gt;
-&lt;h2 id="tree-encoding"&gt;&lt;span class="header-section-number"&gt;4.3&lt;/span&gt; Tree Encoding&lt;/h2&gt;
+&lt;h2 id="tree-encoding"&gt;Tree Encoding&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Crossover&lt;/li&gt;
 &lt;/ul&gt;
@@ -1417,7 +2001,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;li&gt;Mutation&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Changing operator, number - selected nodes are changed&lt;/p&gt;
-&lt;h1 id="references"&gt;&lt;span class="header-section-number"&gt;5&lt;/span&gt; References&lt;/h1&gt;
+&lt;h1 id="references"&gt;References&lt;/h1&gt;
 &lt;p&gt;&lt;a href="http://www.cnblogs.com/biaoyu/archive/2012/10/02/2710267.html"&gt;Traveling Salesman Problem&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.obitko.com/tutorials/genetic-algorithms/"&gt;Genetic Algorithm&lt;/a&gt;&lt;/p&gt;
 &lt;/body&gt;
@@ -1428,7 +2012,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   &lt;meta charset="utf-8" /&gt;
   &lt;meta name="generator" content="pandoc" /&gt;
   &lt;meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" /&gt;
-  &lt;title&gt;Git Pro Doc&lt;/title&gt;
+  &lt;title&gt;Untitled&lt;/title&gt;
   &lt;style type="text/css"&gt;
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -1438,7 +2022,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   &lt;style type="text/css"&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -1451,13 +2035,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -1505,45 +2087,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   &lt;![endif]--&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;header&gt;
-&lt;h1 class="title"&gt;Git Pro Doc&lt;/h1&gt;
-&lt;/header&gt;
 &lt;nav id="TOC"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#git-basics"&gt;&lt;span class="toc-section-number"&gt;1&lt;/span&gt; Git Basics&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#recording-changes-to-the-repository"&gt;&lt;span class="toc-section-number"&gt;1.1&lt;/span&gt; Recording Changes to the Repository&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#viewing-the-commit-history"&gt;&lt;span class="toc-section-number"&gt;1.2&lt;/span&gt; Viewing the Commit History&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#undoing-things"&gt;&lt;span class="toc-section-number"&gt;1.3&lt;/span&gt; Undoing Things&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#working-with-remotes"&gt;&lt;span class="toc-section-number"&gt;1.4&lt;/span&gt; Working with Remotes&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#tagging"&gt;&lt;span class="toc-section-number"&gt;1.5&lt;/span&gt; Tagging&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#git-aliases"&gt;&lt;span class="toc-section-number"&gt;1.6&lt;/span&gt; Git Aliases&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#git-basics"&gt;Git Basics&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#getting-a-git-repository"&gt;Getting a Git Repository&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#recording-changes-to-the-repository"&gt;Recording Changes to the Repository&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#viewing-the-commit-history"&gt;Viewing the Commit History&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#undoing-things"&gt;Undoing Things&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#working-with-remotes"&gt;Working with Remotes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#tagging"&gt;Tagging&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#git-aliases"&gt;Git Aliases&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#git-branching"&gt;&lt;span class="toc-section-number"&gt;2&lt;/span&gt; Git Branching&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#basic-branching-and-merging"&gt;&lt;span class="toc-section-number"&gt;2.1&lt;/span&gt; Basic Branching and Merging&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#branch-management"&gt;&lt;span class="toc-section-number"&gt;2.2&lt;/span&gt; Branch Management&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#branching-workflows"&gt;&lt;span class="toc-section-number"&gt;2.3&lt;/span&gt; Branching Workflows&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#remote-branches"&gt;&lt;span class="toc-section-number"&gt;2.4&lt;/span&gt; Remote Branches&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#rebasing"&gt;&lt;span class="toc-section-number"&gt;2.5&lt;/span&gt; Rebasing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#git-branching"&gt;Git Branching&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#branches-in-a-nutshell"&gt;Branches in a Nutshell&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#basic-branching-and-merging"&gt;Basic Branching and Merging&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#branch-management"&gt;Branch Management&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#branching-workflows"&gt;Branching Workflows&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#remote-branches"&gt;Remote Branches&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#rebasing"&gt;Rebasing&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#distributed-git"&gt;&lt;span class="toc-section-number"&gt;3&lt;/span&gt; Distributed Git&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#distributed-workflows"&gt;&lt;span class="toc-section-number"&gt;3.1&lt;/span&gt; Distributed Workflows&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#distributed-git"&gt;Distributed Git&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#distributed-workflows"&gt;Distributed Workflows&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#git-tools"&gt;&lt;span class="toc-section-number"&gt;4&lt;/span&gt; Git Tools&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#revision-selection"&gt;&lt;span class="toc-section-number"&gt;4.1&lt;/span&gt; Revision Selection&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#commit-ranges"&gt;&lt;span class="toc-section-number"&gt;4.2&lt;/span&gt; Commit Ranges&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#git-tools"&gt;Git Tools&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#revision-selection"&gt;Revision Selection&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#commit-ranges"&gt;Commit Ranges&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#reference"&gt;&lt;span class="toc-section-number"&gt;5&lt;/span&gt; Reference&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#reference"&gt;Reference&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/nav&gt;
 &lt;hr /&gt;
-&lt;h1 id="git-basics"&gt;&lt;span class="header-section-number"&gt;1&lt;/span&gt; Git Basics&lt;/h1&gt;
-&lt;p&gt;This chapter covers every basic command.&lt;br /&gt;
-## Getting a Git Repository&lt;/p&gt;
+&lt;h1 id="git-basics"&gt;Git Basics&lt;/h1&gt;
+&lt;p&gt;This chapter covers every basic command.&lt;/p&gt;
+&lt;h2 id="getting-a-git-repository"&gt;Getting a Git Repository&lt;/h2&gt;
 &lt;p&gt;Initialzing a Repository in an existing directory&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git init&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Cloning an existing repository&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git clone [url]&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id="recording-changes-to-the-repository"&gt;&lt;span class="header-section-number"&gt;1.1&lt;/span&gt; Recording Changes to the Repository&lt;/h2&gt;
+&lt;h2 id="recording-changes-to-the-repository"&gt;Recording Changes to the Repository&lt;/h2&gt;
 &lt;p&gt;Checking the Status of Yours Files&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git status&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Tracking New Files&lt;/p&gt;
@@ -1553,13 +2134,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;Short Status&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git status -s&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Ignoring files&lt;/p&gt;
-&lt;p&gt;.gitignore file save file patterns to match them.&lt;/p&gt;
-&lt;p&gt;The rules for the patterns you can put in the .gitignore file are as follows:&lt;br /&gt;
-- Blank lines or lines starting with # are ignored.&lt;br /&gt;
-- Standard glob patterns work.&lt;br /&gt;
-- You can start patterns with a forward slash (/) to avoid recursivity.&lt;br /&gt;
-- You can end patterns with a forward slash (/) to specify a directory.&lt;br /&gt;
-- You can negate a pattern by starting it with an exclamation point (!).&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;.gitignore&lt;/code&gt; file save file patterns to match them.&lt;/p&gt;
+&lt;p&gt;The rules for the patterns you can put in the .gitignore file are as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Blank lines or lines starting with # are ignored.&lt;/li&gt;
+&lt;li&gt;Standard glob patterns work.&lt;/li&gt;
+&lt;li&gt;You can start patterns with a forward slash (/) to avoid recursivity.&lt;/li&gt;
+&lt;li&gt;You can end patterns with a forward slash (/) to specify a directory.&lt;/li&gt;
+&lt;li&gt;You can negate a pattern by starting it with an exclamation point (!).&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;Viewing Your Staged and Unstaged Changes&lt;/p&gt;
 &lt;div class="sourceCode" id="cb1"&gt;&lt;pre class="sourceCode bash"&gt;&lt;code class="sourceCode bash"&gt;&lt;a class="sourceLine" id="cb1-1" data-line-number="1"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; status &lt;span class="kw"&gt;&amp;amp;&lt;/span&gt; &lt;span class="fu"&gt;git&lt;/span&gt; diff&lt;/a&gt;
 &lt;a class="sourceLine" id="cb1-2" data-line-number="2"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; diff --staged  # see what you&lt;span class="st"&gt;&amp;#39;ve staged that will go into your next commit.&lt;/span&gt;&lt;/a&gt;
@@ -1574,7 +2157,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;another userful thing you may want to do is to keep the file in your tree but remove it from your staging area. To do this ,use the &lt;code&gt;--cached&lt;/code&gt; option.&lt;/p&gt;
 &lt;p&gt;Moving Files&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git mv [oldfilename] [newfilename]&lt;/code&gt; = &lt;code&gt;mv [oldfilename] [newfilename]&lt;/code&gt; + &lt;code&gt;git rm [newfilename]&lt;/code&gt; + &lt;code&gt;git add [newfilename]&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id="viewing-the-commit-history"&gt;&lt;span class="header-section-number"&gt;1.2&lt;/span&gt; Viewing the Commit History&lt;/h2&gt;
+&lt;h2 id="viewing-the-commit-history"&gt;Viewing the Commit History&lt;/h2&gt;
 &lt;p&gt;By default,with no arguments,&lt;code&gt;git log&lt;/code&gt; lists the commits made in that repository in reverse chronological order - that is ,the most recent commits show up first.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git log -p -[number]&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;shows the difference introduced in each commit.&lt;/p&gt;
@@ -1586,15 +2169,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;Limiting log Output&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git log -Sfunction_name&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History##limit_options"&gt;Options to limit the output of git log&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id="undoing-things"&gt;&lt;span class="header-section-number"&gt;1.3&lt;/span&gt; Undoing Things&lt;/h2&gt;
-&lt;p&gt;One of the common undos takes place when you commit too early and possibly forget to add some files or you mess up your commit message.if you want to try that commit again,you can run commit with the –amend ooption.&lt;/p&gt;
+&lt;h2 id="undoing-things"&gt;Undoing Things&lt;/h2&gt;
+&lt;p&gt;One of the common undos takes place when you commit too early and possibly forget to add some files or you mess up your commit message.if you want to try that commit again,you can run commit with the &lt;code&gt;--amend&lt;/code&gt; ooption.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git commit --amend&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;This command takes your staging area and uses it for the commit.&lt;/p&gt;
 &lt;p&gt;Unstaging a Staged File&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git reset HEAD [filename]&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Unmodifying a Modified File&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git checkout -- [filename]&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id="working-with-remotes"&gt;&lt;span class="header-section-number"&gt;1.4&lt;/span&gt; Working with Remotes&lt;/h2&gt;
+&lt;h2 id="working-with-remotes"&gt;Working with Remotes&lt;/h2&gt;
 &lt;p&gt;To be able to collaborate on any Git project,you need to know how to manage your remote repositories.&lt;/p&gt;
 &lt;p&gt;Showing Your Remotes&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git remote -v&lt;/code&gt; shows you the URLs that git has stored for the shortname to be used when reading and writing to that remote.&lt;/p&gt;
@@ -1609,14 +2192,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;Removing and Renaming Remotes&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git remote rename [old-name] [new-name]&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git remote remove/rm [remote-name]&lt;/code&gt; remove a remote&lt;/p&gt;
-&lt;h2 id="tagging"&gt;&lt;span class="header-section-number"&gt;1.5&lt;/span&gt; Tagging&lt;/h2&gt;
+&lt;h2 id="tagging"&gt;Tagging&lt;/h2&gt;
 &lt;p&gt;Git has the ability to tag specific points in history as being important.&lt;br /&gt;
 Listing Your Tags&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git tag&lt;/code&gt; lists the tags in alphabetical order&lt;/p&gt;
 &lt;p&gt;Creating Tags&lt;br /&gt;
 Git uses two main types of tags:lightweight and annotated.&lt;br /&gt;
-A loghtweight tag is very much like a branch that doesn’t change - it’s just a pointer to a specific commit.&lt;br /&gt;
-Annotated tags,however,are stored as full objects in the Git database.They’re checksummed;contain the tagger name,email,and date;have a tagging message; and can be signed and verified with GNU Privacy Guard (GPG).&lt;/p&gt;
+A loghtweight tag is very much like a branch that doesn’t change - it’s just a pointer to a specific commit.&lt;/p&gt;
+&lt;p&gt;Annotated tags,however,are stored as full objects in the Git database.They’re checksummed;contain the tagger name,email,and date;have a tagging message; and can be signed and verified with GNU Privacy Guard (GPG).&lt;/p&gt;
 &lt;p&gt;Annotated Tags&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git tag -a [tagname] -m &amp;quot;message&amp;quot;&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Lightweight Tags&lt;/p&gt;
@@ -1626,15 +2209,15 @@ Annotated tags,however,are stored as full objects in the Git database.They’re 
 &lt;p&gt;Sharing Tags&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git push orign [tagname]&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git push orign --tags&lt;/code&gt; transfer all of your tags to the remote server that are not already there.&lt;/p&gt;
-&lt;p&gt;Checking out Tags&lt;br /&gt;
-git checkout -b [branchname] [tagname]&lt;/p&gt;
-&lt;h2 id="git-aliases"&gt;&lt;span class="header-section-number"&gt;1.6&lt;/span&gt; Git Aliases&lt;/h2&gt;
+&lt;p&gt;Checking out Tags&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git checkout -b [branchname] [tagname]&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id="git-aliases"&gt;Git Aliases&lt;/h2&gt;
 &lt;p&gt;If you don’t want to type the entire text of each of the Git commands,you can easily set up an alias for each command using &lt;code&gt;git config&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git config --global/local alias.[aliasname] [command]&lt;/code&gt;&lt;/p&gt;
-&lt;h1 id="git-branching"&gt;&lt;span class="header-section-number"&gt;2&lt;/span&gt; Git Branching&lt;/h1&gt;
-&lt;p&gt;Branching means you diberge from the main line of development and continue to do work without messing with that main line.&lt;br /&gt;
-## Branches in a Nutshell&lt;br /&gt;
-When you make a commit, Git stores a commit object that contains a pointer to the snapshot of the content you staged.&lt;/p&gt;
+&lt;h1 id="git-branching"&gt;Git Branching&lt;/h1&gt;
+&lt;p&gt;Branching means you diberge from the main line of development and continue to do work without messing with that main line.&lt;/p&gt;
+&lt;h2 id="branches-in-a-nutshell"&gt;Branches in a Nutshell&lt;/h2&gt;
+&lt;p&gt;When you make a commit, Git stores a commit object that contains a pointer to the snapshot of the content you staged.&lt;/p&gt;
 &lt;p&gt;Creating a New Branch&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git branch [branchname]&lt;/code&gt; create a new branch called testing&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git log --oneline --decorate&lt;/code&gt; shows you where rhe branch pointers are pointing.&lt;/p&gt;
@@ -1642,10 +2225,10 @@ When you make a commit, Git stores a commit object that contains a pointer to th
 &lt;p&gt;&lt;code&gt;git checkout [branchname]&lt;/code&gt; this moves &lt;code&gt;HEAD&lt;/code&gt; to point to the branch.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git log --oneline --decorate --graph --all&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell#divergent_history"&gt;Divergent history&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id="basic-branching-and-merging"&gt;&lt;span class="header-section-number"&gt;2.1&lt;/span&gt; Basic Branching and Merging&lt;/h2&gt;
+&lt;h2 id="basic-branching-and-merging"&gt;Basic Branching and Merging&lt;/h2&gt;
 &lt;p&gt;Basic Branching&lt;/p&gt;
 &lt;div class="sourceCode" id="cb2"&gt;&lt;pre class="sourceCode bash"&gt;&lt;code class="sourceCode bash"&gt;&lt;a class="sourceLine" id="cb2-1" data-line-number="1"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; checkout -b [branchname] switch branch&lt;/a&gt;
-&lt;a class="sourceLine" id="cb2-2" data-line-number="2"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; merge [branchname] merge branch &lt;/a&gt;
+&lt;a class="sourceLine" id="cb2-2" data-line-number="2"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; merge [branchname] merge branch&lt;/a&gt;
 &lt;a class="sourceLine" id="cb2-3" data-line-number="3"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; branch -d [branchname] delete branch&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Basic Merging&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git merge [branchname]&lt;/code&gt;&lt;/p&gt;
@@ -1654,15 +2237,15 @@ Occasionally,this process doesn’t go smoothly.If you changed the same part of 
 &lt;p&gt;If you want to use a graphical tool to resolve these issues, you can run &lt;code&gt;git mergetool&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git mergetool&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging#_advanced_merging"&gt;Advanced Merging&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id="branch-management"&gt;&lt;span class="header-section-number"&gt;2.2&lt;/span&gt; Branch Management&lt;/h2&gt;
+&lt;h2 id="branch-management"&gt;Branch Management&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;git branch&lt;/code&gt; command does more than just create and detele branches.&lt;/p&gt;
 &lt;div class="sourceCode" id="cb3"&gt;&lt;pre class="sourceCode bash"&gt;&lt;code class="sourceCode bash"&gt;&lt;a class="sourceLine" id="cb3-1" data-line-number="1"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; branch -v &lt;span class="co"&gt;#shows the last commit on each branch.&lt;/span&gt;&lt;/a&gt;
-&lt;a class="sourceLine" id="cb3-2" data-line-number="2"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; branch --merged/nomerged &lt;span class="co"&gt;# filter this list to branches &lt;/span&gt;&lt;/a&gt;
+&lt;a class="sourceLine" id="cb3-2" data-line-number="2"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; branch --merged/nomerged &lt;span class="co"&gt;# filter this list to branches&lt;/span&gt;&lt;/a&gt;
 &lt;a class="sourceLine" id="cb3-3" data-line-number="3"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; branch -d [branchname] &lt;span class="co"&gt;# detele the branch and lose that work.&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id="branching-workflows"&gt;&lt;span class="header-section-number"&gt;2.3&lt;/span&gt; Branching Workflows&lt;/h2&gt;
+&lt;h2 id="branching-workflows"&gt;Branching Workflows&lt;/h2&gt;
 &lt;p&gt;cover some common workflows that this lightweight branching makes possible.&lt;br /&gt;
 &lt;a href="https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows"&gt;Brancheing Workflows&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id="remote-branches"&gt;&lt;span class="header-section-number"&gt;2.4&lt;/span&gt; Remote Branches&lt;/h2&gt;
+&lt;h2 id="remote-branches"&gt;Remote Branches&lt;/h2&gt;
 &lt;p&gt;Remote references are references in your remote repositories,includeing branches,tags,and so on.&lt;br /&gt;
 you can get a full list of remote references explicitly with &lt;code&gt;git ls-remote [remote]&lt;/code&gt; or `git remote show [remote] gor remote branches as well as more information.&lt;/p&gt;
 &lt;p&gt;Pushing&lt;/p&gt;
@@ -1675,14 +2258,14 @@ you can get a full list of remote references explicitly with &lt;code&gt;git ls-
 &lt;p&gt;&lt;code&gt;git checkout --track orgin/[branchname]&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;In fact,this is so common that there’s even a shortcut for that shortcut.if the branch name you’re trying to checkout doesn’t exist add exactly matches a name on only one remote.Git will create a tracking branch for you.&lt;/p&gt;
 &lt;p&gt;If you already have a local brach and want to set it to a remote branch you just pulled down,or want to change the upsteam branch you’re tracking.&lt;/p&gt;
-&lt;div class="sourceCode" id="cb4"&gt;&lt;pre class="sourceCode bash"&gt;&lt;code class="sourceCode bash"&gt;&lt;a class="sourceLine" id="cb4-1" data-line-number="1"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; branch -u origin/[branchname] &lt;/a&gt;
+&lt;div class="sourceCode" id="cb4"&gt;&lt;pre class="sourceCode bash"&gt;&lt;code class="sourceCode bash"&gt;&lt;a class="sourceLine" id="cb4-1" data-line-number="1"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; branch -u origin/[branchname]&lt;/a&gt;
 &lt;a class="sourceLine" id="cb4-2" data-line-number="2"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; branch -vv &lt;span class="co"&gt;# show what tracking branches you have set up.&lt;/span&gt;&lt;/a&gt;
-&lt;a class="sourceLine" id="cb4-3" data-line-number="3"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; fetch --all&lt;span class="kw"&gt;;&lt;/span&gt;&lt;span class="fu"&gt;git&lt;/span&gt; branch -vv &lt;span class="co"&gt;# fetch from all your remotes &lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;a class="sourceLine" id="cb4-3" data-line-number="3"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; fetch --all&lt;span class="kw"&gt;;&lt;/span&gt;&lt;span class="fu"&gt;git&lt;/span&gt; branch -vv &lt;span class="co"&gt;# fetch from all your remotes&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Pulling&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git pull&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Deleting Remote Branches&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git push origin --delete [branchname]&lt;/code&gt; detele remote branch&lt;/p&gt;
-&lt;h2 id="rebasing"&gt;&lt;span class="header-section-number"&gt;2.5&lt;/span&gt; Rebasing&lt;/h2&gt;
+&lt;h2 id="rebasing"&gt;Rebasing&lt;/h2&gt;
 &lt;p&gt;In Git, there are two main ways to integrate changes from one branch into another: the &lt;code&gt;merge&lt;/code&gt; and the &lt;code&gt;rebase&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;The Basic Rebase&lt;/p&gt;
 &lt;p&gt;rebase a branch to master&lt;/p&gt;
@@ -1701,42 +2284,42 @@ Rebasing replays changes from one line of work onto another in the order they we
 &lt;a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing#rbdiag_i"&gt;Figure&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Rebase vs. Merge&lt;br /&gt;
 In general the way to get the best of both worlds is to rebase local changes you’ve made but haven’t shared yet before you puch them in order to clean up your story,but never rebase anything you’ve pushed somewhere.&lt;/p&gt;
-&lt;h1 id="distributed-git"&gt;&lt;span class="header-section-number"&gt;3&lt;/span&gt; Distributed Git&lt;/h1&gt;
+&lt;h1 id="distributed-git"&gt;Distributed Git&lt;/h1&gt;
 &lt;p&gt;Git in a distributed environment as a contributor and an integretor.&lt;/p&gt;
-&lt;h2 id="distributed-workflows"&gt;&lt;span class="header-section-number"&gt;3.1&lt;/span&gt; Distributed Workflows&lt;/h2&gt;
+&lt;h2 id="distributed-workflows"&gt;Distributed Workflows&lt;/h2&gt;
 &lt;p&gt;Integration-Mannger Workflows&lt;br /&gt;
 &lt;a href="https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#wfdiag_b"&gt;Integration-Manager Workflow Figure&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;TODO&lt;/p&gt;
-&lt;h1 id="git-tools"&gt;&lt;span class="header-section-number"&gt;4&lt;/span&gt; Git Tools&lt;/h1&gt;
-&lt;h2 id="revision-selection"&gt;&lt;span class="header-section-number"&gt;4.1&lt;/span&gt; Revision Selection&lt;/h2&gt;
+&lt;h1 id="git-tools"&gt;Git Tools&lt;/h1&gt;
+&lt;h2 id="revision-selection"&gt;Revision Selection&lt;/h2&gt;
 &lt;p&gt;Short SHA-1&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git log --abbrev-commit --pretty=oneline&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git show [shasum]&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id="commit-ranges"&gt;&lt;span class="header-section-number"&gt;4.2&lt;/span&gt; Commit Ranges&lt;/h2&gt;
+&lt;h2 id="commit-ranges"&gt;Commit Ranges&lt;/h2&gt;
 &lt;p&gt;Double Dot&lt;/p&gt;
 &lt;p&gt;This basically asks Git to resolve a range of commits that are reachable from one commit but aren’t reachable from another.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git log master..experiment&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;show a log of just those commits with &lt;code&gt;master..experiment&lt;/code&gt; — that means “all commits reachable from experiment that aren’t reachable from master.&lt;/p&gt;
 &lt;p&gt;Multiple Points&lt;/p&gt;
 &lt;p&gt;Git allows you to do this by using either the ^ character or –not before any reference from which you don’t want to see reachable commits.&lt;/p&gt;
-&lt;div class="sourceCode" id="cb6"&gt;&lt;pre class="sourceCode bash"&gt;&lt;code class="sourceCode bash"&gt;&lt;a class="sourceLine" id="cb6-1" data-line-number="1"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; log refA..refB  &lt;/a&gt;
-&lt;a class="sourceLine" id="cb6-2" data-line-number="2"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; log ^refA refB  &lt;/a&gt;
-&lt;a class="sourceLine" id="cb6-3" data-line-number="3"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; log refB --not refA  &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="sourceCode" id="cb6"&gt;&lt;pre class="sourceCode bash"&gt;&lt;code class="sourceCode bash"&gt;&lt;a class="sourceLine" id="cb6-1" data-line-number="1"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; log refA..refB&lt;/a&gt;
+&lt;a class="sourceLine" id="cb6-2" data-line-number="2"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; log ^refA refB&lt;/a&gt;
+&lt;a class="sourceLine" id="cb6-3" data-line-number="3"&gt;&lt;span class="fu"&gt;git&lt;/span&gt; log refB --not refA&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Triple Dot&lt;/p&gt;
 &lt;p&gt;specifies all the commits that are reachable by either of two references but not by both of them.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git log master...experiment&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;see what is in master or experiment but not any common references&lt;/p&gt;
-&lt;h1 id="reference"&gt;&lt;span class="header-section-number"&gt;5&lt;/span&gt; Reference&lt;/h1&gt;
+&lt;h1 id="reference"&gt;Reference&lt;/h1&gt;
 &lt;p&gt;&lt;a href="https://git-scm.com/book/en/v2"&gt;Pro Git&lt;/a&gt;&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</content><category term="Git"></category></entry><entry><title>Hello World</title><link href="https://cnewbie.github.io/blog/2017/hello-world-en/" rel="alternate"></link><published>2017-03-23T00:00:00+08:00</published><updated>2018-05-01T00:00:00+08:00</updated><author><name>cnewbie</name></author><id>tag:cnewbie.github.io,2017-03-23:/blog/2017/hello-world-en/</id><summary type="html">&lt;!DOCTYPE html&gt;
+</content><category term="Git"></category><category term="Linux"></category></entry><entry><title>Hello World</title><link href="https://cnewbie.github.io/blog/2017/hello-word-en/" rel="alternate"></link><published>2017-03-23T00:00:00+08:00</published><updated>2018-05-01T00:00:00+08:00</updated><author><name>cnewbie</name></author><id>tag:cnewbie.github.io,2017-03-23:/blog/2017/hello-word-en/</id><summary type="html">&lt;!DOCTYPE html&gt;
 &lt;html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang=""&gt;
 &lt;head&gt;
   &lt;meta charset="utf-8" /&gt;
   &lt;meta name="generator" content="pandoc" /&gt;
   &lt;meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" /&gt;
-  &lt;title&gt;Hello World&lt;/title&gt;
+  &lt;title&gt;Untitled&lt;/title&gt;
   &lt;style type="text/css"&gt;
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -1748,9 +2331,6 @@ In general the way to get the best of both worlds is to rebase local changes you
   &lt;![endif]--&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;header&gt;
-&lt;h1 class="title"&gt;Hello World&lt;/h1&gt;
-&lt;/header&gt;
 &lt;hr /&gt;
 &lt;p&gt;Hello World!!!&lt;/p&gt;
 &lt;/body&gt;
@@ -1761,7 +2341,7 @@ In general the way to get the best of both worlds is to rebase local changes you
   &lt;meta charset="utf-8" /&gt;
   &lt;meta name="generator" content="pandoc" /&gt;
   &lt;meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" /&gt;
-  &lt;title&gt;Hello World&lt;/title&gt;
+  &lt;title&gt;Untitled&lt;/title&gt;
   &lt;style type="text/css"&gt;
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -1773,9 +2353,6 @@ In general the way to get the best of both worlds is to rebase local changes you
   &lt;![endif]--&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;header&gt;
-&lt;h1 class="title"&gt;Hello World&lt;/h1&gt;
-&lt;/header&gt;
 &lt;hr /&gt;
 &lt;p&gt;Hello World!!!&lt;/p&gt;
 &lt;/body&gt;

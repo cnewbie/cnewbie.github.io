@@ -9,18 +9,18 @@
 
 
 
-<link rel="canonical" href="https://cnewbie.github.io/blog/2017/iptables-firewall/">
+<link rel="canonical" href="../../../blog/2018/iptables/">
 
         <meta name="author" content="cnewbie" />
         <meta name="keywords" content="Iptables,Linux" />
-        <meta name="description" content="Iptables 防火墙配置" />
+        <meta name="description" content="Untitled code{white-space: pre-wrap;} span.smallcaps{font-variant: small-caps;} span.underline{text-decoration: underline;} div.column{display: inline-block; vertical-align: top; width: 50%;} a.sourceLine { display: inline-block; line-height: 1.25; } a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; } a.sourceLine:empty { height: 1.2em; } .sourceCode { overflow: visible; } code.sourceCode { white-space: pre; position: relative …" />
 
         <meta property="og:site_name" content="cnewbie's Blog" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Iptables"/>
-        <meta property="og:url" content="https://cnewbie.github.io/blog/2017/iptables-firewall/"/>
-        <meta property="og:description" content="Iptables 防火墙配置"/>
-        <meta property="article:published_time" content="2017-06-30" />
+        <meta property="og:url" content="../../../blog/2018/iptables/"/>
+        <meta property="og:description" content="Untitled code{white-space: pre-wrap;} span.smallcaps{font-variant: small-caps;} span.underline{text-decoration: underline;} div.column{display: inline-block; vertical-align: top; width: 50%;} a.sourceLine { display: inline-block; line-height: 1.25; } a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; } a.sourceLine:empty { height: 1.2em; } .sourceCode { overflow: visible; } code.sourceCode { white-space: pre; position: relative …"/>
+        <meta property="article:published_time" content="2018-08-04" />
             <meta property="article:section" content="Tech" />
             <meta property="article:tag" content="Iptables" />
             <meta property="article:tag" content="Linux" />
@@ -29,19 +29,19 @@
 
 
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://cnewbie.github.io/theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="https://cnewbie.github.io/theme/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../../theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="../../../theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="https://cnewbie.github.io/theme/css/pygments/native.css" rel="stylesheet">
-    <link href="https://cnewbie.github.io/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cnewbie.github.io/theme/css/style.css" type="text/css"/>
+    <link href="../../../theme/css/pygments/native.css" rel="stylesheet">
+    <link href="../../../theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../theme/css/style.css" type="text/css"/>
 
-        <link href="https://cnewbie.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+        <link href="../../../feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
               title="cnewbie's Blog ATOM Feed"/>
 
 
 
-        <link href="https://cnewbie.github.io/feeds/tech.atom.xml" type="application/atom+xml" rel="alternate"
+        <link href="../../../feeds/tech.atom.xml" type="application/atom+xml" rel="alternate"
               title="cnewbie's Blog Tech ATOM Feed"/>
 
 </head>
@@ -56,16 +56,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="https://cnewbie.github.io/" class="navbar-brand">
+            <a href="../../../" class="navbar-brand">
 cnewbie's Blog            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                         <li><a href="https://cnewbie.github.io/pages/about.html">
+                         <li><a href="../../../pages/about.html">
                              About
                           </a></li>
                         <li class="active">
-                            <a href="https://cnewbie.github.io/categories/tech/">Tech</a>
+                            <a href="../../../categories/tech/">Tech</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -74,7 +74,7 @@ cnewbie's Blog            </a>
                   <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
                 </form></span>
               </li>
-              <li><a href="https://cnewbie.github.io/blog/"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+              <li><a href="../../../blog/"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -92,7 +92,7 @@ cnewbie's Blog            </a>
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="https://cnewbie.github.io/blog/2017/iptables-firewall/"
+                    <a href="../../../blog/2018/iptables/"
                        rel="bookmark"
                        title="Permalink to Iptables">
                         Iptables
@@ -105,12 +105,8 @@ cnewbie's Blog            </a>
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-06-30T00:00:00+08:00"> 2017 Jun 30</time>
+        <i class="fa fa-calendar"></i><time datetime="2018-08-04T16:32:41+08:00"> 2018 Aug 04</time>
     </span>
-          <span class="label label-default">Modified</span>
-            <span class="modified">
-                <i class="fa fa-calendar"></i><time datetime="2018-07-16T00:00:00+08:00"> 2018 Jul 16</time>
-            </span>
 
 
 
@@ -123,9 +119,9 @@ cnewbie's Blog            </a>
     </span>
 
 <span class="label label-default">Tags</span>
-	<a href="https://cnewbie.github.io/tags/iptables/">Iptables</a>
+	<a href="../../../tags/iptables/">Iptables</a>
         /
-	<a href="https://cnewbie.github.io/tags/linux/">Linux</a>
+	<a href="../../../tags/linux/">Linux</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -224,6 +220,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#引用">引用</a></li>
 </ul>
 </nav>
+<p>Slug：iptables-firewall<br />
+Summary: Iptables 防火墙配置<br />
+Date: 2017-06-30<br />
+Modified: 2018-07-16</p>
 <hr />
 <h1 id="filternatmangle-规则表">filter,nat,mangle 规则表</h1>
 <h2 id="filter表">filter表</h2>
@@ -381,28 +381,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <!-- Sidebar/Tag Cloud -->
 <li class="list-group-item">
-  <a href="https://cnewbie.github.io/tags/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <a href="../../../tags/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
   <ul class="list-group " id="tags">
     <li class="list-group-item tag-1">
-      <a href="https://cnewbie.github.io/tags/linux/">Linux</a>
+      <a href="../../../tags/linux/">Linux</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="https://cnewbie.github.io/tags/git/">Git</a>
+      <a href="../../../tags/algorithm/">Algorithm</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="https://cnewbie.github.io/tags/algorithm/">Algorithm</a>
+      <a href="../../../tags/git/">Git</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="https://cnewbie.github.io/tags/iptables/">Iptables</a>
+      <a href="../../../tags/cpp/">Cpp</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="https://cnewbie.github.io/tags/markdown/">Markdown</a>
+      <a href="../../../tags/iptables/">Iptables</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="https://cnewbie.github.io/tags/cpp/">Cpp</a>
+      <a href="../../../tags/pandoc/">Pandoc</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="https://cnewbie.github.io/tags/pandoc/">Pandoc</a>
+      <a href="../../../tags/markdown/">Markdown</a>
     </li>
   </ul>
 </li>
@@ -431,13 +431,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       </div>
    </div>
 </footer>
-<script src="https://cnewbie.github.io/theme/js/jquery.min.js"></script>
+<script src="../../../theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="https://cnewbie.github.io/theme/js/bootstrap.min.js"></script>
+<script src="../../../theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="https://cnewbie.github.io/theme/js/respond.min.js"></script>
+<script src="../../../theme/js/respond.min.js"></script>
 
 
 
