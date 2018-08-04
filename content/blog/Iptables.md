@@ -1,14 +1,11 @@
 Title: Iptables Firewall
 Tags: iptables,linux
 lang: zh
+Slug：iptables-firewall
 Summary: Iptables 配置
 Date: 2017-06-30
 Modified: 2018-07-16
 
----
-title: Iptables 防火墙配置
-
----
 
 -----------------------------
 

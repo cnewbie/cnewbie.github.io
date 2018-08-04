@@ -1,19 +1,18 @@
 Title: Git Pro
 Tags: Git
 lang: en
+Slug: git-pro
 Summary: Pro Git note
 Date: 2017-03-25
 Modified: 2018-07-06
 
----
-title: Git Pro Doc
-
----
 
 -----------------------------
 
+
 # Git Basics
 This chapter covers every basic command.
+
 ## Getting a Git Repository
 
 Initialzing a Repository in an existing directory
@@ -191,7 +190,8 @@ If you don't want to type the entire text of each of the Git commands,you can ea
 
 # Git Branching
 Branching means you diberge from the main line of development and continue to do work without messing with that main line.
-##  Branches in a Nutshell
+
+## Branches in a Nutshell
 When you make a commit, Git stores a commit object that contains a pointer to the snapshot of the content you staged.
 
 Creating a New Branch

@@ -29,13 +29,13 @@ IGNORE_FILES = ['.#*', '.*' ]
 ARTICLE_PATHS = ['blog']
 PLUGIN_PATHS = ['plugins']
 STATIC_PATHS = ['images', 'static',]
-PLUGINS = ['i18n_subsites', 
-            'tag_cloud', 
-            'sitemap', 
-            'tipue_search', 
+PLUGINS = ['i18n_subsites',
+            'tag_cloud',
+            'sitemap',
+            'tipue_search',
 #            'render_math',
-            'readtime', 
-            'pandoc_reader', 
+            'readtime',
+            'pandoc_reader',
             ]
 JINJA_ENVIRONMENT = {
     'extensions': ['jinja2.ext.i18n', ],
@@ -45,16 +45,14 @@ PANDOC_ARGS = [
   '--mathjax',
   '--toc',
   '--toc-depth=2',
-  '--number-sections',
+#  '--number-sections',
 ]
 
 PANDOC_EXTENSIONS = [
   '+smart',
   '+hard_line_breaks',
   '-citations',
-  '+yaml_metadata_block',
-  '-pandoc_title_block',
-  '+mmd_title_block',
+#  '+mmd_title_block',
   '+tex_math_dollars',
 ]
 
@@ -125,7 +123,7 @@ DEFAULT_PAGINATION = 10
 #THEME = 'themes/pelican-twitchy'
 THEME = 'themes/pelican-bootstrap3'
 SHOW_DATE_MODIFIED = True
-PYGMENTS_STYLE = 'solarizeddark'
+#PYGMENTS_STYLE = 'solarizeddark'
 USE_PAGER = True
 SIDEBAR_ON_LEFT = True
 #DISPLAY_TOC_ON_SIDEBAR = True

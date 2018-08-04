@@ -1,16 +1,14 @@
 Title: Git Cheatsheet
 Tags: Git
 lang: zh
+Slug: git-cheatsheet
 Summary: Git 命令速查
 Date: 2018-07-14
 Modified: 2018-07-16
 
----
-title: Git Cheatsheet
-
----
 
 -----------------------------
+
 
 # Git 基础
 

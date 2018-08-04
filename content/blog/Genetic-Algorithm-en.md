@@ -1,14 +1,11 @@
 Title: Introduction of Genetic Algorithm
 Tags: Algorithm
 lang: en
+Slug: gentic-algorithm
 Summary: Introduction of the Basic Genetic Algorithm
 Date: 2017-04-12
 Modified: 2018-07-05
 
----
-title: Introduction of Genetic Algorithm
-
----
 
 -----------------------------
 

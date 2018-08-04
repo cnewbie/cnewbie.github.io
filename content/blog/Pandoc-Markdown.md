@@ -4,13 +4,8 @@ lang: zh
 Slug: pandoc-markdown
 Summary: Pandoc Markdown 文档
 Date: 2018-07-15
-Modified: 2018-07-16
+Modified: 2018-08-04
 
-
----
-title: Pandoc Markdown 文档
-
----
 
 -----------------------------
 
@@ -793,7 +788,7 @@ blah blah
 
 # LaTeX macros
 
-Extension `line_blocks`
+Extension `latex_macros`
 
 TODO
 
@@ -1113,6 +1108,64 @@ raw_html, shortcut_reference_links, spaced_reference_links.
 
 >
 pipe_tables, raw_html, fenced_code_blocks, auto_identifiers, ascii_identifiers, backtick_code_blocks, autolink_bare_uris, intraword_underscores, strikeout, hard_line_breaks, emoji, shortcut_reference_links, angle_brackets_escapable.
+
+# 常用语法高亮
+
+常用语法高亮
+
+```markdown
+awk
+bash
+bibtex
+c
+cpp
+cmake
+css
+changelog
+coffee
+diff
+djangotemplate
+dockerfile
+doxygen
+doxygenlua
+email
+erlang
+gcc
+go
+html
+haskell
+ini
+json
+jsp
+java
+javascript
+javadoc
+kotlin
+llvm
+latex
+lua
+makefile
+markdown
+matlab
+php
+perl
+postscript
+powershell
+python
+ruby
+sql
+sqlmysql
+scala
+scheme
+texinfo
+mandoc
+xml
+yaml
+zsh
+dot
+sed
+xorg
+```
 
 # 引用
 [Pandoc](http://pandoc.org/MANUAL.html#pandocs-markdown)
