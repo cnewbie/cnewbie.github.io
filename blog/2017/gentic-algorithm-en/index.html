@@ -86,7 +86,7 @@ cnewbie's Blog            </a>
 <!-- Content Container -->
 <div class="container">
     <div class="row">
-        <div class="col-sm-9 col-sm-push-3">
+        <div class="col-sm-9">
     <section id="content">
         <article>
             <header class="page-header">
@@ -133,7 +133,7 @@ cnewbie's Blog            </a>
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Untitled</title>
-  <style type="text/css">
+  <style>
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
       span.underline{text-decoration: underline;}
@@ -144,7 +144,7 @@ cnewbie's Blog            </a>
   <![endif]-->
 </head>
 <body>
-<nav id="TOC">
+<nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#outline-of-ga">Outline of GA</a></li>
 <li><a href="#selection">Selection</a></li>
@@ -161,8 +161,8 @@ cnewbie's Blog            </a>
 <h1 id="outline-of-ga">Outline of GA</h1>
 <p>Outline of the Basic Genetic Algorithm</p>
 <ol type="1">
-<li>[Start] Generate random population of n chromosomes (suitable solutions for the problem)</li>
-<li>[Fitness] Evaluate the fitness f(x) of each chromosome x in the population</li>
+<li><p>[Start] Generate random population of n chromosomes (suitable solutions for the problem)</p></li>
+<li><p>[Fitness] Evaluate the fitness f(x) of each chromosome x in the population</p></li>
 <li><p>[New population] Create a new population by repeating following steps until the new population is complete</p>
 <ul>
 <li><p><a href="#selection">Selection</a> Select two parent chromosomes from a population according to their fitness (the better fitness, the bigger chance to be selected)</p></li>
@@ -170,8 +170,8 @@ cnewbie's Blog            </a>
 <li><p>[Mutation] With a mutation probability mutate new offspring at each locus (position in chromosome).</p></li>
 <li><p>[Accepting] Place new offspring in a new population</p></li>
 </ul></li>
-<li>[Replace] Use new generated population for a further run of algorithm</li>
-<li>[Test] If the end condition is satisfied, stop, and return the best solution in current population</li>
+<li><p>[Replace] Use new generated population for a further run of algorithm</p></li>
+<li><p>[Test] If the end condition is satisfied, stop, and return the best solution in current population</p></li>
 <li><p>[Loop] Go to step 2</p></li>
 </ol>
 <h1 id="selection">Selection</h1>
@@ -262,7 +262,7 @@ cnewbie's Blog            </a>
     </section>
 
         </div>
-        <div class="col-sm-3 col-sm-pull-9" id="sidebar">
+        <div class="col-sm-3" id="sidebar">
             <aside>
 <!-- Sidebar -->
 <section class="well well-sm ">
@@ -285,22 +285,25 @@ cnewbie's Blog            </a>
       <a href="https://cnewbie.github.io/tags/linux/">Linux</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="https://cnewbie.github.io/tags/git/">Git</a>
+      <a href="https://cnewbie.github.io/tags/algorithm/">Algorithm</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="https://cnewbie.github.io/tags/algorithm/">Algorithm</a>
+      <a href="https://cnewbie.github.io/tags/git/">Git</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="https://cnewbie.github.io/tags/iptables/">Iptables</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="https://cnewbie.github.io/tags/markdown/">Markdown</a>
+      <a href="https://cnewbie.github.io/tags/tmux/">Tmux</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="https://cnewbie.github.io/tags/cpp/">Cpp</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="https://cnewbie.github.io/tags/pandoc/">Pandoc</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://cnewbie.github.io/tags/markdown/">Markdown</a>
     </li>
   </ul>
 </li>
@@ -317,7 +320,7 @@ cnewbie's Blog            </a>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2018 cnewbie
+         <div class="col-xs-10">&copy; 2019 cnewbie
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>

@@ -87,7 +87,7 @@ cnewbie's Blog            </a>
 <!-- Content Container -->
 <div class="container">
     <div class="row">
-        <div class="col-sm-9 col-sm-push-3">
+        <div class="col-sm-9">
     <section id="content">
         <article>
             <header class="page-header">
@@ -136,13 +136,13 @@ cnewbie's Blog            </a>
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Untitled</title>
-  <style type="text/css">
+  <style>
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <style type="text/css">
+  <style>
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
@@ -160,7 +160,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -210,7 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <![endif]-->
 </head>
 <body>
-<nav id="TOC">
+<nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#git-基础">Git 基础</a><ul>
 <li><a href="#基础操作">基础操作</a></li>
@@ -251,12 +251,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>git rm --cached [file name]</code> 取消跟踪文件</p>
 <p>重命名文件</p>
 <p><code>git mv [file name]</code></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="fu">mv</span> old_name new_name</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="fu">git</span> rm old_name</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="fu">git</span> add new_name</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">mv</span> old_name new_name</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="fu">git</span> rm old_name</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="fu">git</span> add new_name</a></code></pre></div>
 <p>查看提交历史</p>
 <p><code>git log</code> <a href="https://git-scm.com/docs/git-log">git log</a></p>
-<p><code>git log --pretty=format: &quot;%h %s&quot; --graph</code></p>
+<p><code>git log --pretty=format: "%h %s" --graph</code></p>
 <p>撤销提交</p>
 <p><code>git commmit --amend</code></p>
 <p><code>git rebase -i</code></p>
@@ -404,7 +404,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </section>
 
         </div>
-        <div class="col-sm-3 col-sm-pull-9" id="sidebar">
+        <div class="col-sm-3" id="sidebar">
             <aside>
 <!-- Sidebar -->
 <section class="well well-sm ">
@@ -427,22 +427,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <a href="https://cnewbie.github.io/tags/linux/">Linux</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="https://cnewbie.github.io/tags/git/">Git</a>
+      <a href="https://cnewbie.github.io/tags/algorithm/">Algorithm</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="https://cnewbie.github.io/tags/algorithm/">Algorithm</a>
+      <a href="https://cnewbie.github.io/tags/git/">Git</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="https://cnewbie.github.io/tags/iptables/">Iptables</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="https://cnewbie.github.io/tags/markdown/">Markdown</a>
+      <a href="https://cnewbie.github.io/tags/tmux/">Tmux</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="https://cnewbie.github.io/tags/cpp/">Cpp</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="https://cnewbie.github.io/tags/pandoc/">Pandoc</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://cnewbie.github.io/tags/markdown/">Markdown</a>
     </li>
   </ul>
 </li>
@@ -459,7 +462,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2018 cnewbie
+         <div class="col-xs-10">&copy; 2019 cnewbie
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>

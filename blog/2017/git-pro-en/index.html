@@ -87,7 +87,7 @@ cnewbie's Blog            </a>
 <!-- Content Container -->
 <div class="container">
     <div class="row">
-        <div class="col-sm-9 col-sm-push-3">
+        <div class="col-sm-9">
     <section id="content">
         <article>
             <header class="page-header">
@@ -136,13 +136,13 @@ cnewbie's Blog            </a>
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Untitled</title>
-  <style type="text/css">
+  <style>
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <style type="text/css">
+  <style>
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
@@ -160,7 +160,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -210,7 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <![endif]-->
 </head>
 <body>
-<nav id="TOC">
+<nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#git-basics">Git Basics</a><ul>
 <li><a href="#getting-a-git-repository">Getting a Git Repository</a></li>
@@ -267,9 +267,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>You can negate a pattern by starting it with an exclamation point (!).</li>
 </ul>
 <p>Viewing Your Staged and Unstaged Changes</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="fu">git</span> status <span class="kw">&amp;</span> <span class="fu">git</span> diff</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="fu">git</span> diff --staged  # see what you<span class="st">&#39;ve staged that will go into your next commit.</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="st">git diff --cached # see that you&#39;</span>ve statged so far.</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">git</span> status <span class="kw">&amp;</span> <span class="fu">git</span> diff</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="fu">git</span> diff --staged  <span class="co"># see what you&#39;ve staged that will go into your next commit.</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="fu">git</span> diff --cached <span class="co"># see that you&#39;ve statged so far.</span></a></code></pre></div>
 <p>Committing Your Changes</p>
 <p><code>git commit -m 'balabala'</code> type commit message inline</p>
 <p>Skipping the Staging Area</p>
@@ -324,7 +324,7 @@ Git uses two main types of tags:lightweight and annotated.<br />
 A loghtweight tag is very much like a branch that doesn’t change - it’s just a pointer to a specific commit.</p>
 <p>Annotated tags,however,are stored as full objects in the Git database.They’re checksummed;contain the tagger name,email,and date;have a tagging message; and can be signed and verified with GNU Privacy Guard (GPG).</p>
 <p>Annotated Tags</p>
-<p><code>git tag -a [tagname] -m &quot;message&quot;</code></p>
+<p><code>git tag -a [tagname] -m "message"</code></p>
 <p>Lightweight Tags</p>
 <p><code>git tag [tagname]</code></p>
 <p>Tagging Later</p>
@@ -350,9 +350,9 @@ A loghtweight tag is very much like a branch that doesn’t change - it’s just
 <p><a href="https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell#divergent_history">Divergent history</a></p>
 <h2 id="basic-branching-and-merging">Basic Branching and Merging</h2>
 <p>Basic Branching</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">git</span> checkout -b [branchname] switch branch</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="fu">git</span> merge [branchname] merge branch</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="fu">git</span> branch -d [branchname] delete branch</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">git</span> checkout -b [branchname] switch branch</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="fu">git</span> merge [branchname] merge branch</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="fu">git</span> branch -d [branchname] delete branch</a></code></pre></div>
 <p>Basic Merging</p>
 <p><code>git merge [branchname]</code></p>
 <p>Basic Merge Conflicts<br />
@@ -362,9 +362,9 @@ Occasionally,this process doesn’t go smoothly.If you changed the same part of 
 <p><a href="https://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging#_advanced_merging">Advanced Merging</a></p>
 <h2 id="branch-management">Branch Management</h2>
 <p>The <code>git branch</code> command does more than just create and detele branches.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">git</span> branch -v <span class="co">#shows the last commit on each branch.</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="fu">git</span> branch --merged/nomerged <span class="co"># filter this list to branches</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="fu">git</span> branch -d [branchname] <span class="co"># detele the branch and lose that work.</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">git</span> branch -v <span class="co">#shows the last commit on each branch.</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="fu">git</span> branch --merged/nomerged <span class="co"># filter this list to branches</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="fu">git</span> branch -d [branchname] <span class="co"># detele the branch and lose that work.</span></a></code></pre></div>
 <h2 id="branching-workflows">Branching Workflows</h2>
 <p>cover some common workflows that this lightweight branching makes possible.<br />
 <a href="https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows">Brancheing Workflows</a></p>
@@ -381,9 +381,9 @@ you can get a full list of remote references explicitly with <code>git ls-remote
 <p><code>git checkout --track orgin/[branchname]</code></p>
 <p>In fact,this is so common that there’s even a shortcut for that shortcut.if the branch name you’re trying to checkout doesn’t exist add exactly matches a name on only one remote.Git will create a tracking branch for you.</p>
 <p>If you already have a local brach and want to set it to a remote branch you just pulled down,or want to change the upsteam branch you’re tracking.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="fu">git</span> branch -u origin/[branchname]</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="fu">git</span> branch -vv <span class="co"># show what tracking branches you have set up.</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="fu">git</span> fetch --all<span class="kw">;</span><span class="fu">git</span> branch -vv <span class="co"># fetch from all your remotes</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">git</span> branch -u origin/[branchname]</a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="fu">git</span> branch -vv <span class="co"># show what tracking branches you have set up.</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="fu">git</span> fetch --all<span class="kw">;</span><span class="fu">git</span> branch -vv <span class="co"># fetch from all your remotes</span></a></code></pre></div>
 <p>Pulling</p>
 <p><code>git pull</code></p>
 <p>Deleting Remote Branches</p>
@@ -392,10 +392,10 @@ you can get a full list of remote references explicitly with <code>git ls-remote
 <p>In Git, there are two main ways to integrate changes from one branch into another: the <code>merge</code> and the <code>rebase</code>.</p>
 <p>The Basic Rebase</p>
 <p>rebase a branch to master</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="fu">git</span> checkout [branchname]</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="fu">git</span> rebase master</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="fu">git</span> checkout master</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="fu">git</span> merge [branchname]</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"><span class="fu">git</span> checkout [branchname]</a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="fu">git</span> rebase master</a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="fu">git</span> checkout master</a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="fu">git</span> merge [branchname]</a></code></pre></div>
 <p>There is no difference in the end product of the integration,but rebasing makes for a cleaner history.<br />
 Rebasing replays changes from one line of work onto another in the order they were introduced,whereas merging takes the endpoints and merges them together.</p>
 <p>More Intersting Rebases</p>
@@ -425,9 +425,9 @@ In general the way to get the best of both worlds is to rebase local changes you
 <p>show a log of just those commits with <code>master..experiment</code> — that means “all commits reachable from experiment that aren’t reachable from master.</p>
 <p>Multiple Points</p>
 <p>Git allows you to do this by using either the ^ character or –not before any reference from which you don’t want to see reachable commits.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="fu">git</span> log refA..refB</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="fu">git</span> log ^refA refB</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="fu">git</span> log refB --not refA</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="fu">git</span> log refA..refB</a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="fu">git</span> log ^refA refB</a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="fu">git</span> log refB --not refA</a></code></pre></div>
 <p>Triple Dot</p>
 <p>specifies all the commits that are reachable by either of two references but not by both of them.</p>
 <p><code>git log master...experiment</code></p>
@@ -443,7 +443,7 @@ In general the way to get the best of both worlds is to rebase local changes you
     </section>
 
         </div>
-        <div class="col-sm-3 col-sm-pull-9" id="sidebar">
+        <div class="col-sm-3" id="sidebar">
             <aside>
 <!-- Sidebar -->
 <section class="well well-sm ">
@@ -466,22 +466,25 @@ In general the way to get the best of both worlds is to rebase local changes you
       <a href="https://cnewbie.github.io/tags/linux/">Linux</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="https://cnewbie.github.io/tags/git/">Git</a>
+      <a href="https://cnewbie.github.io/tags/algorithm/">Algorithm</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="https://cnewbie.github.io/tags/algorithm/">Algorithm</a>
+      <a href="https://cnewbie.github.io/tags/git/">Git</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="https://cnewbie.github.io/tags/iptables/">Iptables</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="https://cnewbie.github.io/tags/markdown/">Markdown</a>
+      <a href="https://cnewbie.github.io/tags/tmux/">Tmux</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="https://cnewbie.github.io/tags/cpp/">Cpp</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="https://cnewbie.github.io/tags/pandoc/">Pandoc</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://cnewbie.github.io/tags/markdown/">Markdown</a>
     </li>
   </ul>
 </li>
@@ -498,7 +501,7 @@ In general the way to get the best of both worlds is to rebase local changes you
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2018 cnewbie
+         <div class="col-xs-10">&copy; 2019 cnewbie
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>

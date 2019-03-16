@@ -87,7 +87,7 @@ cnewbie's Blog            </a>
 <!-- Content Container -->
 <div class="container">
     <div class="row">
-        <div class="col-sm-9 col-sm-push-3">
+        <div class="col-sm-9">
     <section id="content">
         <article>
             <header class="page-header">
@@ -136,13 +136,13 @@ cnewbie's Blog            </a>
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Untitled</title>
-  <style type="text/css">
+  <style>
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <style type="text/css">
+  <style>
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
@@ -160,7 +160,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -210,7 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <![endif]-->
 </head>
 <body>
-<nav id="TOC">
+<nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#filternatmangle-规则表">filter,nat,mangle 规则表</a><ul>
 <li><a href="#filter表">filter表</a></li>
@@ -320,9 +320,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>&lt;-j 动作&gt;：处理数据包的动作，包括ACCEPT、DROP、REJECT等</li>
 </ul>
 <h1 id="iptables常用实例备查">iptables常用实例备查</h1>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ex">iptables</span> -P INPUT DROP</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="ex">iptables</span> -P FORWARD ACCEPT</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="ex">iptables</span> -P OUTPUT ACCEPT</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">iptables</span> -P INPUT DROP</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="ex">iptables</span> -P FORWARD ACCEPT</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="ex">iptables</span> -P OUTPUT ACCEPT</a></code></pre></div>
 <p>限制</p>
 <p><code>iptables -I INPUT 1 -m state --state RELATED,ESTABLISHED -j ACCEPT</code></p>
 <p>把这条语句插在input链的最前面（第一条），对状态为ESTABLISHED,RELATED的连接放行</p>
@@ -333,26 +333,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>删除</p>
 <p><code>iptables -D chain  number</code></p>
 <p>丢弃非法连接</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ex">iptables</span> -A INPUT -m state –state INVALID -j DROP</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="ex">iptables</span> -A OUTPUT -m state –state INVALID -j DROP</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="ex">iptables-A</span> FORWARD -m state –state INVALID -j DROP</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="ex">iptables</span> -A INPUT -m state –state INVALID -j DROP</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="ex">iptables</span> -A OUTPUT -m state –state INVALID -j DROP</a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="ex">iptables-A</span> FORWARD -m state –state INVALID -j DROP</a></code></pre></div>
 <p>日志</p>
 <p><code>iptables -R INPUT 1 -p tcp --dport 22 -m limit --limit 3/minute --limit-burst 8 -j LOG</code></p>
 <p>Dos</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="ex">iptables</span> -N syn-flood   (如果您的防火墙默认配置有“ :syn-flood - [0:0] ”则不许要该项，因为重复了)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="ex">iptables</span> -A INPUT -p tcp --syn -j syn-flood</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="ex">iptables</span> -I syn-flood -p tcp -m limit --limit 2/s --limit-burst 5 -j RETURN</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="ex">iptables</span> -A syn-flood -j REJECT</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co"># 防止DOS太多连接进来,可以允许外网网卡每个IP最多15个初始连接,超过的丢弃</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co"># 需要iptables v1.4.19以上版本：iptables -V</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="ex">iptables</span> -A INPUT -p tcp --syn -i eth0 --dport 80 -m connlimit --connlimit-above 20 --connlimit-mask 24 -j DROP</a>
-<a class="sourceLine" id="cb4-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#用Iptables抵御DDOS (参数与上相同)</span></a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="ex">iptables</span> -A INPUT -p tcp --syn -m limit --limit 5/s --limit-burst 10 -j ACCEPT</a>
-<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="ex">iptables</span> -A FORWARD -p tcp --syn -m limit --limit 1/s -j ACCEPT</a>
-<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="ex">iptables</span> -A FORWARD -p icmp -m limit --limit 2/s --limit-burst 10 -j ACCEPT</a>
-<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="ex">iptables</span> -A INPUT -p icmp --icmp-type 0 -s ! 172.29.73.0/24 -j DROP</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1"><span class="ex">iptables</span> -N syn-flood   (如果您的防火墙默认配置有“ :syn-flood - [0:0] ”则不许要该项，因为重复了)</a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="ex">iptables</span> -A INPUT -p tcp --syn -j syn-flood</a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="ex">iptables</span> -I syn-flood -p tcp -m limit --limit 2/s --limit-burst 5 -j RETURN</a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="ex">iptables</span> -A syn-flood -j REJECT</a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co"># 防止DOS太多连接进来,可以允许外网网卡每个IP最多15个初始连接,超过的丢弃</span></a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="co"># 需要iptables v1.4.19以上版本：iptables -V</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="ex">iptables</span> -A INPUT -p tcp --syn -i eth0 --dport 80 -m connlimit --connlimit-above 20 --connlimit-mask 24 -j DROP</a>
+<a class="sourceLine" id="cb4-9" title="9"></a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="co">#用Iptables抵御DDOS (参数与上相同)</span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="ex">iptables</span> -A INPUT -p tcp --syn -m limit --limit 5/s --limit-burst 10 -j ACCEPT</a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="ex">iptables</span> -A FORWARD -p tcp --syn -m limit --limit 1/s -j ACCEPT</a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="ex">iptables</span> -A FORWARD -p icmp -m limit --limit 2/s --limit-burst 10 -j ACCEPT</a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="ex">iptables</span> -A INPUT -p icmp --icmp-type 0 -s ! 172.29.73.0/24 -j DROP</a></code></pre></div>
 <h1 id="引用">引用</h1>
 <p><a href="http://seanlook.com/2014/02/23/iptables-understand/">Seanlook</a></p>
 </body>
@@ -364,7 +364,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </section>
 
         </div>
-        <div class="col-sm-3 col-sm-pull-9" id="sidebar">
+        <div class="col-sm-3" id="sidebar">
             <aside>
 <!-- Sidebar -->
 <section class="well well-sm ">
@@ -387,22 +387,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <a href="https://cnewbie.github.io/tags/linux/">Linux</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="https://cnewbie.github.io/tags/git/">Git</a>
+      <a href="https://cnewbie.github.io/tags/algorithm/">Algorithm</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="https://cnewbie.github.io/tags/algorithm/">Algorithm</a>
+      <a href="https://cnewbie.github.io/tags/git/">Git</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="https://cnewbie.github.io/tags/iptables/">Iptables</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="https://cnewbie.github.io/tags/markdown/">Markdown</a>
+      <a href="https://cnewbie.github.io/tags/tmux/">Tmux</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="https://cnewbie.github.io/tags/cpp/">Cpp</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="https://cnewbie.github.io/tags/pandoc/">Pandoc</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://cnewbie.github.io/tags/markdown/">Markdown</a>
     </li>
   </ul>
 </li>
@@ -419,7 +422,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2018 cnewbie
+         <div class="col-xs-10">&copy; 2019 cnewbie
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
