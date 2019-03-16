@@ -1,8 +1,8 @@
 Title: Sort Algorithms
-Tags: Algorithm,cpp
+Tags: Algorithm,Cpp
 lang: zh
 Slug: sort-algorithms
-Summary: 排序算法总结
+Summary: 常用排序算法总结
 Date: 2018-08-05
 
 

@@ -1,13 +1,14 @@
-Title: Iptables Firewall
-Tags: iptables,linux
+Title: Iptables
+Tags: Iptables,Linux
 lang: zh
-Slug：iptables-firewall
-Summary: Iptables 配置
+Slug: iptables-firewall
+Summary: Iptables 防火墙配置
 Date: 2017-06-30
 Modified: 2018-07-16
 
 
 -----------------------------
+
 
 # filter,nat,mangle 规则表
 

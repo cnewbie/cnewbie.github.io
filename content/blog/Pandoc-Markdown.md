@@ -1,5 +1,5 @@
 Title: Pandoc Markdown 文档
-Tags: markdown,pandoc
+Tags: Markdown,Pandoc
 lang: zh
 Slug: pandoc-markdown
 Summary: Pandoc Markdown 文档

@@ -9,6 +9,7 @@ Modified: 2018-07-05
 
 -----------------------------
 
+
 # Outline of GA
 
 Outline of the Basic Genetic Algorithm

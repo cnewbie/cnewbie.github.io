@@ -1,5 +1,5 @@
 Title: Git Cheatsheet
-Tags: Git
+Tags: Git,Linux
 lang: zh
 Slug: git-cheatsheet
 Summary: Git 命令速查

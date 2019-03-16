@@ -1,5 +1,5 @@
 Title: Git Pro
-Tags: Git
+Tags: Git,Linux
 lang: en
 Slug: git-pro
 Summary: Pro Git note
