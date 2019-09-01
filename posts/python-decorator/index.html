@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<title>Python 装饰器 | Hugo Blog</title>
+
+<link rel="stylesheet" href="https://cnewbie.github.io/css/styles.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/zenburn.min.css" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://cnewbie.github.io/js/highlight.js"></script>
+
+
+
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-minima.css" />
+<script type="text/javascript" src="https://cnewbie.github.io/js/jssocials.js"></script>
+
+
+
+
+<div class="container">
+    <nav class="navbar level">
+      <div class="navbar-brand">
+          <a class="nav-item" href="https://cnewbie.github.io"><h1 class="title is-3">Hugo Blog</h1></a>
+      </div>           
+      <div class="navbar-menu has-text-centered is-active">
+          <div class="navbar-end is-centered">
+              
+                <a href="https://cnewbie.github.io/about" rel="me">
+                  <span class="icon">
+                    <i class="fas fa-info"></i>
+                  </span>
+                </a>
+              
+                <a href="https://github.com/cnewbie/" rel="me">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+              
+           </div>
+      </div>
+    </nav>
+  </div>
+
+<div class="container">
+  <h2 class="subtitle is-6">April 20, 2019</h2>
+  <h1 class="subtitle is-size-4-mobile is-size-3-desktop">Python 装饰器</h1>
+  <div class="content">
+    
+
+<p>Python 装饰器</p>
+
+<h1 id="装饰器的定义">装饰器的定义</h1>
+
+<blockquote>
+<p>装饰器本质上是一个Python函数，它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。
+它经常用于有切面需求的场景，比如：插入日志、性能测试、事务处理、缓存、权限校验等场景。装饰器是解决这类问题的绝佳设计，有了装饰器，我们就可以抽离出大量与函数功能本身无关的雷同代码并继续重用。</p>
+</blockquote>
+
+<h1 id="为什么需要装饰器">为什么需要装饰器</h1>
+
+<p>假设你原先的程序实现了简单的 <code>fun()</code> 函数</p>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+def fun():
+    print('hello')
+fun()
+</code></pre>
+
+<p>随后需要统计函数的运行时间，你当然可以对原函数进行修改，但是如果其他函数也实现该功能，逐个修改会添加大量重复代码。为了复用代码可以定义一个函数用于处理统计运行时间的需求。</p>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+import time
+from functools import wraps
+
+def timethis(func):
+    '''
+    Decorator that reports the execution time.
+    '''
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print(func.__name__, end-start)
+        return result
+    return wrapper
+
+@timethis
+def fun():
+    &quot;&quot;&quot;
+    hello
+    &quot;&quot;&quot;
+    print('hello')
+# 等同于
+fun = timethis(fun)
+
+fun()
+</code></pre>
+
+<p>通过上述函数对原函数进行包装，原函数 <code>fun()</code> 就向被装饰了一样，而<code>timethis()</code> 返回的是装饰后函数。</p>
+
+<h1 id="函数元数据">函数元数据</h1>
+
+<p>装饰器作用在某个函数时，这个函数重要的元数据，如名字、文档字符串、注解等信息都丢失了</p>
+
+<pre><code># 未装饰前
+&gt;&gt;&gt; fun()
+hello
+&gt;&gt;&gt; fun.__name__
+'fun'
+&gt;&gt;&gt; fun.__doc__
+'\n\thello\n\t'
+&gt;&gt;&gt; fun.__annotations__
+{}
+# 未使用 wraps 函数
+&gt;&gt;&gt; fun.__name__
+'wrapper'
+&gt;&gt;&gt; fun.__doc__
+&gt;&gt;&gt; fun.__annotations__
+{}
+# 使用 wraps 函数
+&gt;&gt;&gt; fun.__name__
+'fun'
+&gt;&gt;&gt; fun.__doc__
+'\n\thello\n\t'
+&gt;&gt;&gt; fun.__annotations__
+{}
+</code></pre>
+
+<p>可以看出函数的元数据被替换为 <code>wrapper</code> 函数对象的元数据。通过调用 <code>@wraps()</code> 装饰器，可以保留原函数的元数据</p>
+
+<p><strong>Note</strong> <code>@wraps(func)</code> 注解是很重要的，它能保留原始函数的元数据。可通过属性访问 <code>__wrapped__</code> 被包装的函数。当多个装饰器作用于同一个函数时，<code>__wrapped__</code> 属性调用的行为是不可预知的，应当避免这样做。</p>
+
+<p><strong>Note</strong> 并不是所有的装饰器都使用了 <code>@wraps()</code>，内置装饰器 <code>@staticmethod</code> 和 <code>@classmethod</code> 是将原函数属性储存在 <code>__func__</code> 中。</p>
+
+<h1 id="定义一个带参数的装饰器">定义一个带参数的装饰器</h1>
+
+<p>假设你需要一个装饰器，给函数添加日志功能，同时可以指定日志的级别或其他选项。你可以这样定义装饰器</p>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+
+from functools import wraps
+import logging
+
+def logged(level, name=None, message=None):
+    &quot;&quot;&quot;
+    Add logging to a function.
+
+    :param: level: logging level
+    :param: name: log name
+    :param: message: log message
+    :return: wrapped func
+    &quot;&quot;&quot;
+    def decorator(func):
+        logname = name if name else func.__module__
+        log = logging.getLogger(logname)
+        logmsg = message if message else func.__name__
+
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            log.log(level, logmsg)
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator
+
+@logged(logging.DEBUG)
+def fun():
+    &quot;&quot;&quot;
+    print hello
+    &quot;&quot;&quot;
+    print('hello')
+# 等价于 func = logged(logging.DEBUG)(func)
+
+@logged(logging.CRITICAL, 'example')
+def fun():
+    &quot;&quot;&quot;
+    print hello
+    &quot;&quot;&quot;
+    print('hello')
+</code></pre>
+
+<p><code>decorate</code> 返回一个可调用对象（包含 <code>__call__</code> 方法），并传入被包装函数作为参数。</p>
+
+<h1 id="自定义属性的装饰器">自定义属性的装饰器</h1>
+
+<p>使用一个装饰器包装一个函数，并允许运行时修改用户提供的参数。</p>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+
+import logging
+from functools import wraps, partial
+
+def attach_wrapper(obj, func=None):
+    &quot;&quot;&quot;
+    Utils decorator to attach a function as an attribute of obj
+    &quot;&quot;&quot;
+    if func is None:
+        return partial(attach_wrapper, obj)
+    setattr(obj, func.__name__, func)
+    return  func
+
+def logged(level, name=None, message=None):
+    &quot;&quot;&quot;
+    Add logging to a function.
+
+    :param: level: logging level
+    :param: name: log name
+    :param: message: log message
+    :return: wrapped func
+    &quot;&quot;&quot;
+    def decorator(func):
+        logname = name if name else func.__name__
+        log = logging.getLogger(logname)
+        logmsg = message if message else func.__name__
+
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            log.log(level, logmsg)
+            return func(*args, **kwargs)
+
+        @attach_wrapper(wrapper)
+        def set_level(newlevel):
+            nonlocal level
+            level = newlevel
+
+        @attach_wrapper(wrapper)
+        def set_message(newmsg)
+            nonlocal logmsg
+            logmsg = newmsg
+
+        @attach_wrapper(wrapper)
+        def get_level():
+            return level
+
+        return wrapper
+    return decorator
+</code></pre>
+
+<pre><code class="language-python">@wraps(func)
+def wrapper(*args, **kwargs):
+    wrapper.log.log(wrapper.level, wrapper.logmsg)
+    return func(*args, **kwargs)
+
+# Attach adjustable attributes
+wrapper.level = level
+wrapper.logmsg = logmsg
+wrapper.log = log
+</code></pre>
+
+<p>访问函数允许使用 <code>nonlocal</code> 来修改函数内部的变量。</p>
+
+<blockquote>
+<p>直接修改的方法也可能正常工作，但前提是它必须是最外层的装饰器才行。 如果它的上面还有另外的装饰器，那么它会隐藏底层属性，使得修改它们没有任何作用。</p>
+</blockquote>
+
+<h1 id="可选参数装饰器">可选参数装饰器</h1>
+
+<p>写一个装饰器，可以不传参数 <code>@logged</code>，或者是传递可选参数如 <code>@logged(logging.DEBUG)</code>。</p>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+
+import logging
+from functools import wraps, partial
+
+def logged(func=None, *, level=logging.DEBUG, name=None, message=None):
+    &quot;&quot;&quot;
+    Add logging to a function.
+
+    :param: func: function name
+    :param: level: logging level
+    :param: log message
+    :return: wrapped func
+    &quot;&quot;&quot;
+    if func is None:
+        return partial(logged, level=level, name=name, message=message)
+
+    logname = name if name else func.__name__
+    log = logging.getLogger(logname)
+    logmsg = message if message else func.__name__
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        log.log(level, logmsg)
+        return func(*args, **kwargs)
+
+    return wraper
+</code></pre>
+
+<p>理解上述代码原理，需要知道装饰的调用规则，</p>
+
+<pre><code class="language-python"># 简单装饰器
+
+@logged
+def fun():
+    print('hello')
+# 等价于 fun = logged(fun)
+
+# 带参数装饰器
+
+@logged(level=logging.DEBUG)
+def fun():
+    print('hello')
+# 等价于 fun = logged(level=loggin.DEBUG)(fun)
+</code></pre>
+
+<p>简单装饰器将被包装函数作为第一个参数传递给 <code>logged</code> 函数，因此，<code>logged()</code> 中第一个参数就是被包装函数自身。</p>
+
+<p>带参数装饰器调用时没有将被包装函数传递给 <code>logged</code> 函数，因此在装饰器内，它必须是可选的。这个反过来会迫使其他参数必须使用关键字来指定。 并且，但这些参数被传递进来后，装饰器要返回一个接受一个函数参数并包装它的函数。 为了这样做，我们使用了一个技巧，就是利用 <code>functools.partial</code> 。 它会返回一个未完全初始化的自身，除了被包装函数外其他参数都已经确定下来了。</p>
+
+<h1 id="利用装饰器进行参数检查">利用装饰器进行参数检查</h1>
+
+<p>// TODO</p>
+
+<h1 id="类中定义装饰器">类中定义装饰器</h1>
+
+<pre><code class="language-python">from functools import wraps
+
+class A(object):
+    &quot;&quot;&quot;
+    Decorator as an instance method
+    &quot;&quot;&quot;
+    def decorator1(self, func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            print(&quot;decorator1&quot;)
+            reurn func(*args, **kwargs)
+        return wrapper
+
+    @classmethod
+    def decorator2(cls, func):
+        @wraps(func)
+        def wraper(*args, **kwargs):
+            print(&quot;decorator2&quot;)
+            return func(*args, **kwargs)
+        return wrapper
+
+a = A()
+@a.decorator1
+def fun():
+    print('hello')
+
+@A.decorator2
+def fun():
+    print('hello')
+</code></pre>
+
+<p>可以看出一个是实例调用，另一个是类调用。装饰器要被定义成类方法并且你必须显式的使用父类名去调用它。</p>
+
+<p>在类中定义装饰器初看上去好像很奇怪，但是在标准库中有很多这样的例子。 特别的，<code>@property</code> 装饰器实际上是一个类，它里面定义了三个方法 <code>getter()</code>, <code>setter()</code>, <code>deleter()</code>, 每一个方法都是一个装饰器。</p>
+
+<p>它为什么要这么定义的主要原因是各种不同的装饰器方法会在关联的 <code>property</code> 实例上操作它的状态。 因此，任何时候只要你碰到需要在装饰器中记录或绑定信息，那么这不失为一种可行方法。</p>
+
+<h1 id="类作为装饰器">类作为装饰器</h1>
+
+<p>使用装饰器包装函数，但是希望返回一个可调用实例。为了实现类装饰器，你需要确保它实现了 <code>__call__()</code> 和 <code>__get__()</code> 方法</p>
+
+<pre><code class="language-python">import types
+from functools import wraps
+
+class Profiled(object):
+    def __init__(self, func):
+        wraps(func)(self)
+        self.ncalls = 0
+
+    def __call__(self, *args, **kwargs):
+        self.ncalls += 1
+        return self.__wrapped__(*args, **kwargs)
+
+    def __get__(self, instance, cls):
+        if instance is None:
+            return self
+        else
+            return types.MethodType(self, instance)
+
+@Profiled
+def add(x, y):
+    return x + y
+
+class Spam:
+    @Profiled
+    def bar(self, x):
+        print(self, x)
+</code></pre>
+
+<p>首先 <code>wraps</code> 函数将被包装函数的元信息复制到可调用实例中。</p>
+
+<p>// TODO</p>
+
+<p><a href="https://www.cnblogs.com/f-ck-need-u/p/10204617.html">类装饰器进阶</a></p>
+
+<p>typys Method 方法</p>
+
+<ul>
+<li><a href="https://stackoverflow.com/questions/46525069/how-is-types-methodtype-used">how is types methodtype used types.Method</a></li>
+<li><a href="https://stackoverflow.com/questions/36812062/why-need-def-get-return-types-methodtype">why need return types methodtype</a></li>
+</ul>
+
+  </div>
+</div>
+<div class="container has-text-centered">
+    
+    <aside><div id="share"></div></aside>
+    <script type="text/javascript">
+        $("#share").jsSocials({
+            showLabel: false,
+            showCount: false,
+            shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+        });
+    </script>
+    
+</div>
+
+<div class="container has-text-centered">
+  
+</div>
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/cnewbie/">cnewbie</a> 2018 - 2019</p>
+  </div>
+</section>
+
+

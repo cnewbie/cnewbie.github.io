@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<title>Python 元类 | Hugo Blog</title>
+
+<link rel="stylesheet" href="https://cnewbie.github.io/css/styles.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/zenburn.min.css" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://cnewbie.github.io/js/highlight.js"></script>
+
+
+
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-minima.css" />
+<script type="text/javascript" src="https://cnewbie.github.io/js/jssocials.js"></script>
+
+
+
+
+<div class="container">
+    <nav class="navbar level">
+      <div class="navbar-brand">
+          <a class="nav-item" href="https://cnewbie.github.io"><h1 class="title is-3">Hugo Blog</h1></a>
+      </div>           
+      <div class="navbar-menu has-text-centered is-active">
+          <div class="navbar-end is-centered">
+              
+                <a href="https://cnewbie.github.io/about" rel="me">
+                  <span class="icon">
+                    <i class="fas fa-info"></i>
+                  </span>
+                </a>
+              
+                <a href="https://github.com/cnewbie/" rel="me">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+              
+           </div>
+      </div>
+    </nav>
+  </div>
+
+<div class="container">
+  <h2 class="subtitle is-6">March 15, 2019</h2>
+  <h1 class="subtitle is-size-4-mobile is-size-3-desktop">Python 元类</h1>
+  <div class="content">
+    
+
+<p>Python 元类（metaclass）</p>
+
+<h1 id="对象">对象</h1>
+
+<p>Python 中一切皆对象，连类也不例外。</p>
+
+<p>对象中包含三个关键性属性：</p>
+
+<ol>
+<li>标识 使用 <code>id()</code> 方法查看</li>
+<li>对象值</li>
+<li>类型 使用 <code>type()</code> 方法查看</li>
+</ol>
+
+<h1 id="类与对象">类与对象</h1>
+
+<p>Python 中使用 class 关键字定义类，通过定义的类生成类实例。实例称之为实例对象。Python 中类是一个对象，所有内建类型的类型都是 type，这个 type 就是元类，元类就是 Python 中的造物主。</p>
+
+<p>道生一，一生二，二生三，三生万物。</p>
+
+<pre><code>道 即是 type
+一 即是 metaclass(元类，或者叫类生成器)
+二 即是 class(类，或者叫实例生成器)
+三 即是 instance(实例)
+万物 即是 实例的各种属性与方法，我们平常使用python时，调用的就是它们。
+</code></pre>
+
+<pre><code>type&gt;&gt;&gt;metaclass&gt;&gt;&gt;class&gt;&gt;&gt;instance
+^  |
+|&lt;&lt;|
+</code></pre>
+
+<pre><code class="language-python"># class 关键词创建
+class Base:
+    counter = 10
+
+class Derived(Base):
+    def get_counter(self):
+        return self.counter
+
+x = Derived()
+x.get_counter()
+# 动态创建
+Base = type('Base', (), {'counter': 10})
+Derived = type('Derived', (Base,), dict(get_counter=lambda self: self.counter))
+
+x = Derived()
+x.get_counter()
+
+# type 函数
+type(name, bases, dict):
+
+    name: 字符串类型，存放新类的名字
+    bases: 元组(tuple)类型，指定类的基类/父类
+    dict: 字典类型，存放该类的所有属性(attributes)和方法(method)
+
+</code></pre>
+
+<p>现在我们都知道类（对象）可以使用 class 关键字创建，我们还知道类（对象）的类型是 type，既然知道了它的类型是　type，那么肯定可以通过 type（元类）来创建。</p>
+
+<h1 id="类的创建过程">类的创建过程</h1>
+
+<ol>
+<li>确定类的父类是否包含 metaclass 参数，没有就执行下一步</li>
+<li>确定类的父类的父类是否包含 metaclass 参数，没有就执行下一步</li>
+<li>使用默认元类 type</li>
+</ol>
+
+<h1 id="定义元类">定义元类</h1>
+
+<h2 id="函数方式">函数方式</h2>
+
+<pre><code class="language-python">def upper_attr(cls, base, attr):
+    attrs = ((name, value) for name, value in attr.items() if not namw.startswith('__'))
+    uppercase_attr = dict((name.upper(), value) for name, value in attrs)
+    return type(cls, base, attr)
+
+def Foo(object):
+    __metaclass__ = upper_attr
+    bar = 'bar'
+print hasattr(Foo, 'bar')
+# 输出: False
+print hasattr(Foo, 'BAR')
+# 输出:True
+
+f = Foo()
+print f.BAR
+# 输出:'bar'
+</code></pre>
+
+<h2 id="类方式">类方式</h2>
+
+<pre><code class="language-python"># 请记住，'type'实际上是一个类，就像'str'和'int'一样。所以，你可以从type继承
+# __new__ 是在__init__之前被调用的特殊方法，__new__是用来创建对象并返回之的方法，__new_()是一个类方法
+# 而__init__只是用来将传入的参数初始化给对象，它是在对象创建之后执行的方法。
+# 你很少用到__new__，除非你希望能够控制对象的创建。这里，创建的对象是类，我们希望能够自定义它，所以我们这里改写__new__
+# 如果你希望的话，你也可以在__init__中做些事情。还有一些高级的用法会涉及到改写__call__特殊方法，但是我们这里不用，下面我们可以单独的讨论这个使用
+
+class UpperAttrMetaclass(type):
+    def __new__(cls, name, bases, dct):
+        attrs = ((name, value) for name, value in dct.items() if not name.startswith('__'))
+        uppercase_attr = dict((name.upper(), value) for name, value in attrs)
+        return super(UpperAttrMetaclass, cls).__new__(cls, name, bases, uppercase_attr)
+</code></pre>
+
+<h1 id="元类的应用">元类的应用</h1>
+
+<ul>
+<li>ORM</li>
+<li>限定子类行为</li>
+<li>注册所有子类</li>
+</ul>
+
+<h1 id="实例化过程">实例化过程</h1>
+
+<p>实例：<code>__call__</code> &gt;&gt;&gt; <code>__new__</code> &gt;&gt;&gt; <code>__init__</code> &gt;&gt;&gt; instance</p>
+
+<p>类实例：<code>__prepare__</code> &gt;&gt;&gt; <code>__call__</code> &gt;&gt;&gt; <code>__new__</code> &gt;&gt;&gt; <code>__init__</code> &gt;&gt;&gt; class instance</p>
+
+<h1 id="特殊函数签名">特殊函数签名</h1>
+
+<pre><code class="language-python">&gt;&gt;&gt; class Meta(type):
+...     @classmethod
+...     def __prepare__(mcs, name, bases, **kwargs):
+...         print('  Meta.__prepare__(mcs=%s, name=%r, bases=%s, **%s)' % (
+...             mcs, name, bases, kwargs
+...         ))
+...         return {}
+
+...     def __new__(mcs, name, bases, attrs, **kwargs):
+...         print('  Meta.__new__(mcs=%s, name=%r, bases=%s, attrs=[%s], **%s)' % (
+...             mcs, name, bases, ', '.join(attrs), kwargs
+...         ))
+...         return super().__new__(mcs, name, bases, attrs)
+
+...     def __init__(cls, name, bases, attrs, **kwargs):
+...         print('  Meta.__init__(cls=%s, name=%r, bases=%s, attrs=[%s], **%s)' % (
+...             cls, name, bases, ', '.join(attrs), kwargs
+...         ))
+...         return super().__init__(name, bases, attrs)
+
+...     def __call__(cls, *args, **kwargs):
+...         print('  Meta.__call__(cls=%s, args=%s, kwargs=%s)' % (
+...             cls, args, kwargs
+...         ))
+...         return super().__call__(*args, **kwargs)
+...
+</code></pre>
+
+<h1 id="元类-super-方法">元类 super 方法</h1>
+
+<pre><code class="language-python">import random
+
+class Meta(type):
+    # 类变量
+    _instance = None
+
+    def __call__(cls, *args, **kwargs):
+        print('meta: call: %s' % cls)
+        if cls._instance is None:
+            cls._instance = super(Meta, cls).__call__(*args, **kwargs)
+        print(&quot;meta: call: returning %s@%s&quot; % (cls._instance.__class__, id(cls._instance)))
+        return cls._instance
+
+
+class ClassA(object):
+    __metaclass__ = Meta
+
+    def __new__(cls, *args, **kwargs):
+        print('classA: new')
+        return super(ClassA, cls).__new__(cls, *args, **kwargs)
+
+    def __init__(self, *args, **kwargs):
+        self.val = random.randint(1, 1000)
+        print('classA: init')
+
+
+class ClassB(object):
+    __metaclass__ = Meta
+
+    def __new__(cls, *args, **kwargs):
+        print('classB: new')
+        return super(ClassB, cls).__new__(cls, *args, **kwargs)
+
+    def __init__(self, *args, **kwargs):
+        print('classB: init')
+        self.val = random.randint(1, 1000)
+
+class ClassC(ClassB):
+    def __new__(cls, *args, **kwargs):
+        print('classC: new')
+        return super(ClassC, cls).__new__(cls, *args, **kwargs)
+
+    def __init__(self, *args, **kwargs):
+        print('classC: init')
+        super(ClassC, self).__init__(self, *args, **kwargs)
+        self.test = 3
+
+
+def main():
+    a1 = ClassA()
+    b1 = ClassB()
+    a2 = ClassA()
+    b2 = ClassB()
+    c1 = ClassC()
+
+    print(a1.val)
+    print(b1.val)
+    print(a2.val)
+    print(b2.val)
+
+if __name__ == '__main__':
+    main()
+</code></pre>
+
+<p><code>x = Foo() == type(Foo).__call__(Foo)</code></p>
+
+<p>元类中的 <code>super() == super(Singleton, cls)</code> 方法调用了待实例化的类 <code>__new__ and __init__</code></p>
+
+<ul>
+<li><code>super(cls, instance)</code> (isinstance(instance, cls) must be True), the method is selected from the next class in <code>instance.__class__.__mro__</code> starting from <code>instance.__class__</code>.</li>
+<li><code>super(cls0, cls1)</code> (issubclass(cls1, cls0) must be True), the method is selected from next class in <code>cls1.__mro__</code> starting from cls0</li>
+</ul>
+
+<h1 id="reference">Reference</h1>
+
+<ul>
+<li><a href="https://segmentfault.com/a/1190000011447445">刘羽冲</a></li>
+<li><a href="https://www.cnblogs.com/tkqasn/p/6524879.html">tkqasn</a></li>
+<li><a href="https://stackoverflow.com/questions/100003/what-are-metaclasses-in-python">stackoverflow</a></li>
+<li><a href="https://lotabout.me/2018/Understanding-Python-MetaClass/">lotabout</a></li>
+<li><a href="https://blog.ionelmc.ro/2015/02/09/understanding-python-metaclasses/">ionelmc</a></li>
+<li><a href="https://stackoverflow.com/questions/47713368/super-in-a-metaclass">stackoverflow</a></li>
+<li><a href="https://stackoverflow.com/questions/222877/what-does-super-do-in-python">super do</a></li>
+<li><a href="https://rhettinger.wordpress.com/2011/05/26/super-considered-super/">blog</a></li>
+<li><a href="https://stackoverflow.com/questions/6760685/creating-a-singleton-in-python">单例模式</a></li>
+<li><a href="https://stackoverflow.com/questions/56691487/how-does-metaclass-work-with-the-mro-list-when-super-is-called?noredirect=1">super in metaclass</a></li>
+<li><a href="https://stackoverflow.com/questions/100003/what-are-metaclasses-in-python">what are metaclasses</a></li>
+<li><a href="https://stackoverflow.com/questions/44725483/what-exactly-does-super-return-in-python-3">super return</a></li>
+<li><a href="https://stackoverflow.com/questions/6966772/using-the-call-method-of-a-metaclass-instead-of-new">super <strong>call</strong> metaclass</a></li>
+</ul>
+
+  </div>
+</div>
+<div class="container has-text-centered">
+    
+    <aside><div id="share"></div></aside>
+    <script type="text/javascript">
+        $("#share").jsSocials({
+            showLabel: false,
+            showCount: false,
+            shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+        });
+    </script>
+    
+</div>
+
+<div class="container has-text-centered">
+  
+</div>
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/cnewbie/">cnewbie</a> 2018 - 2019</p>
+  </div>
+</section>
+
+

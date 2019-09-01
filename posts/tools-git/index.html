@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<title>Git 命令速查 | Hugo Blog</title>
+
+<link rel="stylesheet" href="https://cnewbie.github.io/css/styles.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/zenburn.min.css" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://cnewbie.github.io/js/highlight.js"></script>
+
+
+
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-minima.css" />
+<script type="text/javascript" src="https://cnewbie.github.io/js/jssocials.js"></script>
+
+
+
+
+<div class="container">
+    <nav class="navbar level">
+      <div class="navbar-brand">
+          <a class="nav-item" href="https://cnewbie.github.io"><h1 class="title is-3">Hugo Blog</h1></a>
+      </div>           
+      <div class="navbar-menu has-text-centered is-active">
+          <div class="navbar-end is-centered">
+              
+                <a href="https://cnewbie.github.io/about" rel="me">
+                  <span class="icon">
+                    <i class="fas fa-info"></i>
+                  </span>
+                </a>
+              
+                <a href="https://github.com/cnewbie/" rel="me">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+              
+           </div>
+      </div>
+    </nav>
+  </div>
+
+<div class="container">
+  <h2 class="subtitle is-6">July 16, 2018</h2>
+  <h1 class="subtitle is-size-4-mobile is-size-3-desktop">Git 命令速查</h1>
+  <div class="content">
+    
+
+<h1 id="git-基础">Git 基础</h1>
+
+<h2 id="基础操作">基础操作</h2>
+
+<p>初始化仓库</p>
+
+<p><code>git init</code></p>
+
+<p><code>git clone [url]</code></p>
+
+<p>检查文件状态</p>
+
+<p><code>git status</code></p>
+
+<p>跟踪文件</p>
+
+<p><code>git add [file name]</code> 跟踪新文件/暂存已修改文件</p>
+
+<p>对比文件修改内容</p>
+
+<p><code>git diff [file name]</code></p>
+
+<p><code>git diff --cached/staged [file name]</code> 对比暂存区文件</p>
+
+<p>提交更新</p>
+
+<p><code>git commit</code></p>
+
+<p><code>git commit -m [message]</code>  更新纪录</p>
+
+<p><code>git commit -a -m [message]</code>  跳过暂存文件步骤直接提交</p>
+
+<p>移除文件</p>
+
+<p><code>git rm [file name]</code> 删除文件并取消跟踪</p>
+
+<p><code>git rm --cached [file name]</code> 取消跟踪文件</p>
+
+<p>重命名文件</p>
+
+<p><code>git mv [file name]</code></p>
+
+<pre><code class="language-bash">mv old_name new_name
+git rm old_name
+git add new_name
+</code></pre>
+
+<p>查看提交历史</p>
+
+<p><code>git log</code> <a href="https://git-scm.com/docs/git-log">git log</a></p>
+
+<p><code>git log --pretty=format: &quot;%h %s&quot; --graph</code></p>
+
+<p>撤销提交</p>
+
+<p><code>git commmit --amend</code></p>
+
+<p><code>git rebase -i</code></p>
+
+<p>撤销暂存文件</p>
+
+<p><code>git reset HEAD [file name]</code></p>
+
+<p><code>git reset --hard [file name]</code> 当前文件修改丢失</p>
+
+<p>撤销文件修改</p>
+
+<p><code>git checkout -- [file name]</code></p>
+
+<h2 id="远程仓库">远程仓库</h2>
+
+<p>查看远程仓库</p>
+
+<p><code>git remote -v</code></p>
+
+<p>添加远程仓库</p>
+
+<p><code>git remote add [short name] [url]</code></p>
+
+<p>从远程仓库获取文件</p>
+
+<p><code>git fetch [remote name]</code></p>
+
+<p>推送到远程分支</p>
+
+<p><code>git push [remote name] [branch name]</code></p>
+
+<p>查看远程仓库</p>
+
+<p><code>git remote show [remote-name]</code></p>
+
+<p>远程仓库重命名</p>
+
+<p><code>git remote rename [old name] [new name]</code></p>
+
+<p>删除远程仓库</p>
+
+<p><code>git rm [remote name]</code></p>
+
+<h2 id="标签">标签</h2>
+
+<p>查看标签</p>
+
+<p><code>git tag</code></p>
+
+<p>添加附注标签</p>
+
+<p><code>git tag -a [tag name] -m [message]</code></p>
+
+<p>查看标签详情</p>
+
+<p><code>git show [tag name]</code></p>
+
+<p>添加轻量标签</p>
+
+<p><code>git tag [tag name]</code></p>
+
+<p>推送标签至远程服务器</p>
+
+<p><code>git push [remote branch name] [tag name]</code></p>
+
+<p>推送所有标签</p>
+
+<p><code>git push [remote branch name] --tags</code></p>
+
+<p>特定标签上建立分支</p>
+
+<p><code>git checkout -b [branch name] [tag name]</code></p>
+
+<h1 id="git-分支">Git 分支</h1>
+
+<h2 id="分支基本操作">分支基本操作</h2>
+
+<p>分支创建</p>
+
+<p><code>git branch [branch name]</code></p>
+
+<p>分支切换</p>
+
+<p><code>git checkout [branch name]</code></p>
+
+<p>查看分支历史</p>
+
+<p><code>git log --oneline --decorate --graph --all</code></p>
+
+<p>合并分支</p>
+
+<p><code>git merge [branch name]</code></p>
+
+<p>删除分支</p>
+
+<p><code>git branch -d [branch name]</code></p>
+
+<h2 id="远程分支">远程分支</h2>
+
+<p>查看远程分支</p>
+
+<p><code>git ls-remote</code> or <code>git remote show [remote name]</code></p>
+
+<p>推送分支</p>
+
+<p><code>git push [remote] [local branch]  == git push [remote] [local branch:remote branch name]</code></p>
+
+<p>跟踪分支</p>
+
+<p><code>git chenckout -b [branch] [remote name]/[branch]</code></p>
+
+<p>设置上游分支</p>
+
+<p><code>git branch -u [remote name]/[branch]</code></p>
+
+<p>查看跟踪分支</p>
+
+<p><code>git branch -vv</code></p>
+
+<p>抓取分支更新</p>
+
+<p><code>git fetch --all</code></p>
+
+<p>删除远程分支</p>
+
+<p><code>git push [remote] --delete [branch name]</code> or <code>git push [remote] :[branch naem]</code></p>
+
+<p><a href="https://git-scm.com/docs/git-push#_examples">example</a></p>
+
+<p>分支合并</p>
+
+<p><code>git rebase/merge</code>
+<code>rebase</code>历史纪录更简洁  <a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing">变基</a></p>
+
+<h1 id="git-工具">Git 工具</h1>
+
+<p>引用日志</p>
+
+<p>查看分支引用的历史纪录</p>
+
+<p><code>git reflog</code></p>
+
+<p>提交区间</p>
+
+<p>双点语法,查看后者引用中特定的提交</p>
+
+<p><code>git log [ref name1]..[ref name2]</code></p>
+
+<p>多点语法,不包含最后引用的提交</p>
+
+<p><code>git log refA refB ^refC == git log refA refB --not refC</code></p>
+
+<p>三点语法,查看两引用的差异提交</p>
+
+<p><code>git log [ref name1]...[ref name2]</code></p>
+
+<h2 id="储藏与清理">储藏与清理</h2>
+
+<p>储藏工作空间</p>
+
+<p><code>git stash save</code></p>
+
+<p>查看储藏列表</p>
+
+<p><code>git stash list</code></p>
+
+<p>应用储藏</p>
+
+<p><code>git stash apply [ref]</code></p>
+
+<p>删除储藏</p>
+
+<p><code>git stash drop [ref]</code></p>
+
+<p>不储藏暂存区文件</p>
+
+<p><code>git stash save --kep-index</code></p>
+
+<p>应用储藏包括暂存区</p>
+
+<p><code>git stash apply --index</code></p>
+
+<p>储藏包含未跟踪的文件</p>
+
+<p><code>git stash -u/--include-untracked</code></p>
+
+<p>新建分支并应用储藏</p>
+
+<p><code>git stash branch [nranch name]</code></p>
+
+<p>移除为跟踪文件</p>
+
+<p><code>git clean</code></p>
+
+<p>移除所用文件并储藏</p>
+
+<p><code>git stash --all</code></p>
+
+<h2 id="重写历史">重写历史</h2>
+
+<p>修改最后一次提交</p>
+
+<p><code>git commit --amend</code></p>
+
+<p>交互式修改ref开始的所有提交</p>
+
+<p><code>git rebase -i [ref]</code></p>
+
+<p>批量修改提交</p>
+
+<p><code>git filter-branch --tree-filter [command] [ref]</code></p>
+
+<p>切换根目录</p>
+
+<p><code>git filter-branch --subdirectory-filter [directory name] [ref]</code></p>
+
+<h2 id="重置对比">重置对比</h2>
+
+<p>相反操作操作提交指针</p>
+
+<p><code>git reset --soft HEAD~  |  git commit</code></p>
+
+<p>相反操作暂存区</p>
+
+<p><code>git reset [file name]  |  git add [file name]</code></p>
+
+<p>撤销所有修改包括工作区</p>
+
+<p><code>git reset --hard HEAD~</code></p>
+
+<p>恢复暂存区文件版本其他不变  <a href="https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#Squashing">精简历史</a></p>
+
+<p><code>git reset [ref] -- [file name]</code></p>
+
+<p>切换HEAD指针不丢弃工作目录修改</p>
+
+<p><code>git checkout [branch name]</code></p>
+
+<p>丢弃文件修改  <a href="https://github.com/geeeeeeeeek/git-recipes/wiki/5.2-%E4%BB%A3%E7%A0%81%E5%9B%9E%E6%BB%9A%EF%BC%9AReset%E3%80%81Checkout%E3%80%81Revert-%E7%9A%84%E9%80%89%E6%8B%A9">reset,checkout,revert</a></p>
+
+<p><code>git checkout -- [file name]</code></p>
+
+<h2 id="子模块">子模块</h2>
+
+<p>添加子模块</p>
+
+<p><code>git submodule add  [url]</code></p>
+
+<p>抓取后初始化模块</p>
+
+<p><code>git submodule init</code></p>
+
+<p>抓取后更新子模块</p>
+
+<p><code>git submodule update --remote</code></p>
+
+<p>查看子模块日志</p>
+
+<p><code>git log -p --submodule</code></p>
+
+<p>更新合并</p>
+
+<p><code>git submodule update --remote --merge/--rebase</code></p>
+
+<p>检查子模块是否推送</p>
+
+<p><code>git push --recurse-submodules=check</code></p>
+
+<p>批量操作子模块</p>
+
+<p><code>git submodule foreach [command]</code></p>
+
+  </div>
+</div>
+<div class="container has-text-centered">
+    
+    <aside><div id="share"></div></aside>
+    <script type="text/javascript">
+        $("#share").jsSocials({
+            showLabel: false,
+            showCount: false,
+            shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+        });
+    </script>
+    
+</div>
+
+<div class="container has-text-centered">
+  
+</div>
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/cnewbie/">cnewbie</a> 2018 - 2019</p>
+  </div>
+</section>
+
+

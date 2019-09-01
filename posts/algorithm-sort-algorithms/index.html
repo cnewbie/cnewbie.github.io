@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<title>常用排序算法总结 | Hugo Blog</title>
+
+<link rel="stylesheet" href="https://cnewbie.github.io/css/styles.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/zenburn.min.css" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://cnewbie.github.io/js/highlight.js"></script>
+
+
+
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-minima.css" />
+<script type="text/javascript" src="https://cnewbie.github.io/js/jssocials.js"></script>
+
+
+
+
+<div class="container">
+    <nav class="navbar level">
+      <div class="navbar-brand">
+          <a class="nav-item" href="https://cnewbie.github.io"><h1 class="title is-3">Hugo Blog</h1></a>
+      </div>           
+      <div class="navbar-menu has-text-centered is-active">
+          <div class="navbar-end is-centered">
+              
+                <a href="https://cnewbie.github.io/about" rel="me">
+                  <span class="icon">
+                    <i class="fas fa-info"></i>
+                  </span>
+                </a>
+              
+                <a href="https://github.com/cnewbie/" rel="me">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+              
+           </div>
+      </div>
+    </nav>
+  </div>
+
+<div class="container">
+  <h2 class="subtitle is-6">August 5, 2018</h2>
+  <h1 class="subtitle is-size-4-mobile is-size-3-desktop">常用排序算法总结</h1>
+  <div class="content">
+    
+
+<hr />
+
+<h1 id="工具函数">工具函数</h1>
+
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;ctime&gt;
+
+using namespace std;
+
+void swap(int &amp;a,int &amp;b){
+    int tmp = a;
+    a = b;
+    b = tmp;
+}
+
+void printarr(int *a,int n){
+    for(size_t i = 0; i &lt; n; i++)
+    {
+        cout &lt;&lt; a[i] &lt;&lt; &quot; &quot;;
+    }
+    cout &lt;&lt; endl;
+}
+</code></pre>
+
+<h1 id="bubble-sort-冒泡排序">Bubble Sort 冒泡排序</h1>
+
+<pre><code class="language-cpp">void bubble_sort(int *a, int n){
+    for(size_t i = n-1; i &gt; 0;--i){
+        for(size_t j = i; j &gt; 0;--j)
+        {
+            if(a[j] &lt; a[j-1])
+                swap(a[j],a[j-1]);
+        }
+    }
+}
+
+void bubble_sort_speedup(int *a, int n){
+    for(size_t i = 0; i &lt; n-1; i++){
+        int flag = 0;
+        for(size_t j = 0; j &lt; n-1-i; ++j){
+            if(a[j] &gt; a[j+1]){
+                swap(a[j],a[j+1]);
+                flag = 1;
+            }
+        }
+        if(!flag)
+            break;
+    }
+}
+</code></pre>
+
+<h1 id="cocktail-sort-鸡尾酒排序">Cocktail Sort 鸡尾酒排序</h1>
+
+<pre><code class="language-cpp">void cocktail_sort(int *a,int n){
+    int left = 0;
+    int right = n-1;
+    while(left &lt; right){
+        for(size_t i = left; i&lt;right;++i){
+            if(a[i] &gt; a[i+1])
+                swap(a[i],a[i+1]);
+        }
+        right--;
+        for(size_t j = right;j&gt;left;--j){
+            if(a[j-1] &gt; a[j]){
+                swap(a[j-1],a[j]);
+            }
+        }
+        left++;
+    }
+}
+</code></pre>
+
+<pre><code class="language-cpp">void cocktail_sort_speedup(int *a,int n){
+    bool sorted = false;
+    while(!sorted){
+        sorted = true;
+        for( int i = 0; i &lt; n - 1; i++ ){
+            if( a[i] &gt; a[i + 1] ){
+                swap( a[i], a[i + 1] );
+                sorted = false;
+            }
+        }
+        if(sorted)
+            break;
+        sorted = true;
+        for( int j = n - 1; j &gt; 0; j-- ){
+            if( a[j - 1] &gt; a[j] ){
+                swap( a[j], a[j - 1] );
+                sorted = false;
+            }
+        }
+    }
+}
+</code></pre>
+
+<h1 id="selection-sort-选择排序">Selection Sort 选择排序</h1>
+
+<pre><code class="language-cpp">void selection_sort(int *a, int n){
+    for(size_t i = 0;i &lt; n-1;i++){
+        int index = i;
+        for(size_t j = i+1;j &lt; n;j++){
+            if(a[j] &lt; a[index])
+                index = j;
+        }
+        if(i!=index)
+            swap(a[i],a[index]);
+    }
+}
+</code></pre>
+
+<h1 id="insertion-sort-插入排序">Insertion Sort 插入排序</h1>
+
+<pre><code class="language-cpp">void insertion_sort(int *a, int n){
+    for(size_t i = 1;i &lt; n;i++){
+        int tmp = a[i];
+        size_t j = i;
+        while(j &gt; 0 &amp;&amp; tmp &lt; a[j-1]){
+            a[j] = a[j-1];
+            --j;
+        }
+        a[j] = tmp;
+    }
+}
+</code></pre>
+
+<h1 id="shell-sort-希尔排序">Shell Sort 希尔排序</h1>
+
+<pre><code class="language-cpp">void shell_sort(int *a,int n){
+    int h,i,j,t;
+    for(h = n;h/=2;){
+        // iterator
+        for(i=h;i&lt;n;i++){
+            t=a[i];
+            for(j=i;j&gt;=h &amp;&amp; t&lt;a[j-h];j-=h){
+                a[j] = a[j-h];
+            }
+            a[j] = t;
+        }
+    }
+}
+</code></pre>
+
+<pre><code class="language-cpp">void shell_sort_speedup(int *a,int n){
+    int i,j,tmp,step;
+    step = n;
+    while(step&gt;1){
+        step = step/3+1;
+        // insert sort
+        for(i=step;i&lt;n;i++){
+            tmp = a[i];
+            for(j=i;j&gt;0 &amp;&amp; a[j] &lt; a[j-step];j-=step){
+                a[j] = a[j-step];
+            }
+            a[j] = tmp;
+        }
+    }
+}
+</code></pre>
+
+<h1 id="merge-sort归并排序">Merge Sort归并排序</h1>
+
+<p>递归版本</p>
+
+<pre><code class="language-cpp">void merge_arr(int *a,int m,int n){
+    int i,j,k;
+    int *temp = new int[n];
+    // 0 ---&gt; n
+    for(i=0,j=m,k=0;k&lt;n;k++){
+        temp[k] = j == n ?
+            a[i++]:i == m ?
+            a[j++]:a[j] &lt; a[i]?
+            a[j++]:a[i++];
+    }
+    for(k=0;k&lt;n;k++){
+        a[k] = temp[k];
+    }
+    delete [] temp;
+}
+void merge_sort(int *a,int n){
+    if(n &lt; 2)
+        return;
+    int m = n/2;
+    merge_sort(a,m);
+    merge_sort(a+m,n-m);
+    merge_arr(a,m,n);
+}
+</code></pre>
+
+<p>非递归版本</p>
+
+<pre><code class="language-cpp">void merge_arr2(int *a,int left,int mid,int right){
+    int i = left;
+    int j = mid + 1;
+    int k = 0;
+    int len = right-left+1;
+    int *temp = new int[len];
+    // while(i &lt;= mid &amp;&amp; j &lt;= right){
+    //     temp[k++] = a[i] &lt;= a[j] ? a[i++] : a[j++];
+    // }
+    // while(i &lt;= mid){
+    //     temp[k++] = a[i++];
+    // }
+    // while(j &lt;= right){
+    //     temp[k++] = a[j++];
+    // }
+    for(;k&lt;len;k++){
+        temp[k] = j &gt; right?
+                a[i++]:i &gt; mid?
+                a[j++]:a[i] &lt; a[j]?
+                a[i++]:a[j++];
+    }
+    for(k = 0; k&lt; len;){
+        a[left++] = temp[k++];
+    }
+
+    delete [] temp;
+}
+void merge_sort(int *a,int len){
+    // int left,mid,right,n;
+    int left,n;
+    for(int i = 2;i/2 &lt; len;i*=2){
+        // left = 0;
+        // for(left=0;left+i&lt;len;){
+        //     mid = left + i - 1;
+        //     right = mid + i &lt; len ? mid + i : len - 1;
+        //     n = mid + i &lt; len ? 2*i : len - left+1;
+        //     merge_arr(a+left,mid,n);
+        //     left = right + 1 ;
+        // }
+        for(left = 0;left &lt; len;left+=i){
+            // mid = left + i/2;
+            n = left + i &lt; len?i:len-left;
+            merge_arr(a+left,i/2,n);
+        }
+    }
+}
+</code></pre>
+
+<h1 id="qucik-sort-快速排序">Qucik Sort 快速排序</h1>
+
+<pre><code class="language-cpp">void quick_sort(int *a,int len){
+    if(len&lt;2)
+        return;
+    int i,j;
+    int pivot = a[len/2];
+    for(i=0,j=len-1;;i++,j--){
+        while(a[i] &lt; pivot) i++;
+        while(a[j] &gt; pivot) j--;
+        if(i &gt;= j) break;
+        // swap value
+        swap(a[i],a[j]);
+    }
+    quick_sort(a,i);
+    quick_sort(a+i,len-i);
+}
+</code></pre>
+
+<pre><code class="language-cpp">void quick_sort2(int *a,int n){
+    if(n&lt;2) return;
+    int mid=a[0]; // pivot
+    int i=0,j=n-1;
+    while(i&lt;j){
+        while(j&gt;i &amp;&amp; a[j]&gt;=mid) j--;
+        if(j&gt;i){
+            a[i]=a[j];
+            i++;
+        }
+        while(i&lt;j &amp;&amp; a[i]&lt;mid) i++;
+        if(i&lt;j){
+            a[j]=a[i];
+            j--;
+        }
+    }
+    a[i]=mid;
+    quick_sort2(a,i);
+    quick_sort2(a+i+1,n-i-1);
+}
+</code></pre>
+
+<h1 id="heap-sort-堆排序">Heap Sort 堆排序</h1>
+
+<p>递归版本</p>
+
+<pre><code class="language-cpp">// i is index of array,the left child index is 2*i+1,the right one is 2*i+2,the father index is floor((i-1)/2)
+void siftDown(int *a, int i, int n)
+{
+    int lhs=2*i+1;
+    int rhs=2*i+2;
+    int maxid=i;
+    if(lhs&lt;n &amp;&amp; a[maxid]&lt;a[lhs]) maxid=lhs;
+    if(rhs&lt;n &amp;&amp; a[maxid]&lt;a[rhs]) maxid=rhs;
+    if(maxid!=i)
+    {
+        swap(a[i],a[maxid]);
+        siftDown(a,maxid,n);
+    }
+}
+
+// void makeHeap(int *a, int n){
+//     for(int i=n/2-1; i&gt;=0; i--)
+//     {
+//         siftDown(a,i,n);
+//     }
+// }
+
+void heap_sort(int *a,int n){
+    // makeHeap(a,n);
+    for(int i=n/2-1; i&gt;=0; i--){
+        siftDown(a,i,n);
+    }
+    for(int i=n-1; i&gt;0; i--){
+        swap(a[0],a[i]);
+        siftDown(a,0,i);
+    }
+}
+</code></pre>
+
+<p>非递归版本</p>
+
+<pre><code class="language-cpp">void heap_down(int *a,int i,int n){
+    int lc = 2*i+1;
+    for(;lc&lt;n;i=lc,lc=2*i+1){
+        // lc + 1 &lt; n right chid index can't greater than the array length
+        if(lc+1 &lt; n &amp;&amp; a[lc]&lt;a[lc+1])
+            lc++;
+        if(a[i] &gt;= a[lc])
+            break;
+        else
+            swap(a[i],a[lc]);
+    }
+}
+
+void heap_sort2(int *a,int n){
+    // makeHeap(a,n);
+    for(int i=n/2-1; i&gt;=0; i--){
+        heap_down(a,i,n);
+    }
+    for(int i=n-1; i&gt;0; i--){
+        swap(a[0],a[i]);
+        heap_down(a,0,i);
+    }
+}
+</code></pre>
+
+<h1 id="counting-sort-计数排序">Counting Sort 计数排序</h1>
+
+<pre><code class="language-cpp">void couting_sort(int *a,int n){
+    int range = 20;
+    int *C = new int[range];
+    int *temp = new int[n];
+    for(int i = 0;i &lt; range;i++){
+        C[i] = 0;
+        if(i&lt;n)
+            temp[i]=0;
+    }
+    for(int j = 0;j &lt; n;j++){
+        C[a[j]]++;
+    }
+    for(int i = 1;i &lt; range;i++){
+        C[i]+=C[i-1];
+    }
+    for(int j = n-1;j &gt;= 0;j--){
+        temp[--C[a[j]]] = a[j];
+    }
+    for (int j = 0; j &lt; n; j++){
+        a[j] = temp[j];
+    }
+    delete [] C;
+    delete [] temp;
+}
+</code></pre>
+
+<h1 id="算法对比">算法对比</h1>
+
+<blockquote>
+<p>稳定：如果a原本在b前面，而a=b，排序之后a仍然在b的前面。</p>
+
+<p>不稳定：如果a原本在b的前面，而a=b，排序之后 a 可能会出现在 b 的后面。</p>
+
+<p>时间复杂度：对排序数据的总的操作次数。反映当n变化时，操作次数呈现什么规律。</p>
+
+<p>空间复杂度：是指算法在计算机内执行时所需存储空间的度量，它也是数据规模n的函数。</p>
+</blockquote>
+
+<table>
+<thead>
+<tr>
+<th align="left">算法名称</th>
+<th align="center">时间复杂度（最好）</th>
+<th align="center">时间复杂度（平均）</th>
+<th align="center">时间复杂度（最坏）</th>
+<th align="center">空间复杂度</th>
+<th align="center">稳定性</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">Insertion Sort</td>
+<td align="center">O(n)</td>
+<td align="center">O(n^2)</td>
+<td align="center">O(n^2)</td>
+<td align="center">O(1)</td>
+<td align="center">稳定</td>
+</tr>
+
+<tr>
+<td align="left">Shell Sort</td>
+<td align="center">O(n)</td>
+<td align="center">O(n^1.3)</td>
+<td align="center">O(n^2)</td>
+<td align="center">O(1)</td>
+<td align="center">不稳定</td>
+</tr>
+
+<tr>
+<td align="left">Selection Sort</td>
+<td align="center">O(n^2)</td>
+<td align="center">O(n^2)</td>
+<td align="center">O(n^2)</td>
+<td align="center">O(1)</td>
+<td align="center">不稳定</td>
+</tr>
+
+<tr>
+<td align="left">Heap Sort</td>
+<td align="center">O(nlog n)</td>
+<td align="center">O(nlog n)</td>
+<td align="center">O(nlog n)</td>
+<td align="center">O(1)</td>
+<td align="center">稳定</td>
+</tr>
+
+<tr>
+<td align="left">Bubble Sort</td>
+<td align="center">O(n)</td>
+<td align="center">O(n^2)</td>
+<td align="center">O(n^2)</td>
+<td align="center">O(1)</td>
+<td align="center">稳定</td>
+</tr>
+
+<tr>
+<td align="left">Cocktail Sort</td>
+<td align="center">O(n)</td>
+<td align="center">O(n^2)</td>
+<td align="center">O(n^2)</td>
+<td align="center">O(1)</td>
+<td align="center">稳定</td>
+</tr>
+
+<tr>
+<td align="left">Qucik Sort</td>
+<td align="center">O(nlog n)</td>
+<td align="center">O(nlog n)</td>
+<td align="center">O(n^2)</td>
+<td align="center">O(nlog n)~O(n)</td>
+<td align="center">不稳定</td>
+</tr>
+
+<tr>
+<td align="left">Merge Sort</td>
+<td align="center">O(nlog n)</td>
+<td align="center">O(nlog n)</td>
+<td align="center">O(nlog n)</td>
+<td align="center">O(n)</td>
+<td align="center">稳定</td>
+</tr>
+
+<tr>
+<td align="left">Counting Sort</td>
+<td align="center">O(n+k)</td>
+<td align="center">O(n+k)</td>
+<td align="center">O(n+k)</td>
+<td align="center">O(n+k)</td>
+<td align="center">稳定</td>
+</tr>
+
+<tr>
+<td align="left">Bucket Sort</td>
+<td align="center">O(n)</td>
+<td align="center">O(n+k)</td>
+<td align="center">O(n^2)</td>
+<td align="center">O(n+k)</td>
+<td align="center">稳定</td>
+</tr>
+
+<tr>
+<td align="left">Radix Sort</td>
+<td align="center">O(n*k)</td>
+<td align="center">O(n*k)</td>
+<td align="center">O(n*k)</td>
+<td align="center">O(n+k)</td>
+<td align="center">稳定</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="引用">引用</h1>
+
+<ul>
+<li><a href="http://liaoxl.github.io/blog/20140907/sort/">Moondark</a></li>
+<li><a href="https://www.cnblogs.com/eniac12/p/5329396.html">SteveWang</a></li>
+<li><a href="http://rosettacode.org/wiki/Sorting_algorithms">rosettacode</a></li>
+<li><a href="https://www.cnblogs.com/onepixel/articles/7674659.html">一像素</a></li>
+</ul>
+
+  </div>
+</div>
+<div class="container has-text-centered">
+    
+    <aside><div id="share"></div></aside>
+    <script type="text/javascript">
+        $("#share").jsSocials({
+            showLabel: false,
+            showCount: false,
+            shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+        });
+    </script>
+    
+</div>
+
+<div class="container has-text-centered">
+  
+</div>
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/cnewbie/">cnewbie</a> 2018 - 2019</p>
+  </div>
+</section>
+
+

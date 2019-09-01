@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<title>Python 统计代码运行时间 | Hugo Blog</title>
+
+<link rel="stylesheet" href="https://cnewbie.github.io/css/styles.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/zenburn.min.css" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://cnewbie.github.io/js/highlight.js"></script>
+
+
+
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-minima.css" />
+<script type="text/javascript" src="https://cnewbie.github.io/js/jssocials.js"></script>
+
+
+
+
+<div class="container">
+    <nav class="navbar level">
+      <div class="navbar-brand">
+          <a class="nav-item" href="https://cnewbie.github.io"><h1 class="title is-3">Hugo Blog</h1></a>
+      </div>           
+      <div class="navbar-menu has-text-centered is-active">
+          <div class="navbar-end is-centered">
+              
+                <a href="https://cnewbie.github.io/about" rel="me">
+                  <span class="icon">
+                    <i class="fas fa-info"></i>
+                  </span>
+                </a>
+              
+                <a href="https://github.com/cnewbie/" rel="me">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+              
+           </div>
+      </div>
+    </nav>
+  </div>
+
+<div class="container">
+  <h2 class="subtitle is-6">April 22, 2019</h2>
+  <h1 class="subtitle is-size-4-mobile is-size-3-desktop">Python 统计代码运行时间</h1>
+  <div class="content">
+    
+
+<p>Python 运行时间</p>
+
+<p>在很多的时候我们需要计算我们程序的性能，这个时候我们常常需要统计程序运行的时间。下面我们就来说说怎么统计程序的运行时间。</p>
+
+<h1 id="datetime">datetime</h1>
+
+<pre><code class="language-python">#! /usr/bin/env python
+
+# -*- coding:utf-8 -*-
+
+import datetime
+from functools import wraps
+import logging
+
+def run_time(*args, **kwargs):
+    @wraps(func)
+    def __wrapper(func):
+        logging.getLogger(__name__)
+        start = datetime.datetime.now()
+        ret = func(*args, **kwargs)
+        end = datetime.datetime.now()
+        logging.debug('running time: {}'.format(end-start))
+        return ret
+    return __wrapper
+</code></pre>
+
+<h1 id="time-now">time.now</h1>
+
+<pre><code class="language-python">#! /usr/bin/env python
+
+# -*- coding:utf-8 -*-
+
+import time
+from functools import wraps
+import logging
+
+def run_time(*args, **kwargs):
+    @wraps(func)
+    def __wrapper(func):
+        logging.getLogger(__name__)
+        start = time.time()
+        start_2 = time.clock()
+        ret = func(*args, **kwargs)
+        end = time.time()
+        end_2 = time.clock()
+        logging.debug('running time: {}'.format(end-start))
+        logging.debug('running time2: {}'.format(end_2-start_2))
+        return ret
+    return __wrapper
+</code></pre>
+
+<h1 id="timeit">timeit</h1>
+
+<pre><code class="language-python">#! /usr/bin/env python
+
+# -*- coding:utf-8 -*-
+
+import timeit
+from functools import wraps
+import logging
+
+def run_time(*args, **kwargs):
+    @wraps(func)
+    def __wrapper(func):
+        logging.getLogger(__name__)
+        start = timeit.default_timer()
+        ret = func(*args, **kwargs)
+        end = timeit.default_timer()
+        logging.debug('running time: {}'.format(end-start))
+        return ret
+    return __wrapper
+</code></pre>
+
+<h1 id="方法对比">方法对比</h1>
+
+<ul>
+<li>方法二的精度比较高。方法一基本上是性能最差的。</li>
+<li>*uix 平台方法 <code>datetime.now()</code> 和 <code>time.time()</code> 都包含了其他程序使用CPU的时间。方法 <code>time.clock()</code> 只计算了程序运行CPU的时间。</li>
+<li>*nix 使用 <code>time.time()</code>，windows 使用 <code>time.clock()</code>。</li>
+<li>timeit 可跨平台，推荐使用</li>
+</ul>
+
+  </div>
+</div>
+<div class="container has-text-centered">
+    
+    <aside><div id="share"></div></aside>
+    <script type="text/javascript">
+        $("#share").jsSocials({
+            showLabel: false,
+            showCount: false,
+            shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+        });
+    </script>
+    
+</div>
+
+<div class="container has-text-centered">
+  
+</div>
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/cnewbie/">cnewbie</a> 2018 - 2019</p>
+  </div>
+</section>
+
+
