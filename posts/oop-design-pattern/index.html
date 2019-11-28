@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<title>设计模式 | Hugo Blog</title>
+
+<link rel="stylesheet" href="https://cnewbie.github.io/css/styles.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/zenburn.min.css" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://cnewbie.github.io/js/highlight.js"></script>
+
+
+
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-minima.css" />
+<script type="text/javascript" src="https://cnewbie.github.io/js/jssocials.js"></script>
+
+
+
+
+<div class="container">
+    <nav class="navbar level">
+      <div class="navbar-brand">
+          <a class="nav-item" href="https://cnewbie.github.io"><h1 class="title is-3">Hugo Blog</h1></a>
+      </div>           
+      <div class="navbar-menu has-text-centered is-active">
+          <div class="navbar-end is-centered">
+              
+                <a href="https://cnewbie.github.io/about" rel="me">
+                  <span class="icon">
+                    <i class="fas fa-info"></i>
+                  </span>
+                </a>
+              
+                <a href="https://github.com/cnewbie/" rel="me">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+              
+           </div>
+      </div>
+    </nav>
+  </div>
+
+<div class="container">
+  <h2 class="subtitle is-6">November 1, 2019</h2>
+  <h1 class="subtitle is-size-4-mobile is-size-3-desktop">设计模式</h1>
+  <div class="content">
+    
+
+<p>面向对象之设计模式</p>
+
+<h1 id="创建型模式">创建型模式</h1>
+
+<h2 id="工厂方法-factory-method">工厂方法 Factory Method</h2>
+
+<h3 id="意图">意图</h3>
+
+<p>父类中提供创建对象的接口，但是允许子类修改需要创建对象的类型</p>
+
+<h3 id="问题">问题</h3>
+
+<p>创建物流管理类，起先实现了火车类，随着业务的增长，需要进行水路运输。
+在修改物流管理类时，需要修改所有运输的代码。</p>
+
+<h3 id="解决方案">解决方案</h3>
+
+<p>工厂方法通过调用特殊的工厂方法替代直接使用构造方法构建对象，通过工厂方法返回的对象称之为产品。</p>
+
+<h3 id="uml-结构">UML 结构</h3>
+
+<pre><code class="language-plantuml">interface Product{
+    -doStuff()
+}
+class ConcreteProductA{
+
+}
+class ConcreteProductB{
+
+}
+class Creator{
+    +someOperation()
+    +createProduct(): Product
+}
+class ConcreteCreatorA{
+
+}
+class ConcreteCreatorB{
+}
+ConcreteProductA ..|&gt; Product
+ConcreteProductB ..|&gt; Product
+ConcreteCreatorA --|&gt; Creator
+ConcreteCreatorB --|&gt; Creator
+Creator --&gt; Product
+</code></pre>
+
+<ul>
+<li>Product 抽象产品接口</li>
+<li>ConcreteProduct 产品类</li>
+<li>Creator 抽象工厂方法，依赖抽象产品接口</li>
+<li>ConcreteCreator 工厂方法</li>
+</ul>
+
+<p><img src="https://refactoring.guru/images/patterns/diagrams/factory-method/structure.png" alt="factory method" /></p>
+
+<h3 id="应用示例">应用示例</h3>
+
+<p>多平台 UI 元素</p>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+from abc import ABCMeta, abstractmethod
+
+class Button(metaclass=ABCMeta):
+
+    @abstractmethod
+    def render(self):
+        pass
+
+    @abstractmethod
+    def on_click(self):
+        pass
+
+class WindowsButton(Button):
+
+    def render(self):
+        print(self.__class__.__name__)
+
+    def on_click(self):
+        print(self.__class__.__name__+'click')
+
+
+class LinuxButton(Button):
+
+    def render(self):
+        print(self.__class__.__name__)
+
+    def on_click(self):
+        print(self.__class__.__name__+'click')
+
+
+class Dialog(object):
+
+    def render(self):
+        ok_button = self.create_button()
+        ok_button.on_click()
+        ok_button.render()
+
+    @abstractmethod
+    def create_button(self):
+        pass
+
+class WindowsDialog(Dialog):
+
+    def create_button(self):
+        return WindowsButton()
+
+class LinuxDialog(Dialog):
+
+    def create_butoon(self):
+        return LinuxButton()
+
+if __name__ == '__main__':
+    dailog = WindowsDialog()
+    dailog.render()
+</code></pre>
+
+<h3 id="适用性">适用性</h3>
+
+<ul>
+<li>事先不知道应使用对象的确切类型和依赖关系</li>
+<li>为库或框架提供内部组件拓展</li>
+<li>重用已存在对象而不是每次新建对象，以节约系统资源</li>
+</ul>
+
+<h3 id="实现步骤">实现步骤</h3>
+
+<ol>
+<li>创建所有产品的接口</li>
+<li>创建者中添加空的工厂方法，返回类型为抽象产品</li>
+<li>将创建者代码中所有产品构造函数引用处替换成工厂方法，并将产品创建代码提取到工厂方法中</li>
+<li>构造创建者子类对象，复写工厂方法</li>
+<li>如果基类工厂方法为空，可以声明为抽象方法</li>
+</ol>
+
+<h3 id="优缺点">优缺点</h3>
+
+<ul class="task-list">
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 解耦创建者和产品</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 单一职责原则</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 开闭原则</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 代码层级复杂</label></li>
+</ul>
+
+<h2 id="抽象工厂-abstract-factory">抽象工厂 Abstract Factory</h2>
+
+<h3 id="意图-1">意图</h3>
+
+<p>不指定具体工厂类生产一系列相关产品的族</p>
+
+<h3 id="问题-1">问题</h3>
+
+<p>生产家具族，具体的家具有不同的变种。如何在不改动原有代码的情况下生产新的产品或族</p>
+
+<h3 id="解决方案-1">解决方案</h3>
+
+<p>首先声明产品族的接口，通过接口衍生处不同的产品；接着声明具有创建产品族的方法抽象工厂；
+最后通过抽象工厂衍生具体工厂类，生产需要的产品族。</p>
+
+<h3 id="uml-结构-1">UML 结构</h3>
+
+<pre><code class="language-plantuml">interface ProductA
+interface ProductB
+class ConcreteProductA1
+class ConcreteProductA2
+class ConcreteProductB1
+class ConcreteProductB2
+interface AbstractFactory{
+    +createProduct(): ProductA
+    +createProduct(): ProductB
+}
+class ConcreteFactory1
+class ConcreteFactory2
+class Client{
+    - factory: AbstractFactory
+    + Client(f: AbstractFactory)
+    + someOperation()
+}
+ConcreteFactory1 ..|&gt; AbstractFactory
+ConcreteFactory2 ..|&gt; AbstractFactory
+ConcreteProductA1 ..|&gt; ProductA
+ConcreteProductA2 ..|&gt; ProductA
+ConcreteProductB1 ..|&gt; ProductB
+ConcreteProductB2 ..|&gt; ProductB
+ConcreteFactory1 ..&gt; ConcreteProductA1
+ConcreteFactory1 ..&gt; ConcreteProductB1
+ConcreteFactory2 ..&gt; ConcreteProductA2
+ConcreteFactory2 ..&gt; ConcreteProductB2
+Client o--&gt; AbstractFactory
+</code></pre>
+
+<ul>
+<li>AbstractFactory 抽象工厂接口</li>
+<li>Product 抽象产品</li>
+<li>ConcreteFactory 具体工厂</li>
+<li>ConcreteProduct 具体产品</li>
+</ul>
+
+<p><img src="https://refactoring.guru/images/patterns/diagrams/abstract-factory/structure.png" alt="abstract factory" /></p>
+
+<h3 id="应用示例-1">应用示例</h3>
+
+<p>跨平台 UI 主题</p>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+from abc import ABCMeta, abstractmethod
+
+
+class Button(metaclass=ABCMeta):
+    pass
+
+
+class CheckBox(metaclass=ABCMeta):
+    pass
+
+class WinButton(Button):
+    pass
+
+
+class WinCheckBox(CheckBox):
+    pass
+
+class Button(Button):
+    pass
+
+
+class CheckBox(CheckBox):
+    pass
+
+class GUIFactory(metaclass=ABCMeta):
+
+    @abstractmethod
+    def create_button(self):
+        pass
+
+    @abstractmethod
+    def create_checkbox(self):
+        pass
+
+
+class WinFactory(GUIFactory):
+
+    def create_button(self):
+        print(self.__class__.__name__ + 'button')
+        return WinButton()
+
+    def create_checkbox(self):
+        print(slef.__class__.__name__ + 'checkbox')
+        return WinCheckBox()
+
+
+class MacFactory(GUIFactory):
+
+    def create_button(self):
+        print(self.__class__.__name__ + 'button')
+        return MacButton()
+
+    def create_checkbox(self):
+        print(slef.__class__.__name__ + 'checkbox')
+        return MacCheckBox()
+
+
+class Application(object):
+
+    def __init__(self, factory):
+        self.factory = factory
+
+    def create_ui(self):
+        self.button = factory.create_button()
+
+
+if __name__ == '__main__':
+    factory = WinFactory()
+    app = Application(factory)
+    app.create_ui()
+</code></pre>
+
+<h3 id="适用性-1">适用性</h3>
+
+<ul>
+<li>需要生产一系列相关产品族，但是不希望具体类依赖这些产品</li>
+</ul>
+
+<h3 id="实现步骤-1">实现步骤</h3>
+
+<ol>
+<li>抽象处不同产品的类型</li>
+<li>声明抽象产品接口</li>
+<li>声明抽象工厂接口</li>
+<li>实现具体工厂类和具体产品</li>
+<li>创建工厂初始化代码，实例化具体工厂类</li>
+</ol>
+
+<h3 id="优缺点-1">优缺点</h3>
+
+<ul class="task-list">
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 确保工厂生产的产品相互匹配</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 解耦具体工厂与客户端代码</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 单一职责原则</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 开闭原则</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 代码复杂</label></li>
+</ul>
+
+<h2 id="创建者-builder">创建者 Builder</h2>
+
+<h3 id="意图-2">意图</h3>
+
+<p>逐步构造复杂的对象，可使用相同的构造代码生成对象的不同类型和表示形式。</p>
+
+<h3 id="问题-2">问题</h3>
+
+<p>多步创建复杂对象，如创建房子需要创建车库、花园、游泳池等部分。一种方法是通过房子基类衍生不同的特定子类，
+新增参数必须引入多个子类，最终层级过于复杂，另一种方法创建包含选项的构造函数控制生成的对象，使得参数判断变得复杂。</p>
+
+<h3 id="解决方案-2">解决方案</h3>
+
+<p>分解创建过程成不同的步骤的创建者，随后根据需求调用创建者对象。
+由于构建复杂，可对用于构建产品的构建器步骤的一系列调用提取到一个单独的指挥类中，
+指挥类定义了执行创建步骤的顺序，而创建者提供了这些步骤的实现。</p>
+
+<h3 id="uml-结构-2">UML 结构</h3>
+
+<pre><code class="language-plantuml">interface Builder{
+    + reset()
+    + buildStepA()
+    + buildStepB()
+    + buildStepC()
+}
+class ConcreteBuilder1{
+    - result: Product1
+    + reset()
+    + buildStepA()
+    + buildStepB()
+    + buildStepC()
+    + getResult(): Product1
+}
+
+class ConcreteBuilder2{
+    - result: Product2
+    + reset()
+    + buildStepA()
+    + buildStepB()
+    + buildStepC()
+    + getResult(): Product2
+}
+class Director{
+    - builder: Builder
+    + Director(builder)
+    + changeBuilder(builder)
+    + make(type)
+}
+ConcreteBuilder1 ..|&gt; Builder
+ConcreteBuilder2 ..|&gt; Builder
+ConcreteBuilder1 --&gt; Product1
+ConcreteBuilder2 --&gt; Product2
+Director o--&gt; Builder
+Client --&gt; Director
+Client --&gt; ConcreteBuilder1
+</code></pre>
+
+<ul>
+<li>Builder 创建者接口</li>
+<li>ConcreteBuilder 具体创建者</li>
+<li>Director 指挥者</li>
+</ul>
+
+<p><img src="https://refactoring.guru/images/patterns/diagrams/builder/structure.png" alt="builder structure" /></p>
+
+<h3 id="应用示例-2">应用示例</h3>
+
+<p>创建多种不同类型的车及其手册，通过创建者分解不同的步骤</p>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+from abc import ABCMeta, abstractmethod
+
+
+class Car(object):
+    pass
+
+
+class CarManual(object):
+    pass
+
+
+class SportEngine(object):
+    pass
+
+class Builder(metaclass=ABCMeta):
+
+    @abstractmethod
+    def reset(self):
+        pass
+
+    @abstractmethod
+    def set_seats(self, number):
+        pass
+
+    @abstractmethod
+    def set_engine(self, engine):
+        pass
+
+    @abstractmethod
+    def set_trip_computer(self, *args):
+        pass
+
+    @abstractmethod
+    def set_gps(self, *args):
+        pass
+
+
+class CarBuilder(Builder):
+
+    def reset(self):
+        self._car = Car()
+        print(self.__class__.__name__ + 'reset')
+
+    def set_seats(self, number):
+        print(self.__class__.__name__ + 'set seats')
+
+    def set_engine(self, engine):
+        print(self.__class__.__name__ + 'set engine')
+
+    def set_trip_computer(self, *args):
+        print(self.__class__.__name__ + 'set trip computer')
+
+    def set_gps(self, *args):
+        print(self.__class__.__name__ + 'set gps')
+
+    def get_result(self):
+        return self._car
+
+
+class CarManualBuilder(Builder):
+
+    def reset(self):
+        self._car_manual = CarManual()
+        print(self.__class__.__name__ + 'reset')
+
+    def set_seats(self, number):
+        print(self.__class__.__name__ + 'set seats')
+
+    def set_engine(self, engine):
+        print(self.__class__.__name__ + 'set engine')
+
+    def set_trip_computer(self, *args):
+        print(self.__class__.__name__ + 'set trip computer')
+
+    def set_gps(self, *args):
+        print(self.__class__.__name__ + 'set gps')
+
+    def get_result(self):
+        return self._car_manual
+
+
+class Director(object):
+
+    def set_builder(self, builder):
+        self.builder = builder
+
+    def construct_sports_car(self, builder):
+        if not builder:
+            builder = self.builder
+        builder.reset()
+        builder.set_seats(2)
+        builder.set_engine(SportEngine())
+        builder.set_trip_computer(True)
+        builder.set_gps(True)
+
+    def construct_SUV(self, builder):
+        pass
+
+if __name__ == '__main__':
+    director = Director()
+    builder = CarBuilder()
+    director.construct_sports_car(builder)
+    car = builder.get_result()
+    manual_builder = CarManualBuilder()
+    director.construct_sports_car(manual_builder)
+    manual = manual_builder.get_result()
+</code></pre>
+
+<h3 id="适用性-2">适用性</h3>
+
+<ul>
+<li>避免多参数构造函数</li>
+<li>构造不同类型的产品</li>
+</ul>
+
+<h3 id="实现步骤-2">实现步骤</h3>
+
+<ol>
+<li>确保可抽象出可以创建不同表示产品的共同步骤</li>
+<li>声明创建者接口</li>
+<li>创建具体创建者类，需要实现获取产品类方法，如果产品类型相同可在接口中实现</li>
+<li>创建指挥类</li>
+<li>使用创建类与指挥类</li>
+</ol>
+
+<h3 id="优缺点-2">优缺点</h3>
+
+<ul class="task-list">
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 逐步创建复杂对象</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 重用相同构造代码</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 单一职责原则</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 创建多个类，增加复杂性</label></li>
+</ul>
+
+<h2 id="原型模式">原型模式</h2>
+
+<h3 id="意图-3">意图</h3>
+
+<p>不依赖对象类代码复制已存在的对象</p>
+
+<h3 id="问题-3">问题</h3>
+
+<p>通过创建新对象遍历对象属性复制的方法，可能会忽略私有属性，导致复制不完全</p>
+
+<h3 id="解决方案-3">解决方案</h3>
+
+<p>原型模式将复制过程委派给被复制的对象，模式声明一个统一的接口，让接口支持复制对象，而无需将代码与对象类耦合。</p>
+
+<h3 id="uml-结构-3">UML 结构</h3>
+
+<pre><code class="language-plantuml">interface Prototype{
+    + clone(): Prototype
+}
+
+class ConcretePrototype{
+    - field1
+    + ConcretePrototype(prototype)
+    + clone(): Prototype
+}
+
+class SubclassPrototype{
+    - field2
+    + SubclassPrototype(prototype)
+    + clone(): Prototype
+}
+
+ConcretePrototype ..|&gt;Prototype
+SubclassPrototype --|&gt;ConcretePrototype
+Client --&gt; Prototype
+</code></pre>
+
+<ul>
+<li>Prototype 原型接口</li>
+<li>ConcretePtototype 具体原型，实现复制方法</li>
+<li>Client 客户端调用</li>
+</ul>
+
+<p><img src="https://refactoring.guru/images/patterns/diagrams/prototype/structure-indexed.png" alt="prototype structure" /></p>
+
+<p>原型注册表实现</p>
+
+<pre><code class="language-plantuml">interface Prototype{
+    + getColor(): string
+    + clone(): Prototype
+}
+class PrototypeRegistry{
+    - items: Prototype[]
+    + addItem(id: string, p:Prototype)
+    + getById(id: string): Prototype
+    + getByColor(color: string): Prototype
+}
+class Button{
+    - x,y,color
+    + Button(x,y,color)
+    + BUtton(prototype)
+    + getColor(): string
+    + clone(): Prototype
+}
+class Client{
+
+}
+
+Client --&gt; PrototypeRegistry
+PrototypeRegistry o--&gt; Prototype
+Button ..|&gt; Prototype
+</code></pre>
+
+<p>原型注册表提供了一种访问常用原型的简单方法， 其中存储了一系列可供随时复制的预生成对象。</p>
+
+<p><a href="https://refactoringguru.cn/design-patterns/prototype/python/example">python example</a></p>
+
+<h3 id="应用示例-3">应用示例</h3>
+
+<p>复制几何对象副本</p>
+
+<pre><code class="language-plantuml">abstract class Shape{
+    - x, y
+    - color
+    + Shape(source)
+    + clone()
+}
+
+class Recangle{
+    - width
+    - height
+    + Rectangle()
+    + clone()
+}
+
+class Circle{
+    - radius
+    + Circle()
+    + clone()
+}
+
+Rectangle --|&gt; Shape
+Circle --|&gt; Shape
+Application o--&gt; Shape
+</code></pre>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+from abc import ABCMeta, abstractmethod
+
+class Shape(metaclass=ABCMeta):
+
+    def __init__(self, x=None, y=None, color=None):
+        self.x = x
+        self.y = y
+        self.color = color
+
+    @abstractmethod
+    def clone(self)
+        pass
+
+
+class Rectangle(Shape):
+
+    def __init__(self, w=None, h=None):
+        super().__init__()
+        self.w = w
+        self.h = h
+
+    def clone(self):
+        return Rectangle(self.x, self.y)
+
+class Circle(Shape):
+
+    def __init__(self, radius=None):
+        super().__init__()
+        self.radius = radius
+
+    def clone(self):
+        return Circle(self.x)
+
+class Application(object):
+
+    def __init__(self):
+        circle = Circle()
+        circle.x = 10
+        circle.y = 10
+        self.shapes = list()
+        self.shapes.append(circle)
+        self.shapes.append(circle.clone())
+        rectangle = Rectangle()
+        rectangle.w = 10
+        rectangle.h = 20
+        self.shapes.append(rectangle)
+
+    def clone_all(self):
+        ret = list()
+        for i in self.shapes:
+            ret.append(i.clone())
+        return ret
+
+
+if __name__ == '__main__':
+    app = Application()
+    app.clone_all()
+</code></pre>
+
+<h3 id="适用性-3">适用性</h3>
+
+<ul>
+<li>需要复制对象，又希望代码独立于对象所属的类</li>
+<li>子类的区别在于对象初始化的方式，可使用该模式减少子类数量</li>
+</ul>
+
+<h3 id="实现步骤-3">实现步骤</h3>
+
+<ul>
+<li>创建原型接口，声明克隆方法</li>
+<li>定义额外的构造函数</li>
+<li>实现克隆方法</li>
+<li>可选的丝线注册表类管理常用原型</li>
+</ul>
+
+<h3 id="优缺点-3">优缺点</h3>
+
+<ul class="task-list">
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 克隆对象接口具体子类</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 摆脱重复初始化代码</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 更方便的生产复杂对象</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 除继承之外的处理复杂对象预先配置</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 复杂对象循环引用问题</label></li>
+</ul>
+
+<h2 id="单例模式">单例模式</h2>
+
+<h3 id="意图-4">意图</h3>
+
+<p>确保类仅有单一的实例，提供全局统一访问入口</p>
+
+<h3 id="问题-4">问题</h3>
+
+<ul>
+<li>确保仅有一个实例，常用于限制访问共享资源</li>
+<li>为该实例提供一个全局访问入口</li>
+<li>违反了单一职责原则</li>
+</ul>
+
+<h3 id="解决方案-4">解决方案</h3>
+
+<ul>
+<li>构造函数私有化</li>
+<li>重新定义构造函数并缓存已创建对象</li>
+</ul>
+
+<h3 id="uml-结构-4">UML 结构</h3>
+
+<pre><code class="language-plantuml">class Singleton{
+    - instance: Singleton
+    - Singleton()
+    + getInstance(): Singleton
+}
+class Client{
+
+}
+Client --&gt; Singleton
+</code></pre>
+
+<ul>
+<li>Singleton 单例类：私有化构造函数，定义静态方法</li>
+</ul>
+
+<p><img src="https://refactoring.guru/images/patterns/diagrams/singleton/structure-en-indexed.png" alt="Singleton structure" /></p>
+
+<h3 id="应用示例-4">应用示例</h3>
+
+<p>数据库访问类</p>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+from abc import ABCMeta, abstractmethod
+import threading
+
+
+class SingletonMeta(type):
+    def __init__(self, *args, **kwargs):
+        self._instance = None
+        self.single_lock = Lock()
+        super(SingletonMeta, self).__init__(*args, **kwargs)
+
+    def __call__(self, *args, **kwargs):
+        with self._local:
+            if self._instance is None:
+                self._instance = super(SingletonMeta, self).__call__(*args, **kwargs)
+        return self._instance
+
+
+class Database(metaclass=SingletonMeta):
+    def query(self, *args, **kwargs):
+        print('{} {} {}'.format(self, args, kwargs))
+
+
+class Database2(object):
+    vars = {}
+    single_lock = threading.Lock()
+    def __new__(cls, *args, **kwargs):
+        if cls in cls.vars:
+            return cls.vars[cls]
+        cls.single_lock.acquire()
+        try:
+            if cls in cls.vars:
+                return cls.vars[cls]
+            cls.vars[cls] = super().__new__(cls, *args, **kwargs)
+            return cls.vars[cls]
+        finally:
+            cls.single_lock.release()
+
+    def query(self, *args, **kwargs):
+        print('{} {} {}'.format(self, args, kwargs))
+
+class Application(object):
+    def main(self,  *args, **kwargs):
+        db = Database()
+        db.query('haha')
+
+        db = Database()
+        db.query('heihei')
+
+        db = Database2()
+        db.query('haha2')
+
+        db = Database2()
+        db.query('heihei2')
+
+
+if __name__ == '__main__':
+    db = Database()
+    db.query('haha')
+
+    db = Database()
+    db.query('heihei')
+
+    db = Database2()
+    db.query('haha2')
+
+    db = Database2()
+    db.query('heihei2')
+</code></pre>
+
+<h3 id="适用性-4">适用性</h3>
+
+<ul>
+<li>程序中类的对于所有客户端只有一个可用实例</li>
+<li>更加严格的控制全局变量</li>
+</ul>
+
+<h3 id="实现步骤-4">实现步骤</h3>
+
+<ul>
+<li>私有静态变量</li>
+<li>声明公共静态方法</li>
+<li>延迟初始化</li>
+<li>构造函数私有</li>
+</ul>
+
+<h3 id="优缺点-4">优缺点</h3>
+
+<ul class="task-list">
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 确保类实例唯一</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 全局访问入口</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 延迟加载</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 违反单一职责原则</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 多线程环境需要加锁</label></li>
+</ul>
+
+<h1 id="结构型模式">结构型模式</h1>
+
+<h2 id="适配器-adapter">适配器 Adapter</h2>
+
+<h3 id="意图-5">意图</h3>
+
+<p>使不兼容的对象能够相互兼容</p>
+
+<h3 id="问题-5">问题</h3>
+
+<p>原有的 XML 接口现在需要对接 JSON 接口，可以修改现有代码库实现，可能核心库未提供源代码，无法修改如何处理？</p>
+
+<h3 id="解决方案-5">解决方案</h3>
+
+<p>使用一个适配器对象转换接口，使接口能够兼容。</p>
+
+<p>适配器不仅能够转换不同格式的数据，其次还有助于采用不同接口的对象之间的合作</p>
+
+<h3 id="uml-结构-5">UML 结构</h3>
+
+<pre><code class="language-plantuml">interface ClientInterface{
+    + method(data)
+}
+class Adapter{
+    - adaptee: Service
+    + method(data)
+}
+class Service{
+    + serviceMethod(specialData)
+}
+class Client
+Client --&gt; ClientInterface
+Adapter ..|&gt; ClientInterface
+Adapter o--&gt; Service
+</code></pre>
+
+<ul>
+<li>ClientInterface 客户端接口，抽象协议</li>
+<li>Service 服务，不兼容接口</li>
+<li>Adapter 适配器，处理接口数据</li>
+</ul>
+
+<p>客户端代码与具体适配器代码解耦，方便修改增加新的适配而不修改代码。</p>
+
+<h4 id="类适配器">类适配器</h4>
+
+<pre><code class="language-plantuml">class Client
+class OlderClass{
+    + method(data)
+}
+class Service{
+    + serviceMethod(specialData)
+}
+class Adapter{
+    + method(data)
+}
+Client --&gt; OlderClass
+Adapter --|&gt; OlderClass
+Adapter --|&gt; Service
+</code></pre>
+
+<p>多继承语言支持，类适配器不需要封装对象，同时继承客户端和服务端的行为，重写需要的方法即可。</p>
+
+<h3 id="应用示例-5">应用示例</h3>
+
+<p>不同材料的兼容，方钉和圆孔</p>
+
+<pre><code class="language-plantuml">class RoundHole{
+    - radius: int
+    + RoundHole(radius: int)
+    + getRadius(): int
+    + fits(peg: RoundPeg): bool
+}
+class RoundPeg{
+    - radius: int
+    + RoundPeg(radius: int)
+    + getRadius(): int
+}
+class SquarePegAdapter{
+    - peg: SquarePeg
+    + SquarePegAdapter(peg: SquarePeg)
+    + getRadius(): int
+}
+class SquarePeg{
+    - width: int
+    +SquarePeg(width: int)
+    + getWidth(): int
+}
+RoundHole --&gt; RoundPeg
+SquarePegAdapter --|&gt; RoundPeg
+SquarePeg &lt;|--o SquarePegAdapter
+</code></pre>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+import math
+
+class RoundHole(object):
+
+    def __init__(self, radius):
+        self._radius = radius
+
+    def get_radius(self):
+        return self._radius
+
+    def fits(self, peg):
+        ret = self.get_radius() &gt;= peg.get_radius()
+        print(ret)
+        return ret
+
+
+class RoundPeg(object):
+
+    def __init__(self, radius):
+        self._radius = radius
+
+    def get_radius(self):
+        return self._radius
+
+
+class SquarePeg(object):
+
+    def __init__(self, width):
+        self._width = width
+
+    def get_width(self):
+        return self._width
+
+
+class SquarePegAdapter(RoundPeg):
+
+    def __init__(self, peg):
+        self._peg = peg
+
+    def get_radius(self):
+        return math.sqrt(self._peg.get_width()) / 2
+
+
+if __name__ == '__main__':
+    hole = RoundHole(5)
+    rpeg = RoundPeg(5)
+    hole.fits(rpeg)
+
+    s_sqpeg = SquarePeg(5)
+    l_sqpeg = SquarePeg(10)
+    # hole.fits(s_sqpeg)
+
+    s_sqpeg_adapter = SquarePegAdapter(s_sqpeg)
+    l_sqpeg_adapter = SquarePegAdapter(l_sqpeg)
+    hole.fits(s_sqpeg_adapter)
+    hole.fits(l_sqpeg_adapter)
+</code></pre>
+
+<h3 id="适用性-5">适用性</h3>
+
+<ul>
+<li>希望使用不兼容的接口类时</li>
+<li>希望复用多个缺少相同功能而无法被添加到父类的子类时</li>
+</ul>
+
+<h3 id="实现步骤-5">实现步骤</h3>
+
+<ul>
+<li>确保有两个类接口不兼容</li>
+<li>声明客户端协议接口</li>
+<li>创建具体的适配类</li>
+<li>在适配器中国中保存需要适配的对象</li>
+<li>实现兼容方法</li>
+</ul>
+
+<h3 id="优缺点-5">优缺点</h3>
+
+<ul>
+<li>单一职责原则</li>
+<li>开闭原则</li>
+<li>代码整体复杂度增加</li>
+</ul>
+
+<h2 id="桥接模式">桥接模式</h2>
+
+<h3 id="意图-6">意图</h3>
+
+<p>将大类或一系列相关的类炒粉为抽象和实现两个层次结构，可在开发中独立使用</p>
+
+<h3 id="问题-6">问题</h3>
+
+<p>不同的几何图形配合不同的颜色，如果再新增不同的图形，需要新增多个颜色的不同子类</p>
+
+<h3 id="解决方案-6">解决方案</h3>
+
+<p>通过抽取颜色纬度为独立层次，使初始类中引用这个层次的对象，从而使得一个类不必用所有的状态和行为。</p>
+
+<p>抽象常成为接口是一些实体的高层控制层，不做具体工作，将工作委派给实现层</p>
+
+<h3 id="uml-结构-6">UML 结构</h3>
+
+<pre><code class="language-plantuml">class Abstraction{
+  - i: Implementation
+  + feature1()
+  + feature2()
+}
+interface Implementation{
+  + method1()
+  + method2()
+}
+
+class ConcreteImplementations
+
+ConcreteImplementations ..|&gt; Implementation
+Abstraction o--&gt; Implementation
+Client --&gt; Abstraction
+RefinedAbstraction --|&gt; Abstraction
+</code></pre>
+
+<ul>
+<li>Abstraction 抽象部分控制逻辑</li>
+<li>Implementation 实现部分声明通用接口</li>
+<li>ConcreteImplementations 具体实现</li>
+<li>RefinedAbstraction 具体抽象</li>
+</ul>
+
+<p><img src="https://refactoring.guru/images/patterns/diagrams/bridge/structure-en-indexed.png" alt="bridge structure" /></p>
+
+<h3 id="应用示例-6">应用示例</h3>
+
+<p>设备与遥控器应用</p>
+
+<pre><code class="language-plantuml">class Remote{
+  - device: Device
+  + togglePower()
+  + volumeDown()
+  + volumeUp()
+  + channelDown()
+  + channelUp()
+}
+interface Device{
+  + isEnabled()
+  + enable()
+  + disable()
+  + getVolume()
+  + setVolume(percent)
+  + getChannel()
+  + setChannel(channel)
+}
+class Radio
+class TV
+class AdvancedRemote
+
+Radio ..|&gt; Device
+TV ..|&gt; Device
+AdvancedRemote --|&gt; Remote
+Client --&gt; Remote
+</code></pre>
+
+<p>遥控基类声明了一个设备对象的引用，所有遥控器通过通用设备接口与设备进行交互，使得遥控器可以支持不同类型的设备</p>
+
+<pre><code class="language-python">#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
+class RemoteControl(object):
+
+    def __init__(self, device):
+        self._device = device
+
+    def toggle_power(self):
+        print('switch power')
+        if self._device.is_enable():
+            self._device.disable()
+        else:
+            self._device.enable()
+
+    def volume_down(self):
+        print('volume down')
+        self._device.volume = self._device.volume - 10
+
+    def volume_up(self):
+        print('volume up')
+        self._device.volume = self._device.volume + 10
+
+    def channel_down(self):
+        print('channel down')
+        self._device.channel = self._device.channel - 1
+
+    def channel_up(self):
+        print('channel up')
+        self._device.channel = self._device.channel + 1
+
+
+class AdvancedRemoteControl(RemoteControl):
+
+    def mute(self):
+        slef._device.volume = 0
+
+
+class Device(object):
+
+    def __init__(self, status=False, volume=50, channel=1):
+        self._status = status
+        self._volume = volume
+        self._channel = channel
+
+    def is_enable(self):
+        return self._status
+
+    def enable(self):
+        self._status = True
+
+    def disable(self):
+        self._status = False
+
+    @property
+    def volume(self):
+        return self._volume
+
+    @volume.setter
+    def volume(self, v):
+        self._volume = v
+
+    @property
+    def channel(self):
+        return self._channel
+
+    @channel.setter
+    def channel(self, v):
+        self._channel = v
+
+
+class TV(Device):
+    pass
+
+class Radio(Device):
+    pass
+
+tv = TV()
+remote = RemoteControl(tv)
+remote.toggle_power()
+
+radio = Radio()
+remote = AdvancedRemoteControl(radio)
+remote.volume_down()
+</code></pre>
+
+<h3 id="适用性-6">适用性</h3>
+
+<ul>
+<li>需要拆分重组一个具有多重功能的类</li>
+<li>需要在几个独立纬度拓展一个类</li>
+<li>在运行时切换不同的实现方法</li>
+</ul>
+
+<h3 id="实现步骤-6">实现步骤</h3>
+
+<ul>
+<li>明确类中独立的纬度</li>
+<li>定义抽象类</li>
+<li>确认平台可用操作，声明抽象接口</li>
+<li>平台类实现接口</li>
+<li>抽象类中添加实现类型的引用</li>
+</ul>
+
+<h3 id="优缺点-6">优缺点</h3>
+
+<ul class="task-list">
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 创建与平台无关的类</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 客户端代码与高层抽象互动</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 开闭原则</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 单一职责原则</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 高内聚类使用该方法可能会更复杂</label></li>
+</ul>
+
+<h2 id="组合模式">组合模式</h2>
+
+<h3 id="意图-7">意图</h3>
+
+<p>将对象组合成树状结构，并能像独立对象一样使用它们</p>
+
+<h3 id="问题-7">问题</h3>
+
+<p>计算订单时，需要去除产品的包装后，再计算订单总金额，计算需要去除包装等因素</p>
+
+<h3 id="解决方案-7">解决方案</h3>
+
+<p>组合模式建议使用一个通用接口来与包装和产品交互，并且再该接口中声明一个计算总价的方法</p>
+
+<h3 id="uml-结构-7">UML 结构</h3>
+
+<pre><code class="language-plantuml">interface Component{
+  + execute()
+}
+class Leaf{
+  + execute()
+}
+class Composite{
+   - children: Component[]
+   + add(c: Component)
+   + remove(c: Component)
+   + getChildren(): Component[]
+   + execute()
+}
+class Client
+Leaf ..|&gt; Component
+Composite ..|&gt; Component
+Client --&gt; Component
+</code></pre>
+
+<ul>
+<li>Component 组件 抽象接口描述共同操作</li>
+<li>Leaf 树节点</li>
+<li>Composite 组合 包含也节点的单位</li>
+</ul>
+
+<p><img src="https://refactoring.guru/images/patterns/diagrams/composite/structure-en-indexed.png" alt="composite structure" /></p>
+
+<h3 id="应用示例-7">应用示例</h3>
+
+<p>图形编辑器实现一系列图形, 组合图形包含多个子图形，组合图形自身不完成具体工作，将请求传递给自己的子部件，然后合成结果</p>
+
+<pre><code class="language-plantuml">interface Graphic{
+  + move(x, y)
+  + draw()
+}
+class Dot{
+  + Dot(x, y)
+  + move(x, y)
+  + draw()
+}
+class Circle{
+  radius
+  + Circle(x, y, radius)
+  + draw()
+}
+class CompoundGraphic{
+  - children: Graphic[]
+  + add(child: Graphic)
+  + remove(child: Graphic)
+  + move(x, y)
+  + draw()
+}
+class ImageEditor
+ImageEditor --&gt; Graphic
+Dot ..|&gt; Graphic
+CompoundGraphic ..|&gt; Graphic
+Circle --|&gt; Dot
+</code></pre>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+from abc import ABCMeta, abstractmethod
+
+
+class Graphic(metaclass=ABCMeta):
+
+    @abstractmethod
+    def move(self, x, y):
+        pass
+
+    @abstractmethod
+    def draw(self):
+        pass
+
+
+class Dot(Graphic):
+
+    def __init__(self, x, y):
+        self._x = x
+        self._y = y
+
+    def move(self, x, y):
+        self._x += x
+        self._y += y
+
+    def draw(self):
+        print('draw graphic')
+
+
+class Circle(Dot):
+
+    def __init__(self, x, y, radius):
+        super().__init__(x, y)
+        self._raidus = radius
+
+    def draw(self):
+        print('draw Circle')
+
+
+class CompoundGraphic(Graphic):
+
+    def __init__(self):
+        self._children = list()
+
+    def add(self, child):
+        self._children.append(child)
+
+    def remove(self, child):
+        self._children.remove(child)
+
+    def move(self, x, y):
+        for i in self._children:
+            i.move(x, y)
+
+    def draw(self):
+        for i in self._children:
+            i.draw()
+
+
+class ImageEditor(object):
+
+    def load(self):
+        self.cg = CompoundGraphic()
+        self.cg.add(Dot(1, 2))
+        self.cg.add(Circle(5, 3, 10))
+
+    def group_selected(self, components):
+        group = CompoundGraphic()
+        group.add(components)
+        self.cg.add(group)
+        self.cg.draw()
+
+
+if __name__ == '__main__':
+    ie = ImageEditor()
+    ie.load()
+    ie.group_selected(Dot(3, 4))
+</code></pre>
+
+<h3 id="适用性-7">适用性</h3>
+
+<ul>
+<li>需要实现树状对象结构</li>
+<li>希望客户端以相同的方式处理简单和复杂的元素</li>
+</ul>
+
+<h3 id="实现步骤-7">实现步骤</h3>
+
+<ul>
+<li>确保核心模型能分解成简单元素和容器</li>
+<li>声明组件接口以及一系列方法</li>
+<li>创建一个也节点类表示简单元素</li>
+<li>创建一个组合类表示容器的复杂元素。用于储存子元素</li>
+<li>在容器中定义添加和删除子元素的方法</li>
+</ul>
+
+<h3 id="优缺点-7">优缺点</h3>
+
+<ul>
+<li>利用多态和递归机制方便使用复杂树结构</li>
+<li>开闭原则</li>
+<li>对于功能差异大的类，提供公共结构或许会有困难</li>
+</ul>
+
+<h2 id="装饰模式">装饰模式</h2>
+
+<h3 id="意图-8">意图</h3>
+
+<p>通过对象放入包含行为的特殊封装对象中来为原对象绑定新的行为</p>
+
+<h3 id="问题-8">问题</h3>
+
+<p>通知类中可以发送通知，后续需要增加不同的接受终端和通知方式，如果修改源代码会使代码量快速膨胀和复杂</p>
+
+<h3 id="解决方案-8">解决方案</h3>
+
+<p>通过装饰器将目标对象的方法进行拓展，而不改变结构名称与参数。上述问题可以实现基类装饰器后，衍生出不同终端和通知方式的装饰器。</p>
+
+<h3 id="uml-结构-8">UML 结构</h3>
+
+<pre><code class="language-plantuml">interface Component{
+  + execute()
+}
+class ConcreteComponent{
+  + execute()
+}
+class BaseDecorator{
+  - wrappee: Component
+  + Decorator(c: Component)
+  + execute()
+}
+class ConcreteDecorators{
+  + execute()
+  + extra()
+}
+class Client
+Client --&gt; Component
+ConcreteComponent ..|&gt; Component
+BaseDecorator ..|&gt; Component
+ConcreteDecorators --|&gt; BaseDecorator
+</code></pre>
+
+<ul>
+<li>Component 部件 装饰器和被装饰对象的公共接口</li>
+<li>ConcreteComponent 具体部件 被装饰对象</li>
+<li>BaseDecorator 基类装饰器 通用装饰器接口</li>
+<li>ConcreteDecorators 动态添加行为，改变原有被装饰对象行为</li>
+</ul>
+
+<p><img src="https://refactoringguru.cn/images/patterns/diagrams/decorator/structure-indexed.png" alt="decorator structure" /></p>
+
+<h3 id="应用示例-8">应用示例</h3>
+
+<p>装饰模式加密数据</p>
+
+<pre><code class="language-plantuml">interface DataSource{
+  + writeData(data)
+  + readData()
+}
+class FileDataSource{
+  - filename
+  + FileDataSource(filename)
+  + writeData(data)
+  - readData()
+}
+class DataSourceDecorator{
+  - wrappee: DataSource
+  + DataSourceDecorator(s:DataSource)
+  + writeData(data)
+  + readData()
+}
+class EncryptionDecorator{
+  + writeData(data)
+  + readData()
+}
+class CompresionDecorator{
+  + writeData(data)
+  + readData()
+}
+FileDataSource ..|&gt; DataSource
+DataSourceDecorator ..|&gt; DataSource
+EncryptionDecorator --|&gt; DataSourceDecorator
+CompressionDecorator --|&gt; DataSourceDecorator
+DataSourceDecorator o--&gt; DataSource
+</code></pre>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+from abc import ABCMeta, abstractmethod
+
+
+class DataSource(metaclass=ABCMeta):
+
+    @abstractmethod
+    def write_data(self, data):
+        pass
+
+    @abstractmethod
+    def read_data(self):
+        pass
+
+
+class FileDataSource(DataSource):
+
+    def __init__(self, filename):
+        self._filename = filename
+
+    def write_data(self, data):
+        print('write data')
+
+    def read_data(self):
+        print('read data')
+
+
+class DataSourceDecorator(DataSource):
+
+    def __init__(self, wrappee):
+        self._wrappee = wrappee
+
+
+    def write_data(self, data):
+        print('decorator write data')
+        self._wrappee.write_data(data)
+
+    def read_data(self):
+        print('decorator read data')
+        return self._wrappee.read_data()
+
+
+class EncryptionDecorator(DataSourceDecorator):
+
+    def write_data(self, data):
+        print('encrypt data')
+        super().write_data(data)
+
+    def read_data(self):
+        print('decrypt data')
+        super().read_data()
+
+
+class CompressionDecorator(DataSourceDecorator):
+
+    def write_data(self, data):
+        print('compress data')
+        super().write_data(data)
+
+    def read_data(self):
+        print('decompress data')
+        super().read_data()
+
+
+if __name__ == '__main__':
+    source = FileDataSource('haha')
+    source.write_data('abc')
+    c_source = CompressionDecorator(source)
+    c_source.write_data('abc')
+    e_source = EncryptionDecorator(source)
+    e_source.write_data('abc')
+</code></pre>
+
+<h3 id="适用性-8">适用性</h3>
+
+<ul>
+<li>不修改代码的情况下增加对象的功能</li>
+<li>使用继承拓展对象行为难以实现，使用装饰模式</li>
+</ul>
+
+<h3 id="实现步骤-8">实现步骤</h3>
+
+<ul>
+<li>确保业务逻辑可用一个基本组件和多个额外可选组件表示</li>
+<li>找出通用方法，声明接口</li>
+<li>创建一个具体组件类，定义基础行为</li>
+<li>创建装饰基类，使用一个成员变量储存被装饰对象</li>
+<li>确保所有类实现组件接口</li>
+<li>将装饰基类拓展为具体装饰类，添加额外行为</li>
+</ul>
+
+<h3 id="优缺点-8">优缺点</h3>
+
+<ul>
+<li>无需新建子类即可拓展对象行为</li>
+<li>运行时添加或删除对象的功能</li>
+<li>多个装饰器组合几种行为</li>
+<li>单一职责原则</li>
+<li>装饰器删除特定装饰器比较困难</li>
+<li>实现行为不受装饰顺序装饰比较困难</li>
+<li>各层初始化配置代码比较糟糕</li>
+</ul>
+
+<h1 id="reference">Reference</h1>
+
+<ul>
+<li><a href="https://python-patterns.guide/">python pattern</a></li>
+<li><a href="https://refactoring.guru/design-patterns">refactor guru</a></li>
+<li><a href="https://redis.io/commands/INCR">redis incr</a></li>
+</ul>
+
+  </div>
+</div>
+<div class="container has-text-centered">
+    
+    <aside><div id="share"></div></aside>
+    <script type="text/javascript">
+        $("#share").jsSocials({
+            showLabel: false,
+            showCount: false,
+            shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+        });
+    </script>
+    
+</div>
+
+<div class="container has-text-centered">
+  
+</div>
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/cnewbie/">cnewbie</a> 2018 - 2019</p>
+  </div>
+</section>
+
+

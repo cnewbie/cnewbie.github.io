@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Hugo Blog</title>
@@ -7,10 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/cnewbie/&#34;&gt;cnewbie&lt;/a&gt; 2018 - 2019</copyright>
-    <lastBuildDate>Sun, 05 May 2019 08:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 01 Nov 2019 08:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://cnewbie.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>设计模式</title>
+      <link>https://cnewbie.github.io/posts/oop-design-pattern/</link>
+      <pubDate>Fri, 01 Nov 2019 08:00:00 +0800</pubDate>
+      
+      <guid>https://cnewbie.github.io/posts/oop-design-pattern/</guid>
+      <description>面向对象之设计模式
+创建型模式 工厂方法 Factory Method 意图 父类中提供创建对象的接口，但是允许子类修改需要创建对象的类型
+问题 创建物流管理类，起先实现了火车类，随着业务的增长，需要进行水路运输。 在修改物流管理类时，需要修改所有运输的代码。
+解决方案 工厂方法通过调用特殊的工厂方法替代直接使用构造方法构建对象，通过工厂方法返回的对象称之为产品。
+UML 结构 interface Product{ -doStuff() } class ConcreteProductA{ } class ConcreteProductB{ } class Creator{ +someOperation() +createProduct(): Product } class ConcreteCreatorA{ } class ConcreteCreatorB{ } ConcreteProductA ..|&amp;gt; Product ConcreteProductB ..|&amp;gt; Product ConcreteCreatorA --|&amp;gt; Creator ConcreteCreatorB --|&amp;gt; Creator Creator --&amp;gt; Product   Product 抽象产品接口 ConcreteProduct 产品类 Creator 抽象工厂方法，依赖抽象产品接口 ConcreteCreator 工厂方法  应用示例 多平台 UI 元素
+#!/usr/bin/env python3 from abc import ABCMeta, abstractmethod class Button(metaclass=ABCMeta): @abstractmethod def render(self): pass @abstractmethod def on_click(self): pass class WindowsButton(Button): def render(self): print(self.</description>
+    </item>
     
     <item>
       <title>Python Cookbook</title>

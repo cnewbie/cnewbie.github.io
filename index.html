@@ -62,6 +62,30 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
       
       <article class="columns">
         <div class="column is-2">
+          <h6 class="is-inline" style="white-space: nowrap">Nov 1</h2>
+        </div>
+        <div class="column">
+          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/oop-design-pattern/">设计模式</a></h1>
+          <div class="content is-hidden-mobile">
+            面向对象之设计模式
+创建型模式 工厂方法 Factory Method 意图 父类中提供创建对象的接口，但是允许子类修改需要创建对象的类型
+问题 创建物流管理类，起先实现了火车类，随着业务的增长，需要进行水路运输。 在修改物流管理类时，需要修改所有运输的代码。
+解决方案 工厂方法通过调用特殊的工厂方法替代直接使用构造方法构建对象，通过工厂方法返回的对象称之为产品。
+UML 结构 interface Product{ -doStuff() } class ConcreteProductA{ } class ConcreteProductB{ } class Creator{ +someOperation() +createProduct(): Product } class ConcreteCreatorA{ } class ConcreteCreatorB{ } …
+            
+            <br>
+            <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/oop-design-pattern/">
+            <span class="icon-link is-small" style="line-height: 100%">
+                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+              </span>
+              <p style="padding:0 5px"></p>more</p>
+            </a>
+            
+          </div>
+      </article>
+      
+      <article class="columns">
+        <div class="column is-2">
           <h6 class="is-inline" style="white-space: nowrap">May 5</h2>
         </div>
         <div class="column">
@@ -248,29 +272,6 @@ SQL语句对大小写不敏感
             
             <br>
             <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/python-metaclass/">
-            <span class="icon-link is-small" style="line-height: 100%">
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-              </span>
-              <p style="padding:0 5px"></p>more</p>
-            </a>
-            
-          </div>
-      </article>
-      
-      
-      <h1 class="title is-3">2018</h1>
-      
-      <article class="columns">
-        <div class="column is-2">
-          <h6 class="is-inline" style="white-space: nowrap">Aug 5</h2>
-        </div>
-        <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/algorithm-sort-algorithms/">常用排序算法总结</a></h1>
-          <div class="content is-hidden-mobile">
-            工具函数 #include &lt;iostream&gt; #include &lt;ctime&gt; using namespace std; void swap(int &amp;a,int &amp;b){ int tmp = a; a = b; b = tmp; } void printarr(int *a,int n){ for(size_t i = 0; i &lt; n; i++) { cout &lt;&lt; a[i] &lt;&lt; &quot; &quot;; } cout &lt;&lt; endl; }  Bubble Sort 冒泡排序 void bubble_sort(int *a, int n){ for(size_t i = n-1; i &gt; 0;--i){ for(size_t j = i; j &gt; 0;--j) { if(a[j] …
-            
-            <br>
-            <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/algorithm-sort-algorithms/">
             <span class="icon-link is-small" style="line-height: 100%">
                 <i class="fa fa-angle-double-right" aria-hidden="true"></i>
               </span>
