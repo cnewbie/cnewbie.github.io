@@ -60,16 +60,10 @@
   <h2 class="subtitle is-6">March 15, 2019</h2>
   <h1 class="subtitle is-size-4-mobile is-size-3-desktop">Tmux and Screen</h1>
   <div class="content">
-    
-
-<p>Terminal Multiplexers: Screen, Tmux</p>
-
+    <p>Terminal Multiplexers: Screen, Tmux</p>
 <p>终端多路复用：Screen，Tmux</p>
-
-<h1 id="命令行选项">命令行选项</h1>
-
+<h1 id="heading">命令行选项</h1>
 <p>术语对照表</p>
-
 <table>
 <thead>
 <tr>
@@ -77,60 +71,49 @@
 <th>中文</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
-<td><code>session</code></td>
-<td>会话</td>
+<td><code>session</code>|会话</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>attach</code></td>
-<td>连接</td>
+<td><code>attach</code>|连接</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>detach</code></td>
-<td>脱离</td>
+<td><code>detach</code>|脱离</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>prefix</code></td>
-<td>前缀</td>
+<td><code>prefix</code>|前缀</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>multiplexer</code></td>
-<td>多路复用</td>
+<td><code>multiplexer</code>|多路复用</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>window</code></td>
-<td>窗口</td>
+<td><code>window</code>|窗口</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>regions</code></td>
-<td>区域</td>
+<td><code>regions</code>|区域</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>panes</code></td>
-<td>面板</td>
+<td><code>panes</code>|面板</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>buffer</code></td>
-<td>缓存</td>
+<td><code>buffer</code>|缓存</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>mark</code></td>
-<td>标记</td>
+<td><code>mark</code>|标记</td>
+<td></td>
 </tr>
 </tbody>
 </table>
-
 <table>
 <thead>
 <tr>
@@ -139,72 +122,60 @@
 <th><strong>tmux</strong></th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>创建指定名称的会话并连接</td>
-<td><code>screen -S foo</code></td>
-<td><code>tmux new -s foo</code></td>
+<td><code>screen -S foo</code>|<code>tmux new -s foo</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>创建会话并脱离</td>
-<td><code>screen -S foo -d -m</code></td>
-<td><code>tmux new -s foo -d</code></td>
+<td><code>screen -S foo -d -m</code>|<code>tmux new -s foo -d</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>列出所有会话</td>
-<td><code>screen -list</code></td>
-<td><code>tmux ls</code></td>
+<td><code>screen -list</code>|<code>tmux ls</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>连接</td>
-<td><code>screen -r</code></td>
-<td><code>tmux attach</code></td>
+<td><code>screen -r</code>|<code>tmux attach</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>连接到指定会话</td>
-<td><code>screen -r foo</code></td>
-<td><code>tmux attach -t foo</code></td>
+<td><code>screen -r foo</code>|<code>tmux attach -t foo</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>通过 pid 连接会话</td>
 <td><code>screen -r pid</code></td>
 <td></td>
 </tr>
-
 <tr>
 <td>连接到运行中的会话</td>
 <td><code>screen -x foo</code></td>
 <td></td>
 </tr>
-
 <tr>
 <td>销毁指定会话</td>
-<td><code>screen -r foo -X quit</code></td>
-<td><code>tmux kill-session -t foo</code></td>
+<td><code>screen -r foo -X quit</code>|<code>tmux kill-session -t foo</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>发送命令到指定会话</td>
-<td><code>screen -r foo -X command</code></td>
-<td><code>tmux command -t foo</code></td>
+<td><code>screen -r foo -X command</code>|<code>tmux command -t foo</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>脱离会话</td>
-<td><code>screen -d name</code></td>
+<td><code>screen -d name</code>|</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-
-<h1 id="按键绑定">按键绑定</h1>
-
+<h1 id="heading-1">按键绑定</h1>
 <table>
 <thead>
 <tr>
@@ -215,48 +186,42 @@
 <th><strong>tmux command</strong></th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>帮助</td>
-<td><code>?</code></td>
-<td><code>:help</code></td>
-<td><code>?</code></td>
-<td><code>:help</code></td>
+<td><code>?</code>|<code>:help</code>|<code>?</code>|<code>:help</code></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>发送前缀至其他应用</td>
-<td><code>a</code></td>
-<td><code>:meta</code></td>
-<td><code>C-b</code></td>
-<td><code>:send-prefix</code></td>
+<td><code>a</code>|<code>:meta</code>|<code>C-b</code>|<code>:send-prefix</code></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>暂停多路复用</td>
-<td><code>C-z</code></td>
-<td><code>:suspend</code></td>
-<td><code>C-z</code></td>
-<td><code>:suspend-client</code></td>
+<td><code>C-z</code>|<code>:suspend</code>|<code>C-z</code>|<code>:suspend-client</code></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>显示前一个多路复用终端信息</td>
-<td><code>m/C-m</code></td>
-<td><code>:lastmsg</code></td>
-<td><code>~</code></td>
-<td><code>:show-messages</code></td>
+<td><code>m/C-m</code>|<code>:lastmsg</code>|<code>~</code>|<code>:show-messages</code></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>加载配置文件</td>
 <td></td>
-<td><code>:source filename</code></td>
-<td></td>
+<td><code>:source filename</code>|</td>
 <td><code>:source-file filename</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td></td>
 <td></td>
@@ -264,7 +229,6 @@
 <td></td>
 <td></td>
 </tr>
-
 <tr>
 <td>新建会话</td>
 <td></td>
@@ -272,7 +236,6 @@
 <td></td>
 <td><code>:new</code></td>
 </tr>
-
 <tr>
 <td>新建命名会话</td>
 <td></td>
@@ -280,31 +243,27 @@
 <td></td>
 <td><code>:new -s name</code></td>
 </tr>
-
 <tr>
 <td>切换会话</td>
 <td></td>
 <td></td>
-<td><code>s</code></td>
-<td><code>:choose-session</code></td>
+<td><code>s</code>|<code>:choose-session</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>重命名会话</td>
 <td></td>
-<td><code>:sessionname newname</code></td>
-<td><code>$</code></td>
-<td><code>rename-session newname</code></td>
+<td><code>:sessionname newname</code>|<code>$</code>|<code>rename-session newname</code></td>
+<td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>销毁会话</td>
-<td><code>C-\</code></td>
-<td><code>:quit</code></td>
+<td><code>C-\</code>|<code>:quit</code>|||</td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
-
 <tr>
 <td></td>
 <td></td>
@@ -312,119 +271,104 @@
 <td></td>
 <td></td>
 </tr>
-
 <tr>
 <td>创建窗口</td>
-<td><code>c/C-c</code></td>
-<td><code>:screen</code></td>
-<td><code>c</code></td>
-<td><code>:new-window</code></td>
+<td><code>c/C-c</code>|<code>:screen</code>|<code>c</code>|<code>:new-window</code></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>切换下一个窗口</td>
-<td><code>n/C-n/&lt;SPACE&gt;</code></td>
-<td><code>:next</code></td>
-<td><code>n</code></td>
-<td><code>next-window</code></td>
+<td><code>n/C-n/&lt;SPACE&gt;</code>|<code>:next</code>|<code>n</code>|<code>next-window</code></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>切换上一个窗口</td>
-<td><code>p/h/C-p/&lt;BACKSPACE&gt;</code></td>
-<td><code>:prev</code></td>
-<td><code>p</code></td>
-<td><code>:previous-window</code></td>
+<td><code>p/h/C-p/&lt;BACKSPACE&gt;</code>|<code>:prev</code>|<code>p</code>|<code>:previous-window</code></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>激活最近使用的窗口</td>
-<td><code>C-a</code></td>
-<td><code>:other</code></td>
+<td><code>C-a</code>|<code>:other</code></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
-
 <tr>
 <td>选择指定 <code>number</code> 窗口</td>
-<td><code>number/' number</code></td>
-<td><code>number</code></td>
-<td><code>:select-window -t number</code></td>
+<td><code>number/' number</code>|<code>number</code>|<code>:select-window -t number</code></td>
+<td></td>
+<td></td>
 <td></td>
 </tr>
-
 <tr>
 <td>列出所有窗口</td>
-<td><code>w/C-w</code></td>
-<td><code>:windows</code></td>
-<td></td>
+<td><code>w/C-w</code>|<code>:windows</code>|</td>
 <td><code>:list-windows</code></td>
+<td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>显示当前窗口信息</td>
-<td><code>N</code></td>
-<td><code>:number</code></td>
+<td><code>N</code>|<code>:number</code></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
-
 <tr>
-<td>重新分配窗口 <code>number</code></td>
+<td>重新分配窗口 <code>number</code>|</td>
+<td></td>
+<td><code>. position</code>|<code>:move-window</code></td>
 <td></td>
 <td></td>
-<td><code>. position</code></td>
-<td><code>:move-window</code></td>
 </tr>
-
 <tr>
 <td>重新分配窗口所在会话</td>
 <td></td>
 <td></td>
-<td><code>. sessname</code> </br> <code>. sessnum:position</code></td>
+<td><code>. sessname</code> <!-- raw HTML omitted --> <code>. sessnum:position</code></td>
 <td></td>
 </tr>
-
 <tr>
 <td>重绘当前窗口</td>
-<td><code>l/C-l</code></td>
-<td><code>:redisplay</code></td>
-<td><code>r</code></td>
-<td><code>:refresh-client</code></td>
+<td><code>l/C-l</code>|<code>:redisplay</code>|<code>r</code>|<code>:refresh-client</code></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>交互式选择窗口</td>
-<td><code>&quot;</code></td>
-<td><code>:windowlist -b</code></td>
-<td><code>w</code></td>
-<td><code>:choose-window</code></td>
+<td><code>&quot;</code>|<code>:windowlist -b</code>|<code>w</code>|<code>:choose-window</code></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>重命名窗口</td>
-<td><code>A</code></td>
-<td><code>:title</code></td>
-<td><code>,</code></td>
+<td><code>A</code>|<code>:title</code>|<code>,</code></td>
+<td></td>
+<td></td>
 <td></td>
 </tr>
-
 <tr>
 <td>选择名为 foo 的窗口</td>
-<td><code>'</code></td>
-<td><code>:select</code></td>
-<td><code>f foo</code></td>
+<td><code>'</code>|<code>:select</code>|<code>f foo</code></td>
+<td></td>
+<td></td>
 <td></td>
 </tr>
-
 <tr>
 <td>关闭当前窗口</td>
-<td><code>k</code></td>
-<td><code>:kill</code></td>
-<td><code>&amp;</code></td>
-<td><code>kill-window</code></td>
+<td><code>k</code>|<code>:kill</code>|<code>&amp;</code>|<code>kill-window</code></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>联合窗口 1 到当前窗口</td>
 <td></td>
@@ -432,7 +376,6 @@
 <td></td>
 <td><code>:join-pane -s 1</code></td>
 </tr>
-
 <tr>
 <td>联合窗口 1 的区域 0 到当前窗口</td>
 <td></td>
@@ -440,7 +383,6 @@
 <td></td>
 <td><code>:join-pane -s 1.0</code></td>
 </tr>
-
 <tr>
 <td></td>
 <td></td>
@@ -448,23 +390,20 @@
 <td></td>
 <td></td>
 </tr>
-
 <tr>
 <td>上下分割</td>
-<td><code>S</code></td>
-<td><code>:split</code></td>
+<td><code>S</code>|<code>:split</code></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
-
 <tr>
 <td>左右分割</td>
-<td>`</td>
-<td>/V`</td>
-<td><code>:vsplit</code></td>
+<td><code>|/V</code>|<code>:vsplit</code></td>
+<td></td>
+<td></td>
 <td></td>
 </tr>
-
 <tr>
 <td>切换到下一区域</td>
 <td><code>&lt;TAB&gt;</code></td>
@@ -472,7 +411,6 @@
 <td></td>
 <td></td>
 </tr>
-
 <tr>
 <td>使区域高度相同</td>
 <td></td>
@@ -480,31 +418,27 @@
 <td></td>
 <td></td>
 </tr>
-
 <tr>
 <td>保留当前区域关闭其他区域</td>
-<td><code>Q</code></td>
-<td><code>:only</code></td>
+<td><code>Q</code>|<code>:only</code></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
-
 <tr>
 <td>清除当前区域</td>
-<td><code>C</code></td>
-<td><code>:clear</code></td>
+<td><code>C</code>|<code>:clear</code></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
-
 <tr>
 <td>关闭当前区域</td>
-<td><code>X</code></td>
-<td><code>:remove</code></td>
+<td><code>X</code>|<code>:remove</code></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
-
 <tr>
 <td>输出日志到文件</td>
 <td></td>
@@ -512,7 +446,6 @@
 <td></td>
 <td></td>
 </tr>
-
 <tr>
 <td>关闭日志</td>
 <td></td>
@@ -520,7 +453,6 @@
 <td></td>
 <td></td>
 </tr>
-
 <tr>
 <td>调节当前区域行高</td>
 <td></td>
@@ -528,7 +460,6 @@
 <td></td>
 <td></td>
 </tr>
-
 <tr>
 <td>设置当前区域行高为 n</td>
 <td></td>
@@ -536,7 +467,6 @@
 <td></td>
 <td></td>
 </tr>
-
 <tr>
 <td></td>
 <td></td>
@@ -544,31 +474,27 @@
 <td></td>
 <td></td>
 </tr>
-
 <tr>
 <td>上下分割</td>
 <td></td>
 <td></td>
-<td><code>&quot;</code></td>
-<td><code>:split-window</code></td>
+<td><code>&quot;</code>|<code>:split-window</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>左右分割</td>
 <td></td>
 <td></td>
-<td><code>%</code></td>
-<td><code>:split-window -h</code></td>
+<td><code>%</code>|<code>:split-window -h</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>切换下一区域</td>
 <td></td>
 <td></td>
-<td><code>o</code></td>
-<td><code>:select-pane</code></td>
+<td><code>o</code>|<code>:select-pane</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>列出面板</td>
 <td></td>
@@ -576,31 +502,27 @@
 <td></td>
 <td><code>:list-panes</code></td>
 </tr>
-
 <tr>
 <td>显示面板编号</td>
 <td></td>
 <td></td>
-<td><code>q</code></td>
-<td><code>:list-panes</code></td>
+<td><code>q</code>|<code>:list-panes</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>旋转面板</td>
 <td></td>
 <td></td>
-<td><code>C-o</code></td>
-<td><code>:rotate-window</code></td>
+<td><code>C-o</code>|<code>:rotate-window</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>反向旋转面板</td>
 <td></td>
 <td></td>
-<td><code>M-o</code></td>
-<td><code>:rotate-window -D</code></td>
+<td><code>M-o</code>|<code>:rotate-window -D</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>相同宽度的面板布局</td>
 <td></td>
@@ -608,7 +530,6 @@
 <td><code>M-1</code></td>
 <td></td>
 </tr>
-
 <tr>
 <td>相同高度的面板布局</td>
 <td></td>
@@ -616,47 +537,41 @@
 <td><code>M-2</code></td>
 <td></td>
 </tr>
-
 <tr>
 <td>交换当前与前一面板</td>
 <td></td>
 <td></td>
-<td><code>{</code></td>
-<td><code>:swap-pane -U</code></td>
+<td><code>{</code>|<code>:swap-pane -U</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>交换当前与后一面板</td>
 <td></td>
 <td></td>
-<td><code>}</code></td>
-<td><code>:swap-pane -D</code></td>
+<td><code>}</code>|<code>:swap-pane -D</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>修改面板布局</td>
 <td></td>
 <td></td>
-<td><code>&lt;SPACE&gt;</code></td>
-<td><code>:next-layout</code></td>
+<td><code>&lt;SPACE&gt;</code>|<code>:next-layout</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>关闭当前面板</td>
 <td></td>
 <td></td>
-<td><code>x</code></td>
-<td><code>:confim-before kill-pane</code></td>
+<td><code>x</code>|<code>:confim-before kill-pane</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>break 当前面板至分离窗口</td>
 <td></td>
 <td></td>
-<td><code>!</code></td>
-<td><code>:break-pane</code></td>
+<td><code>!</code>|<code>:break-pane</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>清除当前面板</td>
 <td></td>
@@ -664,7 +579,6 @@
 <td></td>
 <td><code>:clear-history</code></td>
 </tr>
-
 <tr>
 <td>输出日志到文件</td>
 <td></td>
@@ -672,7 +586,6 @@
 <td></td>
 <td><code>:pipe-pane &quot;cat &gt; /tmp/tmux.log&quot;</code></td>
 </tr>
-
 <tr>
 <td>关闭日志</td>
 <td></td>
@@ -680,7 +593,6 @@
 <td></td>
 <td><code>:pipe-pane</code></td>
 </tr>
-
 <tr>
 <td>调节左/上单元大小</td>
 <td></td>
@@ -688,7 +600,6 @@
 <td></td>
 <td><code>:resize-pane -L/U n</code></td>
 </tr>
-
 <tr>
 <td></td>
 <td></td>
@@ -696,55 +607,48 @@
 <td></td>
 <td></td>
 </tr>
-
 <tr>
 <td>进入 copy 模式</td>
-<td><code>[/C-[/&lt;ESC&gt;</code></td>
-<td><code>:copy</code></td>
-<td><code>[</code></td>
-<td><code>:copy-mode</code></td>
+<td><code>[/C-[/&lt;ESC&gt;</code>|<code>:copy</code>|<code>[</code>|<code>:copy-mode</code></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>paste 最近的缓存</td>
-<td><code>]</code></td>
+<td><code>]</code>|</td>
+<td><code>]</code>|<code>:paste-buffer</code></td>
 <td></td>
-<td><code>]</code></td>
-<td><code>:paste-buffer</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>缓存列表</td>
 <td></td>
 <td></td>
-<td><code>#</code></td>
-<td><code>:list-buffers</code></td>
+<td><code>#</code>|<code>:list-buffers</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>交互式选择缓存</td>
 <td></td>
 <td></td>
-<td><code>=</code></td>
-<td><code>:choose-buffer</code></td>
+<td><code>=</code>|<code>:choose-buffer</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>缓存保存至文件</td>
-<td><code>&gt;</code></td>
-<td><code>:writebuf path</code></td>
-<td></td>
+<td><code>&gt;</code>|<code>:writebuf path</code>|</td>
 <td><code>:save-buffer path</code></td>
+<td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>copy 文件至缓存</td>
-<td><code>&lt;</code></td>
-<td><code>:readbuf path</code></td>
-<td></td>
+<td><code>&lt;</code>|<code>:readbuf path</code>|</td>
 <td><code>:load-buffer path</code></td>
+<td></td>
+<td></td>
 </tr>
-
 <tr>
 <td></td>
 <td></td>
@@ -752,7 +656,6 @@
 <td></td>
 <td></td>
 </tr>
-
 <tr>
 <td>默认绑定</td>
 <td>Vim style</td>
@@ -760,131 +663,114 @@
 <td>Emacs-style</td>
 <td></td>
 </tr>
-
 <tr>
 <td>设置标记</td>
-<td><code>&lt;SPACE&gt;</code></td>
-<td></td>
+<td><code>&lt;SPACE&gt;</code>|</td>
 <td><code>C-&lt;SPACE&gt;</code></td>
 <td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>copy from 标记点并退出 copy mode</td>
-<td><code>&lt;SPACE&gt;</code></td>
-<td></td>
+<td><code>&lt;SPACE&gt;</code>|</td>
 <td><code>C-w</code></td>
 <td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>单列移动</td>
-<td><code>h/l</code></td>
-<td></td>
+<td><code>h/l</code>|</td>
 <td><code>C-b/C-h</code></td>
 <td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>单行移动</td>
-<td><code>j/k</code></td>
-<td></td>
+<td><code>j/k</code>|</td>
 <td><code>C-n/C-p</code></td>
 <td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>行开头</td>
-<td><code>0</code></td>
-<td></td>
+<td><code>0</code>|</td>
 <td><code>C-a</code></td>
 <td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>行结尾</td>
-<td><code>$</code></td>
-<td></td>
+<td><code>$</code>|</td>
 <td><code>C-e</code></td>
 <td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>下一个词</td>
-<td><code>e</code></td>
-<td></td>
+<td><code>e</code>|</td>
 <td><code>M-f</code></td>
 <td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>上一个词</td>
-<td><code>b</code></td>
-<td></td>
+<td><code>b</code>|</td>
 <td><code>M-b</code></td>
 <td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>向上翻页</td>
-<td><code>C-b</code></td>
-<td></td>
+<td><code>C-b</code>|</td>
 <td><code>M-v</code></td>
 <td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>向下翻页</td>
-<td><code>C-f</code></td>
-<td></td>
+<td><code>C-f</code>|</td>
 <td><code>C-v</code></td>
 <td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>缓存开头</td>
-<td><code>g</code></td>
-<td></td>
+<td><code>g</code>|</td>
 <td><code>M-&lt;</code></td>
 <td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>缓存结尾</td>
-<td><code>G</code></td>
-<td></td>
+<td><code>G</code>|</td>
 <td><code>M-&gt;</code></td>
 <td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>向上搜索</td>
-<td><code>? phrase</code></td>
-<td></td>
+<td><code>? phrase</code>|</td>
 <td><code>C-r phrase</code></td>
 <td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>向下搜索</td>
-<td><code>/ phrase</code></td>
-<td></td>
+<td><code>/ phrase</code>|</td>
 <td><code>C-s phrase</code></td>
 <td></td>
+<td></td>
 </tr>
-
 <tr>
 <td>退出 copy 模式</td>
-<td><code>&lt;ESC&gt;</code></td>
-<td></td>
+<td><code>&lt;ESC&gt;</code>|</td>
 <td><code>q</code></td>
+<td></td>
 <td></td>
 </tr>
 </tbody>
 </table>
-
 <p>自定义</p>
-
 <table>
 <thead>
 <tr>
@@ -893,72 +779,60 @@
 <th><strong>tmux</strong></th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>启动配置文件</td>
-<td><code>~/.screenrc</code></td>
-<td><code>~/.tmux.conf</code></td>
+<td><code>~/.screenrc</code>|<code>~/.tmux.conf</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>滚动长度</td>
-<td><code>defscrollback 2000</code></td>
-<td><code>set-option histoty-limit 2000</code></td>
+<td><code>defscrollback 2000</code>|<code>set-option histoty-limit 2000</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>配置前缀</td>
-<td><code>escape ^B^B</code></td>
-<td><code>set-optime -g prefix C-a</code></td>
+<td><code>escape ^B^B</code>|<code>set-optime -g prefix C-a</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>define key binding</td>
-<td><code>bind</code></td>
-<td><code>bind-key</code></td>
+<td><code>bind</code>|<code>bind-key</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>undefine key binding</td>
 <td></td>
 <td><code>unbind-key</code></td>
 </tr>
-
 <tr>
 <td>配置 copy/scrollback 绑定</td>
-<td><code>markkeys h=^b:l=^F:$=^E</code></td>
-<td><code>setw -g mode-keys vi</code></td>
+<td><code>markkeys h=^b:l=^F:$=^E</code>|<code>setw -g mode-keys vi</code></td>
+<td></td>
 </tr>
-
 <tr>
 <td>关闭启动信息</td>
 <td><code>startup_message off</code></td>
 <td></td>
 </tr>
-
 <tr>
 <td>配置默认窗口号</td>
 <td></td>
 <td><code>set -g base-index 1</code></td>
 </tr>
-
 <tr>
 <td>显示状态栏</td>
-<td><code>caption always</code></br><code>caption splitonly</code> # default</td>
-<td><code>set-option status off</code></br><code>set-option status on</code></td>
+<td><code>caption always</code><!-- raw HTML omitted --><code>caption splitonly</code> # default</td>
+<td><code>set-option status off</code><!-- raw HTML omitted --><code>set-option status on</code></td>
 </tr>
-
 <tr>
 <td>自定义标题</td>
-<td><code>caption string &quot;string&quot;</code></td>
-<td><code>set-option status-left &quot;string&quot;</code></br><code>set-option status-right &quot;string&quot;</code></td>
+<td><code>caption string &quot;string&quot;</code>|<code>set-option status-left &quot;string&quot;</code><!-- raw HTML omitted --><code>set-option status-right &quot;string&quot;</code></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-
 <h1 id="man-tmux">man tmux</h1>
-
 <table>
 <thead>
 <tr>
@@ -966,59 +840,47 @@
 <th>description</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
-<td><code>-2</code></td>
-<td>强制假设tmux支持256色</td>
+<td><code>-2</code>|强制假设tmux支持256色</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>-C</code></td>
-<td>启动 <strong>control mode</strong> <code>-CC</code>关闭回显</td>
+<td><code>-C</code>|启动 <strong>control mode</strong> <code>-CC</code>关闭回显</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>-c</code></td>
-<td>使用默认 shell 执行指令</td>
+<td><code>-c</code>|使用默认 shell 执行指令</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>-f</code></td>
-<td>指定加载配置文件</td>
+<td><code>-f</code>|指定加载配置文件</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>-l</code></td>
-<td>加载login shell配置</td>
+<td><code>-l</code>|加载login shell配置</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>-L</code></td>
-<td>tmux 保存服务socket至 TMUX_TMPDIR，如果变量未设置则保存至/tmp 文件夹</td>
+<td><code>-L</code>|tmux 保存服务socket至 TMUX_TMPDIR，如果变量未设置则保存至/tmp 文件夹</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>-S</code></td>
-<td>指定服务socket路径</td>
+<td><code>-S</code>|指定服务socket路径</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>-u</code></td>
-<td>在tmux启东市查找 LC_AlL,LC_CTYPE,LANG三个环境变量，如果存在 UTF8标志则支持UTF8编码</td>
+<td><code>-u</code>|在tmux启东市查找 LC_AlL,LC_CTYPE,LANG三个环境变量，如果存在 UTF8标志则支持UTF8编码</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>-v</code></td>
-<td>展示详细日志记录</td>
+<td><code>-v</code>|展示详细日志记录</td>
+<td></td>
 </tr>
 </tbody>
 </table>
-
 <h1 id="cheat-sheet">Cheat Sheet</h1>
-
 <p>Ctrl+b // 激活控制台；此时以下按键生效</p>
-
 <table>
 <thead>
 <tr>
@@ -1026,262 +888,210 @@
 <th>含义</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>系统操作</td>
 <td></td>
 </tr>
-
 <tr>
-<td><code>?</code></td>
-<td>列出所有快捷键；<code>q</code>键返回</td>
+<td><code>?</code>|列出所有快捷键；<code>q</code>键返回</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>d</code></td>
-<td>脱离当前会话；返回 <strong>shell</strong> 界面，输入 <code>tmux attach</code>重新进入会话</td>
+<td><code>d</code>|脱离当前会话；返回 <strong>shell</strong> 界面，输入 <code>tmux attach</code>重新进入会话</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>D</code></td>
-<td>选择要脱离的会话；同时开启多个会话使用</td>
+<td><code>D</code>|选择要脱离的会话；同时开启多个会话使用</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>L</code></td>
-<td>切换至上一个连接的会话</td>
+<td><code>L</code>|切换至上一个连接的会话</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>Ctrl+z</code></td>
-<td>挂起当前会话</td>
+<td><code>Ctrl+z</code>|挂起当前会话</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>r</code></td>
-<td>强制重绘连接的会话</td>
+<td><code>r</code>|强制重绘连接的会话</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>s</code></td>
-<td>选择并切换会话；在同时开启了多个会话时使用</td>
+<td><code>s</code>|选择并切换会话；在同时开启了多个会话时使用</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>t</code></td>
-<td>显示时间信息</td>
+<td><code>t</code>|显示时间信息</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>(</code></td>
-<td>切换至前一个会话</td>
+<td><code>(</code>|切换至前一个会话</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>)</code></td>
-<td>切换至后一个回话</td>
+<td><code>)</code>|切换至后一个回话</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>:</code></td>
-<td>进入命令行模式</td>
+<td><code>:</code>|进入命令行模式</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>[</code></td>
-<td>进入复制模式；此时的操作与vi/emacs相同，按q/Esc退出</td>
+<td><code>[</code>|进入复制模式；此时的操作与vi/emacs相同，按q/Esc退出</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>]</code></td>
-<td>粘贴最近的拷贝缓存区内容</td>
+<td><code>]</code>|粘贴最近的拷贝缓存区内容</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>~</code></td>
-<td>列出提示信息缓存</td>
+<td><code>~</code>|列出提示信息缓存</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>#</code></td>
-<td>列出所有剪切版缓存</td>
+<td><code>#</code>|列出所有剪切版缓存</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>-</code></td>
-<td>删除最近的拷贝缓存区内容</td>
+<td><code>-</code>|删除最近的拷贝缓存区内容</td>
+<td></td>
 </tr>
-
 <tr>
 <td>窗口操作</td>
 <td></td>
 </tr>
-
 <tr>
-<td><code>c</code></td>
-<td>创建新窗口</td>
+<td><code>c</code>|创建新窗口</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>&amp;</code></td>
-<td>关闭当前窗口</td>
+<td><code>&amp;</code>|关闭当前窗口</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>0-9</code></td>
-<td>切换至指定窗口</td>
+<td><code>0-9</code>|切换至指定窗口</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>p</code></td>
-<td>切换至上一窗口</td>
+<td><code>p</code>|切换至上一窗口</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>n</code></td>
-<td>切换至下一窗口</td>
+<td><code>n</code>|切换至下一窗口</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>l</code></td>
-<td>在前后两个窗口间互相切换</td>
+<td><code>l</code>|在前后两个窗口间互相切换</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>w</code></td>
-<td>通过窗口列表切换窗口</td>
+<td><code>w</code>|通过窗口列表切换窗口</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>,</code></td>
-<td>重命名当前窗口</td>
+<td><code>,</code>|重命名当前窗口</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>.</code></td>
-<td>修改当前窗口编号</td>
+<td><code>.</code>|修改当前窗口编号</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>f</code></td>
-<td>在所有窗口中查找指定文本</td>
+<td><code>f</code>|在所有窗口中查找指定文本</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>i</code></td>
-<td>显示当前窗口信息</td>
+<td><code>i</code>|显示当前窗口信息</td>
+<td></td>
 </tr>
-
 <tr>
 <td>面板操作</td>
 <td></td>
 </tr>
-
 <tr>
-<td><code>m</code></td>
-<td>标记当前面板</td>
+<td><code>m</code>|标记当前面板</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>M</code></td>
-<td>清除标记的面板</td>
+<td><code>M</code>|清除标记的面板</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>&quot;</code></td>
-<td>分隔为上下面板</td>
+<td><code>&quot;</code>|分隔为上下面板</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>%</code></td>
-<td>分隔为左右面板</td>
+<td><code>%</code>|分隔为左右面板</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>x</code></td>
-<td>关闭当前面板</td>
+<td><code>x</code>|关闭当前面板</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>;</code></td>
-<td>切换至前一个活动面板</td>
+<td><code>;</code>|切换至前一个活动面板</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>!</code></td>
-<td>将当前面板置于新窗口；即新建一个窗口，其中仅包含当前面板</td>
+<td><code>!</code>|将当前面板置于新窗口；即新建一个窗口，其中仅包含当前面板</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>Ctrl+方向键</code></td>
-<td>以1个单元格为单位移动边缘以调整当前面板大小</td>
+<td><code>Ctrl+方向键</code>|以1个单元格为单位移动边缘以调整当前面板大小</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>Alt+方向键</code></td>
-<td>以5个单元格为单位移动边缘以调整当前面板大小</td>
+<td><code>Alt+方向键</code>|以5个单元格为单位移动边缘以调整当前面板大小</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>Space</code></td>
-<td>在预置的面板布局中循环切换</td>
+<td><code>Space</code>|在预置的面板布局中循环切换</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>q</code></td>
-<td>显示面板编号</td>
+<td><code>q</code>|显示面板编号</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>o</code></td>
-<td>在当前窗口中选择下一面板</td>
+<td><code>o</code>|在当前窗口中选择下一面板</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>方向键</code></td>
-<td>移动光标以选择面板</td>
+<td><code>方向键</code>|移动光标以选择面板</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>{</code></td>
-<td>向前置换当前面板</td>
+<td><code>{</code>|向前置换当前面板</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>}</code></td>
-<td>向后置换当前面板</td>
+<td><code>}</code>|向后置换当前面板</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>Alt+o</code></td>
-<td>逆时针旋转当前窗口的面板</td>
+<td><code>Alt+o</code>|逆时针旋转当前窗口的面板</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>Alt+n</code></td>
-<td>切换到下一窗口</td>
+<td><code>Alt+n</code>|切换到下一窗口</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>Alt+p</code></td>
-<td>切换到上一个窗口</td>
+<td><code>Alt+p</code>|切换到上一个窗口</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>Ctrl+o</code></td>
-<td>顺时针旋转当前窗口的面板</td>
+<td><code>Ctrl+o</code>|顺时针旋转当前窗口的面板</td>
+<td></td>
 </tr>
-
 <tr>
-<td><code>z</code></td>
-<td>切换当前面板缩放状态</td>
+<td><code>z</code>|切换当前面板缩放状态</td>
+<td></td>
 </tr>
 </tbody>
 </table>
-
 <h1 id="reference">Reference</h1>
-
 <p><a href="http://man.openbsd.org/OpenBSD-current/man1/tmux.1">man tmux</a></p>
 
   </div>

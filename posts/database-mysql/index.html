@@ -60,32 +60,21 @@
   <h2 class="subtitle is-6">March 26, 2019</h2>
   <h1 class="subtitle is-size-4-mobile is-size-3-desktop">MySQL 命令速查</h1>
   <div class="content">
-    
-
-<hr />
-
+    <hr>
 <p><a href="http://www.w3school.com.cn/">教程地址</a></p>
-
 <p>SQL语句对大小写不敏感</p>
-
-<h1 id="基础语法">基础语法</h1>
-
+<h1 id="heading">基础语法</h1>
 <blockquote>
 <p>SELECT 列名称 FROM 表名称</p>
 </blockquote>
-
 <p><strong>DISTINCT</strong> 用语返回唯一的值</p>
-
 <blockquote>
 <p>SELECT DISTINCT 列名称 FROM 表名称</p>
 </blockquote>
-
 <p><strong>WHERE</strong> 有条件从表中选取数据</p>
-
 <blockquote>
 <p>SELECT 列名称 FROM 表名称 WHERE 列 运算符 值</p>
 </blockquote>
-
 <table>
 <thead>
 <tr>
@@ -93,82 +82,63 @@
 <th>描述</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>=</td>
 <td>等于</td>
 </tr>
-
 <tr>
 <td>&lt;&gt;</td>
 <td>不等于</td>
 </tr>
-
 <tr>
 <td>&gt;</td>
 <td>大于</td>
 </tr>
-
 <tr>
 <td>&lt;</td>
 <td>小于</td>
 </tr>
-
 <tr>
 <td>&gt;=</td>
 <td>大于等于</td>
 </tr>
-
 <tr>
 <td>&lt;=</td>
 <td>小于等于</td>
 </tr>
-
 <tr>
 <td>BETWEEN</td>
 <td>在某个范围内</td>
 </tr>
-
 <tr>
 <td>LIKE</td>
 <td>搜索某种模式</td>
 </tr>
 </tbody>
 </table>
-
 <p><strong>AND</strong> 和 <strong>OR</strong> 运算符是基于一个以上条件对记录进行过滤</p>
-
 <p><strong>ORDER BY</strong> 语句用于对结果集进行升序排序,如降序进行排序，可以使用 <strong>DESC</strong> 关键字</p>
-
 <p><strong>INSERT INTO</strong> 向表格中插入新的行</p>
-
 <blockquote>
 <p>INSERT INTO 表名称 VALUES (值1,值2,&hellip;)</p>
-
+</blockquote>
+<blockquote>
 <p>INSERT INTO 表名称 (列1,列2,&hellip;) VALUES (值1,值2,&hellip;)</p>
 </blockquote>
-
 <p><strong>UPDATE</strong> 修改表中的数据</p>
-
 <blockquote>
 <p>UPDATE 表名称 SET 列名称=新值 WHERE 列名称=新值</p>
 </blockquote>
-
 <p><strong>DELETE</strong> 删除表中的行</p>
-
 <blockquote>
 <p>DELETE FROM 表名称 WHERE 列名称=值</p>
 </blockquote>
-
-<h1 id="高级语法">高级语法</h1>
-
-<p><strong>LIKE</strong> 操作符用于在 <strong>WHERE</strong> 子句中搜索列中的指定模式（&rdquo;%&rdquo; 可用于定义通配符）</p>
-
+<h1 id="heading-1">高级语法</h1>
+<p><strong>LIKE</strong> 操作符用于在 <strong>WHERE</strong> 子句中搜索列中的指定模式（&quot;%&rdquo; 可用于定义通配符）</p>
 <blockquote>
 <p>SELECT 列名称 FROM 表名称 WHERE 列名称 LIKE 模式</p>
 </blockquote>
-
 <table>
 <thead>
 <tr>
@@ -176,86 +146,64 @@
 <th>替代一个或多个字符</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>_</td>
 <td>仅替代一个字符</td>
 </tr>
-
 <tr>
 <td>[charlist]</td>
 <td>字符列中的任何单一字符</td>
 </tr>
-
 <tr>
-<td>[^charlist] </br> [!charlist]</td>
+<td>[^charlist] <!-- raw HTML omitted --> [!charlist]</td>
 <td>不在字符列中的任何单一字符</td>
 </tr>
 </tbody>
 </table>
-
 <p><strong>IN</strong> 操作符允许我们在 <strong>WHERE</strong> 子句中规定多个值</p>
-
 <blockquote>
 <p>SELECT 列名称 FROM 表名称 WHERE 列名称 IN (值1,值2,&hellip;)</p>
 </blockquote>
-
 <p><strong>BETWEEN</strong> 操作符在 <strong>WHERE</strong> 子句中使用，作用是选取介于两个值之间的数据范围</p>
-
 <blockquote>
 <p>SELECT 列名称 FROM 表名称 WHERE 列名称 BETWEEN 值1 AND 值2</p>
 </blockquote>
-
 <p><strong>Alias</strong> 别名</p>
-
 <blockquote>
 <p>SELECT 列名称 FROM 表名称 AS 别名</p>
-
+</blockquote>
+<blockquote>
 <p>SELECT 列名称 AS 别名 FROM 表名</p>
 </blockquote>
-
 <p><strong>JOIN</strong> 用于根据两个或多个表中的列之间的关系，从这些表中查询数据</p>
-
 <blockquote>
 <p>SELECT A.a, A.b, B.a FROM A JOIN B ON A.id=B.id</p>
 </blockquote>
-
 <ul>
 <li><strong>JOIN</strong>: 如果表中有至少一个匹配，则返回行</li>
 <li><strong>LEFT JOIN</strong>: 即使右表中没有匹配，也从左表返回所有的行</li>
 <li><strong>RIGHT JOIN</strong>: 即使左表中没有匹配，也从右表返回所有的行</li>
 <li><strong>FULL JOIN</strong>: 只要其中一个表中存在匹配，就返回行</li>
 </ul>
-
 <p><strong>UNION</strong> 操作符用于合并两个或多个 <strong>SELECT</strong> 语句的结果集</p>
-
 <p><strong>UNION</strong> 操作符选取不同的值。如果允许重复的值，请使用 <strong>UNION ALL</strong></p>
-
 <blockquote>
 <p>SELECT 列名 FROM 表名 UNION SELECT 列名 FROM 表名</p>
 </blockquote>
-
 <p><strong>SELECT INTO</strong> 语句从一个表中选取数据，然后把数据插入另一个表中</p>
-
 <blockquote>
 <p>SELECT 列名 INTO 新表名 FROM 旧表名</p>
 </blockquote>
-
 <p><strong>CREATE DATABASE</strong> 用于创建数据库</p>
-
 <blockquote>
 <p>CREATE DATABASE 数据库名</p>
 </blockquote>
-
 <p><strong>CREATE TABLE</strong> 语句用于创建数据库中的表</p>
-
 <blockquote>
 <p>CREATE TABLE 表名 (列名 类型,列名 类型);</p>
 </blockquote>
-
 <p><strong>SQL</strong> 约束用于限制加入表的数据的类型</p>
-
 <ul>
 <li><strong>NOT NULL</strong> 约束强制列不接受 <strong>NULL</strong> 值</li>
 <li><strong>UNIQUE</strong> 约束唯一标识数据库表中的每条记录</li>
@@ -264,53 +212,46 @@
 <li><strong>CHECK</strong> 约束用于限制列中的值的范围</li>
 <li><strong>DEFAULT</strong> 约束用于向列中插入默认值</li>
 </ul>
-
 <p><strong>CREATE INDEX</strong> 语句用于在表中创建索引</p>
-
 <blockquote>
 <p>CREATE INDEX 索引名 ON 表名(列名)</p>
 </blockquote>
-
 <p><strong>DROP</strong> 语句，可以轻松地删除索引、表和数据库</p>
-
 <blockquote>
 <p>DROP INDEX 列名.索引名</p>
-
+</blockquote>
+<blockquote>
 <p>DROP TABLE 表名</p>
-
+</blockquote>
+<blockquote>
 <p>DROP DATABASE 库名</p>
 </blockquote>
-
 <p>删除表内数据，不删除表本身</p>
-
 <blockquote>
 <p>TRUNCATE TABLE 表名称</p>
 </blockquote>
-
 <p><strong>ALTER TABLE</strong> 语句用于在已有的表中添加、修改或删除列</p>
-
 <blockquote>
 <p>ALTER TABLE 表名 ADD 列名 类型</p>
-
+</blockquote>
+<blockquote>
 <p>ALTER TABLE 表名 ALTER COLUMN 列名 类型</p>
-
+</blockquote>
+<blockquote>
 <p>ALTER TABLE 表名 DROP COLUMN 列名</p>
 </blockquote>
-
 <p><strong>AUTO INCREMENT</strong> 在新记录插入表中时生成一个唯一的数字</p>
-
 <p><strong>SQL VIEW</strong> 视图是可视化的表</p>
-
 <blockquote>
 <p>CREATE VIEW 图名 AS SELECT 列名 FROM 表名 WHERE 条件</p>
-
+</blockquote>
+<blockquote>
 <p>CREATE OR REPLACE VIEW 图名 AS SELECT 列名 FROM 表名 WHERE 条件</p>
-
+</blockquote>
+<blockquote>
 <p>DROP VIEW 图名</p>
 </blockquote>
-
 <p><strong>SQL Date</strong> 函数</p>
-
 <table>
 <thead>
 <tr>
@@ -318,81 +259,64 @@
 <th>描述</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>NOW()</td>
 <td>返回当前的日期和时间</td>
 </tr>
-
 <tr>
 <td>CURDATE()</td>
 <td>返回当前的日期</td>
 </tr>
-
 <tr>
 <td>CURTIME()</td>
 <td>返回当前的时间</td>
 </tr>
-
 <tr>
 <td>DATE()</td>
 <td>提取日期或日期/时间表达式的日期部分</td>
 </tr>
-
 <tr>
 <td>EXTRACT()</td>
 <td>返回日期/时间按的单独部分</td>
 </tr>
-
 <tr>
 <td>DATE_ADD()</td>
 <td>给日期添加指定的时间间隔</td>
 </tr>
-
 <tr>
 <td>DATE_SUB()</td>
 <td>从日期减去指定的时间间隔</td>
 </tr>
-
 <tr>
 <td>DATEDIFF()</td>
 <td>返回两个日期之间的天数</td>
 </tr>
-
 <tr>
 <td>DATE_FORMAT()</td>
 <td>用不同的格式显示日期/时间</td>
 </tr>
 </tbody>
 </table>
-
 <p><strong>NULL</strong> 值是遗漏的未知数据</p>
-
 <p><strong>MySQL</strong> 数据类型(文本、数字和日期/时间类型)</p>
-
-<h1 id="sql-函数">SQL 函数</h1>
-
+<h1 id="sql-">SQL 函数</h1>
 <ul>
 <li>Aggregate 函数</li>
 <li>Scalar 函数</li>
 </ul>
-
-<p>
-&gt; SELECT funCtion(列) FROM 表</p>
-
+<p></p>
+<blockquote>
+<p>SELECT funCtion(列) FROM 表</p>
+</blockquote>
 <p><strong>GROUP BY</strong> 语句用于结合合计函数，根据一个或多个列对结果集进行分组</p>
-
 <blockquote>
 <p>SELECT 列名,function() FROM 表名 WHERE 列名 GROUP BY 列名</p>
 </blockquote>
-
 <p><strong>HAVING</strong> 增加 HAVING 子句原因是，WHERE 关键字无法与合计函数一起使用</p>
-
 <blockquote>
 <p>SELECT 列名,function() FROM 表名 WHERE 列名 GROUP BY 列名 HAVING function()</p>
 </blockquote>
-
 <p><a href="http://www.w3school.com.cn/sql/sql_quickref.asp">关键字索引Reference</a></p>
 
   </div>

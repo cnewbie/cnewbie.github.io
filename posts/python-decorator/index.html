@@ -60,64 +60,49 @@
   <h2 class="subtitle is-6">April 20, 2019</h2>
   <h1 class="subtitle is-size-4-mobile is-size-3-desktop">Python 装饰器</h1>
   <div class="content">
-    
-
-<p>Python 装饰器</p>
-
-<h1 id="装饰器的定义">装饰器的定义</h1>
-
+    <p>Python 装饰器</p>
+<h1 id="heading">装饰器的定义</h1>
 <blockquote>
 <p>装饰器本质上是一个Python函数，它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。
 它经常用于有切面需求的场景，比如：插入日志、性能测试、事务处理、缓存、权限校验等场景。装饰器是解决这类问题的绝佳设计，有了装饰器，我们就可以抽离出大量与函数功能本身无关的雷同代码并继续重用。</p>
 </blockquote>
-
-<h1 id="为什么需要装饰器">为什么需要装饰器</h1>
-
+<h1 id="heading-1">为什么需要装饰器</h1>
 <p>假设你原先的程序实现了简单的 <code>fun()</code> 函数</p>
-
-<pre><code class="language-python">#!/usr/bin/env python3
-def fun():
-    print('hello')
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fun</span>():
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">hello</span><span style="color:#e6db74">&#39;</span>)
 fun()
-</code></pre>
+</code></pre></div><p>随后需要统计函数的运行时间，你当然可以对原函数进行修改，但是如果其他函数也实现该功能，逐个修改会添加大量重复代码。为了复用代码可以定义一个函数用于处理统计运行时间的需求。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+<span style="color:#f92672">import</span> time
+<span style="color:#f92672">from</span> functools <span style="color:#f92672">import</span> wraps
 
-<p>随后需要统计函数的运行时间，你当然可以对原函数进行修改，但是如果其他函数也实现该功能，逐个修改会添加大量重复代码。为了复用代码可以定义一个函数用于处理统计运行时间的需求。</p>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">timethis</span>(func):
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;&#39;&#39;</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    Decorator that reports the execution time.</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#39;&#39;&#39;</span>
+    <span style="color:#a6e22e">@wraps</span>(func)
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+        start <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+        result <span style="color:#f92672">=</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
+        end <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+        <span style="color:#66d9ef">print</span>(func<span style="color:#f92672">.</span>__name__, end<span style="color:#f92672">-</span>start)
+        <span style="color:#66d9ef">return</span> result
+    <span style="color:#66d9ef">return</span> wrapper
 
-<pre><code class="language-python">#!/usr/bin/env python3
-import time
-from functools import wraps
-
-def timethis(func):
-    '''
-    Decorator that reports the execution time.
-    '''
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        start = time.time()
-        result = func(*args, **kwargs)
-        end = time.time()
-        print(func.__name__, end-start)
-        return result
-    return wrapper
-
-@timethis
-def fun():
-    &quot;&quot;&quot;
-    hello
-    &quot;&quot;&quot;
-    print('hello')
-# 等同于
-fun = timethis(fun)
+<span style="color:#a6e22e">@timethis</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fun</span>():
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    hello</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">hello</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#75715e"># 等同于</span>
+fun <span style="color:#f92672">=</span> timethis(fun)
 
 fun()
-</code></pre>
-
-<p>通过上述函数对原函数进行包装，原函数 <code>fun()</code> 就向被装饰了一样，而<code>timethis()</code> 返回的是装饰后函数。</p>
-
-<h1 id="函数元数据">函数元数据</h1>
-
+</code></pre></div><p>通过上述函数对原函数进行包装，原函数 <code>fun()</code> 就向被装饰了一样，而<code>timethis()</code> 返回的是装饰后函数。</p>
+<h1 id="heading-2">函数元数据</h1>
 <p>装饰器作用在某个函数时，这个函数重要的元数据，如名字、文档字符串、注解等信息都丢失了</p>
-
 <pre><code># 未装饰前
 &gt;&gt;&gt; fun()
 hello
@@ -140,271 +125,228 @@ hello
 '\n\thello\n\t'
 &gt;&gt;&gt; fun.__annotations__
 {}
-</code></pre>
-
-<p>可以看出函数的元数据被替换为 <code>wrapper</code> 函数对象的元数据。通过调用 <code>@wraps()</code> 装饰器，可以保留原函数的元数据</p>
-
+</code></pre><p>可以看出函数的元数据被替换为 <code>wrapper</code> 函数对象的元数据。通过调用 <code>@wraps()</code> 装饰器，可以保留原函数的元数据</p>
 <p><strong>Note</strong> <code>@wraps(func)</code> 注解是很重要的，它能保留原始函数的元数据。可通过属性访问 <code>__wrapped__</code> 被包装的函数。当多个装饰器作用于同一个函数时，<code>__wrapped__</code> 属性调用的行为是不可预知的，应当避免这样做。</p>
-
 <p><strong>Note</strong> 并不是所有的装饰器都使用了 <code>@wraps()</code>，内置装饰器 <code>@staticmethod</code> 和 <code>@classmethod</code> 是将原函数属性储存在 <code>__func__</code> 中。</p>
-
-<h1 id="定义一个带参数的装饰器">定义一个带参数的装饰器</h1>
-
+<h1 id="heading-3">定义一个带参数的装饰器</h1>
 <p>假设你需要一个装饰器，给函数添加日志功能，同时可以指定日志的级别或其他选项。你可以这样定义装饰器</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
 
-<pre><code class="language-python">#!/usr/bin/env python3
+<span style="color:#f92672">from</span> functools <span style="color:#f92672">import</span> wraps
+<span style="color:#f92672">import</span> logging
 
-from functools import wraps
-import logging
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logged</span>(level, name<span style="color:#f92672">=</span>None, message<span style="color:#f92672">=</span>None):
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    Add logging to a function.</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    :param: level: logging level</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    :param: name: log name</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    :param: message: log message</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    :return: wrapped func</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decorator</span>(func):
+        logname <span style="color:#f92672">=</span> name <span style="color:#66d9ef">if</span> name <span style="color:#66d9ef">else</span> func<span style="color:#f92672">.</span>__module__
+        log <span style="color:#f92672">=</span> logging<span style="color:#f92672">.</span>getLogger(logname)
+        logmsg <span style="color:#f92672">=</span> message <span style="color:#66d9ef">if</span> message <span style="color:#66d9ef">else</span> func<span style="color:#f92672">.</span>__name__
 
-def logged(level, name=None, message=None):
-    &quot;&quot;&quot;
-    Add logging to a function.
+        <span style="color:#a6e22e">@wraps</span>(func)
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+            log<span style="color:#f92672">.</span>log(level, logmsg)
+            <span style="color:#66d9ef">return</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
+        <span style="color:#66d9ef">return</span> wrapper
+    <span style="color:#66d9ef">return</span> decorator
 
-    :param: level: logging level
-    :param: name: log name
-    :param: message: log message
-    :return: wrapped func
-    &quot;&quot;&quot;
-    def decorator(func):
-        logname = name if name else func.__module__
-        log = logging.getLogger(logname)
-        logmsg = message if message else func.__name__
+<span style="color:#a6e22e">@logged</span>(logging<span style="color:#f92672">.</span>DEBUG)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fun</span>():
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    print hello</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">hello</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#75715e"># 等价于 func = logged(logging.DEBUG)(func)</span>
 
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            log.log(level, logmsg)
-            return func(*args, **kwargs)
-        return wrapper
-    return decorator
-
-@logged(logging.DEBUG)
-def fun():
-    &quot;&quot;&quot;
-    print hello
-    &quot;&quot;&quot;
-    print('hello')
-# 等价于 func = logged(logging.DEBUG)(func)
-
-@logged(logging.CRITICAL, 'example')
-def fun():
-    &quot;&quot;&quot;
-    print hello
-    &quot;&quot;&quot;
-    print('hello')
-</code></pre>
-
-<p><code>decorate</code> 返回一个可调用对象（包含 <code>__call__</code> 方法），并传入被包装函数作为参数。</p>
-
-<h1 id="自定义属性的装饰器">自定义属性的装饰器</h1>
-
+<span style="color:#a6e22e">@logged</span>(logging<span style="color:#f92672">.</span>CRITICAL, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">example</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fun</span>():
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    print hello</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">hello</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><p><code>decorate</code> 返回一个可调用对象（包含 <code>__call__</code> 方法），并传入被包装函数作为参数。</p>
+<h1 id="heading-4">自定义属性的装饰器</h1>
 <p>使用一个装饰器包装一个函数，并允许运行时修改用户提供的参数。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
 
-<pre><code class="language-python">#!/usr/bin/env python3
+<span style="color:#f92672">import</span> logging
+<span style="color:#f92672">from</span> functools <span style="color:#f92672">import</span> wraps, partial
 
-import logging
-from functools import wraps, partial
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">attach_wrapper</span>(obj, func<span style="color:#f92672">=</span>None):
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    Utils decorator to attach a function as an attribute of obj</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">if</span> func <span style="color:#f92672">is</span> None:
+        <span style="color:#66d9ef">return</span> partial(attach_wrapper, obj)
+    setattr(obj, func<span style="color:#f92672">.</span>__name__, func)
+    <span style="color:#66d9ef">return</span>  func
 
-def attach_wrapper(obj, func=None):
-    &quot;&quot;&quot;
-    Utils decorator to attach a function as an attribute of obj
-    &quot;&quot;&quot;
-    if func is None:
-        return partial(attach_wrapper, obj)
-    setattr(obj, func.__name__, func)
-    return  func
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logged</span>(level, name<span style="color:#f92672">=</span>None, message<span style="color:#f92672">=</span>None):
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    Add logging to a function.</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    :param: level: logging level</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    :param: name: log name</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    :param: message: log message</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    :return: wrapped func</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decorator</span>(func):
+        logname <span style="color:#f92672">=</span> name <span style="color:#66d9ef">if</span> name <span style="color:#66d9ef">else</span> func<span style="color:#f92672">.</span>__name__
+        log <span style="color:#f92672">=</span> logging<span style="color:#f92672">.</span>getLogger(logname)
+        logmsg <span style="color:#f92672">=</span> message <span style="color:#66d9ef">if</span> message <span style="color:#66d9ef">else</span> func<span style="color:#f92672">.</span>__name__
 
-def logged(level, name=None, message=None):
-    &quot;&quot;&quot;
-    Add logging to a function.
+        <span style="color:#a6e22e">@wraps</span>(func)
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+            log<span style="color:#f92672">.</span>log(level, logmsg)
+            <span style="color:#66d9ef">return</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
 
-    :param: level: logging level
-    :param: name: log name
-    :param: message: log message
-    :return: wrapped func
-    &quot;&quot;&quot;
-    def decorator(func):
-        logname = name if name else func.__name__
-        log = logging.getLogger(logname)
-        logmsg = message if message else func.__name__
-
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            log.log(level, logmsg)
-            return func(*args, **kwargs)
-
-        @attach_wrapper(wrapper)
-        def set_level(newlevel):
+        <span style="color:#a6e22e">@attach_wrapper</span>(wrapper)
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_level</span>(newlevel):
             nonlocal level
-            level = newlevel
+            level <span style="color:#f92672">=</span> newlevel
 
-        @attach_wrapper(wrapper)
-        def set_message(newmsg)
+        <span style="color:#a6e22e">@attach_wrapper</span>(wrapper)
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_message</span>(newmsg)
             nonlocal logmsg
-            logmsg = newmsg
+            logmsg <span style="color:#f92672">=</span> newmsg
 
-        @attach_wrapper(wrapper)
-        def get_level():
-            return level
+        <span style="color:#a6e22e">@attach_wrapper</span>(wrapper)
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_level</span>():
+            <span style="color:#66d9ef">return</span> level
 
-        return wrapper
-    return decorator
-</code></pre>
+        <span style="color:#66d9ef">return</span> wrapper
+    <span style="color:#66d9ef">return</span> decorator
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@wraps</span>(func)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+    wrapper<span style="color:#f92672">.</span>log<span style="color:#f92672">.</span>log(wrapper<span style="color:#f92672">.</span>level, wrapper<span style="color:#f92672">.</span>logmsg)
+    <span style="color:#66d9ef">return</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
 
-<pre><code class="language-python">@wraps(func)
-def wrapper(*args, **kwargs):
-    wrapper.log.log(wrapper.level, wrapper.logmsg)
-    return func(*args, **kwargs)
-
-# Attach adjustable attributes
-wrapper.level = level
-wrapper.logmsg = logmsg
-wrapper.log = log
-</code></pre>
-
-<p>访问函数允许使用 <code>nonlocal</code> 来修改函数内部的变量。</p>
-
+<span style="color:#75715e"># Attach adjustable attributes</span>
+wrapper<span style="color:#f92672">.</span>level <span style="color:#f92672">=</span> level
+wrapper<span style="color:#f92672">.</span>logmsg <span style="color:#f92672">=</span> logmsg
+wrapper<span style="color:#f92672">.</span>log <span style="color:#f92672">=</span> log
+</code></pre></div><p>访问函数允许使用 <code>nonlocal</code> 来修改函数内部的变量。</p>
 <blockquote>
 <p>直接修改的方法也可能正常工作，但前提是它必须是最外层的装饰器才行。 如果它的上面还有另外的装饰器，那么它会隐藏底层属性，使得修改它们没有任何作用。</p>
 </blockquote>
-
-<h1 id="可选参数装饰器">可选参数装饰器</h1>
-
+<h1 id="heading-5">可选参数装饰器</h1>
 <p>写一个装饰器，可以不传参数 <code>@logged</code>，或者是传递可选参数如 <code>@logged(logging.DEBUG)</code>。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
 
-<pre><code class="language-python">#!/usr/bin/env python3
+<span style="color:#f92672">import</span> logging
+<span style="color:#f92672">from</span> functools <span style="color:#f92672">import</span> wraps, partial
 
-import logging
-from functools import wraps, partial
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logged</span>(func<span style="color:#f92672">=</span>None, <span style="color:#f92672">*</span>, level<span style="color:#f92672">=</span>logging<span style="color:#f92672">.</span>DEBUG, name<span style="color:#f92672">=</span>None, message<span style="color:#f92672">=</span>None):
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    Add logging to a function.</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    :param: func: function name</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    :param: level: logging level</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    :param: log message</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    :return: wrapped func</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">if</span> func <span style="color:#f92672">is</span> None:
+        <span style="color:#66d9ef">return</span> partial(logged, level<span style="color:#f92672">=</span>level, name<span style="color:#f92672">=</span>name, message<span style="color:#f92672">=</span>message)
 
-def logged(func=None, *, level=logging.DEBUG, name=None, message=None):
-    &quot;&quot;&quot;
-    Add logging to a function.
+    logname <span style="color:#f92672">=</span> name <span style="color:#66d9ef">if</span> name <span style="color:#66d9ef">else</span> func<span style="color:#f92672">.</span>__name__
+    log <span style="color:#f92672">=</span> logging<span style="color:#f92672">.</span>getLogger(logname)
+    logmsg <span style="color:#f92672">=</span> message <span style="color:#66d9ef">if</span> message <span style="color:#66d9ef">else</span> func<span style="color:#f92672">.</span>__name__
 
-    :param: func: function name
-    :param: level: logging level
-    :param: log message
-    :return: wrapped func
-    &quot;&quot;&quot;
-    if func is None:
-        return partial(logged, level=level, name=name, message=message)
+    <span style="color:#a6e22e">@wraps</span>(func)
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+        log<span style="color:#f92672">.</span>log(level, logmsg)
+        <span style="color:#66d9ef">return</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
 
-    logname = name if name else func.__name__
-    log = logging.getLogger(logname)
-    logmsg = message if message else func.__name__
+    <span style="color:#66d9ef">return</span> wraper
+</code></pre></div><p>理解上述代码原理，需要知道装饰的调用规则，</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 简单装饰器</span>
 
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        log.log(level, logmsg)
-        return func(*args, **kwargs)
+<span style="color:#a6e22e">@logged</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fun</span>():
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">hello</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#75715e"># 等价于 fun = logged(fun)</span>
 
-    return wraper
-</code></pre>
+<span style="color:#75715e"># 带参数装饰器</span>
 
-<p>理解上述代码原理，需要知道装饰的调用规则，</p>
-
-<pre><code class="language-python"># 简单装饰器
-
-@logged
-def fun():
-    print('hello')
-# 等价于 fun = logged(fun)
-
-# 带参数装饰器
-
-@logged(level=logging.DEBUG)
-def fun():
-    print('hello')
-# 等价于 fun = logged(level=loggin.DEBUG)(fun)
-</code></pre>
-
-<p>简单装饰器将被包装函数作为第一个参数传递给 <code>logged</code> 函数，因此，<code>logged()</code> 中第一个参数就是被包装函数自身。</p>
-
+<span style="color:#a6e22e">@logged</span>(level<span style="color:#f92672">=</span>logging<span style="color:#f92672">.</span>DEBUG)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fun</span>():
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">hello</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#75715e"># 等价于 fun = logged(level=loggin.DEBUG)(fun)</span>
+</code></pre></div><p>简单装饰器将被包装函数作为第一个参数传递给 <code>logged</code> 函数，因此，<code>logged()</code> 中第一个参数就是被包装函数自身。</p>
 <p>带参数装饰器调用时没有将被包装函数传递给 <code>logged</code> 函数，因此在装饰器内，它必须是可选的。这个反过来会迫使其他参数必须使用关键字来指定。 并且，但这些参数被传递进来后，装饰器要返回一个接受一个函数参数并包装它的函数。 为了这样做，我们使用了一个技巧，就是利用 <code>functools.partial</code> 。 它会返回一个未完全初始化的自身，除了被包装函数外其他参数都已经确定下来了。</p>
-
-<h1 id="利用装饰器进行参数检查">利用装饰器进行参数检查</h1>
-
+<h1 id="heading-6">利用装饰器进行参数检查</h1>
 <p>// TODO</p>
+<h1 id="heading-7">类中定义装饰器</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> functools <span style="color:#f92672">import</span> wraps
 
-<h1 id="类中定义装饰器">类中定义装饰器</h1>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span>(object):
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    Decorator as an instance method</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decorator1</span>(self, func):
+        <span style="color:#a6e22e">@wraps</span>(func)
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">decorator1</span><span style="color:#e6db74">&#34;</span>)
+            reurn func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
+        <span style="color:#66d9ef">return</span> wrapper
 
-<pre><code class="language-python">from functools import wraps
+    <span style="color:#a6e22e">@classmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decorator2</span>(cls, func):
+        <span style="color:#a6e22e">@wraps</span>(func)
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wraper</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">decorator2</span><span style="color:#e6db74">&#34;</span>)
+            <span style="color:#66d9ef">return</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
+        <span style="color:#66d9ef">return</span> wrapper
 
-class A(object):
-    &quot;&quot;&quot;
-    Decorator as an instance method
-    &quot;&quot;&quot;
-    def decorator1(self, func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            print(&quot;decorator1&quot;)
-            reurn func(*args, **kwargs)
-        return wrapper
+a <span style="color:#f92672">=</span> A()
+<span style="color:#a6e22e">@a.decorator1</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fun</span>():
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">hello</span><span style="color:#e6db74">&#39;</span>)
 
-    @classmethod
-    def decorator2(cls, func):
-        @wraps(func)
-        def wraper(*args, **kwargs):
-            print(&quot;decorator2&quot;)
-            return func(*args, **kwargs)
-        return wrapper
-
-a = A()
-@a.decorator1
-def fun():
-    print('hello')
-
-@A.decorator2
-def fun():
-    print('hello')
-</code></pre>
-
-<p>可以看出一个是实例调用，另一个是类调用。装饰器要被定义成类方法并且你必须显式的使用父类名去调用它。</p>
-
+<span style="color:#a6e22e">@A.decorator2</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fun</span>():
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">hello</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><p>可以看出一个是实例调用，另一个是类调用。装饰器要被定义成类方法并且你必须显式的使用父类名去调用它。</p>
 <p>在类中定义装饰器初看上去好像很奇怪，但是在标准库中有很多这样的例子。 特别的，<code>@property</code> 装饰器实际上是一个类，它里面定义了三个方法 <code>getter()</code>, <code>setter()</code>, <code>deleter()</code>, 每一个方法都是一个装饰器。</p>
-
 <p>它为什么要这么定义的主要原因是各种不同的装饰器方法会在关联的 <code>property</code> 实例上操作它的状态。 因此，任何时候只要你碰到需要在装饰器中记录或绑定信息，那么这不失为一种可行方法。</p>
-
-<h1 id="类作为装饰器">类作为装饰器</h1>
-
+<h1 id="heading-8">类作为装饰器</h1>
 <p>使用装饰器包装函数，但是希望返回一个可调用实例。为了实现类装饰器，你需要确保它实现了 <code>__call__()</code> 和 <code>__get__()</code> 方法</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> types
+<span style="color:#f92672">from</span> functools <span style="color:#f92672">import</span> wraps
 
-<pre><code class="language-python">import types
-from functools import wraps
-
-class Profiled(object):
-    def __init__(self, func):
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Profiled</span>(object):
+    <span style="color:#66d9ef">def</span> __init__(self, func):
         wraps(func)(self)
-        self.ncalls = 0
+        self<span style="color:#f92672">.</span>ncalls <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
 
-    def __call__(self, *args, **kwargs):
-        self.ncalls += 1
-        return self.__wrapped__(*args, **kwargs)
+    <span style="color:#66d9ef">def</span> __call__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+        self<span style="color:#f92672">.</span>ncalls <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>__wrapped__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
 
-    def __get__(self, instance, cls):
-        if instance is None:
-            return self
-        else
-            return types.MethodType(self, instance)
+    <span style="color:#66d9ef">def</span> __get__(self, instance, cls):
+        <span style="color:#66d9ef">if</span> instance <span style="color:#f92672">is</span> None:
+            <span style="color:#66d9ef">return</span> self
+        <span style="color:#66d9ef">else</span>
+            <span style="color:#66d9ef">return</span> types<span style="color:#f92672">.</span>MethodType(self, instance)
 
-@Profiled
-def add(x, y):
-    return x + y
+<span style="color:#a6e22e">@Profiled</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y):
+    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
 
-class Spam:
-    @Profiled
-    def bar(self, x):
-        print(self, x)
-</code></pre>
-
-<p>首先 <code>wraps</code> 函数将被包装函数的元信息复制到可调用实例中。</p>
-
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Spam</span>:
+    <span style="color:#a6e22e">@Profiled</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bar</span>(self, x):
+        <span style="color:#66d9ef">print</span>(self, x)
+</code></pre></div><p>首先 <code>wraps</code> 函数将被包装函数的元信息复制到可调用实例中。</p>
 <p>// TODO</p>
-
 <p><a href="https://www.cnblogs.com/f-ck-need-u/p/10204617.html">类装饰器进阶</a></p>
-
 <p>typys Method 方法</p>
-
 <ul>
 <li><a href="https://stackoverflow.com/questions/46525069/how-is-types-methodtype-used">how is types methodtype used types.Method</a></li>
 <li><a href="https://stackoverflow.com/questions/36812062/why-need-def-get-return-types-methodtype">why need return types methodtype</a></li>

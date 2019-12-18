@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/cnewbie/&#34;&gt;cnewbie&lt;/a&gt; 2018 - 2019</copyright>
-    <lastBuildDate>Fri, 01 Nov 2019 08:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 15 Dec 2019 08:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://cnewbie.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Binary Search</title>
+      <link>https://cnewbie.github.io/posts/algorithm-binary-search/</link>
+      <pubDate>Sun, 15 Dec 2019 08:00:00 +0800</pubDate>
+      
+      <guid>https://cnewbie.github.io/posts/algorithm-binary-search/</guid>
+      <description>二分查找 二分查找模版 def binary_search(arr, target): if not arr: return -1 left = 0 right = len(arr) - 1 while left &amp;lt;= right: mid = left + ((right - left)&amp;gt;&amp;gt;1) pivot = arr[mid] if pivot &amp;lt; target: left = mid + 1 elif pivot &amp;gt; target: right = mid - 1 else pass # ??? ret = -1 # ??? return ret 二分查找实现 #!/usr/bin/env python3 # -*- coding:utf-8 -*- import bisect def binary_search(arr, target): &amp;#34;&amp;#34;&amp;#34;二分查找不存在返回 -1 &amp;#34;&amp;#34;&amp;#34; ret = -1 if not arr: return ret arr_len = len(arr) left = 0 right = arr_len while left &amp;lt; right: mid = left + ((right - left)&amp;gt;&amp;gt;1) v = arr[mid] if v &amp;lt; target: left = mid + 1 elif v &amp;gt; target: right = mid else: return mid return ret def low_bound(arr, target): &amp;#34;&amp;#34;&amp;#34;返回左边界 第一个大于等于 &amp;#34;&amp;#34;&amp;#34; ret = -1 if not arr: return ret arr_len = len(arr) left = 0 right = arr_len while left &amp;lt; right: mid = left + ((right - left)&amp;gt;&amp;gt;1) v = arr[mid] # v &amp;gt;= target right = mid if v &amp;lt; target: left = mid + 1 elif v &amp;gt; target: right = mid else: right = mid ret = left return ret def upper_bound(arr, target): &amp;#34;&amp;#34;&amp;#34;返回边界 第一个大于&amp;#34;&amp;#34;&amp;#34; ret = -1 if not arr: return ret arr_len = len(arr) left = 0 right = arr_len while left &amp;lt; right: mid = left + ((right - left)&amp;gt;&amp;gt;1) v = arr[mid] # v &amp;lt;= target left = mid + 1 if v &amp;lt; target: left = mid + 1 elif v &amp;gt; target: right = mid else: left = mid + 1 ret = right return ret def low_bound_reverse(arr, target): &amp;#34;&amp;#34;&amp;#34;逆序数组，返回左边界 第一个小于等于 &amp;#34;&amp;#34;&amp;#34; ret = -1 if not arr: return ret arr_len = len(arr) left = 0 right = arr_len while left &amp;lt; right: mid = left + ((right - left)&amp;gt;&amp;gt;1) v = arr[mid] # v &amp;gt;= target left = mid + 1 if v &amp;gt;= target: left = mid + 1 elif v &amp;lt; target: right = mid ret = left return ret def upper_bound_reverse(arr, target): &amp;#34;&amp;#34;&amp;#34;逆序数组，返回边界 第一个小于&amp;#34;&amp;#34;&amp;#34; ret = -1 if not arr: return ret arr_len = len(arr) left = 0 right = arr_len while left &amp;lt; right: mid = left + ((right - left)&amp;gt;&amp;gt;1) v = arr[mid] # v &amp;lt;= target right = mid if v &amp;gt; target: left = mid + 1 elif v &amp;lt;= target: right = mid ret = right return ret def _main(): # arr = list(range(1, 11)) # 数组从小到大 arr = list(range(11)) pivot = 7 arr[8] = pivot print(&amp;#39;origin: {}&amp;#39;.</description>
+    </item>
     
     <item>
       <title>设计模式</title>
@@ -19,10 +28,11 @@
       
       <guid>https://cnewbie.github.io/posts/oop-design-pattern/</guid>
       <description>面向对象之设计模式
-创建型模式 工厂方法 Factory Method 意图 父类中提供创建对象的接口，但是允许子类修改需要创建对象的类型
+创建型模式 创建型模式提供了创建对象的机制， 能够提升已有代码的灵活性和可复用性。
+工厂方法 Factory Method 意图 父类中提供创建对象的接口，但是允许子类修改需要创建对象的类型
 问题 创建物流管理类，起先实现了火车类，随着业务的增长，需要进行水路运输。 在修改物流管理类时，需要修改所有运输的代码。
 解决方案 工厂方法通过调用特殊的工厂方法替代直接使用构造方法构建对象，通过工厂方法返回的对象称之为产品。
-UML 结构 interface Product{ -doStuff() } class ConcreteProductA{ } class ConcreteProductB{ } class Creator{ +someOperation() +createProduct(): Product } class ConcreteCreatorA{ } class ConcreteCreatorB{ } ConcreteProductA ..|&amp;gt; Product ConcreteProductB ..|&amp;gt; Product ConcreteCreatorA --|&amp;gt; Creator ConcreteCreatorB --|&amp;gt; Creator Creator --&amp;gt; Product   Product 抽象产品接口 ConcreteProduct 产品类 Creator 抽象工厂方法，依赖抽象产品接口 ConcreteCreator 工厂方法  应用示例 多平台 UI 元素
+UML 结构 interface Product{ -doStuff() } class ConcreteProductA{ } class ConcreteProductB{ } class Creator{ +someOperation() +createProduct(): Product } class ConcreteCreatorA{ } class ConcreteCreatorB{ } ConcreteProductA ..|&amp;gt; Product ConcreteProductB ..|&amp;gt; Product ConcreteCreatorA --|&amp;gt; Creator ConcreteCreatorB --|&amp;gt; Creator Creator --&amp;gt; Product  Product 抽象产品接口 ConcreteProduct 产品类 Creator 抽象工厂方法，依赖抽象产品接口 ConcreteCreator 工厂方法  应用示例 多平台 UI 元素
 #!/usr/bin/env python3 from abc import ABCMeta, abstractmethod class Button(metaclass=ABCMeta): @abstractmethod def render(self): pass @abstractmethod def on_click(self): pass class WindowsButton(Button): def render(self): print(self.</description>
     </item>
     
@@ -32,8 +42,8 @@ UML 结构 interface Product{ -doStuff() } class ConcreteProductA{ } class Concr
       <pubDate>Sun, 05 May 2019 08:00:00 +0800</pubDate>
       
       <guid>https://cnewbie.github.io/posts/python-cookbook/</guid>
-      <description>数据结构与算法 小顶堆 import heapq nums = [1, 8, 2, 23, 7, -4, 18, 23, 42, 37, 2] heap = list(nums) heapq.heapify(heap) heap # [-4, 2, 1, 23, 7, 2, 18, 23, 42, 37, 8] print(heapq.nlargest(3, nums)) # Prints [42, 37, 23] print(heapq.nsmallest(3, nums)) # Prints [-4, 1, 2]  nlargest() 和 nsmallest() 适合查找元素数量少的情况，如果查找数量较多，通常先排序后切片更快。sorted(items)[:N]
-优先队列 import heapq class PriorityQueue(object): def __init__(self): self._queue = [] self._index = 0 def push(self, item, priority): heapq.</description>
+      <description>数据结构与算法 小顶堆 import heapq nums = [1, 8, 2, 23, 7, -4, 18, 23, 42, 37, 2] heap = list(nums) heapq.heapify(heap) heap # [-4, 2, 1, 23, 7, 2, 18, 23, 42, 37, 8] print(heapq.nlargest(3, nums)) # Prints [42, 37, 23] print(heapq.nsmallest(3, nums)) # Prints [-4, 1, 2] nlargest() 和 nsmallest() 适合查找元素数量少的情况，如果查找数量较多，通常先排序后切片更快。sorted(items)[:N]
+优先队列 import heapq class PriorityQueue(object): def __init__(self): self._queue = [] self._index = 0 def push(self, item, priority): heapq.heappush(self._queue, (-priority, self.</description>
     </item>
     
     <item>
@@ -42,12 +52,15 @@ UML 结构 interface Product{ -doStuff() } class ConcreteProductA{ } class Concr
       <pubDate>Thu, 25 Apr 2019 08:00:00 +0800</pubDate>
       
       <guid>https://cnewbie.github.io/posts/python-deepcopy/</guid>
-      <description> Python 浅拷贝、深拷贝  深复制，即将被复制对象完全再复制一遍作为独立的新个体单独存在。所以改变原有被复制对象不会对已经复制出来的新对象产生影响。 等于赋值，并不会产生一个独立的对象单独存在，他只是将原有的数据块打上一个新标签，所以当其中一个标签被改变的时候，数据块就会发生变化，另一个标签也会随之改变。 而浅复制要分两种情况进行讨论：
- 当浅复制的值是不可变对象（数值，字符串，元组）时和“等于赋值”的情况一样，对象的id值与浅复制原来的值相同。 当浅复制的值是可变对象（列表和元组）时会产生一个“不是那么独立的对象”存在。有两种情况：
- 第一种情况：复制的 对象中无复杂子对象，原来值的改变并不会影响浅复制的值，同时浅复制的值改变也并不会影响原来的值。原来值的id值与浅复制原来的值不同。
- 第二种情况：复制的对象中有复杂子对象 （例如列表中的一个子元素是一个列表），如果不改变其中复杂子对象，浅复制的值改变并不会影响原来的值。但是改变原来的值中的复杂子对象的值会影响浅复制的值。
-     对于简单的 object，例如不可变对象（数值，字符串，元组），用 shallow copy 和 deep copy 没区别
-复杂的 object， 如 list 中套着 list 的情况，shallow copy 中的 子list，并未从原 object 真的「独立」出来。也就是说，如果你改变原 object 的子 list 中的一个元素，你的 copy 就会跟着一起变。这跟我们直觉上对「复制」的理解不同。
+      <description>Python 浅拷贝、深拷贝   深复制，即将被复制对象完全再复制一遍作为独立的新个体单独存在。所以改变原有被复制对象不会对已经复制出来的新对象产生影响。
+  等于赋值，并不会产生一个独立的对象单独存在，他只是将原有的数据块打上一个新标签，所以当其中一个标签被改变的时候，数据块就会发生变化，另一个标签也会随之改变。
+  而浅复制要分两种情况进行讨论：
+  当浅复制的值是不可变对象（数值，字符串，元组）时和“等于赋值”的情况一样，对象的id值与浅复制原来的值相同。
+  当浅复制的值是可变对象（列表和元组）时会产生一个“不是那么独立的对象”存在。有两种情况：
+  第一种情况：复制的 对象中无复杂子对象，原来值的改变并不会影响浅复制的值，同时浅复制的值改变也并不会影响原来的值。原来值的id值与浅复制原来的值不同。
+  第二种情况：复制的对象中有复杂子对象 （例如列表中的一个子元素是一个列表），如果不改变其中复杂子对象，浅复制的值改变并不会影响原来的值。但是改变原来的值中的复杂子对象的值会影响浅复制的值。
+       对于简单的 object，例如不可变对象（数值，字符串，元组），用 shallow copy 和 deep copy 没区别
+  复杂的 object， 如 list 中套着 list 的情况，shallow copy 中的 子list，并未从原 object 真的「独立」出来。也就是说，如果你改变原 object 的子 list 中的一个元素，你的 copy 就会跟着一起变。这跟我们直觉上对「复制」的理解不同。
  Reference  runoob eva-j doc stackoverflow  </description>
     </item>
     
@@ -59,7 +72,7 @@ UML 结构 interface Product{ -doStuff() } class ConcreteProductA{ } class Concr
       <guid>https://cnewbie.github.io/posts/python-code-running-time/</guid>
       <description>Python 运行时间
 在很多的时候我们需要计算我们程序的性能，这个时候我们常常需要统计程序运行的时间。下面我们就来说说怎么统计程序的运行时间。
-datetime #! /usr/bin/env python # -*- coding:utf-8 -*- import datetime from functools import wraps import logging def run_time(*args, **kwargs): @wraps(func) def __wrapper(func): logging.getLogger(__name__) start = datetime.datetime.now() ret = func(*args, **kwargs) end = datetime.datetime.now() logging.debug(&#39;running time: {}&#39;.format(end-start)) return ret return __wrapper  time.now #! /usr/bin/env python # -*- coding:utf-8 -*- import time from functools import wraps import logging def run_time(*args, **kwargs): @wraps(func) def __wrapper(func): logging.getLogger(__name__) start = time.</description>
+datetime #! /usr/bin/env python # -*- coding:utf-8 -*- import datetime from functools import wraps import logging def run_time(*args, **kwargs): @wraps(func) def __wrapper(func): logging.getLogger(__name__) start = datetime.datetime.now() ret = func(*args, **kwargs) end = datetime.datetime.now() logging.debug(&amp;#39;running time: {}&amp;#39;.format(end-start)) return ret return __wrapper time.now #! /usr/bin/env python # -*- coding:utf-8 -*- import time from functools import wraps import logging def run_time(*args, **kwargs): @wraps(func) def __wrapper(func): logging.getLogger(__name__) start = time.time() start_2 = time.</description>
     </item>
     
     <item>
@@ -71,8 +84,9 @@ datetime #! /usr/bin/env python # -*- coding:utf-8 -*- import datetime from func
       <description>Python 装饰器
 装饰器的定义  装饰器本质上是一个Python函数，它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。 它经常用于有切面需求的场景，比如：插入日志、性能测试、事务处理、缓存、权限校验等场景。装饰器是解决这类问题的绝佳设计，有了装饰器，我们就可以抽离出大量与函数功能本身无关的雷同代码并继续重用。
  为什么需要装饰器 假设你原先的程序实现了简单的 fun() 函数
-#!/usr/bin/env python3 def fun(): print(&#39;hello&#39;) fun()  随后需要统计函数的运行时间，你当然可以对原函数进行修改，但是如果其他函数也实现该功能，逐个修改会添加大量重复代码。为了复用代码可以定义一个函数用于处理统计运行时间的需求。
-#!/usr/bin/env python3 import time from functools import wraps def timethis(func): &#39;&#39;&#39; Decorator that reports the execution time. &#39;&#39;&#39; @wraps(func) def wrapper(*args, **kwargs): start = time.time() result = func(*args, **kwargs) end = time.time() print(func.__name__, end-start) return result return wrapper @timethis def fun(): &amp;quot;&amp;quot;&amp;quot; hello &amp;quot;&amp;quot;&amp;quot; print(&#39;hello&#39;) # 等同于 fun = timethis(fun) fun()  通过上述函数对原函数进行包装，原函数 fun() 就向被装饰了一样，而timethis() 返回的是装饰后函数。</description>
+#!/usr/bin/env python3 def fun(): print(&amp;#39;hello&amp;#39;) fun() 随后需要统计函数的运行时间，你当然可以对原函数进行修改，但是如果其他函数也实现该功能，逐个修改会添加大量重复代码。为了复用代码可以定义一个函数用于处理统计运行时间的需求。
+#!/usr/bin/env python3 import time from functools import wraps def timethis(func): &amp;#39;&amp;#39;&amp;#39;Decorator that reports the execution time.&amp;#39;&amp;#39;&amp;#39; @wraps(func) def wrapper(*args, **kwargs): start = time.time() result = func(*args, **kwargs) end = time.time() print(func.__name__, end-start) return result return wrapper @timethis def fun(): &amp;#34;&amp;#34;&amp;#34;hello&amp;#34;&amp;#34;&amp;#34; print(&amp;#39;hello&amp;#39;) # 等同于 fun = timethis(fun) fun() 通过上述函数对原函数进行包装，原函数 fun() 就向被装饰了一样，而timethis() 返回的是装饰后函数。
+函数元数据 装饰器作用在某个函数时，这个函数重要的元数据，如名字、文档字符串、注解等信息都丢失了</description>
     </item>
     
     <item>
@@ -81,7 +95,7 @@ datetime #! /usr/bin/env python # -*- coding:utf-8 -*- import datetime from func
       <pubDate>Wed, 17 Apr 2019 08:00:00 +0800</pubDate>
       
       <guid>https://cnewbie.github.io/posts/python-closure/</guid>
-      <description> Python 闭包
+      <description>Python 闭包
 首先还得从基本概念说起，什么是闭包呢？来看下维基上的解释: 在计算机科学中，闭包（Closure）是词法闭包（Lexical Closure）的简称，是引用了自由变量的函数。这个被引用的自由变量将和这个函数一同存在，即使已经离开了创造它的环境也不例外。所以，有另一种说法认为闭包是由函数和与其相关的引用环境组合而成的实体。闭包在运行时可以有多个实例，不同的引用环境和相同的函数组合可以产生不同的实例。
 上面提到了两个关键的地方： 自由变量 和 函数, 这两个关键稍后再说。还是得在赘述下“闭包”的意思，望文知意，可以形象的把它理解为一个封闭的包裹，这个包裹就是一个函数，当然还有函数内部对应的逻辑，包裹里面的东西就是自由变量，自由变量可以在随着包裹到处游荡。当然还得有个前提，这个包裹是被创建出来的。 在通过Python的语言介绍一下，一个闭包就是你调用了一个函数A，这个函数A返回了一个函数B给你。这个返回的函数B就叫做闭包。你在调用函数A的时候传递的参数就是自由变量。
 另外再说一点，闭包并不是Python中特有的概念，所有把函数做为一等公民的语言均有闭包的概念。不过像Java这样以class为一等公民的语言中也可以使用闭包，只是它得用类或接口来实现。
@@ -99,15 +113,15 @@ Refernece  xuzhoufeng foofish  </description>
       <description>类之间的关系
 泛化（Generalization） 泛化关系：是一种继承关系，表示一般与特殊的关系，通过继承增加子类的能力，它指定了子类如何特化父类的所有特征和行为。例如：老虎是动物的一种，即有老虎的特性也有动物的共性。
 箭头指向：带三角箭头的实线，箭头指向父类
-Fruit &amp;lt;|-- Apple  实现（Realization） 实现关系：是一种类与接口的关系，表示类是接口所有特征和行为的实现。
+Fruit &amp;lt;|-- Apple 实现（Realization） 实现关系：是一种类与接口的关系，表示类是接口所有特征和行为的实现。
 箭头指向：带三角箭头的虚线，箭头指向接口
-State&amp;lt;|..BattleState  依赖（Dependency） 依赖关系：是一种使用的关系，即一个类的实现需要另一个类的协助，这种关系具有偶然性、临时性。类A要完成某个功能引用了类B，则类A依赖类B。被依赖的类会影响到依赖类，所以要尽量不使用双向的互相依赖。
+State&amp;lt;|..BattleState 依赖（Dependency） 依赖关系：是一种使用的关系，即一个类的实现需要另一个类的协助，这种关系具有偶然性、临时性。类A要完成某个功能引用了类B，则类A依赖类B。被依赖的类会影响到依赖类，所以要尽量不使用双向的互相依赖。
 代码表现：类A的某个成员函数的返回值、局部变量、方法的参数或者对静态方法的调用，则表示类A引用了类B。
 箭头及指向：带箭头的虚线，指向被依赖者
-Computer&amp;lt;..Student  class Computer { public: static void start(){ cout&amp;lt;&amp;lt;&amp;quot;电脑正在启动&amp;quot;&amp;lt;&amp;lt;endl; } }; class Student { public: //返回值构成依赖 Computer&amp;amp; program(); //形参构成依赖 void program(Computer&amp;amp;); void playGame() { //局部变量构成依赖 Computer* computer=new Computer; ... //静态方法调用构成依赖 Computer::star(); } };  关联（Association） 关联关系：是一种拥有的关系，它使一个类知道另一个类的属性和方法，体现为两个类、或者类与接口之间语义级别的一种强依赖关系；如：老师与学生，丈夫与妻子关联可以是双向的，也可以是单向的。双向的关联可以有两个箭头或者没有箭头，单向的关联有一个箭头。
+Computer&amp;lt;..Student class Computer { public: static void start(){ cout&amp;lt;&amp;lt;&amp;#34;电脑正在启动&amp;#34;&amp;lt;&amp;lt;endl; } }; class Student { public: //返回值构成依赖  Computer&amp;amp; program(); //形参构成依赖  void program(Computer&amp;amp;); void playGame() { //局部变量构成依赖  Computer* computer=new Computer; ... //静态方法调用构成依赖  Computer::star(); } }; 关联（Association） 关联关系：是一种拥有的关系，它使一个类知道另一个类的属性和方法，体现为两个类、或者类与接口之间语义级别的一种强依赖关系；如：老师与学生，丈夫与妻子关联可以是双向的，也可以是单向的。双向的关联可以有两个箭头或者没有箭头，单向的关联有一个箭头。
 代码体现：成员变量
 箭头及指向：带普通箭头的实心线，指向被拥有者（被关联）
-Student &amp;quot;n&amp;quot; --&amp;gt; &amp;quot;n&amp;quot; Teacher  class Teacher; class Student{ public: Teacher teacher; //成员变量 void study(); }  聚合（Aggregation） 聚合关系：整体与部分的关系，且部分可以离开整体而单独存在。如车和轮胎是整体和部分的关系，轮胎离开车仍然可以存在。</description>
+Student &amp;quot;n&amp;quot; --&amp;gt; &amp;quot;n&amp;quot; Teacher class Teacher; class Student{ public: Teacher teacher; //成员变量  void study(); } 聚合（Aggregation） 聚合关系：整体与部分的关系，且部分可以离开整体而单独存在。如车和轮胎是整体和部分的关系，轮胎离开车仍然可以存在。</description>
     </item>
     
     <item>
@@ -137,7 +151,7 @@ SQL语句对大小写不敏感
 对象中包含三个关键性属性：
  标识 使用 id() 方法查看 对象值 类型 使用 type() 方法查看  类与对象 Python 中使用 class 关键字定义类，通过定义的类生成类实例。实例称之为实例对象。Python 中类是一个对象，所有内建类型的类型都是 type，这个 type 就是元类，元类就是 Python 中的造物主。
 道生一，一生二，二生三，三生万物。
-道 即是 type 一 即是 metaclass(元类，或者叫类生成器) 二 即是 class(类，或者叫实例生成器) 三 即是 instance(实例) 万物 即是 实例的各种属性与方法，我们平常使用python时，调用的就是它们。  type&amp;gt;&amp;gt;&amp;gt;metaclass&amp;gt;&amp;gt;&amp;gt;class&amp;gt;&amp;gt;&amp;gt;instance ^ | |&amp;lt;&amp;lt;|  # class 关键词创建 class Base: counter = 10 class Derived(Base): def get_counter(self): return self.counter x = Derived() x.get_counter() # 动态创建 Base = type(&#39;Base&#39;, (), {&#39;counter&#39;: 10}) Derived = type(&#39;Derived&#39;, (Base,), dict(get_counter=lambda self: self.</description>
+道 即是 type 一 即是 metaclass(元类，或者叫类生成器) 二 即是 class(类，或者叫实例生成器) 三 即是 instance(实例) 万物 即是 实例的各种属性与方法，我们平常使用python时，调用的就是它们。  type&amp;gt;&amp;gt;&amp;gt;metaclass&amp;gt;&amp;gt;&amp;gt;class&amp;gt;&amp;gt;&amp;gt;instance ^ | |&amp;lt;&amp;lt;| # class 关键词创建 class Base: counter = 10 class Derived(Base): def get_counter(self): return self.counter x = Derived() x.get_counter() # 动态创建 Base = type(&amp;#39;Base&amp;#39;, (), {&amp;#39;counter&amp;#39;: 10}) Derived = type(&amp;#39;Derived&amp;#39;, (Base,), dict(get_counter=lambda self: self.</description>
     </item>
     
     <item>
@@ -149,7 +163,7 @@ SQL语句对大小写不敏感
       <description>Terminal Multiplexers: Screen, Tmux
 终端多路复用：Screen，Tmux
 命令行选项 术语对照表
-   英文 中文     session 会话   attach 连接   detach 脱离   prefix 前缀   multiplexer 多路复用   window 窗口   regions 区域   panes 面板   buffer 缓存   mark 标记       用途 screen tmux     创建指定名称的会话并连接 screen -S foo tmux new -s foo   创建会话并脱离 screen -S foo -d -m tmux new -s foo -d   列出所有会话 screen -list tmux ls   连接 screen -r tmux attach   连接到指定会话 screen -r foo tmux attach -t foo   通过 pid 连接会话 screen -r pid    连接到运行中的会话 screen -x foo    销毁指定会话 screen -r foo -X quit tmux kill-session -t foo   发送命令到指定会话 screen -r foo -X command tmux command -t foo   脱离会话 screen -d name     按键绑定    用途 screen screen command tmux tmux command     帮助 ?</description>
+   英文 中文     session|会话    attach|连接    detach|脱离    prefix|前缀    multiplexer|多路复用    window|窗口    regions|区域    panes|面板    buffer|缓存    mark|标记        用途 screen tmux     创建指定名称的会话并连接 screen -S foo|tmux new -s foo    创建会话并脱离 screen -S foo -d -m|tmux new -s foo -d    列出所有会话 screen -list|tmux ls    连接 screen -r|tmux attach    连接到指定会话 screen -r foo|tmux attach -t foo    通过 pid 连接会话 screen -r pid    连接到运行中的会话 screen -x foo    销毁指定会话 screen -r foo -X quit|tmux kill-session -t foo    发送命令到指定会话 screen -r foo -X command|tmux command -t foo    脱离会话 screen -d name|     按键绑定    用途 screen screen command tmux tmux command     帮助 ?</description>
     </item>
     
     <item>
@@ -158,7 +172,7 @@ SQL语句对大小写不敏感
       <pubDate>Sun, 05 Aug 2018 08:00:00 +0800</pubDate>
       
       <guid>https://cnewbie.github.io/posts/algorithm-sort-algorithms/</guid>
-      <description>工具函数 #include &amp;lt;iostream&amp;gt; #include &amp;lt;ctime&amp;gt; using namespace std; void swap(int &amp;amp;a,int &amp;amp;b){ int tmp = a; a = b; b = tmp; } void printarr(int *a,int n){ for(size_t i = 0; i &amp;lt; n; i++) { cout &amp;lt;&amp;lt; a[i] &amp;lt;&amp;lt; &amp;quot; &amp;quot;; } cout &amp;lt;&amp;lt; endl; }  Bubble Sort 冒泡排序 void bubble_sort(int *a, int n){ for(size_t i = n-1; i &amp;gt; 0;--i){ for(size_t j = i; j &amp;gt; 0;--j) { if(a[j] &amp;lt; a[j-1]) swap(a[j],a[j-1]); } } } void bubble_sort_speedup(int *a, int n){ for(size_t i = 0; i &amp;lt; n-1; i++){ int flag = 0; for(size_t j = 0; j &amp;lt; n-1-i; ++j){ if(a[j] &amp;gt; a[j+1]){ swap(a[j],a[j+1]); flag = 1; } } if(!</description>
+      <description>工具函数 #include &amp;lt;iostream&amp;gt;#include &amp;lt;ctime&amp;gt; using namespace std; void swap(int &amp;amp;a,int &amp;amp;b){ int tmp = a; a = b; b = tmp; } void printarr(int *a,int n){ for(size_t i = 0; i &amp;lt; n; i++) { cout &amp;lt;&amp;lt; a[i] &amp;lt;&amp;lt; &amp;#34;&amp;#34;; } cout &amp;lt;&amp;lt; endl; } Bubble Sort 冒泡排序 void bubble_sort(int *a, int n){ for(size_t i = n-1; i &amp;gt; 0;--i){ for(size_t j = i; j &amp;gt; 0;--j) { if(a[j] &amp;lt; a[j-1]) swap(a[j],a[j-1]); } } } void bubble_sort_speedup(int *a, int n){ for(size_t i = 0; i &amp;lt; n-1; i++){ int flag = 0; for(size_t j = 0; j &amp;lt; n-1-i; ++j){ if(a[j] &amp;gt; a[j+1]){ swap(a[j],a[j+1]); flag = 1; } } if(!</description>
     </item>
     
     <item>
@@ -168,14 +182,13 @@ SQL语句对大小写不敏感
       
       <guid>https://cnewbie.github.io/posts/markdown-pandoc/</guid>
       <description>Philosophy 哲学 Markdown is designed to be easy to write,and,even more importantly,easy to read.
- A Markdown-formatted document should be publishable as-is,as plain text,without looking like it&amp;rsquo;s been marked up with tags or formatting instructions. - John Gruber
+ A Markdown-formatted document should be publishable as-is,as plain text,without looking like it&#39;s been marked up with tags or formatting instructions. - John Gruber
  Paragraphs 段落 一个段落包含一行或多行文字，通过行后跟随一个或多个空白行，换行符（newlines）和空格（spaces）作用一样，如果需要硬换行（hard line break），在行后添加两个以上的空格。
 Extension escaped_line_breaks
 反斜杠（backslash）后跟随换行符也是一种硬换行
 Note 在多行和表格中，这种方式是唯一的方式进行硬换行，因为表格中空格会被忽略。
 Headers 标题 标题风格 两种风格的标题 Setext 和 ATX
- Setext 风格
-A level-one header ================== A level-two header ------------------  ATX 风格</description>
+ Setext 风格  A level-one header ================== A level-two header ------------------  ATX 风格  # A level-one header ## A level-two header  ### A level-three header ### Extension blank_before_header</description>
     </item>
     
     <item>
@@ -203,7 +216,7 @@ git rm [file name] 删除文件并取消跟踪
 git rm --cached [file name] 取消跟踪文件
 重命名文件
 git mv [file name]
-mv old_name new_name git rm old_name git add new_name  查看提交历史</description>
+mv old_name new_name git rm old_name git add new_name 查看提交历史</description>
     </item>
     
     <item>
@@ -222,8 +235,7 @@ raw表 决定数据包是否被状态跟踪机制处理
 两条规则链 OUTPUT,PREROUTING
 四种状态
  NEW 开始一个连接 RELATED 某个已经建立的连接所建立的新连接 ESTABLISHED 发送后接到应答的数据包 INVALID 无法识别的数据包  规则链和规则 在处理各种数据包时，根据防火墙规则的不同时机，iptables供涉及5种默认规则链：
- INPUT 当接收到防火墙本机地址的数据包（入站）时,应用此链中的规则。。 OUTPUT 当防火墙本机向外发送数据包（出站）时，应用此链中的规则。 FORWARD 当接收到需要通过防火墙发送给其他地址的数据包（转发）时，应用此链中的规则。 PREROUTING 在对数据包作路由选择之前，应用此链中的规则，如DNAT。 POSTROUTING 在对数据包作路由选择之后，应用此链中的规则，如SNAT。
---&amp;gt;PREROUTING--&amp;gt;[ROUTE]--&amp;gt;FORWARD--&amp;gt;POSTROUTING--&amp;gt; mangle | mangle ^ mangle nat | filter | nat | | | | v | INPUT OUTPUT | mangle ^ mangle | filter | nat v ------&amp;gt;local-------&amp;gt;| filter   防火墙处理数据包的方式（规则）：</description>
+ INPUT 当接收到防火墙本机地址的数据包（入站）时,应用此链中的规则。。 OUTPUT 当防火墙本机向外发送数据包（出站）时，应用此链中的规则。 FORWARD 当接收到需要通过防火墙发送给其他地址的数据包（转发）时，应用此链中的规则。 PREROUTING 在对数据包作路由选择之前，应用此链中的规则，如DNAT。 POSTROUTING 在对数据包作路由选择之后，应用此链中的规则，如SNAT。  --&amp;gt;PREROUTING--&amp;gt;[ROUTE]--&amp;gt;FORWARD--&amp;gt;POSTROUTING--&amp;gt; mangle | mangle ^ mangle nat | filter | nat | | | | v | INPUT OUTPUT | mangle ^ mangle | filter | nat v ------&amp;gt;local-------&amp;gt;| filter 防火墙处理数据包的方式（规则）：</description>
     </item>
     
     <item>
@@ -233,8 +245,10 @@ raw表 决定数据包是否被状态跟踪机制处理
       
       <guid>https://cnewbie.github.io/posts/algorithm-ga-en/</guid>
       <description>Outline of GA Outline of the Basic Genetic Algorithm
- [Start] Generate random population of n chromosomes (suitable solutions for the problem) [Fitness] Evaluate the fitness f(x) of each chromosome x in the population [New population] Create a new population by repeating following steps until the new population is complete
- [Selection] Select two parent chromosomes from a population according to their fitness (the better fitness, the bigger chance to be selected)</description>
+  [Start] Generate random population of n chromosomes (suitable solutions for the problem)
+  [Fitness] Evaluate the fitness f(x) of each chromosome x in the population
+  [New population] Create a new population by repeating following steps until the new population is complete
+  [Selection] Select two parent chromosomes from a population according to their fitness (the better fitness, the bigger chance to be selected)</description>
     </item>
     
   </channel>

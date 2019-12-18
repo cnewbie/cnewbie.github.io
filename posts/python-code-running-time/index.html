@@ -60,83 +60,69 @@
   <h2 class="subtitle is-6">April 22, 2019</h2>
   <h1 class="subtitle is-size-4-mobile is-size-3-desktop">Python 统计代码运行时间</h1>
   <div class="content">
-    
-
-<p>Python 运行时间</p>
-
+    <p>Python 运行时间</p>
 <p>在很多的时候我们需要计算我们程序的性能，这个时候我们常常需要统计程序运行的时间。下面我们就来说说怎么统计程序的运行时间。</p>
-
 <h1 id="datetime">datetime</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#! /usr/bin/env python</span>
 
-<pre><code class="language-python">#! /usr/bin/env python
+<span style="color:#75715e"># -*- coding:utf-8 -*-</span>
 
-# -*- coding:utf-8 -*-
+<span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">from</span> functools <span style="color:#f92672">import</span> wraps
+<span style="color:#f92672">import</span> logging
 
-import datetime
-from functools import wraps
-import logging
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_time</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+    <span style="color:#a6e22e">@wraps</span>(func)
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__wrapper</span>(func):
+        logging<span style="color:#f92672">.</span>getLogger(__name__)
+        start <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
+        ret <span style="color:#f92672">=</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
+        end <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
+        logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">running time: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(end<span style="color:#f92672">-</span>start))
+        <span style="color:#66d9ef">return</span> ret
+    <span style="color:#66d9ef">return</span> __wrapper
+</code></pre></div><h1 id="timenow">time.now</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#! /usr/bin/env python</span>
 
-def run_time(*args, **kwargs):
-    @wraps(func)
-    def __wrapper(func):
-        logging.getLogger(__name__)
-        start = datetime.datetime.now()
-        ret = func(*args, **kwargs)
-        end = datetime.datetime.now()
-        logging.debug('running time: {}'.format(end-start))
-        return ret
-    return __wrapper
-</code></pre>
+<span style="color:#75715e"># -*- coding:utf-8 -*-</span>
 
-<h1 id="time-now">time.now</h1>
+<span style="color:#f92672">import</span> time
+<span style="color:#f92672">from</span> functools <span style="color:#f92672">import</span> wraps
+<span style="color:#f92672">import</span> logging
 
-<pre><code class="language-python">#! /usr/bin/env python
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_time</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+    <span style="color:#a6e22e">@wraps</span>(func)
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__wrapper</span>(func):
+        logging<span style="color:#f92672">.</span>getLogger(__name__)
+        start <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+        start_2 <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>clock()
+        ret <span style="color:#f92672">=</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
+        end <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+        end_2 <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>clock()
+        logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">running time: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(end<span style="color:#f92672">-</span>start))
+        logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">running time2: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(end_2<span style="color:#f92672">-</span>start_2))
+        <span style="color:#66d9ef">return</span> ret
+    <span style="color:#66d9ef">return</span> __wrapper
+</code></pre></div><h1 id="timeit">timeit</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#! /usr/bin/env python</span>
 
-# -*- coding:utf-8 -*-
+<span style="color:#75715e"># -*- coding:utf-8 -*-</span>
 
-import time
-from functools import wraps
-import logging
+<span style="color:#f92672">import</span> timeit
+<span style="color:#f92672">from</span> functools <span style="color:#f92672">import</span> wraps
+<span style="color:#f92672">import</span> logging
 
-def run_time(*args, **kwargs):
-    @wraps(func)
-    def __wrapper(func):
-        logging.getLogger(__name__)
-        start = time.time()
-        start_2 = time.clock()
-        ret = func(*args, **kwargs)
-        end = time.time()
-        end_2 = time.clock()
-        logging.debug('running time: {}'.format(end-start))
-        logging.debug('running time2: {}'.format(end_2-start_2))
-        return ret
-    return __wrapper
-</code></pre>
-
-<h1 id="timeit">timeit</h1>
-
-<pre><code class="language-python">#! /usr/bin/env python
-
-# -*- coding:utf-8 -*-
-
-import timeit
-from functools import wraps
-import logging
-
-def run_time(*args, **kwargs):
-    @wraps(func)
-    def __wrapper(func):
-        logging.getLogger(__name__)
-        start = timeit.default_timer()
-        ret = func(*args, **kwargs)
-        end = timeit.default_timer()
-        logging.debug('running time: {}'.format(end-start))
-        return ret
-    return __wrapper
-</code></pre>
-
-<h1 id="方法对比">方法对比</h1>
-
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_time</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+    <span style="color:#a6e22e">@wraps</span>(func)
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__wrapper</span>(func):
+        logging<span style="color:#f92672">.</span>getLogger(__name__)
+        start <span style="color:#f92672">=</span> timeit<span style="color:#f92672">.</span>default_timer()
+        ret <span style="color:#f92672">=</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
+        end <span style="color:#f92672">=</span> timeit<span style="color:#f92672">.</span>default_timer()
+        logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">running time: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(end<span style="color:#f92672">-</span>start))
+        <span style="color:#66d9ef">return</span> ret
+    <span style="color:#66d9ef">return</span> __wrapper
+</code></pre></div><h1 id="heading">方法对比</h1>
 <ul>
 <li>方法二的精度比较高。方法一基本上是性能最差的。</li>
 <li>*uix 平台方法 <code>datetime.now()</code> 和 <code>time.time()</code> 都包含了其他程序使用CPU的时间。方法 <code>time.clock()</code> 只计算了程序运行CPU的时间。</li>

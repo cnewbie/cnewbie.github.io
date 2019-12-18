@@ -3,13 +3,18 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://cnewbie.github.io/posts/algorithm-binary-search/</loc>
+    <lastmod>2019-12-15T08:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://cnewbie.github.io/</loc>
-    <lastmod>2019-11-01T08:00:00+08:00</lastmod>
+    <lastmod>2019-12-15T08:00:00+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://cnewbie.github.io/posts/</loc>
-    <lastmod>2019-11-01T08:00:00+08:00</lastmod>
+    <lastmod>2019-12-15T08:00:00+08:00</lastmod>
   </url>
   
   <url>

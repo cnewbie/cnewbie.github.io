@@ -60,392 +60,346 @@
   <h2 class="subtitle is-6">August 5, 2018</h2>
   <h1 class="subtitle is-size-4-mobile is-size-3-desktop">常用排序算法总结</h1>
   <div class="content">
-    
+    <hr>
+<h1 id="heading">工具函数</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#</span><span style="color:#75715e">include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#75715e">#</span><span style="color:#75715e">include</span> <span style="color:#75715e">&lt;ctime&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 
-<hr />
-
-<h1 id="工具函数">工具函数</h1>
-
-<pre><code class="language-cpp">#include &lt;iostream&gt;
-#include &lt;ctime&gt;
-
-using namespace std;
-
-void swap(int &amp;a,int &amp;b){
-    int tmp = a;
-    a = b;
-    b = tmp;
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">swap</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>a,<span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>b){
+    <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> a;
+    a <span style="color:#f92672">=</span> b;
+    b <span style="color:#f92672">=</span> tmp;
 }
 
-void printarr(int *a,int n){
-    for(size_t i = 0; i &lt; n; i++)
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printarr</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
+    <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">+</span><span style="color:#f92672">+</span>)
     {
-        cout &lt;&lt; a[i] &lt;&lt; &quot; &quot;;
+        cout <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> a[i] <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#34;</span>;
     }
-    cout &lt;&lt; endl;
+    cout <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> endl;
 }
-</code></pre>
-
-<h1 id="bubble-sort-冒泡排序">Bubble Sort 冒泡排序</h1>
-
-<pre><code class="language-cpp">void bubble_sort(int *a, int n){
-    for(size_t i = n-1; i &gt; 0;--i){
-        for(size_t j = i; j &gt; 0;--j)
+</code></pre></div><h1 id="bubble-sort-">Bubble Sort 冒泡排序</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bubble_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a, <span style="color:#66d9ef">int</span> n){
+    <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>;<span style="color:#f92672">-</span><span style="color:#f92672">-</span>i){
+        <span style="color:#66d9ef">for</span>(size_t j <span style="color:#f92672">=</span> i; j <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>;<span style="color:#f92672">-</span><span style="color:#f92672">-</span>j)
         {
-            if(a[j] &lt; a[j-1])
-                swap(a[j],a[j-1]);
+            <span style="color:#66d9ef">if</span>(a[j] <span style="color:#f92672">&lt;</span> a[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+                swap(a[j],a[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]);
         }
     }
 }
 
-void bubble_sort_speedup(int *a, int n){
-    for(size_t i = 0; i &lt; n-1; i++){
-        int flag = 0;
-        for(size_t j = 0; j &lt; n-1-i; ++j){
-            if(a[j] &gt; a[j+1]){
-                swap(a[j],a[j+1]);
-                flag = 1;
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bubble_sort_speedup</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a, <span style="color:#66d9ef">int</span> n){
+    <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; i<span style="color:#f92672">+</span><span style="color:#f92672">+</span>){
+        <span style="color:#66d9ef">int</span> flag <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+        <span style="color:#66d9ef">for</span>(size_t j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">-</span>i; <span style="color:#f92672">+</span><span style="color:#f92672">+</span>j){
+            <span style="color:#66d9ef">if</span>(a[j] <span style="color:#f92672">&gt;</span> a[j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]){
+                swap(a[j],a[j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]);
+                flag <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
             }
         }
-        if(!flag)
-            break;
+        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>flag)
+            <span style="color:#66d9ef">break</span>;
     }
 }
-</code></pre>
-
-<h1 id="cocktail-sort-鸡尾酒排序">Cocktail Sort 鸡尾酒排序</h1>
-
-<pre><code class="language-cpp">void cocktail_sort(int *a,int n){
-    int left = 0;
-    int right = n-1;
-    while(left &lt; right){
-        for(size_t i = left; i&lt;right;++i){
-            if(a[i] &gt; a[i+1])
-                swap(a[i],a[i+1]);
+</code></pre></div><h1 id="cocktail-sort-">Cocktail Sort 鸡尾酒排序</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">cocktail_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
+    <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">int</span> right <span style="color:#f92672">=</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+    <span style="color:#66d9ef">while</span>(left <span style="color:#f92672">&lt;</span> right){
+        <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> left; i<span style="color:#f92672">&lt;</span>right;<span style="color:#f92672">+</span><span style="color:#f92672">+</span>i){
+            <span style="color:#66d9ef">if</span>(a[i] <span style="color:#f92672">&gt;</span> a[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>])
+                swap(a[i],a[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]);
         }
-        right--;
-        for(size_t j = right;j&gt;left;--j){
-            if(a[j-1] &gt; a[j]){
-                swap(a[j-1],a[j]);
+        right<span style="color:#f92672">-</span><span style="color:#f92672">-</span>;
+        <span style="color:#66d9ef">for</span>(size_t j <span style="color:#f92672">=</span> right;j<span style="color:#f92672">&gt;</span>left;<span style="color:#f92672">-</span><span style="color:#f92672">-</span>j){
+            <span style="color:#66d9ef">if</span>(a[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">&gt;</span> a[j]){
+                swap(a[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>],a[j]);
             }
         }
-        left++;
+        left<span style="color:#f92672">+</span><span style="color:#f92672">+</span>;
     }
 }
-</code></pre>
-
-<pre><code class="language-cpp">void cocktail_sort_speedup(int *a,int n){
-    bool sorted = false;
-    while(!sorted){
-        sorted = true;
-        for( int i = 0; i &lt; n - 1; i++ ){
-            if( a[i] &gt; a[i + 1] ){
-                swap( a[i], a[i + 1] );
-                sorted = false;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">cocktail_sort_speedup</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
+    <span style="color:#66d9ef">bool</span> sorted <span style="color:#f92672">=</span> false;
+    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>sorted){
+        sorted <span style="color:#f92672">=</span> true;
+        <span style="color:#66d9ef">for</span>( <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">+</span><span style="color:#f92672">+</span> ){
+            <span style="color:#66d9ef">if</span>( a[i] <span style="color:#f92672">&gt;</span> a[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] ){
+                swap( a[i], a[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] );
+                sorted <span style="color:#f92672">=</span> false;
             }
         }
-        if(sorted)
-            break;
-        sorted = true;
-        for( int j = n - 1; j &gt; 0; j-- ){
-            if( a[j - 1] &gt; a[j] ){
-                swap( a[j], a[j - 1] );
-                sorted = false;
+        <span style="color:#66d9ef">if</span>(sorted)
+            <span style="color:#66d9ef">break</span>;
+        sorted <span style="color:#f92672">=</span> true;
+        <span style="color:#66d9ef">for</span>( <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>; j<span style="color:#f92672">-</span><span style="color:#f92672">-</span> ){
+            <span style="color:#66d9ef">if</span>( a[j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&gt;</span> a[j] ){
+                swap( a[j], a[j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] );
+                sorted <span style="color:#f92672">=</span> false;
             }
         }
     }
 }
-</code></pre>
-
-<h1 id="selection-sort-选择排序">Selection Sort 选择排序</h1>
-
-<pre><code class="language-cpp">void selection_sort(int *a, int n){
-    for(size_t i = 0;i &lt; n-1;i++){
-        int index = i;
-        for(size_t j = i+1;j &lt; n;j++){
-            if(a[j] &lt; a[index])
-                index = j;
+</code></pre></div><h1 id="selection-sort-">Selection Sort 选择排序</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">selection_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a, <span style="color:#66d9ef">int</span> n){
+    <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;i <span style="color:#f92672">&lt;</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">+</span><span style="color:#f92672">+</span>){
+        <span style="color:#66d9ef">int</span> index <span style="color:#f92672">=</span> i;
+        <span style="color:#66d9ef">for</span>(size_t j <span style="color:#f92672">=</span> i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;j <span style="color:#f92672">&lt;</span> n;j<span style="color:#f92672">+</span><span style="color:#f92672">+</span>){
+            <span style="color:#66d9ef">if</span>(a[j] <span style="color:#f92672">&lt;</span> a[index])
+                index <span style="color:#f92672">=</span> j;
         }
-        if(i!=index)
+        <span style="color:#66d9ef">if</span>(i<span style="color:#f92672">!</span><span style="color:#f92672">=</span>index)
             swap(a[i],a[index]);
     }
 }
-</code></pre>
-
-<h1 id="insertion-sort-插入排序">Insertion Sort 插入排序</h1>
-
-<pre><code class="language-cpp">void insertion_sort(int *a, int n){
-    for(size_t i = 1;i &lt; n;i++){
-        int tmp = a[i];
-        size_t j = i;
-        while(j &gt; 0 &amp;&amp; tmp &lt; a[j-1]){
-            a[j] = a[j-1];
-            --j;
+</code></pre></div><h1 id="insertion-sort-">Insertion Sort 插入排序</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">insertion_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a, <span style="color:#66d9ef">int</span> n){
+    <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;i <span style="color:#f92672">&lt;</span> n;i<span style="color:#f92672">+</span><span style="color:#f92672">+</span>){
+        <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> a[i];
+        size_t j <span style="color:#f92672">=</span> i;
+        <span style="color:#66d9ef">while</span>(j <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> tmp <span style="color:#f92672">&lt;</span> a[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]){
+            a[j] <span style="color:#f92672">=</span> a[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
+            <span style="color:#f92672">-</span><span style="color:#f92672">-</span>j;
         }
-        a[j] = tmp;
+        a[j] <span style="color:#f92672">=</span> tmp;
     }
 }
-</code></pre>
-
-<h1 id="shell-sort-希尔排序">Shell Sort 希尔排序</h1>
-
-<pre><code class="language-cpp">void shell_sort(int *a,int n){
-    int h,i,j,t;
-    for(h = n;h/=2;){
-        // iterator
-        for(i=h;i&lt;n;i++){
-            t=a[i];
-            for(j=i;j&gt;=h &amp;&amp; t&lt;a[j-h];j-=h){
-                a[j] = a[j-h];
+</code></pre></div><h1 id="shell-sort-">Shell Sort 希尔排序</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">shell_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
+    <span style="color:#66d9ef">int</span> h,i,j,t;
+    <span style="color:#66d9ef">for</span>(h <span style="color:#f92672">=</span> n;h<span style="color:#f92672">/</span><span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>;){
+        <span style="color:#75715e">// iterator
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span>h;i<span style="color:#f92672">&lt;</span>n;i<span style="color:#f92672">+</span><span style="color:#f92672">+</span>){
+            t<span style="color:#f92672">=</span>a[i];
+            <span style="color:#66d9ef">for</span>(j<span style="color:#f92672">=</span>i;j<span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span>h <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> t<span style="color:#f92672">&lt;</span>a[j<span style="color:#f92672">-</span>h];j<span style="color:#f92672">-</span><span style="color:#f92672">=</span>h){
+                a[j] <span style="color:#f92672">=</span> a[j<span style="color:#f92672">-</span>h];
             }
-            a[j] = t;
+            a[j] <span style="color:#f92672">=</span> t;
         }
     }
 }
-</code></pre>
-
-<pre><code class="language-cpp">void shell_sort_speedup(int *a,int n){
-    int i,j,tmp,step;
-    step = n;
-    while(step&gt;1){
-        step = step/3+1;
-        // insert sort
-        for(i=step;i&lt;n;i++){
-            tmp = a[i];
-            for(j=i;j&gt;0 &amp;&amp; a[j] &lt; a[j-step];j-=step){
-                a[j] = a[j-step];
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">shell_sort_speedup</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
+    <span style="color:#66d9ef">int</span> i,j,tmp,step;
+    step <span style="color:#f92672">=</span> n;
+    <span style="color:#66d9ef">while</span>(step<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span>){
+        step <span style="color:#f92672">=</span> step<span style="color:#f92672">/</span><span style="color:#ae81ff">3</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
+        <span style="color:#75715e">// insert sort
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span>step;i<span style="color:#f92672">&lt;</span>n;i<span style="color:#f92672">+</span><span style="color:#f92672">+</span>){
+            tmp <span style="color:#f92672">=</span> a[i];
+            <span style="color:#66d9ef">for</span>(j<span style="color:#f92672">=</span>i;j<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> a[j] <span style="color:#f92672">&lt;</span> a[j<span style="color:#f92672">-</span>step];j<span style="color:#f92672">-</span><span style="color:#f92672">=</span>step){
+                a[j] <span style="color:#f92672">=</span> a[j<span style="color:#f92672">-</span>step];
             }
-            a[j] = tmp;
+            a[j] <span style="color:#f92672">=</span> tmp;
         }
     }
 }
-</code></pre>
-
-<h1 id="merge-sort归并排序">Merge Sort归并排序</h1>
-
+</code></pre></div><h1 id="merge-sort">Merge Sort归并排序</h1>
 <p>递归版本</p>
-
-<pre><code class="language-cpp">void merge_arr(int *a,int m,int n){
-    int i,j,k;
-    int *temp = new int[n];
-    // 0 ---&gt; n
-    for(i=0,j=m,k=0;k&lt;n;k++){
-        temp[k] = j == n ?
-            a[i++]:i == m ?
-            a[j++]:a[j] &lt; a[i]?
-            a[j++]:a[i++];
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">merge_arr</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> m,<span style="color:#66d9ef">int</span> n){
+    <span style="color:#66d9ef">int</span> i,j,k;
+    <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>temp <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[n];
+    <span style="color:#75715e">// 0 ---&gt; n
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,j<span style="color:#f92672">=</span>m,k<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;k<span style="color:#f92672">&lt;</span>n;k<span style="color:#f92672">+</span><span style="color:#f92672">+</span>){
+        temp[k] <span style="color:#f92672">=</span> j <span style="color:#f92672">=</span><span style="color:#f92672">=</span> n <span style="color:#f92672">?</span>
+            a[i<span style="color:#f92672">+</span><span style="color:#f92672">+</span>]<span style="color:#f92672">:</span>i <span style="color:#f92672">=</span><span style="color:#f92672">=</span> m <span style="color:#f92672">?</span>
+            a[j<span style="color:#f92672">+</span><span style="color:#f92672">+</span>]<span style="color:#f92672">:</span>a[j] <span style="color:#f92672">&lt;</span> a[i]<span style="color:#f92672">?</span>
+            a[j<span style="color:#f92672">+</span><span style="color:#f92672">+</span>]<span style="color:#f92672">:</span>a[i<span style="color:#f92672">+</span><span style="color:#f92672">+</span>];
     }
-    for(k=0;k&lt;n;k++){
-        a[k] = temp[k];
+    <span style="color:#66d9ef">for</span>(k<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;k<span style="color:#f92672">&lt;</span>n;k<span style="color:#f92672">+</span><span style="color:#f92672">+</span>){
+        a[k] <span style="color:#f92672">=</span> temp[k];
     }
-    delete [] temp;
+    <span style="color:#66d9ef">delete</span> [] temp;
 }
-void merge_sort(int *a,int n){
-    if(n &lt; 2)
-        return;
-    int m = n/2;
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">merge_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
+    <span style="color:#66d9ef">if</span>(n <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>)
+        <span style="color:#66d9ef">return</span>;
+    <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> n<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>;
     merge_sort(a,m);
-    merge_sort(a+m,n-m);
+    merge_sort(a<span style="color:#f92672">+</span>m,n<span style="color:#f92672">-</span>m);
     merge_arr(a,m,n);
 }
-</code></pre>
-
-<p>非递归版本</p>
-
-<pre><code class="language-cpp">void merge_arr2(int *a,int left,int mid,int right){
-    int i = left;
-    int j = mid + 1;
-    int k = 0;
-    int len = right-left+1;
-    int *temp = new int[len];
-    // while(i &lt;= mid &amp;&amp; j &lt;= right){
-    //     temp[k++] = a[i] &lt;= a[j] ? a[i++] : a[j++];
-    // }
-    // while(i &lt;= mid){
-    //     temp[k++] = a[i++];
-    // }
-    // while(j &lt;= right){
-    //     temp[k++] = a[j++];
-    // }
-    for(;k&lt;len;k++){
-        temp[k] = j &gt; right?
-                a[i++]:i &gt; mid?
-                a[j++]:a[i] &lt; a[j]?
-                a[i++]:a[j++];
+</code></pre></div><p>非递归版本</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">merge_arr2</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> left,<span style="color:#66d9ef">int</span> mid,<span style="color:#66d9ef">int</span> right){
+    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> left;
+    <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+    <span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">int</span> len <span style="color:#f92672">=</span> right<span style="color:#f92672">-</span>left<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
+    <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>temp <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[len];
+    <span style="color:#75715e">// while(i &lt;= mid &amp;&amp; j &lt;= right){
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//     temp[k++] = a[i] &lt;= a[j] ? a[i++] : a[j++];
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// }
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// while(i &lt;= mid){
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//     temp[k++] = a[i++];
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// }
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// while(j &lt;= right){
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//     temp[k++] = a[j++];
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// }
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(;k<span style="color:#f92672">&lt;</span>len;k<span style="color:#f92672">+</span><span style="color:#f92672">+</span>){
+        temp[k] <span style="color:#f92672">=</span> j <span style="color:#f92672">&gt;</span> right<span style="color:#f92672">?</span>
+                a[i<span style="color:#f92672">+</span><span style="color:#f92672">+</span>]<span style="color:#f92672">:</span>i <span style="color:#f92672">&gt;</span> mid<span style="color:#f92672">?</span>
+                a[j<span style="color:#f92672">+</span><span style="color:#f92672">+</span>]<span style="color:#f92672">:</span>a[i] <span style="color:#f92672">&lt;</span> a[j]<span style="color:#f92672">?</span>
+                a[i<span style="color:#f92672">+</span><span style="color:#f92672">+</span>]<span style="color:#f92672">:</span>a[j<span style="color:#f92672">+</span><span style="color:#f92672">+</span>];
     }
-    for(k = 0; k&lt; len;){
-        a[left++] = temp[k++];
+    <span style="color:#66d9ef">for</span>(k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k<span style="color:#f92672">&lt;</span> len;){
+        a[left<span style="color:#f92672">+</span><span style="color:#f92672">+</span>] <span style="color:#f92672">=</span> temp[k<span style="color:#f92672">+</span><span style="color:#f92672">+</span>];
     }
 
-    delete [] temp;
+    <span style="color:#66d9ef">delete</span> [] temp;
 }
-void merge_sort(int *a,int len){
-    // int left,mid,right,n;
-    int left,n;
-    for(int i = 2;i/2 &lt; len;i*=2){
-        // left = 0;
-        // for(left=0;left+i&lt;len;){
-        //     mid = left + i - 1;
-        //     right = mid + i &lt; len ? mid + i : len - 1;
-        //     n = mid + i &lt; len ? 2*i : len - left+1;
-        //     merge_arr(a+left,mid,n);
-        //     left = right + 1 ;
-        // }
-        for(left = 0;left &lt; len;left+=i){
-            // mid = left + i/2;
-            n = left + i &lt; len?i:len-left;
-            merge_arr(a+left,i/2,n);
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">merge_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> len){
+    <span style="color:#75715e">// int left,mid,right,n;
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> left,n;
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;i<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">&lt;</span> len;i<span style="color:#f92672">*</span><span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>){
+        <span style="color:#75715e">// left = 0;
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// for(left=0;left+i&lt;len;){
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//     mid = left + i - 1;
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//     right = mid + i &lt; len ? mid + i : len - 1;
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//     n = mid + i &lt; len ? 2*i : len - left+1;
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//     merge_arr(a+left,mid,n);
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//     left = right + 1 ;
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// }
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;left <span style="color:#f92672">&lt;</span> len;left<span style="color:#f92672">+</span><span style="color:#f92672">=</span>i){
+            <span style="color:#75715e">// mid = left + i/2;
+</span><span style="color:#75715e"></span>            n <span style="color:#f92672">=</span> left <span style="color:#f92672">+</span> i <span style="color:#f92672">&lt;</span> len<span style="color:#f92672">?</span>i:len<span style="color:#f92672">-</span>left;
+            merge_arr(a<span style="color:#f92672">+</span>left,i<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>,n);
         }
     }
 }
-</code></pre>
-
-<h1 id="qucik-sort-快速排序">Qucik Sort 快速排序</h1>
-
-<pre><code class="language-cpp">void quick_sort(int *a,int len){
-    if(len&lt;2)
-        return;
-    int i,j;
-    int pivot = a[len/2];
-    for(i=0,j=len-1;;i++,j--){
-        while(a[i] &lt; pivot) i++;
-        while(a[j] &gt; pivot) j--;
-        if(i &gt;= j) break;
-        // swap value
-        swap(a[i],a[j]);
+</code></pre></div><h1 id="qucik-sort-">Qucik Sort 快速排序</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">quick_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> len){
+    <span style="color:#66d9ef">if</span>(len<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">2</span>)
+        <span style="color:#66d9ef">return</span>;
+    <span style="color:#66d9ef">int</span> i,j;
+    <span style="color:#66d9ef">int</span> pivot <span style="color:#f92672">=</span> a[len<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>];
+    <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,j<span style="color:#f92672">=</span>len<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;;i<span style="color:#f92672">+</span><span style="color:#f92672">+</span>,j<span style="color:#f92672">-</span><span style="color:#f92672">-</span>){
+        <span style="color:#66d9ef">while</span>(a[i] <span style="color:#f92672">&lt;</span> pivot) i<span style="color:#f92672">+</span><span style="color:#f92672">+</span>;
+        <span style="color:#66d9ef">while</span>(a[j] <span style="color:#f92672">&gt;</span> pivot) j<span style="color:#f92672">-</span><span style="color:#f92672">-</span>;
+        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> j) <span style="color:#66d9ef">break</span>;
+        <span style="color:#75715e">// swap value
+</span><span style="color:#75715e"></span>        swap(a[i],a[j]);
     }
     quick_sort(a,i);
-    quick_sort(a+i,len-i);
+    quick_sort(a<span style="color:#f92672">+</span>i,len<span style="color:#f92672">-</span>i);
 }
-</code></pre>
-
-<pre><code class="language-cpp">void quick_sort2(int *a,int n){
-    if(n&lt;2) return;
-    int mid=a[0]; // pivot
-    int i=0,j=n-1;
-    while(i&lt;j){
-        while(j&gt;i &amp;&amp; a[j]&gt;=mid) j--;
-        if(j&gt;i){
-            a[i]=a[j];
-            i++;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">quick_sort2</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
+    <span style="color:#66d9ef">if</span>(n<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">return</span>;
+    <span style="color:#66d9ef">int</span> mid<span style="color:#f92672">=</span>a[<span style="color:#ae81ff">0</span>]; <span style="color:#75715e">// pivot
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,j<span style="color:#f92672">=</span>n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+    <span style="color:#66d9ef">while</span>(i<span style="color:#f92672">&lt;</span>j){
+        <span style="color:#66d9ef">while</span>(j<span style="color:#f92672">&gt;</span>i <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> a[j]<span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span>mid) j<span style="color:#f92672">-</span><span style="color:#f92672">-</span>;
+        <span style="color:#66d9ef">if</span>(j<span style="color:#f92672">&gt;</span>i){
+            a[i]<span style="color:#f92672">=</span>a[j];
+            i<span style="color:#f92672">+</span><span style="color:#f92672">+</span>;
         }
-        while(i&lt;j &amp;&amp; a[i]&lt;mid) i++;
-        if(i&lt;j){
-            a[j]=a[i];
-            j--;
+        <span style="color:#66d9ef">while</span>(i<span style="color:#f92672">&lt;</span>j <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> a[i]<span style="color:#f92672">&lt;</span>mid) i<span style="color:#f92672">+</span><span style="color:#f92672">+</span>;
+        <span style="color:#66d9ef">if</span>(i<span style="color:#f92672">&lt;</span>j){
+            a[j]<span style="color:#f92672">=</span>a[i];
+            j<span style="color:#f92672">-</span><span style="color:#f92672">-</span>;
         }
     }
-    a[i]=mid;
+    a[i]<span style="color:#f92672">=</span>mid;
     quick_sort2(a,i);
-    quick_sort2(a+i+1,n-i-1);
+    quick_sort2(a<span style="color:#f92672">+</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,n<span style="color:#f92672">-</span>i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
 }
-</code></pre>
-
-<h1 id="heap-sort-堆排序">Heap Sort 堆排序</h1>
-
+</code></pre></div><h1 id="heap-sort-">Heap Sort 堆排序</h1>
 <p>递归版本</p>
-
-<pre><code class="language-cpp">// i is index of array,the left child index is 2*i+1,the right one is 2*i+2,the father index is floor((i-1)/2)
-void siftDown(int *a, int i, int n)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// i is index of array,the left child index is 2*i+1,the right one is 2*i+2,the father index is floor((i-1)/2)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">siftDown</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a, <span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> n)
 {
-    int lhs=2*i+1;
-    int rhs=2*i+2;
-    int maxid=i;
-    if(lhs&lt;n &amp;&amp; a[maxid]&lt;a[lhs]) maxid=lhs;
-    if(rhs&lt;n &amp;&amp; a[maxid]&lt;a[rhs]) maxid=rhs;
-    if(maxid!=i)
+    <span style="color:#66d9ef">int</span> lhs<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
+    <span style="color:#66d9ef">int</span> rhs<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>;
+    <span style="color:#66d9ef">int</span> maxid<span style="color:#f92672">=</span>i;
+    <span style="color:#66d9ef">if</span>(lhs<span style="color:#f92672">&lt;</span>n <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> a[maxid]<span style="color:#f92672">&lt;</span>a[lhs]) maxid<span style="color:#f92672">=</span>lhs;
+    <span style="color:#66d9ef">if</span>(rhs<span style="color:#f92672">&lt;</span>n <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> a[maxid]<span style="color:#f92672">&lt;</span>a[rhs]) maxid<span style="color:#f92672">=</span>rhs;
+    <span style="color:#66d9ef">if</span>(maxid<span style="color:#f92672">!</span><span style="color:#f92672">=</span>i)
     {
         swap(a[i],a[maxid]);
         siftDown(a,maxid,n);
     }
 }
 
-// void makeHeap(int *a, int n){
-//     for(int i=n/2-1; i&gt;=0; i--)
-//     {
-//         siftDown(a,i,n);
-//     }
-// }
-
-void heap_sort(int *a,int n){
-    // makeHeap(a,n);
-    for(int i=n/2-1; i&gt;=0; i--){
+<span style="color:#75715e">// void makeHeap(int *a, int n){
+</span><span style="color:#75715e"></span><span style="color:#75715e">//     for(int i=n/2-1; i&gt;=0; i--)
+</span><span style="color:#75715e"></span><span style="color:#75715e">//     {
+</span><span style="color:#75715e"></span><span style="color:#75715e">//         siftDown(a,i,n);
+</span><span style="color:#75715e"></span><span style="color:#75715e">//     }
+</span><span style="color:#75715e"></span><span style="color:#75715e">// }
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">heap_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
+    <span style="color:#75715e">// makeHeap(a,n);
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>n<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; i<span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">-</span><span style="color:#f92672">-</span>){
         siftDown(a,i,n);
     }
-    for(int i=n-1; i&gt;0; i--){
-        swap(a[0],a[i]);
-        siftDown(a,0,i);
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; i<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">-</span><span style="color:#f92672">-</span>){
+        swap(a[<span style="color:#ae81ff">0</span>],a[i]);
+        siftDown(a,<span style="color:#ae81ff">0</span>,i);
     }
 }
-</code></pre>
-
-<p>非递归版本</p>
-
-<pre><code class="language-cpp">void heap_down(int *a,int i,int n){
-    int lc = 2*i+1;
-    for(;lc&lt;n;i=lc,lc=2*i+1){
-        // lc + 1 &lt; n right chid index can't greater than the array length
-        if(lc+1 &lt; n &amp;&amp; a[lc]&lt;a[lc+1])
-            lc++;
-        if(a[i] &gt;= a[lc])
-            break;
-        else
+</code></pre></div><p>非递归版本</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">heap_down</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> i,<span style="color:#66d9ef">int</span> n){
+    <span style="color:#66d9ef">int</span> lc <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
+    <span style="color:#66d9ef">for</span>(;lc<span style="color:#f92672">&lt;</span>n;i<span style="color:#f92672">=</span>lc,lc<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>){
+        <span style="color:#75715e">// lc + 1 &lt; n right chid index can&#39;t greater than the array length
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(lc<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> a[lc]<span style="color:#f92672">&lt;</span>a[lc<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>])
+            lc<span style="color:#f92672">+</span><span style="color:#f92672">+</span>;
+        <span style="color:#66d9ef">if</span>(a[i] <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> a[lc])
+            <span style="color:#66d9ef">break</span>;
+        <span style="color:#66d9ef">else</span>
             swap(a[i],a[lc]);
     }
 }
 
-void heap_sort2(int *a,int n){
-    // makeHeap(a,n);
-    for(int i=n/2-1; i&gt;=0; i--){
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">heap_sort2</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
+    <span style="color:#75715e">// makeHeap(a,n);
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>n<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; i<span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">-</span><span style="color:#f92672">-</span>){
         heap_down(a,i,n);
     }
-    for(int i=n-1; i&gt;0; i--){
-        swap(a[0],a[i]);
-        heap_down(a,0,i);
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; i<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">-</span><span style="color:#f92672">-</span>){
+        swap(a[<span style="color:#ae81ff">0</span>],a[i]);
+        heap_down(a,<span style="color:#ae81ff">0</span>,i);
     }
 }
-</code></pre>
-
-<h1 id="counting-sort-计数排序">Counting Sort 计数排序</h1>
-
-<pre><code class="language-cpp">void couting_sort(int *a,int n){
-    int range = 20;
-    int *C = new int[range];
-    int *temp = new int[n];
-    for(int i = 0;i &lt; range;i++){
-        C[i] = 0;
-        if(i&lt;n)
-            temp[i]=0;
+</code></pre></div><h1 id="counting-sort-">Counting Sort 计数排序</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">couting_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
+    <span style="color:#66d9ef">int</span> range <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
+    <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>C <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[range];
+    <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>temp <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[n];
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;i <span style="color:#f92672">&lt;</span> range;i<span style="color:#f92672">+</span><span style="color:#f92672">+</span>){
+        C[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+        <span style="color:#66d9ef">if</span>(i<span style="color:#f92672">&lt;</span>n)
+            temp[i]<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
     }
-    for(int j = 0;j &lt; n;j++){
-        C[a[j]]++;
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;j <span style="color:#f92672">&lt;</span> n;j<span style="color:#f92672">+</span><span style="color:#f92672">+</span>){
+        C[a[j]]<span style="color:#f92672">+</span><span style="color:#f92672">+</span>;
     }
-    for(int i = 1;i &lt; range;i++){
-        C[i]+=C[i-1];
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;i <span style="color:#f92672">&lt;</span> range;i<span style="color:#f92672">+</span><span style="color:#f92672">+</span>){
+        C[i]<span style="color:#f92672">+</span><span style="color:#f92672">=</span>C[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
     }
-    for(int j = n-1;j &gt;= 0;j--){
-        temp[--C[a[j]]] = a[j];
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;j <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;j<span style="color:#f92672">-</span><span style="color:#f92672">-</span>){
+        temp[<span style="color:#f92672">-</span><span style="color:#f92672">-</span>C[a[j]]] <span style="color:#f92672">=</span> a[j];
     }
-    for (int j = 0; j &lt; n; j++){
-        a[j] = temp[j];
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">+</span><span style="color:#f92672">+</span>){
+        a[j] <span style="color:#f92672">=</span> temp[j];
     }
-    delete [] C;
-    delete [] temp;
+    <span style="color:#66d9ef">delete</span> [] C;
+    <span style="color:#66d9ef">delete</span> [] temp;
 }
-</code></pre>
-
-<h1 id="算法对比">算法对比</h1>
-
+</code></pre></div><h1 id="heading-1">算法对比</h1>
 <blockquote>
 <p>稳定：如果a原本在b前面，而a=b，排序之后a仍然在b的前面。</p>
-
+</blockquote>
+<blockquote>
 <p>不稳定：如果a原本在b的前面，而a=b，排序之后 a 可能会出现在 b 的后面。</p>
-
+</blockquote>
+<blockquote>
 <p>时间复杂度：对排序数据的总的操作次数。反映当n变化时，操作次数呈现什么规律。</p>
-
+</blockquote>
+<blockquote>
 <p>空间复杂度：是指算法在计算机内执行时所需存储空间的度量，它也是数据规模n的函数。</p>
 </blockquote>
-
 <table>
 <thead>
 <tr>
@@ -457,7 +411,6 @@ void heap_sort2(int *a,int n){
 <th align="center">稳定性</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">Insertion Sort</td>
@@ -467,7 +420,6 @@ void heap_sort2(int *a,int n){
 <td align="center">O(1)</td>
 <td align="center">稳定</td>
 </tr>
-
 <tr>
 <td align="left">Shell Sort</td>
 <td align="center">O(n)</td>
@@ -476,7 +428,6 @@ void heap_sort2(int *a,int n){
 <td align="center">O(1)</td>
 <td align="center">不稳定</td>
 </tr>
-
 <tr>
 <td align="left">Selection Sort</td>
 <td align="center">O(n^2)</td>
@@ -485,7 +436,6 @@ void heap_sort2(int *a,int n){
 <td align="center">O(1)</td>
 <td align="center">不稳定</td>
 </tr>
-
 <tr>
 <td align="left">Heap Sort</td>
 <td align="center">O(nlog n)</td>
@@ -494,7 +444,6 @@ void heap_sort2(int *a,int n){
 <td align="center">O(1)</td>
 <td align="center">稳定</td>
 </tr>
-
 <tr>
 <td align="left">Bubble Sort</td>
 <td align="center">O(n)</td>
@@ -503,7 +452,6 @@ void heap_sort2(int *a,int n){
 <td align="center">O(1)</td>
 <td align="center">稳定</td>
 </tr>
-
 <tr>
 <td align="left">Cocktail Sort</td>
 <td align="center">O(n)</td>
@@ -512,7 +460,6 @@ void heap_sort2(int *a,int n){
 <td align="center">O(1)</td>
 <td align="center">稳定</td>
 </tr>
-
 <tr>
 <td align="left">Qucik Sort</td>
 <td align="center">O(nlog n)</td>
@@ -521,7 +468,6 @@ void heap_sort2(int *a,int n){
 <td align="center">O(nlog n)~O(n)</td>
 <td align="center">不稳定</td>
 </tr>
-
 <tr>
 <td align="left">Merge Sort</td>
 <td align="center">O(nlog n)</td>
@@ -530,7 +476,6 @@ void heap_sort2(int *a,int n){
 <td align="center">O(n)</td>
 <td align="center">稳定</td>
 </tr>
-
 <tr>
 <td align="left">Counting Sort</td>
 <td align="center">O(n+k)</td>
@@ -539,7 +484,6 @@ void heap_sort2(int *a,int n){
 <td align="center">O(n+k)</td>
 <td align="center">稳定</td>
 </tr>
-
 <tr>
 <td align="left">Bucket Sort</td>
 <td align="center">O(n)</td>
@@ -548,7 +492,6 @@ void heap_sort2(int *a,int n){
 <td align="center">O(n+k)</td>
 <td align="center">稳定</td>
 </tr>
-
 <tr>
 <td align="left">Radix Sort</td>
 <td align="center">O(n*k)</td>
@@ -559,9 +502,7 @@ void heap_sort2(int *a,int n){
 </tr>
 </tbody>
 </table>
-
-<h1 id="引用">引用</h1>
-
+<h1 id="heading-2">引用</h1>
 <ul>
 <li><a href="http://liaoxl.github.io/blog/20140907/sort/">Moondark</a></li>
 <li><a href="https://www.cnblogs.com/eniac12/p/5329396.html">SteveWang</a></li>

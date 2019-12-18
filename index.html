@@ -64,16 +64,37 @@
       
       <article class="columns">
         <div class="column is-2">
+          <h6 class="is-inline" style="white-space: nowrap">Dec 15</h2>
+        </div>
+        <div class="column">
+          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/algorithm-binary-search/">Binary Search</a></h1>
+          <div class="content is-hidden-mobile">
+            二分查找 二分查找模版 def binary_search(arr, target): if not arr: return -1 left = 0 right = len(arr) - 1 while left &lt;= right: mid = left + ((right - left)&gt;&gt;1) pivot = arr[mid] if pivot &lt; target: left = mid + 1 elif pivot &gt; target: right = mid - 1 else pass # ??? ret = -1 # ??? return ret 二分查找实现 #!/usr/bin/env python3 # -*- coding:utf-8 -*- import bisect def binary_search(arr, target): …
+            
+            <br>
+            <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/algorithm-binary-search/">
+            <span class="icon-link is-small" style="line-height: 100%">
+                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+              </span>
+              <p style="padding:0 5px"></p>more</p>
+            </a>
+            
+          </div>
+      </article>
+      
+      <article class="columns">
+        <div class="column is-2">
           <h6 class="is-inline" style="white-space: nowrap">Nov 1</h2>
         </div>
         <div class="column">
           <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/oop-design-pattern/">设计模式</a></h1>
           <div class="content is-hidden-mobile">
             面向对象之设计模式
-创建型模式 工厂方法 Factory Method 意图 父类中提供创建对象的接口，但是允许子类修改需要创建对象的类型
+创建型模式 创建型模式提供了创建对象的机制， 能够提升已有代码的灵活性和可复用性。
+工厂方法 Factory Method 意图 父类中提供创建对象的接口，但是允许子类修改需要创建对象的类型
 问题 创建物流管理类，起先实现了火车类，随着业务的增长，需要进行水路运输。 在修改物流管理类时，需要修改所有运输的代码。
 解决方案 工厂方法通过调用特殊的工厂方法替代直接使用构造方法构建对象，通过工厂方法返回的对象称之为产品。
-UML 结构 interface Product{ -doStuff() } class ConcreteProductA{ } class ConcreteProductB{ } class Creator{ +someOperation() +createProduct(): Product } class ConcreteCreatorA{ } class ConcreteCreatorB{ } …
+UML 结构 interface Product{ -doStuff() } class ConcreteProductA{ } class ConcreteProductB{ } class Creator{ +someOperation() +createProduct(): Product } class ConcreteCreatorA{ } …
             
             <br>
             <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/oop-design-pattern/">
@@ -93,7 +114,7 @@ UML 结构 interface Product{ -doStuff() } class ConcreteProductA{ } class Concr
         <div class="column">
           <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/python-cookbook/">Python Cookbook</a></h1>
           <div class="content is-hidden-mobile">
-            数据结构与算法 小顶堆 import heapq nums = [1, 8, 2, 23, 7, -4, 18, 23, 42, 37, 2] heap = list(nums) heapq.heapify(heap) heap # [-4, 2, 1, 23, 7, 2, 18, 23, 42, 37, 8] print(heapq.nlargest(3, nums)) # Prints [42, 37, 23] print(heapq.nsmallest(3, nums)) # Prints [-4, 1, 2]  nlargest() 和 nsmallest() 适合查找元素数量少的情况，如果查找数量较多，通常先排序后切片更快。sorted(items)[:N]
+            数据结构与算法 小顶堆 import heapq nums = [1, 8, 2, 23, 7, -4, 18, 23, 42, 37, 2] heap = list(nums) heapq.heapify(heap) heap # [-4, 2, 1, 23, 7, 2, 18, 23, 42, 37, 8] print(heapq.nlargest(3, nums)) # Prints [42, 37, 23] print(heapq.nsmallest(3, nums)) # Prints [-4, 1, 2] nlargest() 和 nsmallest() 适合查找元素数量少的情况，如果查找数量较多，通常先排序后切片更快。sorted(items)[:N]
 优先队列 import heapq class PriorityQueue(object): def …
             
             <br>
@@ -114,10 +135,13 @@ UML 结构 interface Product{ -doStuff() } class ConcreteProductA{ } class Concr
         <div class="column">
           <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/python-deepcopy/">Python 内存拷贝</a></h1>
           <div class="content is-hidden-mobile">
-             Python 浅拷贝、深拷贝  深复制，即将被复制对象完全再复制一遍作为独立的新个体单独存在。所以改变原有被复制对象不会对已经复制出来的新对象产生影响。 等于赋值，并不会产生一个独立的对象单独存在，他只是将原有的数据块打上一个新标签，所以当其中一个标签被改变的时候，数据块就会发生变化，另一个标签也会随之改变。 而浅复制要分两种情况进行讨论：
- 当浅复制的值是不可变对象（数值，字符串，元组）时和“等于赋值”的情况一样，对象的id值与浅复制原来的值相同。 当浅复制的值是可变对象（列表和元组）时会产生一个“不是那么独立的对象”存在。有两种情况：
- 第一种情况：复制的 对象中无复杂子对象，原来值的改变并不会影响浅复制的值，同时浅复制的值改变也并不会影响原来的值。原来值的id值与浅复制原来的值不同。
- 第二种情况：复制的对象中有复杂子对象 （例如列表中的一个子元素是一个列表），如果不改变其中复杂子 …
+            Python 浅拷贝、深拷贝   深复制，即将被复制对象完全再复制一遍作为独立的新个体单独存在。所以改变原有被复制对象不会对已经复制出来的新对象产生影响。
+  等于赋值，并不会产生一个独立的对象单独存在，他只是将原有的数据块打上一个新标签，所以当其中一个标签被改变的时候，数据块就会发生变化，另一个标签也会随之改变。
+  而浅复制要分两种情况进行讨论：
+  当浅复制的值是不可变对象（数值，字符串，元组）时和“等于赋值”的情况一样，对象的id值与浅复制原来的值相同。
+  当浅复制的值是可变对象（列表和元组）时会产生一个“不是那么独立的对象”存在。有两种情况：
+  第一种情况：复制的 对象中无复杂子对象，原来值的改变并不会影响浅复制的值，同时浅复制的值改变也并不会影响原来的值。原来值的id值与浅复制原来的值不同。
+  第二种情况：复制的对象中有复杂子对象 （例如列表中的一个子元素是一个列表），如 …
             
           </div>
       </article>
@@ -131,7 +155,7 @@ UML 结构 interface Product{ -doStuff() } class ConcreteProductA{ } class Concr
           <div class="content is-hidden-mobile">
             Python 运行时间
 在很多的时候我们需要计算我们程序的性能，这个时候我们常常需要统计程序运行的时间。下面我们就来说说怎么统计程序的运行时间。
-datetime #! /usr/bin/env python # -*- coding:utf-8 -*- import datetime from functools import wraps import logging def run_time(*args, **kwargs): @wraps(func) def __wrapper(func): logging.getLogger(__name__) start = datetime.datetime.now() ret = func(*args, **kwargs) end = datetime.datetime.now() logging.debug('running time: …
+datetime #! /usr/bin/env python # -*- coding:utf-8 -*- import datetime from functools import wraps import logging def run_time(*args, **kwargs): @wraps(func) def __wrapper(func): logging.getLogger(__name__) start = datetime.datetime.now() ret = func(*args, **kwargs) end = datetime.datetime.now() logging.debug(&#39;running …
             
             <br>
             <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/python-code-running-time/">
@@ -154,8 +178,8 @@ datetime #! /usr/bin/env python # -*- coding:utf-8 -*- import datetime from func
             Python 装饰器
 装饰器的定义  装饰器本质上是一个Python函数，它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。 它经常用于有切面需求的场景，比如：插入日志、性能测试、事务处理、缓存、权限校验等场景。装饰器是解决这类问题的绝佳设计，有了装饰器，我们就可以抽离出大量与函数功能本身无关的雷同代码并继续重用。
  为什么需要装饰器 假设你原先的程序实现了简单的 fun() 函数
-#!/usr/bin/env python3 def fun(): print('hello') fun()  随后需要统计函数的运行时间，你当然可以对原函数进行修改，但是如果其他函数也实现该功能，逐个修改会添加大量重复代码。为了复用代码可以定义一个函数用于处理统计运行时间的需求。
-#!/usr/bin/env python3 import time from …
+#!/usr/bin/env python3 def fun(): print(&#39;hello&#39;) fun() 随后需要统计函数的运行时间，你当然可以对原函数进行修改，但是如果其他函数也实现该功能，逐个修改会添加大量重复代码。为了复用代码可以定义一个函数用于处理统计运行时间的需求。
+#!/usr/bin/env python3 import time …
             
             <br>
             <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/python-decorator/">
@@ -175,9 +199,9 @@ datetime #! /usr/bin/env python # -*- coding:utf-8 -*- import datetime from func
         <div class="column">
           <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/python-closure/">Python 闭包</a></h1>
           <div class="content is-hidden-mobile">
-             Python 闭包
+            Python 闭包
 首先还得从基本概念说起，什么是闭包呢？来看下维基上的解释: 在计算机科学中，闭包（Closure）是词法闭包（Lexical Closure）的简称，是引用了自由变量的函数。这个被引用的自由变量将和这个函数一同存在，即使已经离开了创造它的环境也不例外。所以，有另一种说法认为闭包是由函数和与其相关的引用环境组合而成的实体。闭包在运行时可以有多个实例，不同的引用环境和相同的函数组合可以产生不同的实例。
-上面提到了两个关键的地方： 自由变量 和 函数, 这两个关键稍后再说。还是得在赘述下“闭包”的意思，望文知意，可以形象的把它理解为一个封闭的包裹，这个包裹就是一个函数，当然还有函数内部对应的逻辑，包裹里面的东西就是自由变量，自由变量可以在随着包裹到处游荡。当然还得有个前提，这个包裹是被创建出来的。 在通过Python的语言介绍一下，一个闭包就是你调用了一个函数A，这个函数A …
+上面提到了两个关键的地方： 自由变量 和 函数, 这两个关键稍后再说。还是得在赘述下“闭包”的意思，望文知意，可以形象的把它理解为一个封闭的包裹，这个包裹就是一个函数，当然还有函数内部对应的逻辑，包裹里面的东西就是自由变量，自由变量可以在随着包裹到处游荡。当然还得有个前提，这个包裹是被创建出来的。 在通过Python的语言介绍一下，一个闭包就是你调用了一个函数A，这个函数A返 …
             
           </div>
       </article>
@@ -192,10 +216,10 @@ datetime #! /usr/bin/env python # -*- coding:utf-8 -*- import datetime from func
             类之间的关系
 泛化（Generalization） 泛化关系：是一种继承关系，表示一般与特殊的关系，通过继承增加子类的能力，它指定了子类如何特化父类的所有特征和行为。例如：老虎是动物的一种，即有老虎的特性也有动物的共性。
 箭头指向：带三角箭头的实线，箭头指向父类
-Fruit &lt;|-- Apple  实现（Realization） 实现关系：是一种类与接口的关系，表示类是接口所有特征和行为的实现。
+Fruit &lt;|-- Apple 实现（Realization） 实现关系：是一种类与接口的关系，表示类是接口所有特征和行为的实现。
 箭头指向：带三角箭头的虚线，箭头指向接口
-State&lt;|..BattleState  依赖（Dependency） 依赖关系：是一种使用的关系，即一个类的实现需要另一个类的协助，这种关系具有偶然性、临时性。类A要完成某个功能引用了类B，则类A依赖类B。被依赖的类会影响到依赖类，所以要尽量不使用双向的互相依赖。
-代码表现：类A的某个成员函数的返回值、局部变量、方法的参数或者对静态方法的调 …
+State&lt;|..BattleState 依赖（Dependency） 依赖关系：是一种使用的关系，即一个类的实现需要另一个类的协助，这种关系具有偶然性、临时性。类A要完成某个功能引用了类B，则类A依赖类B。被依赖的类会影响到依赖类，所以要尽量不使用双向的互相依赖。
+代码表现：类A的某个成员函数的返回值、局部变量、方法的参数或者对静态方法的调用， …
             
             <br>
             <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/oop-relationship-of-class/">
@@ -245,35 +269,10 @@ SQL语句对大小写不敏感
             Terminal Multiplexers: Screen, Tmux
 终端多路复用：Screen，Tmux
 命令行选项 术语对照表
-   英文 中文     session 会话   attach 连接   detach 脱离   prefix 前缀   multiplexer 多路复用   window 窗口   regions 区域   panes 面板   buffer 缓存   mark 标记       用途 screen tmux     创建指定名称的会话并连接 screen -S foo tmux new -s foo   创建会话并脱离 screen -S foo -d -m tmux new -s foo -d   列出所有会话 screen -list tmux ls   连接 screen -r tmux attach   连接到指定会话 screen -r …
+   英文 中文     session|会话    attach|连接    detach|脱离    prefix|前缀    multiplexer|多路复用    window|窗口    regions|区域    panes|面板    buffer|缓存    mark|标记        用途 screen tmux     创建指定名称的会话并连接 screen -S foo|tmux new -s foo    创建会话并脱离 screen -S foo -d -m|tmux new -s foo -d    列出所有会话 screen -list|tmux ls    连接 screen -r|tmux attach    连接到指定会 …
             
             <br>
             <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/linux-tmux/">
-            <span class="icon-link is-small" style="line-height: 100%">
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-              </span>
-              <p style="padding:0 5px"></p>more</p>
-            </a>
-            
-          </div>
-      </article>
-      
-      <article class="columns">
-        <div class="column is-2">
-          <h6 class="is-inline" style="white-space: nowrap">Mar 15</h2>
-        </div>
-        <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/python-metaclass/">Python 元类</a></h1>
-          <div class="content is-hidden-mobile">
-            Python 元类（metaclass）
-对象 Python 中一切皆对象，连类也不例外。
-对象中包含三个关键性属性：
- 标识 使用 id() 方法查看 对象值 类型 使用 type() 方法查看  类与对象 Python 中使用 class 关键字定义类，通过定义的类生成类实例。实例称之为实例对象。Python 中类是一个对象，所有内建类型的类型都是 type，这个 type 就是元类，元类就是 Python 中的造物主。
-道生一，一生二，二生三，三生万物。
-道 即是 type 一 即是 metaclass(元类，或者叫类生成器) 二 即是 class(类，或者叫实例生成器) 三 即是 instance(实例) 万物 即是 实例的各种属性与方法，我们平常使用python时，调用的就是它们。 …
-            
-            <br>
-            <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/python-metaclass/">
             <span class="icon-link is-small" style="line-height: 100%">
                 <i class="fa fa-angle-double-right" aria-hidden="true"></i>
               </span>

@@ -60,82 +60,56 @@
   <h2 class="subtitle is-6">July 16, 2018</h2>
   <h1 class="subtitle is-size-4-mobile is-size-3-desktop">Iptables 配置</h1>
   <div class="content">
-    
-
-<h1 id="filter-nat-mangle-规则表">filter,nat,mangle 规则表</h1>
-
-<h2 id="filter表">filter表</h2>
-
+    <h1 id="filternatmangle-">filter,nat,mangle 规则表</h1>
+<h2 id="filter">filter表</h2>
 <p>数据包过滤,根据规则决定是否放行数据包（DROP,ACCEPT,REJECT,LOG）</p>
-
 <p>三条规则链</p>
-
 <ul>
 <li>INPUT 进入本地的包</li>
 <li>FORWARD 不是本地产生且负责转发的包</li>
 <li>OUTPUT 本地产生的包</li>
 </ul>
-
-<h2 id="nat表">nat表</h2>
-
+<h2 id="nat">nat表</h2>
 <p>修改数据包ip地址、端口等信息（SNAT,DNAT,MASQUERADE,REDIRECT）</p>
-
 <p>三条规则链</p>
-
 <ul>
 <li>PREROUTING 改变进入数据包的目的地址</li>
 <li>OUTPUT 改变本地产生包的目的地址</li>
 <li>POSTROUTING 改变发出数据包的源地址</li>
 </ul>
-
-<h2 id="mangle表">mangle表</h2>
-
+<h2 id="mangle">mangle表</h2>
 <p>修改数据包的TOS，TTL及数据包的Mark</p>
-
 <p>五个规则链 PREROUTING，POSTROUTING，INPUT，OUTPUT，FORWARD</p>
-
-<h2 id="raw表">raw表</h2>
-
+<h2 id="raw">raw表</h2>
 <p>决定数据包是否被状态跟踪机制处理</p>
-
 <p>两条规则链 OUTPUT,PREROUTING</p>
-
 <p>四种状态</p>
-
 <ul>
 <li>NEW 开始一个连接</li>
 <li>RELATED 某个已经建立的连接所建立的新连接</li>
 <li>ESTABLISHED 发送后接到应答的数据包</li>
 <li>INVALID 无法识别的数据包</li>
 </ul>
-
-<h1 id="规则链和规则">规则链和规则</h1>
-
+<h1 id="heading">规则链和规则</h1>
 <p>在处理各种数据包时，根据防火墙规则的不同时机，iptables供涉及5种默认规则链：</p>
-
 <ul>
 <li>INPUT 当接收到防火墙本机地址的数据包（入站）时,应用此链中的规则。。</li>
 <li>OUTPUT 当防火墙本机向外发送数据包（出站）时，应用此链中的规则。</li>
 <li>FORWARD 当接收到需要通过防火墙发送给其他地址的数据包（转发）时，应用此链中的规则。</li>
 <li>PREROUTING 在对数据包作路由选择之前，应用此链中的规则，如DNAT。</li>
-
-<li><p>POSTROUTING 在对数据包作路由选择之后，应用此链中的规则，如SNAT。</p>
-
-<pre><code>--&gt;PREROUTING--&gt;[ROUTE]--&gt;FORWARD--&gt;POSTROUTING--&gt;
- mangle        |       mangle        ^ mangle
-  nat          |       filter        |  nat
-               |                     |
-               |                     |
-               v                     |
-             INPUT                 OUTPUT
-               | mangle              ^ mangle
-               | filter              |  nat
-               v ------&gt;local-------&gt;| filter
-</code></pre></li>
+<li>POSTROUTING 在对数据包作路由选择之后，应用此链中的规则，如SNAT。</li>
 </ul>
-
-<p>防火墙处理数据包的方式（规则）：</p>
-
+<pre><code>--&gt;PREROUTING--&gt;[ROUTE]--&gt;FORWARD--&gt;POSTROUTING--&gt;
+     mangle        |       mangle        ^ mangle
+      nat          |       filter        |  nat
+                   |                     |
+                   |                     |
+                   v                     |
+                 INPUT                 OUTPUT
+                   | mangle              ^ mangle
+                   | filter              |  nat
+                   v ------&gt;local-------&gt;| filter
+</code></pre><p>防火墙处理数据包的方式（规则）：</p>
 <ul>
 <li>ACCEPT：允许数据包通过</li>
 <li>DROP：直接丢弃数据包，不给任何回应信息</li>
@@ -146,17 +120,11 @@
 <li>REDIRECT：是DNAT的一种特殊形式，将网络包转发到本地host上（不管IP头部指定的目标地址是啥），方便在本机做端口转发。</li>
 <li>LOG：在/var/log/messages文件中记录日志信息，然后将数据包传递给下一条规则</li>
 </ul>
-
 <p>除去最后一个LOG，前3条规则匹配数据包后，该数据包不会再往下继续匹配了，所以编写的规则顺序极其关键。</p>
-
 <p>Linux数据包路由原理</p>
-
-<p><img src="/images/2017-packetflow.jpg" alt="数据包流程" /></p>
-
-<h1 id="iptables编写规则">iptables编写规则</h1>
-
-<p><img src="/images/2017-iptables.png" alt="命令格式" /></p>
-
+<p><img src="/images/2017-packetflow.jpg" alt="数据包流程"></p>
+<h1 id="iptables">iptables编写规则</h1>
+<p><img src="/images/2017-iptables.png" alt="命令格式"></p>
 <ul>
 <li>[-t 表名]：该规则所操作的哪个表，可以使用filter、nat等，如果没有指定则默认为filter</li>
 <li>-A：新增一条规则，到该规则链列表的最后一行</li>
@@ -174,72 +142,50 @@
 <li>[-d目标IP地址]：目标主机的IP地址或子网地址</li>
 <li>[&ndash;dport目标端口号]：数据包的IP的目标端口号</li>
 <li>-m：extend matches，这个选项用于提供更多的匹配参数，如：
-
 <ul>
 <li>-m state –state ESTABLISHED,RELATED</li>
 <li>-m tcp –dport 22</li>
 <li>-m multiport –dports 80,8080</li>
 <li>-m icmp –icmp-type 8</li>
-</ul></li>
+</ul>
+</li>
 <li>&lt;-j 动作&gt;：处理数据包的动作，包括ACCEPT、DROP、REJECT等</li>
 </ul>
-
-<h1 id="iptables常用实例备查">iptables常用实例备查</h1>
-
-<pre><code class="language-bash">iptables -P INPUT DROP
+<h1 id="iptables-1">iptables常用实例备查</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">iptables -P INPUT DROP
 iptables -P FORWARD ACCEPT
 iptables -P OUTPUT ACCEPT
-</code></pre>
-
-<p>限制</p>
-
+</code></pre></div><p>限制</p>
 <p><code>iptables -I INPUT 1 -m state --state RELATED,ESTABLISHED -j ACCEPT</code></p>
-
 <p>把这条语句插在input链的最前面（第一条），对状态为ESTABLISHED,RELATED的连接放行</p>
-
 <p><code>iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT</code></p>
-
 <p>开放指定端口</p>
-
 <p><code>iptables -I INPUT 2 -i lo -j ACCEPT</code></p>
-
 <p>允许loopback，本地回环是主机内部发送和接收</p>
-
 <p>删除</p>
-
 <p><code>iptables -D chain  number</code></p>
-
 <p>丢弃非法连接</p>
-
-<pre><code class="language-bash">iptables -A INPUT -m state –state INVALID -j DROP
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">iptables -A INPUT -m state –state INVALID -j DROP
 iptables -A OUTPUT -m state –state INVALID -j DROP
 iptables-A FORWARD -m state –state INVALID -j DROP
-</code></pre>
-
-<p>日志</p>
-
+</code></pre></div><p>日志</p>
 <p><code>iptables -R INPUT 1 -p tcp --dport 22 -m limit --limit 3/minute --limit-burst 8 -j LOG</code></p>
-
 <p>Dos</p>
-
-<pre><code class="language-bash">iptables -N syn-flood   (如果您的防火墙默认配置有“ :syn-flood - [0:0] ”则不许要该项，因为重复了)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">iptables -N syn-flood   <span style="color:#f92672">(</span>如果您的防火墙默认配置有“ :syn-flood - <span style="color:#f92672">[</span>0:0<span style="color:#f92672">]</span> ”则不许要该项，因为重复了<span style="color:#f92672">)</span>
 iptables -A INPUT -p tcp --syn -j syn-flood
-iptables -I syn-flood -p tcp -m limit --limit 2/s --limit-burst 5 -j RETURN
+iptables -I syn-flood -p tcp -m limit --limit 2/s --limit-burst <span style="color:#ae81ff">5</span> -j RETURN
 iptables -A syn-flood -j REJECT
-# 防止DOS太多连接进来,可以允许外网网卡每个IP最多15个初始连接,超过的丢弃
+<span style="color:#75715e"># 防止DOS太多连接进来,可以允许外网网卡每个IP最多15个初始连接,超过的丢弃</span>
 
-# 需要iptables v1.4.19以上版本：iptables -V
-iptables -A INPUT -p tcp --syn -i eth0 --dport 80 -m connlimit --connlimit-above 20 --connlimit-mask 24 -j DROP
+<span style="color:#75715e"># 需要iptables v1.4.19以上版本：iptables -V</span>
+iptables -A INPUT -p tcp --syn -i eth0 --dport <span style="color:#ae81ff">80</span> -m connlimit --connlimit-above <span style="color:#ae81ff">20</span> --connlimit-mask <span style="color:#ae81ff">24</span> -j DROP
 
-#用Iptables抵御DDOS (参数与上相同)
-iptables -A INPUT -p tcp --syn -m limit --limit 5/s --limit-burst 10 -j ACCEPT
+<span style="color:#75715e">#用Iptables抵御DDOS (参数与上相同)</span>
+iptables -A INPUT -p tcp --syn -m limit --limit 5/s --limit-burst <span style="color:#ae81ff">10</span> -j ACCEPT
 iptables -A FORWARD -p tcp --syn -m limit --limit 1/s -j ACCEPT
-iptables -A FORWARD -p icmp -m limit --limit 2/s --limit-burst 10 -j ACCEPT
-iptables -A INPUT -p icmp --icmp-type 0 -s ! 172.29.73.0/24 -j DROP
-</code></pre>
-
-<h1 id="引用">引用</h1>
-
+iptables -A FORWARD -p icmp -m limit --limit 2/s --limit-burst <span style="color:#ae81ff">10</span> -j ACCEPT
+iptables -A INPUT -p icmp --icmp-type <span style="color:#ae81ff">0</span> -s ! 172.29.73.0/24 -j DROP
+</code></pre></div><h1 id="heading-1">引用</h1>
 <p><a href="http://seanlook.com/2014/02/23/iptables-understand/">Seanlook</a></p>
 
   </div>
