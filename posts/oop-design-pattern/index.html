@@ -61,17 +61,17 @@
   <h1 class="subtitle is-size-4-mobile is-size-3-desktop">设计模式</h1>
   <div class="content">
     <p>面向对象之设计模式</p>
-<h1 id="heading">创建型模式</h1>
+<h1 id="创建型模式">创建型模式</h1>
 <p>创建型模式提供了创建对象的机制， 能够提升已有代码的灵活性和可复用性。</p>
-<h2 id="-factory-method">工厂方法 Factory Method</h2>
-<h3 id="heading-1">意图</h3>
+<h2 id="工厂方法-factory-method">工厂方法 Factory Method</h2>
+<h3 id="意图">意图</h3>
 <p>父类中提供创建对象的接口，但是允许子类修改需要创建对象的类型</p>
-<h3 id="heading-2">问题</h3>
+<h3 id="问题">问题</h3>
 <p>创建物流管理类，起先实现了火车类，随着业务的增长，需要进行水路运输。
 在修改物流管理类时，需要修改所有运输的代码。</p>
-<h3 id="heading-3">解决方案</h3>
+<h3 id="解决方案">解决方案</h3>
 <p>工厂方法通过调用特殊的工厂方法替代直接使用构造方法构建对象，通过工厂方法返回的对象称之为产品。</p>
-<h3 id="uml-">UML 结构</h3>
+<h3 id="uml-结构">UML 结构</h3>
 <pre><code class="language-plantuml" data-lang="plantuml">interface Product{
     -doStuff()
 }
@@ -102,7 +102,7 @@ Creator --&gt; Product
 <li>ConcreteCreator 工厂方法</li>
 </ul>
 <p><img src="https://refactoring.guru/images/patterns/diagrams/factory-method/structure.png" alt="factory method"></p>
-<h3 id="heading-4">应用示例</h3>
+<h3 id="应用示例">应用示例</h3>
 <p>多平台 UI 元素</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
 <span style="color:#f92672">from</span> abc <span style="color:#f92672">import</span> ABCMeta, abstractmethod
@@ -159,13 +159,13 @@ Creator --&gt; Product
 <span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
     dailog <span style="color:#f92672">=</span> WindowsDialog()
     dailog<span style="color:#f92672">.</span>render()
-</code></pre></div><h3 id="heading-5">适用性</h3>
+</code></pre></div><h3 id="适用性">适用性</h3>
 <ul>
 <li>事先不知道应使用对象的确切类型和依赖关系</li>
 <li>为库或框架提供内部组件拓展</li>
 <li>重用已存在对象而不是每次新建对象，以节约系统资源</li>
 </ul>
-<h3 id="heading-6">实现步骤</h3>
+<h3 id="实现步骤">实现步骤</h3>
 <ol>
 <li>创建所有产品的接口</li>
 <li>创建者中添加空的工厂方法，返回类型为抽象产品</li>
@@ -173,22 +173,22 @@ Creator --&gt; Product
 <li>构造创建者子类对象，复写工厂方法</li>
 <li>如果基类工厂方法为空，可以声明为抽象方法</li>
 </ol>
-<h3 id="heading-7">优缺点</h3>
+<h3 id="优缺点">优缺点</h3>
 <ul>
 <li><input checked="" disabled="" type="checkbox">解耦创建者和产品</li>
 <li><input checked="" disabled="" type="checkbox">单一职责原则</li>
 <li><input checked="" disabled="" type="checkbox">开闭原则</li>
 <li><input disabled="" type="checkbox">代码层级复杂</li>
 </ul>
-<h2 id="-abstract-factory">抽象工厂 Abstract Factory</h2>
-<h3 id="heading-8">意图</h3>
+<h2 id="抽象工厂-abstract-factory">抽象工厂 Abstract Factory</h2>
+<h3 id="意图-1">意图</h3>
 <p>不指定具体工厂类生产一系列相关产品的族</p>
-<h3 id="heading-9">问题</h3>
+<h3 id="问题-1">问题</h3>
 <p>生产家具族，具体的家具有不同的变种。如何在不改动原有代码的情况下生产新的产品或族</p>
-<h3 id="heading-10">解决方案</h3>
+<h3 id="解决方案-1">解决方案</h3>
 <p>首先声明产品族的接口，通过接口衍生处不同的产品；接着声明具有创建产品族的方法抽象工厂；
 最后通过抽象工厂衍生具体工厂类，生产需要的产品族。</p>
-<h3 id="uml--1">UML 结构</h3>
+<h3 id="uml-结构-1">UML 结构</h3>
 <pre><code class="language-plantuml" data-lang="plantuml">interface ProductA
 interface ProductB
 class ConcreteProductA1
@@ -224,7 +224,7 @@ Client o--&gt; AbstractFactory
 <li>ConcreteProduct 具体产品</li>
 </ul>
 <p><img src="https://refactoring.guru/images/patterns/diagrams/abstract-factory/structure.png" alt="abstract factory"></p>
-<h3 id="heading-11">应用示例</h3>
+<h3 id="应用示例-1">应用示例</h3>
 <p>跨平台 UI 主题</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
 <span style="color:#f92672">from</span> abc <span style="color:#f92672">import</span> ABCMeta, abstractmethod
@@ -297,11 +297,11 @@ Client o--&gt; AbstractFactory
     factory <span style="color:#f92672">=</span> WinFactory()
     app <span style="color:#f92672">=</span> Application(factory)
     app<span style="color:#f92672">.</span>create_ui()
-</code></pre></div><h3 id="heading-12">适用性</h3>
+</code></pre></div><h3 id="适用性-1">适用性</h3>
 <ul>
 <li>需要生产一系列相关产品族，但是不希望具体类依赖这些产品</li>
 </ul>
-<h3 id="heading-13">实现步骤</h3>
+<h3 id="实现步骤-1">实现步骤</h3>
 <ol>
 <li>抽象处不同产品的类型</li>
 <li>声明抽象产品接口</li>
@@ -309,7 +309,7 @@ Client o--&gt; AbstractFactory
 <li>实现具体工厂类和具体产品</li>
 <li>创建工厂初始化代码，实例化具体工厂类</li>
 </ol>
-<h3 id="heading-14">优缺点</h3>
+<h3 id="优缺点-1">优缺点</h3>
 <ul>
 <li><input checked="" disabled="" type="checkbox">确保工厂生产的产品相互匹配</li>
 <li><input checked="" disabled="" type="checkbox">解耦具体工厂与客户端代码</li>
@@ -317,17 +317,17 @@ Client o--&gt; AbstractFactory
 <li><input checked="" disabled="" type="checkbox">开闭原则</li>
 <li><input disabled="" type="checkbox">代码复杂</li>
 </ul>
-<h2 id="-builder">创建者 Builder</h2>
-<h3 id="heading-15">意图</h3>
+<h2 id="创建者-builder">创建者 Builder</h2>
+<h3 id="意图-2">意图</h3>
 <p>逐步构造复杂的对象，可使用相同的构造代码生成对象的不同类型和表示形式。</p>
-<h3 id="heading-16">问题</h3>
+<h3 id="问题-2">问题</h3>
 <p>多步创建复杂对象，如创建房子需要创建车库、花园、游泳池等部分。一种方法是通过房子基类衍生不同的特定子类，
 新增参数必须引入多个子类，最终层级过于复杂，另一种方法创建包含选项的构造函数控制生成的对象，使得参数判断变得复杂。</p>
-<h3 id="heading-17">解决方案</h3>
+<h3 id="解决方案-2">解决方案</h3>
 <p>分解创建过程成不同的步骤的创建者，随后根据需求调用创建者对象。
 由于构建复杂，可对用于构建产品的构建器步骤的一系列调用提取到一个单独的指挥类中，
 指挥类定义了执行创建步骤的顺序，而创建者提供了这些步骤的实现。</p>
-<h3 id="uml--2">UML 结构</h3>
+<h3 id="uml-结构-2">UML 结构</h3>
 <pre><code class="language-plantuml" data-lang="plantuml">interface Builder{
     + reset()
     + buildStepA()
@@ -370,7 +370,7 @@ Client --&gt; ConcreteBuilder1
 <li>Director 指挥者</li>
 </ul>
 <p><img src="https://refactoring.guru/images/patterns/diagrams/builder/structure.png" alt="builder structure"></p>
-<h3 id="heading-18">应用示例</h3>
+<h3 id="应用示例-2">应用示例</h3>
 <p>创建多种不同类型的车及其手册，通过创建者分解不同的步骤</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
 <span style="color:#f92672">from</span> abc <span style="color:#f92672">import</span> ABCMeta, abstractmethod
@@ -479,12 +479,12 @@ Client --&gt; ConcreteBuilder1
     manual_builder <span style="color:#f92672">=</span> CarManualBuilder()
     director<span style="color:#f92672">.</span>construct_sports_car(manual_builder)
     manual <span style="color:#f92672">=</span> manual_builder<span style="color:#f92672">.</span>get_result()
-</code></pre></div><h3 id="heading-19">适用性</h3>
+</code></pre></div><h3 id="适用性-2">适用性</h3>
 <ul>
 <li>避免多参数构造函数</li>
 <li>构造不同类型的产品</li>
 </ul>
-<h3 id="heading-20">实现步骤</h3>
+<h3 id="实现步骤-2">实现步骤</h3>
 <ol>
 <li>确保可抽象出可以创建不同表示产品的共同步骤</li>
 <li>声明创建者接口</li>
@@ -492,21 +492,21 @@ Client --&gt; ConcreteBuilder1
 <li>创建指挥类</li>
 <li>使用创建类与指挥类</li>
 </ol>
-<h3 id="heading-21">优缺点</h3>
+<h3 id="优缺点-2">优缺点</h3>
 <ul>
 <li><input checked="" disabled="" type="checkbox">逐步创建复杂对象</li>
 <li><input checked="" disabled="" type="checkbox">重用相同构造代码</li>
 <li><input checked="" disabled="" type="checkbox">单一职责原则</li>
 <li><input disabled="" type="checkbox">创建多个类，增加复杂性</li>
 </ul>
-<h2 id="heading-22">原型模式</h2>
-<h3 id="heading-23">意图</h3>
+<h2 id="原型模式">原型模式</h2>
+<h3 id="意图-3">意图</h3>
 <p>不依赖对象类代码复制已存在的对象</p>
-<h3 id="heading-24">问题</h3>
+<h3 id="问题-3">问题</h3>
 <p>通过创建新对象遍历对象属性复制的方法，可能会忽略私有属性，导致复制不完全</p>
-<h3 id="heading-25">解决方案</h3>
+<h3 id="解决方案-3">解决方案</h3>
 <p>原型模式将复制过程委派给被复制的对象，模式声明一个统一的接口，让接口支持复制对象，而无需将代码与对象类耦合。</p>
-<h3 id="uml--3">UML 结构</h3>
+<h3 id="uml-结构-3">UML 结构</h3>
 <pre><code class="language-plantuml" data-lang="plantuml">interface Prototype{
     + clone(): Prototype
 }
@@ -559,7 +559,7 @@ PrototypeRegistry o--&gt; Prototype
 Button ..|&gt; Prototype
 </code></pre><p>原型注册表提供了一种访问常用原型的简单方法， 其中存储了一系列可供随时复制的预生成对象。</p>
 <p><a href="https://refactoringguru.cn/design-patterns/prototype/python/example">python example</a></p>
-<h3 id="heading-26">应用示例</h3>
+<h3 id="应用示例-3">应用示例</h3>
 <p>复制几何对象副本</p>
 <pre><code class="language-plantuml" data-lang="plantuml">abstract class Shape{
     - x, y
@@ -642,19 +642,19 @@ Application o--&gt; Shape
 <span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
     app <span style="color:#f92672">=</span> Application()
     app<span style="color:#f92672">.</span>clone_all()
-</code></pre></div><h3 id="heading-27">适用性</h3>
+</code></pre></div><h3 id="适用性-3">适用性</h3>
 <ul>
 <li>需要复制对象，又希望代码独立于对象所属的类</li>
 <li>子类的区别在于对象初始化的方式，可使用该模式减少子类数量</li>
 </ul>
-<h3 id="heading-28">实现步骤</h3>
+<h3 id="实现步骤-3">实现步骤</h3>
 <ul>
 <li>创建原型接口，声明克隆方法</li>
 <li>定义额外的构造函数</li>
 <li>实现克隆方法</li>
 <li>可选的丝线注册表类管理常用原型</li>
 </ul>
-<h3 id="heading-29">优缺点</h3>
+<h3 id="优缺点-3">优缺点</h3>
 <ul>
 <li><input checked="" disabled="" type="checkbox">克隆对象接口具体子类</li>
 <li><input checked="" disabled="" type="checkbox">摆脱重复初始化代码</li>
@@ -662,21 +662,21 @@ Application o--&gt; Shape
 <li><input checked="" disabled="" type="checkbox">除继承之外的处理复杂对象预先配置</li>
 <li><input disabled="" type="checkbox">复杂对象循环引用问题</li>
 </ul>
-<h2 id="heading-30">单例模式</h2>
-<h3 id="heading-31">意图</h3>
+<h2 id="单例模式">单例模式</h2>
+<h3 id="意图-4">意图</h3>
 <p>确保类仅有单一的实例，提供全局统一访问入口</p>
-<h3 id="heading-32">问题</h3>
+<h3 id="问题-4">问题</h3>
 <ul>
 <li>确保仅有一个实例，常用于限制访问共享资源</li>
 <li>为该实例提供一个全局访问入口</li>
 <li>违反了单一职责原则</li>
 </ul>
-<h3 id="heading-33">解决方案</h3>
+<h3 id="解决方案-4">解决方案</h3>
 <ul>
 <li>构造函数私有化</li>
 <li>重新定义构造函数并缓存已创建对象</li>
 </ul>
-<h3 id="uml--4">UML 结构</h3>
+<h3 id="uml-结构-4">UML 结构</h3>
 <pre><code class="language-plantuml" data-lang="plantuml">class Singleton{
     - instance: Singleton
     - Singleton()
@@ -690,7 +690,7 @@ Client --&gt; Singleton
 <li>Singleton 单例类：私有化构造函数，定义静态方法</li>
 </ul>
 <p><img src="https://refactoring.guru/images/patterns/diagrams/singleton/structure-en-indexed.png" alt="Singleton structure"></p>
-<h3 id="heading-34">应用示例</h3>
+<h3 id="应用示例-4">应用示例</h3>
 <p>数据库访问类</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
 <span style="color:#f92672">from</span> abc <span style="color:#f92672">import</span> ABCMeta, abstractmethod
@@ -760,19 +760,19 @@ Client --&gt; Singleton
 
     db <span style="color:#f92672">=</span> Database2()
     db<span style="color:#f92672">.</span>query(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">heihei2</span><span style="color:#e6db74">&#39;</span>)
-</code></pre></div><h3 id="heading-35">适用性</h3>
+</code></pre></div><h3 id="适用性-4">适用性</h3>
 <ul>
 <li>程序中类的对于所有客户端只有一个可用实例</li>
 <li>更加严格的控制全局变量</li>
 </ul>
-<h3 id="heading-36">实现步骤</h3>
+<h3 id="实现步骤-4">实现步骤</h3>
 <ul>
 <li>私有静态变量</li>
 <li>声明公共静态方法</li>
 <li>延迟初始化</li>
 <li>构造函数私有</li>
 </ul>
-<h3 id="heading-37">优缺点</h3>
+<h3 id="优缺点-4">优缺点</h3>
 <ul>
 <li><input checked="" disabled="" type="checkbox">确保类实例唯一</li>
 <li><input checked="" disabled="" type="checkbox">全局访问入口</li>
@@ -780,17 +780,17 @@ Client --&gt; Singleton
 <li><input disabled="" type="checkbox">违反单一职责原则</li>
 <li><input disabled="" type="checkbox">多线程环境需要加锁</li>
 </ul>
-<h1 id="heading-38">结构型模式</h1>
+<h1 id="结构型模式">结构型模式</h1>
 <p>结构型模式介绍如何将对象和类组装成较大的结构， 并同时保持结构的灵活和高效。</p>
-<h2 id="-adapter">适配器 Adapter</h2>
-<h3 id="heading-39">意图</h3>
+<h2 id="适配器-adapter">适配器 Adapter</h2>
+<h3 id="意图-5">意图</h3>
 <p>使不兼容的对象能够相互兼容</p>
-<h3 id="heading-40">问题</h3>
+<h3 id="问题-5">问题</h3>
 <p>原有的 XML 接口现在需要对接 JSON 接口，可以修改现有代码库实现，可能核心库未提供源代码，无法修改如何处理？</p>
-<h3 id="heading-41">解决方案</h3>
+<h3 id="解决方案-5">解决方案</h3>
 <p>使用一个适配器对象转换接口，使接口能够兼容。</p>
 <p>适配器不仅能够转换不同格式的数据，其次还有助于采用不同接口的对象之间的合作</p>
-<h3 id="uml--5">UML 结构</h3>
+<h3 id="uml-结构-5">UML 结构</h3>
 <pre><code class="language-plantuml" data-lang="plantuml">interface ClientInterface{
     + method(data)
 }
@@ -811,7 +811,7 @@ Adapter o--&gt; Service
 <li>Adapter 适配器，处理接口数据</li>
 </ul>
 <p>客户端代码与具体适配器代码解耦，方便修改增加新的适配而不修改代码。</p>
-<h4 id="heading-42">类适配器</h4>
+<h4 id="类适配器">类适配器</h4>
 <pre><code class="language-plantuml" data-lang="plantuml">class Client
 class OlderClass{
     + method(data)
@@ -826,7 +826,7 @@ Client --&gt; OlderClass
 Adapter --|&gt; OlderClass
 Adapter --|&gt; Service
 </code></pre><p>多继承语言支持，类适配器不需要封装对象，同时继承客户端和服务端的行为，重写需要的方法即可。</p>
-<h3 id="heading-43">应用示例</h3>
+<h3 id="应用示例-5">应用示例</h3>
 <p>不同材料的兼容，方钉和圆孔</p>
 <pre><code class="language-plantuml" data-lang="plantuml">class RoundHole{
     - radius: int
@@ -909,12 +909,12 @@ SquarePeg &lt;|--o SquarePegAdapter
     l_sqpeg_adapter <span style="color:#f92672">=</span> SquarePegAdapter(l_sqpeg)
     hole<span style="color:#f92672">.</span>fits(s_sqpeg_adapter)
     hole<span style="color:#f92672">.</span>fits(l_sqpeg_adapter)
-</code></pre></div><h3 id="heading-44">适用性</h3>
+</code></pre></div><h3 id="适用性-5">适用性</h3>
 <ul>
 <li>希望使用不兼容的接口类时</li>
 <li>希望复用多个缺少相同功能而无法被添加到父类的子类时</li>
 </ul>
-<h3 id="heading-45">实现步骤</h3>
+<h3 id="实现步骤-5">实现步骤</h3>
 <ul>
 <li>确保有两个类接口不兼容</li>
 <li>声明客户端协议接口</li>
@@ -922,21 +922,21 @@ SquarePeg &lt;|--o SquarePegAdapter
 <li>在适配器中保存需要适配的对象</li>
 <li>实现兼容方法</li>
 </ul>
-<h3 id="heading-46">优缺点</h3>
+<h3 id="优缺点-5">优缺点</h3>
 <ul>
 <li>单一职责原则</li>
 <li>开闭原则</li>
 <li>代码整体复杂度增加</li>
 </ul>
-<h2 id="heading-47">桥接模式</h2>
-<h3 id="heading-48">意图</h3>
+<h2 id="桥接模式">桥接模式</h2>
+<h3 id="意图-6">意图</h3>
 <p>将大类或一系列相关的类炒粉为抽象和实现两个层次结构，可在开发中独立使用</p>
-<h3 id="heading-49">问题</h3>
+<h3 id="问题-6">问题</h3>
 <p>不同的几何图形配合不同的颜色，如果再新增不同的图形，需要新增多个颜色的不同子类</p>
-<h3 id="heading-50">解决方案</h3>
+<h3 id="解决方案-6">解决方案</h3>
 <p>通过抽取颜色纬度为独立层次，使初始类中引用这个层次的对象，从而使得一个类不必用所有的状态和行为。</p>
 <p>抽象常成为接口是一些实体的高层控制层，不做具体工作，将工作委派给实现层</p>
-<h3 id="uml--6">UML 结构</h3>
+<h3 id="uml-结构-6">UML 结构</h3>
 <pre><code class="language-plantuml" data-lang="plantuml">class Abstraction{
   - i: Implementation
   + feature1()
@@ -960,7 +960,7 @@ RefinedAbstraction --|&gt; Abstraction
 <li>RefinedAbstraction 具体抽象</li>
 </ul>
 <p><img src="https://refactoring.guru/images/patterns/diagrams/bridge/structure-en-indexed.png" alt="bridge structure"></p>
-<h3 id="heading-51">应用示例</h3>
+<h3 id="应用示例-6">应用示例</h3>
 <p>设备与遥控器应用</p>
 <pre><code class="language-plantuml" data-lang="plantuml">class Remote{
   - device: Device
@@ -1073,13 +1073,13 @@ remote<span style="color:#f92672">.</span>toggle_power()
 radio <span style="color:#f92672">=</span> Radio()
 remote <span style="color:#f92672">=</span> AdvancedRemoteControl(radio)
 remote<span style="color:#f92672">.</span>volume_down()
-</code></pre></div><h3 id="heading-52">适用性</h3>
+</code></pre></div><h3 id="适用性-6">适用性</h3>
 <ul>
 <li>需要拆分重组一个具有多重功能的类</li>
 <li>需要在几个独立纬度拓展一个类</li>
 <li>在运行时切换不同的实现方法</li>
 </ul>
-<h3 id="heading-53">实现步骤</h3>
+<h3 id="实现步骤-6">实现步骤</h3>
 <ul>
 <li>明确类中独立的纬度</li>
 <li>定义抽象类</li>
@@ -1087,7 +1087,7 @@ remote<span style="color:#f92672">.</span>volume_down()
 <li>平台类实现接口</li>
 <li>抽象类中添加实现类型的引用</li>
 </ul>
-<h3 id="heading-54">优缺点</h3>
+<h3 id="优缺点-6">优缺点</h3>
 <ul>
 <li><input checked="" disabled="" type="checkbox">创建与平台无关的类</li>
 <li><input checked="" disabled="" type="checkbox">客户端代码与高层抽象互动</li>
@@ -1095,14 +1095,14 @@ remote<span style="color:#f92672">.</span>volume_down()
 <li><input checked="" disabled="" type="checkbox">单一职责原则</li>
 <li><input disabled="" type="checkbox">高内聚类使用该方法可能会更复杂</li>
 </ul>
-<h2 id="heading-55">组合模式</h2>
-<h3 id="heading-56">意图</h3>
+<h2 id="组合模式">组合模式</h2>
+<h3 id="意图-7">意图</h3>
 <p>将对象组合成树状结构，并能像独立对象一样使用它们</p>
-<h3 id="heading-57">问题</h3>
+<h3 id="问题-7">问题</h3>
 <p>计算订单时，需要去除产品的包装后，再计算订单总金额，计算需要去除包装等因素</p>
-<h3 id="heading-58">解决方案</h3>
+<h3 id="解决方案-7">解决方案</h3>
 <p>组合模式建议使用一个通用接口来与包装和产品交互，并且再该接口中声明一个计算总价的方法</p>
-<h3 id="uml--7">UML 结构</h3>
+<h3 id="uml-结构-7">UML 结构</h3>
 <pre><code class="language-plantuml" data-lang="plantuml">interface Component{
   + execute()
 }
@@ -1126,7 +1126,7 @@ Client --&gt; Component
 <li>Composite 组合 包含也节点的单位</li>
 </ul>
 <p><img src="https://refactoring.guru/images/patterns/diagrams/composite/structure-en-indexed.png" alt="composite structure"></p>
-<h3 id="heading-59">应用示例</h3>
+<h3 id="应用示例-7">应用示例</h3>
 <p>图形编辑器实现一系列图形, 组合图形包含多个子图形，组合图形自身不完成具体工作，将请求传递给自己的子部件，然后合成结果</p>
 <pre><code class="language-plantuml" data-lang="plantuml">interface Graphic{
   + move(x, y)
@@ -1231,12 +1231,12 @@ Circle --|&gt; Dot
     ie <span style="color:#f92672">=</span> ImageEditor()
     ie<span style="color:#f92672">.</span>load()
     ie<span style="color:#f92672">.</span>group_selected(Dot(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>))
-</code></pre></div><h3 id="heading-60">适用性</h3>
+</code></pre></div><h3 id="适用性-7">适用性</h3>
 <ul>
 <li>需要实现树状对象结构</li>
 <li>希望客户端以相同的方式处理简单和复杂的元素</li>
 </ul>
-<h3 id="heading-61">实现步骤</h3>
+<h3 id="实现步骤-7">实现步骤</h3>
 <ul>
 <li>确保核心模型能分解成简单元素和容器</li>
 <li>声明组件接口以及一系列方法</li>
@@ -1244,20 +1244,20 @@ Circle --|&gt; Dot
 <li>创建一个组合类表示容器的复杂元素。用于储存子元素</li>
 <li>在容器中定义添加和删除子元素的方法</li>
 </ul>
-<h3 id="heading-62">优缺点</h3>
+<h3 id="优缺点-7">优缺点</h3>
 <ul>
 <li>利用多态和递归机制方便使用复杂树结构</li>
 <li>开闭原则</li>
 <li>对于功能差异大的类，提供公共结构或许会有困难</li>
 </ul>
-<h2 id="heading-63">装饰模式</h2>
-<h3 id="heading-64">意图</h3>
+<h2 id="装饰模式">装饰模式</h2>
+<h3 id="意图-8">意图</h3>
 <p>通过对象放入包含行为的特殊封装对象中来为原对象绑定新的行为</p>
-<h3 id="heading-65">问题</h3>
+<h3 id="问题-8">问题</h3>
 <p>通知类中可以发送通知，后续需要增加不同的接受终端和通知方式，如果修改源代码会使代码量快速膨胀和复杂</p>
-<h3 id="heading-66">解决方案</h3>
+<h3 id="解决方案-8">解决方案</h3>
 <p>通过装饰器将目标对象的方法进行拓展，而不改变结构名称与参数。上述问题可以实现基类装饰器后，衍生出不同终端和通知方式的装饰器。</p>
-<h3 id="uml--8">UML 结构</h3>
+<h3 id="uml-结构-8">UML 结构</h3>
 <pre><code class="language-plantuml" data-lang="plantuml">interface Component{
   + execute()
 }
@@ -1285,7 +1285,7 @@ ConcreteDecorators --|&gt; BaseDecorator
 <li>ConcreteDecorators 动态添加行为，改变原有被装饰对象行为</li>
 </ul>
 <p><img src="https://refactoringguru.cn/images/patterns/diagrams/decorator/structure-indexed.png" alt="decorator structure"></p>
-<h3 id="heading-67">应用示例</h3>
+<h3 id="应用示例-8">应用示例</h3>
 <p>装饰模式加密数据</p>
 <pre><code class="language-plantuml" data-lang="plantuml">interface DataSource{
   + writeData(data)
@@ -1387,12 +1387,12 @@ DataSourceDecorator o--&gt; DataSource
     c_source<span style="color:#f92672">.</span>write_data(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">abc</span><span style="color:#e6db74">&#39;</span>)
     e_source <span style="color:#f92672">=</span> EncryptionDecorator(source)
     e_source<span style="color:#f92672">.</span>write_data(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">abc</span><span style="color:#e6db74">&#39;</span>)
-</code></pre></div><h3 id="heading-68">适用性</h3>
+</code></pre></div><h3 id="适用性-8">适用性</h3>
 <ul>
 <li>不修改代码的情况下增加对象的功能</li>
 <li>使用继承拓展对象行为难以实现，使用装饰模式</li>
 </ul>
-<h3 id="heading-69">实现步骤</h3>
+<h3 id="实现步骤-8">实现步骤</h3>
 <ul>
 <li>确保业务逻辑可用一个基本组件和多个额外可选组件表示</li>
 <li>找出通用方法，声明接口</li>
@@ -1401,7 +1401,7 @@ DataSourceDecorator o--&gt; DataSource
 <li>确保所有类实现组件接口</li>
 <li>将装饰基类拓展为具体装饰类，添加额外行为</li>
 </ul>
-<h3 id="heading-70">优缺点</h3>
+<h3 id="优缺点-8">优缺点</h3>
 <ul>
 <li>无需新建子类即可拓展对象行为</li>
 <li>运行时添加或删除对象的功能</li>
@@ -1411,14 +1411,14 @@ DataSourceDecorator o--&gt; DataSource
 <li>实现行为不受装饰顺序装饰比较困难</li>
 <li>各层初始化配置代码比较糟糕</li>
 </ul>
-<h2 id="heading-71">外观模式</h2>
-<h3 id="heading-72">意图</h3>
+<h2 id="外观模式">外观模式</h2>
+<h3 id="意图-9">意图</h3>
 <p>使复杂类提供一个简单的接口</p>
-<h3 id="heading-73">问题</h3>
+<h3 id="问题-9">问题</h3>
 <p>代码中使用复杂的库或框架中对象，需要负责所有对象的初始化工作、管理其依赖关系并正确执行。将业务逻辑和第三方类的实现耦合，使代码难以维护。</p>
-<h3 id="heading-74">解决方案</h3>
+<h3 id="解决方案-9">解决方案</h3>
 <p>外观模式为许多部件的复杂子系统提供一个简单的接口，不关心内部实现，仅调用需要的功能。</p>
-<h3 id="uml--9">UML 结构</h3>
+<h3 id="uml-结构-9">UML 结构</h3>
 <pre><code class="language-plantuml" data-lang="plantuml">class Facade{
   - linkToSubsystemObjects
   - optionalAdditionFacade
@@ -1439,7 +1439,7 @@ AdditionalFacade ..&gt; Subsystem
 <li>Subsystem 复杂子系统</li>
 </ul>
 <p><img src="https://refactoringguru.cn/images/patterns/diagrams/facade/structure-indexed.png" alt="facade structure"></p>
-<h3 id="heading-75">应用示例</h3>
+<h3 id="应用示例-9">应用示例</h3>
 <p>视频转换框架</p>
 <pre><code class="language-plantuml" data-lang="plantuml">class Application
 class VideoConverter{
@@ -1481,31 +1481,31 @@ VideoConverter ..&gt; CodecFactory
 <span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
     convertor <span style="color:#f92672">=</span> VideoConverter()
     mp4 <span style="color:#f92672">=</span> convertor<span style="color:#f92672">.</span>convert(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">adfd</span><span style="color:#e6db74">&#39;</span>)
-</code></pre></div><h3 id="heading-76">适用性</h3>
+</code></pre></div><h3 id="适用性-9">适用性</h3>
 <ul>
 <li>需要一个复杂子系统的直接接口，且该接口功能有限</li>
 <li>需要将子系统组织为多层结构，减少子系统之间的耦合</li>
 </ul>
-<h3 id="heading-77">实现步骤</h3>
+<h3 id="实现步骤-9">实现步骤</h3>
 <ul>
 <li>确认能否在现有子系统的基础上提供一个更简单的接口</li>
 <li>在外观类中声明并实现接口</li>
 <li>确保所有客户端代码仅通过外观模式与子系统进行交互</li>
 </ul>
-<h3 id="heading-78">优缺点</h3>
+<h3 id="优缺点-9">优缺点</h3>
 <ul>
 <li>可以让代码独立与复杂子系统</li>
 <li>外观可能成为与程序中所有类耦合的类对象</li>
 </ul>
-<h2 id="heading-79">享元模式</h2>
-<h3 id="heading-80">意图</h3>
+<h2 id="享元模式">享元模式</h2>
+<h3 id="意图-10">意图</h3>
 <p>享元模式通过共享对象状态，在有限的内存中保存更多的对象</p>
-<h3 id="heading-81">问题</h3>
+<h3 id="问题-10">问题</h3>
 <p>对象过多造成内存不足，程序崩溃</p>
-<h3 id="heading-82">解决方案</h3>
+<h3 id="解决方案-10">解决方案</h3>
 <p>对象的常量数据通常被称为固有属性， 其位于对象中， 其他对象只能读取但不能修改其数值。 而对象的其他状态常常能被其他对象 “从外部” 改变， 因此被称为外在属性。</p>
 <p>享元模式建议不在对象中存储外在状态， 而是将其传递给依赖于它的一个特殊方法。 程序只在对象中保存固有属性， 以方便在不同情景下重用。</p>
-<h3 id="uml--10">UML 结构</h3>
+<h3 id="uml-结构-10">UML 结构</h3>
 <pre><code class="language-plantuml" data-lang="plantuml">class FlyweightFactory{
     - cache: Flyweight[]
     + getFlyweight(repeationState)
@@ -1530,7 +1530,7 @@ Context --&gt; FlyweightFactory
 <li>Context 外在属性类</li>
 </ul>
 <p><img src="https://refactoring.guru/images/patterns/diagrams/flyweight/structure.png" alt="flyweight structure"></p>
-<h3 id="heading-83">应用示例</h3>
+<h3 id="应用示例-10">应用示例</h3>
 <p>储存多个树对象</p>
 <pre><code class="language-plantuml" data-lang="plantuml">class TreeType{
     - name
@@ -1625,11 +1625,11 @@ Forest o--&gt; Tree
     forest<span style="color:#f92672">.</span>plant_tree(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">tree</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">red</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">p</span><span style="color:#e6db74">&#39;</span>)
     forest<span style="color:#f92672">.</span>draw(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">canvas</span><span style="color:#e6db74">&#39;</span>)
 
-</code></pre></div><h3 id="heading-84">适用性</h3>
+</code></pre></div><h3 id="适用性-10">适用性</h3>
 <ul>
 <li>当程序使用需要大量对象，并且内存不足的情况</li>
 </ul>
-<h3 id="heading-85">实现步骤</h3>
+<h3 id="实现步骤-10">实现步骤</h3>
 <ul>
 <li>分离类属性至两个部分，固有属性；外在属性</li>
 <li>类中不可变的保留固有属性成员变量</li>
@@ -1637,20 +1637,20 @@ Forest o--&gt; Tree
 <li>可选的实现工厂类管理享元缓存池</li>
 <li>客户端必须储存和计算外在状态的数值</li>
 </ul>
-<h3 id="heading-86">优缺点</h3>
+<h3 id="优缺点-10">优缺点</h3>
 <ul>
 <li><input checked="" disabled="" type="checkbox">节省内存</li>
 <li><input disabled="" type="checkbox">牺牲速度换取内存</li>
 <li><input disabled="" type="checkbox">代码复杂</li>
 </ul>
-<h2 id="heading-87">代理模式</h2>
-<h3 id="heading-88">意图</h3>
+<h2 id="代理模式">代理模式</h2>
+<h3 id="意图-11">意图</h3>
 <p>代理模式控制原始对象的访问，并允许在将请求提交给对象前后进行一些处理。</p>
-<h3 id="heading-89">问题</h3>
+<h3 id="问题-11">问题</h3>
 <p>大量消耗系统资源的对象，实现懒加载，类中可能存在重复的代码。但对于不能修改代码第三方库，不能实现懒加载。</p>
-<h3 id="heading-90">解决方案</h3>
+<h3 id="解决方案-11">解决方案</h3>
 <p>创建一个新的代理类，将操作委托给代理类，可以真实操作前后执行某些操作。</p>
-<h3 id="uml--11">UML 结构</h3>
+<h3 id="uml-结构-11">UML 结构</h3>
 <pre><code class="language-plantuml" data-lang="plantuml">interface ServiceInterface{
     + opeartion()
 }
@@ -1672,7 +1672,7 @@ Proxy o--&gt; Service
 <li>Service 真实逻辑类</li>
 </ul>
 <p><img src="https://refactoring.guru/images/patterns/diagrams/proxy/structure.png" alt="proxy structure"></p>
-<h3 id="heading-91">应用示例</h3>
+<h3 id="应用示例-11">应用示例</h3>
 <p>视频懒加载与缓存</p>
 <pre><code class="language-plantuml" data-lang="plantuml">interface YoutubeLib{
     + listVideos()
@@ -1772,7 +1772,7 @@ CachedVideo o--&gt; YoutubeVideo
     ret <span style="color:#f92672">=</span> manager<span style="color:#f92672">.</span>react_on_user_input(<span style="color:#ae81ff">1</span>)
     <span style="color:#66d9ef">print</span>(ret)
 
-</code></pre></div><h3 id="heading-92">适用性</h3>
+</code></pre></div><h3 id="适用性-11">适用性</h3>
 <ul>
 <li>懒加载</li>
 <li>访问控制</li>
@@ -1780,7 +1780,7 @@ CachedVideo o--&gt; YoutubeVideo
 <li>打印日志</li>
 <li>缓存</li>
 </ul>
-<h3 id="heading-93">实现步骤</h3>
+<h3 id="实现步骤-11">实现步骤</h3>
 <ul>
 <li>创建代理与服务的接口，备选的方式是将代理作为服务类的子类</li>
 <li>创建代理类，通常代理负责创建和管理服务</li>
@@ -1788,7 +1788,7 @@ CachedVideo o--&gt; YoutubeVideo
 <li>创建构造方法判断代理还是服务对象，可以用工厂方法代替</li>
 <li>可选服务对象延迟加载</li>
 </ul>
-<h3 id="heading-94">优缺点</h3>
+<h3 id="优缺点-11">优缺点</h3>
 <ul>
 <li><input checked="" disabled="" type="checkbox">客户端无感知控制服务对象</li>
 <li><input checked="" disabled="" type="checkbox">可管理服务对象生命周期</li>
@@ -1796,19 +1796,19 @@ CachedVideo o--&gt; YoutubeVideo
 <li><input disabled="" type="checkbox">代码复杂</li>
 <li><input disabled="" type="checkbox">服务延迟响应</li>
 </ul>
-<h1 id="heading-95">行为模式</h1>
+<h1 id="行为模式">行为模式</h1>
 <p>行为模式负责对象间的高效沟通和职责委派</p>
-<h2 id="heading-96">责任链模式</h2>
-<h3 id="heading-97">意图</h3>
+<h2 id="责任链模式">责任链模式</h2>
+<h3 id="意图-12">意图</h3>
 <p>请求发送至责任链。 收到请求后，每个处理者均可对请求进行处理，或将其传递给链上的下个处理者。</p>
-<h3 id="heading-98">问题</h3>
+<h3 id="问题-12">问题</h3>
 <p>在线订单系统，限制非认证用户创建订单，处理认证还需要添加授权、数据验证、缓存等检查，随着功能的增多系统代码越来越复杂。</p>
-<h3 id="heading-99">解决方案</h3>
+<h3 id="解决方案-12">解决方案</h3>
 <p>责任链会将特定行为转换为被称作 handler 的独立对象，请求与数据传递给 handler 对象处理。</p>
 <p>将多个 handler 串联成链，请求在链上移动并且有计划被 handler 处理。</p>
 <p>最重要的是：handler 可以决定不再沿着链传递请求，这可高效地取消所有后续处理步骤。</p>
 <p>另一种不同的方式为：对于每个请求如果 handler 可以处理就不会在向后传递。</p>
-<h3 id="uml--12">UML 结构</h3>
+<h3 id="uml-结构-12">UML 结构</h3>
 <pre><code class="language-plantuml" data-lang="plantuml">interface Handler{
     + setNext(h: Handler)
     + handle(request)
@@ -1829,7 +1829,7 @@ ConcreteHandlers --|&gt; BaseHandler
 <li>ConcreteHandlers 具体处理类</li>
 </ul>
 <p><img src="https://refactoring.guru/images/patterns/diagrams/chain-of-responsibility/structure.png" alt="chain sturcture"></p>
-<h3 id="heading-100">应用示例</h3>
+<h3 id="应用示例-12">应用示例</h3>
 <p>GUI 元素显示上下文帮助信息</p>
 <pre><code class="language-plantuml" data-lang="plantuml">interface ComponentWithContextualHelp{
     + showHelp()
@@ -1936,35 +1936,35 @@ Dialog --&gt; Container
     dialog<span style="color:#f92672">.</span>add(panel)
     dialog<span style="color:#f92672">.</span>show_help()
 
-</code></pre></div><h3 id="heading-101">适用性</h3>
+</code></pre></div><h3 id="适用性-12">适用性</h3>
 <ul>
 <li>程序需要不同处理方式处理不同种类的请求，而且请求类型和顺序位置</li>
 <li>必须按顺序执行处理者</li>
 <li>如果处理者及其顺序必须在运行是改变，可以使用该模式</li>
 </ul>
-<h3 id="heading-102">实现步骤</h3>
+<h3 id="实现步骤-12">实现步骤</h3>
 <ul>
 <li>声明处理者接口并描述请求处理方法</li>
 <li>为了精简代码可以在处理者接口穿件抽象处理者基类</li>
 <li>依次创建集体处理者代码</li>
 <li>客户端可自行组装责任链，或独立工厂类获取</li>
 </ul>
-<h3 id="heading-103">优缺点</h3>
+<h3 id="优缺点-12">优缺点</h3>
 <ul>
 <li><input checked="" disabled="" type="checkbox">控制请求处理顺序</li>
 <li><input checked="" disabled="" type="checkbox">单一职责原则</li>
 <li><input checked="" disabled="" type="checkbox">开闭原则</li>
 <li><input disabled="" type="checkbox">部分请求可能未处理</li>
 </ul>
-<h2 id="heading-104">命令模式</h2>
-<h3 id="heading-105">意图</h3>
+<h2 id="命令模式">命令模式</h2>
+<h3 id="意图-13">意图</h3>
 <p>将请求转换为一个包含与请求相关的所有信息的独立对象。</p>
-<h3 id="heading-106">问题</h3>
+<h3 id="问题-13">问题</h3>
 <p>定义文本编辑器基类抽象按钮，为了实现功能具体化多个按钮，修改按钮基类使影响所有子类。除了按钮如快捷键等行为代码如何处理。</p>
-<h3 id="heading-107">解决方案</h3>
+<h3 id="解决方案-13">解决方案</h3>
 <p>优良的软件设计通常会将关注点分离，即常用的软件分层。如编辑软件分离 GUI 与业务逻辑。命令模式将所有操作进行抽象成命令类，通过命令对象负责连接不同的 GUI 和业务逻辑对象。</p>
 <p>命令模式使用数据对命令对象进行配置，实现不同请求参数。</p>
-<h3 id="uml--13">UML 结构</h3>
+<h3 id="uml-结构-13">UML 结构</h3>
 <pre><code class="language-plantuml" data-lang="plantuml">class Invoker{
     - command
     + setCommand(command)
@@ -1993,7 +1993,7 @@ Client --&gt; Receiver
 <li>Receiver 接受者 处理业务逻辑</li>
 </ul>
 <p><img src="https://refactoring.guru/images/patterns/diagrams/command/structure.png" alt="command structure"></p>
-<h3 id="heading-108">应用示例</h3>
+<h3 id="应用示例-13">应用示例</h3>
 <p>命令模式实现命令历史与撤销</p>
 <p>有些命令会改变编辑器的状态 （例如剪切和粘贴），它们可在执行相关操作前对编辑器的状态进行备份。命令执行后会和当前点备份的编辑器状态一起被放入命令历史 （命令对象栈）。 此后，如果用户需要进行回滚操作，程序可从历史记录中取出最近的命令，读取相应的编辑器状态备份，然后进行恢复。</p>
 <pre><code class="language-plantuml" data-lang="plantuml">class Command{
@@ -2197,13 +2197,13 @@ UndoCommand --&gt; Application
     app<span style="color:#f92672">.</span>test_buttons(buttons)
 
 </code></pre></div><p>TODO</p>
-<h3 id="heading-109">适用性</h3>
+<h3 id="适用性-13">适用性</h3>
 <ul>
 <li>通过操作来参数化对象，将特定的方法调用转化为独立对象。</li>
 <li>想要将操作放入队列中、 操作的执行或者远程执行操作</li>
 <li>想要实现操作回滚功能</li>
 </ul>
-<h3 id="heading-110">实现步骤</h3>
+<h3 id="实现步骤-13">实现步骤</h3>
 <ul>
 <li>声明仅有一个执行方法的抽象命令接口</li>
 <li>具体命令类实现抽象接口，类必须保存请求参数与接受者</li>
@@ -2211,7 +2211,7 @@ UndoCommand --&gt; Application
 <li>修改发送者使其执行命令，而非直接将请求发送给接收者</li>
 <li>顺序初始化对象：接受者、创建命令、关联命令与发送者</li>
 </ul>
-<h3 id="heading-111">优缺点</h3>
+<h3 id="优缺点-13">优缺点</h3>
 <ul>
 <li><input checked="" disabled="" type="checkbox">单一职责</li>
 <li><input checked="" disabled="" type="checkbox">开闭原则</li>
@@ -2220,16 +2220,16 @@ UndoCommand --&gt; Application
 <li><input checked="" disabled="" type="checkbox">将一组简单命令组合成复杂命令</li>
 <li><input disabled="" type="checkbox">代码复杂</li>
 </ul>
-<h2 id="heading-112">迭代器模式</h2>
-<h3 id="heading-113">意图</h3>
+<h2 id="迭代器模式">迭代器模式</h2>
+<h3 id="意图-14">意图</h3>
 <p>不暴露集合底层数据表现形式的情况下遍历集合中所有的元素</p>
-<h3 id="heading-114">问题</h3>
+<h3 id="问题-14">问题</h3>
 <p>将遍历方法写入集合类中会造成代码复杂，并且不符合高效存储的设计理念</p>
-<h3 id="heading-115">解决方案</h3>
+<h3 id="解决方案-14">解决方案</h3>
 <p>迭代器模式的主要思想是将集合的遍历行为抽取为单独的迭代器对象。</p>
 <p>迭代器提供获取集合元素的基础方法，通过调用方法遍历集合所有元素。</p>
 <p>迭代器实现相同的接口，如果需要新的迭代方式，按照需求新建新的迭代器类，无需修改集合代码。</p>
-<h3 id="uml--14">UML 结构</h3>
+<h3 id="uml-结构-14">UML 结构</h3>
 <pre><code class="language-plantuml" data-lang="plantuml">interface Iterator{
     + getNext()
     + hasMore(): bool
@@ -2260,7 +2260,7 @@ ConcreteIterator &lt;--&gt; ConcreteCollection
 <li>ConcreteIterableCollection 具体返回迭代器类</li>
 </ul>
 <p><img src="https://refactoring.guru/images/patterns/diagrams/iterator/structure.png" alt="iterator structure"></p>
-<h3 id="heading-116">应用示例</h3>
+<h3 id="应用示例-14">应用示例</h3>
 <p>遍历一个好友关系功能的特殊集合</p>
 <pre><code class="language-plantuml" data-lang="plantuml">class Profile{
     + getId()
@@ -2411,26 +2411,1166 @@ Facebook o--&gt; Profile
     app<span style="color:#f92672">.</span>send_sapm_to_friends(profile)
     app<span style="color:#f92672">.</span>send_spam_to_coworkers(profile)
 
-</code></pre></div><h3 id="heading-117">适用性</h3>
+</code></pre></div><h3 id="适用性-14">适用性</h3>
 <ul>
 <li>集合背后为复杂的数据结构，希望隐藏其复杂性</li>
 <li>减少程序中重复的遍历代码</li>
 <li>希望代码能遍历不同的甚至是无法与之的数据结构</li>
 </ul>
-<h3 id="heading-118">实现步骤</h3>
+<h3 id="实现步骤-14">实现步骤</h3>
 <ul>
 <li>声明迭代器接口，至少提供获取下一个元素的方法</li>
 <li>声明集合接口并描述一个获取迭代器的方法</li>
 <li>使用迭代器实现具体的迭代类</li>
 <li>集合中实现集合接口，提供不同创建迭代器的方法</li>
 </ul>
-<h3 id="heading-119">优缺点</h3>
+<h3 id="优缺点-14">优缺点</h3>
 <ul>
 <li><input checked="" disabled="" type="checkbox">单一职责</li>
 <li><input checked="" disabled="" type="checkbox">开闭原则</li>
 <li><input checked="" disabled="" type="checkbox">并行遍历集合</li>
 <li><input checked="" disabled="" type="checkbox">可暂停后继续遍历集合</li>
 <li><input disabled="" type="checkbox">特殊集合迭代器效率低</li>
+</ul>
+<h2 id="中介者模式">中介者模式</h2>
+<h3 id="意图-15">意图</h3>
+<p>减少对象之间相互依赖，通过限制对象直接交互，使用中介者进行交互。</p>
+<h3 id="问题-15">问题</h3>
+<p>包含多个组件的对话框进行交互，如果在组件中实现组件之间动态交互与数据的校验等逻辑，会导致代码复杂无法复用。</p>
+<h3 id="解决方案-15">解决方案</h3>
+<p>中介者模式使组件调用特殊的中介者对象， 通过中介者以间接的方式进行交互。</p>
+<p>上个例子，将对话框作为中介者，所有部件与对话框交互，减少部件之间的依赖。</p>
+<h3 id="uml-结构-15">UML 结构</h3>
+<pre><code class="language-plantuml" data-lang="plantuml">interface Mediator{
+    + notify(sender)
+}
+class ComponentA{
+    - m: Mediator
+    + opeartionA()
+}
+class ComponentB{
+    - m: Mediator
+    + opeartionB()
+}
+class ConcreteMediator{
+    - componentA
+    - componentB
+    + notify(sender)
+    + reactOnA()
+    + reactOnB()
+}
+ConcreteMediator ..|&gt; Mediator
+ConcreteMediator *--&gt; ComponentA
+ConcreteMediator *--&gt; ComponentB
+</code></pre><ul>
+<li>Mediator 抽象中介者</li>
+<li>ConcreteMediator 具体中介者</li>
+<li>ComponentA 组件</li>
+</ul>
+<p><img src="https://refactoring.guru/images/patterns/diagrams/mediator/structure.png" alt="mediator structure"></p>
+<h3 id="应用示例-15">应用示例</h3>
+<p>UI 组件交互</p>
+<pre><code class="language-plantuml" data-lang="plantuml">interface Mediator{
+    + notify(sender: Component, event: string)
+}
+class Component{
+    # dialog: Mediator
+    + Component(dialog)
+    + click()
+    + keypress()
+}
+class AuthenticationDialog{
+    title: string
+    loginOrRegister: bool
+    loginUsername, loginPassword: Textbox
+    regUserame, regPassword, regEmail: Textbox
+    ok, cancel: Button
+    rememerMe: Checkbox
+    + AuthenticationDialog()
+    + notify(sender, event)
+}
+class Checkbox{
+    + check()
+}
+class Button
+class Textbox
+Button --|&gt; Component
+Textbox --|&gt; Component
+Checkbox --|&gt; Component
+Component &lt;--&gt; Mediator
+AuthenticationDialog ..|&gt; Mediator
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+<span style="color:#75715e"># -*- condig: utf-8 -*-</span>
+
+<span style="color:#f92672">from</span> abc <span style="color:#f92672">import</span> ABCMeta, abstractmethod
+
+
+<span style="color:#75715e"># 抽象接口</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Mediator</span>(metaclass<span style="color:#f92672">=</span>ABCMeta):
+
+    <span style="color:#a6e22e">@abstractmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">notify</span>(self, sender, event):
+        <span style="color:#66d9ef">pass</span>
+
+
+<span style="color:#75715e"># 具体实现</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AuthenticationDialog</span>(Mediator):
+
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+        self<span style="color:#f92672">.</span>title <span style="color:#f92672">=</span> None
+        self<span style="color:#f92672">.</span>login_or_register_chkbx <span style="color:#f92672">=</span> True
+        self<span style="color:#f92672">.</span>login_username <span style="color:#f92672">=</span> None
+        self<span style="color:#f92672">.</span>login_password <span style="color:#f92672">=</span> None
+        self<span style="color:#f92672">.</span>registration_email <span style="color:#f92672">=</span> None
+        self<span style="color:#f92672">.</span>registration_password <span style="color:#f92672">=</span> None
+        self<span style="color:#f92672">.</span>registration_email <span style="color:#f92672">=</span> None
+        self<span style="color:#f92672">.</span>ok_btn <span style="color:#f92672">=</span> None
+        self<span style="color:#f92672">.</span>cancel_btn <span style="color:#f92672">=</span> None
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_chk</span>(self, chk):
+        self<span style="color:#f92672">.</span>login_or_register_chkbx <span style="color:#f92672">=</span> chk
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">notify</span>(self, sender, event):
+        <span style="color:#66d9ef">if</span> sender <span style="color:#f92672">==</span> self<span style="color:#f92672">.</span>login_or_register_chkbx <span style="color:#f92672">and</span> event <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">check</span><span style="color:#e6db74">&#39;</span>:
+            <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>login_or_register_chkbx<span style="color:#f92672">.</span>checked:
+                self<span style="color:#f92672">.</span>title <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">log in</span><span style="color:#e6db74">&#39;</span>
+            <span style="color:#66d9ef">else</span>:
+                self<span style="color:#f92672">.</span>title <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">register</span><span style="color:#e6db74">&#39;</span>
+        <span style="color:#66d9ef">elif</span> sender <span style="color:#f92672">==</span> self<span style="color:#f92672">.</span>ok_btn <span style="color:#f92672">and</span> event <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">click</span><span style="color:#e6db74">&#39;</span>:
+            <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>login_or_register<span style="color:#f92672">.</span>checked:
+                self<span style="color:#f92672">.</span>title <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">click</span><span style="color:#e6db74">&#39;</span>
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>title:
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>title))
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Component</span>(object):
+
+    <span style="color:#66d9ef">def</span> __init__(self, dialog):
+        self<span style="color:#f92672">.</span>dialog <span style="color:#f92672">=</span> dialog
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click</span>(self):
+        self<span style="color:#f92672">.</span>dialog<span style="color:#f92672">.</span>notify(self, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">click</span><span style="color:#e6db74">&#39;</span>)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">keypress</span>(self):
+        self<span style="color:#f92672">.</span>dialog<span style="color:#f92672">.</span>notify(self, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">keypress</span><span style="color:#e6db74">&#39;</span>)
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Button</span>(Component):
+    <span style="color:#66d9ef">pass</span>
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Textbox</span>(Component):
+    <span style="color:#66d9ef">pass</span>
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Checkbox</span>(Component):
+
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+        super()<span style="color:#f92672">.</span>__init__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
+        self<span style="color:#f92672">.</span>checked <span style="color:#f92672">=</span> True
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check</span>(self):
+        self<span style="color:#f92672">.</span>dialog<span style="color:#f92672">.</span>notify(self, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">check</span><span style="color:#e6db74">&#39;</span>)
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+    ad <span style="color:#f92672">=</span> AuthenticationDialog()
+    btn <span style="color:#f92672">=</span> Button(ad)
+    chk <span style="color:#f92672">=</span> Checkbox(ad)
+    ad<span style="color:#f92672">.</span>set_chk(chk)
+    btn<span style="color:#f92672">.</span>click()
+    chk<span style="color:#f92672">.</span>check()
+
+</code></pre></div><h3 id="适用性-15">适用性</h3>
+<ul>
+<li>对象与对象紧密耦合时，使用中介者模式</li>
+<li>组件过于依赖其他组件而无法复用是</li>
+<li>不同场景下复用一些基本行为，导致您需要创建大量组件子类</li>
+</ul>
+<h3 id="实现步骤-15">实现步骤</h3>
+<ul>
+<li>找一组分离有益的耦合类</li>
+<li>声明中介者接口与协议</li>
+<li>实现具体中介者类</li>
+<li>组件必须保存对于中介者对象的引用，构造函数传入</li>
+<li>修改组件代码，使其可调用中介者通知方法，而非其他组件方法</li>
+</ul>
+<h3 id="优缺点-15">优缺点</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox">单一职责</li>
+<li><input checked="" disabled="" type="checkbox">开闭原则</li>
+<li><input checked="" disabled="" type="checkbox">减轻组件之间的耦合</li>
+<li><input checked="" disabled="" type="checkbox">复用组件</li>
+<li><input disabled="" type="checkbox">中介者过于复杂</li>
+</ul>
+<h2 id="备忘录模式">备忘录模式</h2>
+<h3 id="意图-16">意图</h3>
+<p>在不暴露对象实现细节的情况下保存和恢复对象之前的状态。</p>
+<h3 id="问题-16">问题</h3>
+<p>文本编辑器除了实现简单的文字编辑还具有图片等多媒体编辑功能，软件需要提供文件的修改历史。编辑器对象需要对所需要的属性进行保存，但是会涉及到对象权限问题。</p>
+<h3 id="解决方案-16">解决方案</h3>
+<p>备忘录模式将创建状态快照的工作委派给实际状态的拥有者对象。 这样拥有者对象就不再需要暴露私有属性，编辑器类也拥有其状态的完全访问权。</p>
+<p>备忘录模式将对象的副本储存在备忘对象中，除了创建该对象的对象外，任何其他对象都无权访问内容。其他对象必须使用受限接口与备忘录进行交互， 它们可以获取快照的元数据。</p>
+<h3 id="uml-结构-16">UML 结构</h3>
+<h4 id="基于嵌套类实现">基于嵌套类实现</h4>
+<pre><code class="language-plantuml" data-lang="plantuml">class Memento{
+    - state
+    - Memento(state)
+    - getState()
+}
+class Originator{
+    + save(): Memento
+    + restore(m: Memento)
+}
+class Caretaker{
+    - originator
+    - history: Memento[]
+    + doSomething()
+    + undo()
+}
+Originator ..&gt; Memento
+Caretaker --&gt; Memento
+</code></pre><p><img src="https://refactoring.guru/images/patterns/diagrams/memento/structure1-indexed.png" alt="memento structure"></p>
+<ul>
+<li>Originator 原生类 可生成恢复快照</li>
+<li>Memento 备忘录</li>
+<li>Caretaker 负责人 负责状态相关操作</li>
+<li>备忘录嵌套在原生类中</li>
+</ul>
+<h4 id="基于接口实现">基于接口实现</h4>
+<pre><code class="language-plantuml" data-lang="plantuml">interface Memeto
+class ConcreteMemento{
+    - state
+    + Memento(state)
+    + getState()
+}
+class Originator{
+    - state
+    + save(): Memento
+    + restore(m: Memento)
+}
+class Client{
+    - origintor
+    - history: Memento[]
+    + undo()
+}
+ConcreteMemento ..|&gt; Memento
+Originator ..&gt; ConcreteMemento
+Client --&gt; Memento
+</code></pre><p><img src="https://refactoring.guru/images/patterns/diagrams/memento/structure2-indexed.png" alt="memento structure"></p>
+<ul>
+<li>负责人仅可通过明确声明的中间接口与备忘录互动， 该接口仅声明与备忘录元数据相关的方法， 限制其对备忘录成员变量的直接访问权限。</li>
+<li>原生类可以直接与备忘录对象进行交互， 访问备忘录类中声明的成员变量和方法。</li>
+</ul>
+<h4 id="严格封装">严格封装</h4>
+<pre><code class="language-plantuml" data-lang="plantuml">interface Originator{
+    save(): Memento
+}
+interface Memento{
+    + restore()
+}
+class Caretaker{
+    - history: Memento[]
+    + undo()
+}
+class ConcreteMemento{
+    - originator
+    - state
+    + Memento(originator, state)
+    + restore()
+}
+class ConcreteOriginator{
+    - state
+    + save(): Memento
+    + setState(state)
+}
+Originator ..&gt; Memento
+ConcreteOriginator ..|&gt; Originator
+Caretaker --&gt; Memento
+ConcreteMemento ..|&gt; Memento
+ConcreteOriginator &lt;--&gt; ConcreteMemento
+</code></pre><p><img src="https://refactoring.guru/images/patterns/diagrams/memento/structure3-indexed.png" alt="memento structure"></p>
+<h3 id="应用示例-16">应用示例</h3>
+<p>基于命令模式与备忘录模式，保存复杂文字编辑器的状态快照。</p>
+<p>命令对象作为负责人，执行与命令相关的操作前获取编辑器的备忘录，在撤销时，保存其状态。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+<span style="color:#75715e"># -*- coding: utf-8 -*-</span>
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Editor</span>(object):
+
+    <span style="color:#66d9ef">def</span> __init__(self, text<span style="color:#f92672">=</span>None, cur_x<span style="color:#f92672">=</span>None, cur_y<span style="color:#f92672">=</span>None, selection_width<span style="color:#f92672">=</span>None):
+        self<span style="color:#f92672">.</span>text <span style="color:#f92672">=</span> text
+        self<span style="color:#f92672">.</span>cur_x <span style="color:#f92672">=</span> cur_x
+        self<span style="color:#f92672">.</span>cur_y <span style="color:#f92672">=</span> cur_y
+        self<span style="color:#f92672">.</span>selection_width <span style="color:#f92672">=</span> selection_width
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_text</span>(self, text):
+        self<span style="color:#f92672">.</span>text <span style="color:#f92672">=</span> text
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_cursor</span>(self, x, y):
+        self<span style="color:#f92672">.</span>cur_x <span style="color:#f92672">=</span> x
+        self<span style="color:#f92672">.</span>cur_y <span style="color:#f92672">=</span> y
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_selection_width</span>(self, width):
+        self<span style="color:#f92672">.</span>selection_width <span style="color:#f92672">=</span> width
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_snapshot</span>(self):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">create snap</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">return</span> Snapshot(self, self<span style="color:#f92672">.</span>text, self<span style="color:#f92672">.</span>cur_x, self<span style="color:#f92672">.</span>cur_y, self<span style="color:#f92672">.</span>selection_width)
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Snapshot</span>(object):
+
+    <span style="color:#66d9ef">def</span> __init__(self, editor<span style="color:#f92672">=</span>None, text<span style="color:#f92672">=</span>None, cur_x<span style="color:#f92672">=</span>None, cur_y<span style="color:#f92672">=</span>None, selection_width<span style="color:#f92672">=</span>None):
+        self<span style="color:#f92672">.</span>editor <span style="color:#f92672">=</span> editor
+        self<span style="color:#f92672">.</span>text <span style="color:#f92672">=</span> text
+        self<span style="color:#f92672">.</span>cur_x <span style="color:#f92672">=</span> cur_x
+        self<span style="color:#f92672">.</span>cur_y <span style="color:#f92672">=</span> cur_y
+        self<span style="color:#f92672">.</span>selection_width <span style="color:#f92672">=</span> selection_width
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">restore</span>(self):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">restore snap</span><span style="color:#e6db74">&#39;</span>)
+        self<span style="color:#f92672">.</span>editor<span style="color:#f92672">.</span>set_text(self<span style="color:#f92672">.</span>text)
+        self<span style="color:#f92672">.</span>editor<span style="color:#f92672">.</span>set_cursor(self<span style="color:#f92672">.</span>cur_x, self<span style="color:#f92672">.</span>cur_y)
+        self<span style="color:#f92672">.</span>editor<span style="color:#f92672">.</span>set_selection_width(self<span style="color:#f92672">.</span>selection_width)
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Command</span>(object):
+
+    <span style="color:#66d9ef">def</span> __init__(self, backup<span style="color:#f92672">=</span>None):
+        self<span style="color:#f92672">.</span>backup <span style="color:#f92672">=</span> backup
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_backup</span>(self, editor):
+        self<span style="color:#f92672">.</span>backup <span style="color:#f92672">=</span> editor<span style="color:#f92672">.</span>create_snapshot()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">undo</span>(self, editor):
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>backup:
+            self<span style="color:#f92672">.</span>backup<span style="color:#f92672">.</span>restore()
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+    cmd <span style="color:#f92672">=</span> Command()
+    editor <span style="color:#f92672">=</span> Editor(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">text</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>)
+    cmd<span style="color:#f92672">.</span>make_backup(editor)
+    cmd<span style="color:#f92672">.</span>undo(editor)
+
+</code></pre></div><h3 id="适用性-16">适用性</h3>
+<ul>
+<li>需要创建对象快照恢复其之前的状态</li>
+<li>直接访问对象成员变量破坏封装特性时</li>
+</ul>
+<h3 id="实现步骤-16">实现步骤</h3>
+<ul>
+<li>确认原生类</li>
+<li>创建备忘录类</li>
+<li>将备忘录类设为不可变，备忘录只能通过构造函数一次性接收数据</li>
+<li>可通过嵌套类或接口的方式创建备忘录类的关键关系</li>
+<li>原生类中添加创建备忘录的方法、添加恢复自身状态的方法</li>
+<li>负责人类处理具体如何被触发创建备忘录和恢复备忘录的逻辑</li>
+</ul>
+<h3 id="优缺点-16">优缺点</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox">不破坏对象封装情况的前提下创建对象状态快照</li>
+<li><input checked="" disabled="" type="checkbox">通过负责人维护原生类状态历史</li>
+<li><input disabled="" type="checkbox">客户端频繁创建备忘录会消耗大量内存</li>
+<li><input disabled="" type="checkbox">负责人必须跟踪原生类生命周期，才能销毁不使用的备忘录</li>
+<li><input disabled="" type="checkbox">动态编程语言不能确保备忘录状态不能被更改</li>
+</ul>
+<h2 id="观察者模式">观察者模式</h2>
+<h3 id="意图-17">意图</h3>
+<p>允许你定义一种订阅机制， 可在对象事件发生时通知多个 “观察” 该对象的其他对象。</p>
+<h3 id="问题-17">问题</h3>
+<p>商店到货通知，要么让顾客浪费时间检查产品是否到货， 要么让商店浪费资源去通知没有需求的顾客。</p>
+<h3 id="解决方案-17">解决方案</h3>
+<p>将自身状态改变通知其他对象称为发布者，关注发布者状态变化的称为订阅者。</p>
+<p>发布者实现订阅机制，一、存储订阅者对象引用的列表成员变量，二、实现列表增删的公共方法。</p>
+<p>为了实现通知订阅者，需要订阅者实现相同的接口，以便发布者通过该接口与订阅者交互。</p>
+<h3 id="uml-结构-17">UML 结构</h3>
+<pre><code class="language-plantuml" data-lang="plantuml">interface Subscriber{
+    + update()
+}
+class Publisher{
+    - subscribers: Subscriber[]
+    - mainState
+    + subscribe(s: Subscriber)
+    + unsubscribe(s: Subscriber)
+    + notifySubscribers()
+    + mainBusinessLogic()
+}
+class ConcreteSubscribers{
+    + update(publisher)
+}
+ConcreteSubscribers ..|&gt; Subscriber
+Publisher o--&gt; Subscriber
+Client --&gt; Publisher
+</code></pre><p><img src="https://refactoring.guru/images/patterns/diagrams/observer/structure-indexed.png" alt="observer structure"></p>
+<ul>
+<li>Publisher 发布者 触发事件</li>
+<li>Subscriber 订阅者 抽象接口</li>
+<li>ConcreteSubscriber 具体订阅者 接收事件</li>
+</ul>
+<h3 id="应用示例-17">应用示例</h3>
+<p>文本编辑器将自身状态通知其他服务</p>
+<pre><code class="language-plantuml" data-lang="plantuml">interface EventListeners{
+    + update(filename)
+}
+class Editor{
+    - eventManager
+    + Editor()
+    + openFile()
+    + saveFile()
+}
+class EventManager{
+    - listeners
+    + subscribe(eventType, listener)
+    + unsubscribe(eventType, listener)
+    + notify(eventType, data)
+}
+class EmainAlertsListener{
+    + update(filename)
+}
+class LogginListener{
+    + update(filename)
+}
+Editor o--&gt; EventManager
+EventManager o--&gt; EventListeners
+EmailAlertsListener ..|&gt; EventListeners
+LoggingListener ..|&gt; EventListeners
+</code></pre><p>只要发布者通过同样的接口与所有订阅者进行交互， 那么在程序中新增订阅者时就无需修改已有发布者类的代码。</p>
+<p><img src="https://refactoring.guru/images/patterns/diagrams/observer/example.png" alt="observer example"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python</span>
+<span style="color:#75715e"># -*- coding: utf-8 -*-</span>
+<span style="color:#f92672">from</span> collections <span style="color:#f92672">import</span> defaultdict
+<span style="color:#f92672">from</span> abc <span style="color:#f92672">import</span> ABCMeta, abstractmethod
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EventManager</span>(object):
+
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+        self<span style="color:#f92672">.</span>_listeners <span style="color:#f92672">=</span> defaultdict(list)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">subscribe</span>(self, event_type, listener):
+        self<span style="color:#f92672">.</span>_listeners[event_type]<span style="color:#f92672">.</span>append(listener)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">unsubscribe</span>(self, event_type, listener):
+        self<span style="color:#f92672">.</span>_listeners[event_type]<span style="color:#f92672">.</span>remove(listener)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">notify</span>(self, event_type, data):
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>_listeners[event_type]:
+            i<span style="color:#f92672">.</span>update(data)
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Editor</span>(object):
+
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+        self<span style="color:#f92672">.</span>file <span style="color:#f92672">=</span> None
+        self<span style="color:#f92672">.</span>events <span style="color:#f92672">=</span> EventManager()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">open_file</span>(self, path):
+        self<span style="color:#f92672">.</span>file <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">open file</span><span style="color:#e6db74">&#39;</span>
+        self<span style="color:#f92672">.</span>events<span style="color:#f92672">.</span>notify(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">open</span><span style="color:#e6db74">&#39;</span>, self<span style="color:#f92672">.</span>file)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">save_file</span>(self):
+        self<span style="color:#f92672">.</span>file <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">write file</span><span style="color:#e6db74">&#39;</span>
+        self<span style="color:#f92672">.</span>events<span style="color:#f92672">.</span>notify(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">save</span><span style="color:#e6db74">&#39;</span>, self<span style="color:#f92672">.</span>file)
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EventListener</span>(metaclass<span style="color:#f92672">=</span>ABCMeta):
+
+    <span style="color:#a6e22e">@abstractmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">update</span>(self, file_name):
+        <span style="color:#66d9ef">pass</span>
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LoggingListener</span>(EventListener):
+
+    <span style="color:#66d9ef">def</span> __init__(self, log_file_name, message):
+        self<span style="color:#f92672">.</span>log <span style="color:#f92672">=</span> log_file_name
+        self<span style="color:#f92672">.</span>message <span style="color:#f92672">=</span> message
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">update</span>(self, file_name):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{} {} update</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>log, file_name))
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EmailAlertsListener</span>(EventListener):
+
+    <span style="color:#66d9ef">def</span> __init__(self, email, message):
+        self<span style="color:#f92672">.</span>email <span style="color:#f92672">=</span> email
+        self<span style="color:#f92672">.</span>message <span style="color:#f92672">=</span> message
+
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">update</span>(self, file_name):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{} {} update</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>email, file_name))
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+    editor <span style="color:#f92672">=</span> Editor()
+    logger <span style="color:#f92672">=</span> LoggingListener(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">log</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">file 1</span><span style="color:#e6db74">&#39;</span>)
+    editor<span style="color:#f92672">.</span>events<span style="color:#f92672">.</span>subscribe(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">open</span><span style="color:#e6db74">&#39;</span>, logger)
+    email <span style="color:#f92672">=</span> EmailAlertsListener(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">email</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">haha</span><span style="color:#e6db74">&#39;</span>)
+    editor<span style="color:#f92672">.</span>events<span style="color:#f92672">.</span>subscribe(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">save</span><span style="color:#e6db74">&#39;</span>, email)
+    editor<span style="color:#f92672">.</span>open_file(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">file2</span><span style="color:#e6db74">&#39;</span>)
+    editor<span style="color:#f92672">.</span>save_file()
+
+</code></pre></div><h3 id="适用性-17">适用性</h3>
+<ul>
+<li>当一个对象状态的改变需要改变其他对象，或实际对象是事先未知的或动态变化的，可以使用观察者模式</li>
+<li>当应用中的一些对象必须观察其他对象是，可以使用该模式</li>
+</ul>
+<h3 id="实现步骤-17">实现步骤</h3>
+<ul>
+<li>声明订阅者接口，至少声明一个 update 方法</li>
+<li>声明发布者接口并定义一些接口来管理订阅对象</li>
+<li>实现订阅方法</li>
+<li>创建发布者类，每次事件发生需要通知订阅者</li>
+<li>在具体订阅类中实现通知更新的方法</li>
+<li>客户端必须生成全部订阅者，并在相应的发布者处完成注册工作</li>
+</ul>
+<h3 id="优缺点-17">优缺点</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox">开闭原则</li>
+<li><input checked="" disabled="" type="checkbox">可以运行时建立对象之间的联系</li>
+<li><input disabled="" type="checkbox">订阅者的通知顺序是随机的</li>
+</ul>
+<h2 id="状态模式">状态模式</h2>
+<h3 id="意图-18">意图</h3>
+<p>当对象的内部状态变化时改变其行为， 使其看上去就像改变了自身所属的类一样。</p>
+<h3 id="问题-18">问题</h3>
+<p>相近概念：有限状态机</p>
+<p>程序在任何时刻仅可处于几种有限的状态中，在任何一个特定状态中，程序的行为都不相同， 且可瞬间从一个状态切换到另一个状态。</p>
+<p>基于条件语句的状态机，为了能根据当前状态选择完成相应行为的方法会包含复杂的条件语句。 修改其转换逻辑可能会涉及到修改所有方法中的状态条件语句， 导致代码的维护工作非常艰难。</p>
+<h3 id="解决方案-18">解决方案</h3>
+<p>创建包含所有状态的类，然后将所有状态的对应行为抽取到这些类中。原始对象作为上下文对象，保存指向状态对象的引用，且将所有与状态相关的工作委派给该对象。</p>
+<h3 id="uml-结构-18">UML 结构</h3>
+<pre><code class="language-plantuml" data-lang="plantuml">interface State{
+    + doThis()
+    + doThat()
+}
+class ConcreteStates{
+    - context
+    + setContext(context)
+    + doThis()
+    + doThat()
+}
+class Context{
+    - state
+    + Context(initialState)
+    + changeState(state)
+    + doThis()
+    + doThat()
+}
+class Client
+Client --&gt; Context
+Client --&gt; ConcreteStates
+ConcreteStates --|&gt; State
+ConcreteStates --&gt; Context
+Context o--&gt; State
+</code></pre><ul>
+<li>State 抽象状态接口</li>
+<li>ConcreteStates 具体状态类 包含所有需要状态</li>
+<li>Context 上下文 切换状态</li>
+</ul>
+<p><img src="https://refactoring.guru/images/patterns/diagrams/state/structure.png" alt="state structure"></p>
+<h3 id="应用示例-18">应用示例</h3>
+<p>状态模式将根据当前回放状态， 让媒体播放器中的相同控件完成不同的行为。</p>
+<pre><code class="language-plantuml" data-lang="plantuml">class State{
+    - player
+    + State(player)
+    + clickLock()
+    + clickPlay()
+    + clickNext()
+    + clickPrevious()
+}
+class Player{
+    - state
+    + UI,volume,playlist,currentSong
+    + Player()
+    + changeState(state)
+    + clickLock()
+    + clickPlay()
+    + clickNext()
+    + clickPrevious()
+    + startPlayback()
+    + stopPlayback()
+    + nextSong()
+    + previousSong()
+    + fastForward()
+    + rewind()
+}
+Player o--&gt; State
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+
+<span style="color:#f92672">from</span> abc <span style="color:#f92672">import</span> ABCMeta, abstractmethod
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AudioPlay</span>(object):
+
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+        self<span style="color:#f92672">.</span>state <span style="color:#f92672">=</span> ReadyState(self)
+        self<span style="color:#f92672">.</span>UI <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">UI</span><span style="color:#e6db74">&#39;</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">change_state</span>(self, state):
+        self<span style="color:#f92672">.</span>state <span style="color:#f92672">=</span> state
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_lock</span>(self):
+        self<span style="color:#f92672">.</span>state<span style="color:#f92672">.</span>click_lock()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_play</span>(self):
+        self<span style="color:#f92672">.</span>state<span style="color:#f92672">.</span>click_play()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_next</span>(self):
+        self<span style="color:#f92672">.</span>state<span style="color:#f92672">.</span>click_next()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_previous</span>(self):
+        self<span style="color:#f92672">.</span>state<span style="color:#f92672">.</span>click_previous()
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">State</span>(metaclass<span style="color:#f92672">=</span>ABCMeta):
+
+    <span style="color:#66d9ef">def</span> __init__(self, player):
+        self<span style="color:#f92672">.</span>player <span style="color:#f92672">=</span> player
+
+    <span style="color:#a6e22e">@abstractmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_lock</span>(self):
+        <span style="color:#66d9ef">pass</span>
+
+    <span style="color:#a6e22e">@abstractmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_play</span>(self):
+        <span style="color:#66d9ef">pass</span>
+
+    <span style="color:#a6e22e">@abstractmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_next</span>(self):
+        <span style="color:#66d9ef">pass</span>
+
+    <span style="color:#a6e22e">@abstractmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_previous</span>(self):
+        <span style="color:#66d9ef">pass</span>
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LockedState</span>(State):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_lock</span>(self):
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>player<span style="color:#f92672">.</span>playing:
+            self<span style="color:#f92672">.</span>player<span style="color:#f92672">.</span>change_state(PlayingState(self<span style="color:#f92672">.</span>player))
+        <span style="color:#66d9ef">else</span>:
+            self<span style="color:#f92672">.</span>player<span style="color:#f92672">.</span>change_state(ReadyState(self<span style="color:#f92672">.</span>player))
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_next</span>(self):
+        <span style="color:#66d9ef">return</span> super()<span style="color:#f92672">.</span>click_next()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_play</span>(self):
+        <span style="color:#66d9ef">return</span> super()<span style="color:#f92672">.</span>click_play()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_previous</span>(self):
+        <span style="color:#66d9ef">return</span> super()<span style="color:#f92672">.</span>click_previous()
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ReadyState</span>(State):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_lock</span>(self):
+        self<span style="color:#f92672">.</span>player<span style="color:#f92672">.</span>change_state(LockedState(self<span style="color:#f92672">.</span>player))
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_next</span>(self):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">next song</span><span style="color:#e6db74">&#39;</span>)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_previous</span>(self):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">previous song</span><span style="color:#e6db74">&#39;</span>)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_play</span>(self):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">play song</span><span style="color:#e6db74">&#39;</span>)
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PlayingState</span>(State):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_lock</span>(self):
+        self<span style="color:#f92672">.</span>player<span style="color:#f92672">.</span>change_state(LockedState(self<span style="color:#f92672">.</span>player))
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_play</span>(self):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">stop play</span><span style="color:#e6db74">&#39;</span>)
+        self<span style="color:#f92672">.</span>player<span style="color:#f92672">.</span>change_state(ReadyState(self<span style="color:#f92672">.</span>player))
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_next</span>(self):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">next song</span><span style="color:#e6db74">&#39;</span>)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_previous</span>(self):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">previous song</span><span style="color:#e6db74">&#39;</span>)
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+    play <span style="color:#f92672">=</span> AudioPlay()
+    play<span style="color:#f92672">.</span>click_next()
+    play<span style="color:#f92672">.</span>click_previous()
+    play<span style="color:#f92672">.</span>click_play()
+    play<span style="color:#f92672">.</span>click_lock()
+    play<span style="color:#f92672">.</span>click_next()
+    play<span style="color:#f92672">.</span>click_previous()
+    play<span style="color:#f92672">.</span>click_play()
+
+</code></pre></div><h3 id="适用性-18">适用性</h3>
+<ul>
+<li>如果对象需要根据自身当前状态进行不同行为，同时状态的数量非常多且与状态相关的代码会频繁变更</li>
+<li>如果某个类需要根据成员变量的当前值改变自身行为，需要使用大量的条件语句</li>
+<li>当相似状态和基于条件的状态机转换中存在许多重复代码</li>
+</ul>
+<h3 id="实现步骤-18">实现步骤</h3>
+<ul>
+<li>
+<p>确认上下文类</p>
+</li>
+<li>
+<p>声明状态接口</p>
+</li>
+<li>
+<p>实现特定状态的具体类</p>
+<ul>
+<li>这些成员变量或方法设为公有。</li>
+<li>将需要抽取的上下文行为更改为上下文中的公有方法， 然后在状态类中调用。</li>
+<li>将状态类嵌套在上下文类中。</li>
+</ul>
+</li>
+<li>
+<p>上下文类中添加一个状态接口类型的引用成员变量， 以及一个用于修改该成员变量值的公有接口。</p>
+</li>
+</ul>
+<h3 id="优缺点-18">优缺点</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox">单一职责原则</li>
+<li><input checked="" disabled="" type="checkbox">开闭原则</li>
+<li><input checked="" disabled="" type="checkbox">消除臃肿的状态机条件语句简化上下文代码</li>
+<li><input disabled="" type="checkbox">状态机只有很少的几个状态， 或者很少发生改变， 那么应用该模式可能会显得小题大作</li>
+</ul>
+<h2 id="策略模式">策略模式</h2>
+<h3 id="意图-19">意图</h3>
+<p>定义一系列算法， 并将每种算法分别放入独立的类中， 以使算法的对象能够相互替换。</p>
+<h3 id="问题-19">问题</h3>
+<p>实现自动导航的导游程序，首次实现了公交版的路线规划，随后增加了骑行者者版本的路线规划，随着需求越来越多，代码量增加可维护性下降。</p>
+<h3 id="解决方案-19">解决方案</h3>
+<p>策略模式找出负责用许多不同方式完成特定任务的类， 然后将其中的算法抽取到一组被称为策略的独立类中。</p>
+<p>上下文的原始类必须包含一个成员变量来存储对于每种策略的引用。 上下文并不执行任务， 而是将工作委派给已连接的策略对象。</p>
+<h3 id="uml-结构-19">UML 结构</h3>
+<pre><code class="language-plantuml" data-lang="plantuml">interface Strategy{
+    + execute(data)
+}
+class ConcreteStrategies{
+    + execute(data)
+}
+class Context{
+    - strategy
+    + setStrategy(strategy)
+    + doSomething()
+}
+class Client
+Client --&gt; Context
+Client --&gt; ConcreteStrategies
+Context o--&gt; Strategy
+ConcreteStrategies ..|&gt; Strategy
+</code></pre><ul>
+<li>Strategy 抽象策略类</li>
+<li>ConcreteStrategies 具体策略类</li>
+<li>Context 上下文 维护指向具体策略的引用，上下文不清楚其所涉及的策略类型与算法的执行方式</li>
+</ul>
+<p><img src="https://refactoring.guru/images/patterns/diagrams/strategy/structure.png" alt="strategy structure"></p>
+<h3 id="应用示例-19">应用示例</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+
+<span style="color:#f92672">from</span> abc <span style="color:#f92672">import</span> ABCMeta, abstractmethod
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Strategy</span>(metaclass<span style="color:#f92672">=</span>ABCMeta):
+
+    <span style="color:#a6e22e">@abstractmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+        <span style="color:#66d9ef">pass</span>
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ConcreteStrategyAdd</span>(Strategy):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+        ret <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> args:
+            ret <span style="color:#f92672">+</span><span style="color:#f92672">=</span> int(i)
+        <span style="color:#66d9ef">return</span> ret
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ConcreteStrategySubtract</span>(Strategy):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+        ret <span style="color:#f92672">=</span> args[<span style="color:#ae81ff">0</span>]
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> args[<span style="color:#ae81ff">1</span>:]:
+            ret <span style="color:#f92672">-</span><span style="color:#f92672">=</span> int(i)
+        <span style="color:#66d9ef">return</span> ret
+
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ConcreteStrategyMultiply</span>(Strategy):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+        ret <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> args:
+            ret <span style="color:#f92672">*</span><span style="color:#f92672">=</span> int(i)
+        <span style="color:#66d9ef">return</span> ret
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Context</span>(object):
+
+    <span style="color:#66d9ef">def</span> __init__(self, strategy<span style="color:#f92672">=</span>None):
+        super()<span style="color:#f92672">.</span>__init__()
+        self<span style="color:#f92672">.</span>strategy <span style="color:#f92672">=</span> strategy
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_strategy</span>(self, strategy):
+        self<span style="color:#f92672">.</span>strategy <span style="color:#f92672">=</span> strategy
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute_strategy</span>(self, <span style="color:#f92672">*</span>args):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>strategy<span style="color:#f92672">.</span>execute(<span style="color:#f92672">*</span>args)
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+
+    a <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+    b <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>
+
+    context <span style="color:#f92672">=</span> Context()
+    context<span style="color:#f92672">.</span>set_strategy(ConcreteStrategyAdd())
+    <span style="color:#66d9ef">print</span>(context<span style="color:#f92672">.</span>execute_strategy(a, b))
+    context<span style="color:#f92672">.</span>set_strategy(ConcreteStrategySubtract())
+    <span style="color:#66d9ef">print</span>(context<span style="color:#f92672">.</span>execute_strategy(a, b))
+    context<span style="color:#f92672">.</span>set_strategy(ConcreteStrategyMultiply())
+    <span style="color:#66d9ef">print</span>(context<span style="color:#f92672">.</span>execute_strategy(a, b))
+
+</code></pre></div><h3 id="适用性-19">适用性</h3>
+<ul>
+<li>当你想使用对象中各种不同的算法变体， 并希望能在运行时切换算法时， 可使用策略模式。</li>
+<li>当你有许多仅在执行某些行为时略有不同的相似类时， 可使用策略模式。</li>
+<li>如果算法在逻辑的上下文中不是特别重要， 使用该模式能将类的业务逻辑与其算法实现细节隔离开来。</li>
+<li>当类中使用了复杂条件运算符以在同一算法的不同变体中切换时， 可使用该模式。</li>
+</ul>
+<h3 id="实现步骤-19">实现步骤</h3>
+<ul>
+<li>上下文中修改频率较高的算法</li>
+<li>声明该算法的通用接口</li>
+<li>实现具体策略类</li>
+<li>上下文类中添加一个成员变量用于保存对于策略对象的引用。 然后提供设置方法</li>
+</ul>
+<h3 id="优缺点-19">优缺点</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox">在运行时切换对象内的算法。</li>
+<li><input checked="" disabled="" type="checkbox">将算法的实现和使用算法的代码隔离开来。</li>
+<li><input checked="" disabled="" type="checkbox">使用组合来代替继承。</li>
+<li><input checked="" disabled="" type="checkbox">开闭原则</li>
+<li><input disabled="" type="checkbox">如果你的算法极少发生改变， 那么没有任何理由引入新的类和接口。</li>
+<li><input disabled="" type="checkbox">客户端必须知晓策略间的不同——它需要选择合适的策略。</li>
+<li><input disabled="" type="checkbox">许多现代编程语言支持函数类型功能， 允许你在一组匿名函数中实现不同版本的算法。</li>
+</ul>
+<h2 id="模版方法模式">模版方法模式</h2>
+<h3 id="意图-20">意图</h3>
+<p>超类中定义了一个算法的框架， 允许子类在不修改结构的情况下重写算法的特定步骤。</p>
+<h3 id="问题-20">问题</h3>
+<p>编写文档数据提取工具，首个版本仅支持 DOC 文件，随后增加了 CSV、PDF 文件的支持。</p>
+<p>发现这三个类中包含许多相似代码。 尽管这些类处理不同数据格式的代码完全不同， 但数据处理和分析的代码却几乎完全一样。并且客户端中包含了很多条件语句。</p>
+<h3 id="解决方案-20">解决方案</h3>
+<p>模板方法模式建议将算法分解为一系列步骤， 然后将这些步骤改写为方法， 最后在 “模板方法” 中依次调用这些方法。步骤可以是抽象的， 也可以有一些默认的实现。为了能够使用算法， 客户端需要自行提供子类并实现所有的抽象步骤。 如有必要还需重写一些步骤（不包括模板方法）。</p>
+<h3 id="uml-结构-20">UML 结构</h3>
+<pre><code class="language-plantuml" data-lang="plantuml">class AbstractClass{
+    + templateMethod()
+    + step1()
+    + step2()
+    + step3()
+}
+class ConcreteClass1{
+    + step2()
+    + step3()
+}
+class ConcreteClass2{
+    + step1()
+    + step2()
+}
+ConcreteClass1 --|&gt; AbstractClass
+ConcreteClass2 --|&gt; AbstractClass
+</code></pre><p><img src="https://refactoring.guru/images/patterns/diagrams/template-method/structure.png" alt="tempalte method structure"></p>
+<h3 id="应用示例-20">应用示例</h3>
+<p>AI 策略类游戏</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+
+<span style="color:#f92672">from</span> abc <span style="color:#f92672">import</span> ABCMeta, abstractmethod
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GameAI</span>(object):
+
+    <span style="color:#a6e22e">@abstractmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">build_structures</span>(self):
+        <span style="color:#66d9ef">pass</span>
+
+    <span style="color:#a6e22e">@abstractmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">build_units</span>(self):
+        <span style="color:#66d9ef">pass</span>
+
+    <span style="color:#a6e22e">@abstractmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">send_scouts</span>(self, position):
+        <span style="color:#66d9ef">pass</span>
+
+    <span style="color:#a6e22e">@abstractmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">send_warriors</span>(self, position):
+        <span style="color:#66d9ef">pass</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">closest_enemy</span>(self):
+        <span style="color:#66d9ef">return</span> True
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">collection_resources</span>(self):
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>build_structures():
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">collection {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(i))
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">attack</span>(self):
+        enemy <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>closest_enemy()
+        <span style="color:#66d9ef">if</span> enemy:
+            self<span style="color:#f92672">.</span>send_warriors(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">x1</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">else</span>:
+            self<span style="color:#f92672">.</span>send_scouts(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">y1</span><span style="color:#e6db74">&#39;</span>)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">turn</span>(self):
+        <span style="color:#75715e"># template method</span>
+        self<span style="color:#f92672">.</span>collection_resources()
+        self<span style="color:#f92672">.</span>build_structures()
+        self<span style="color:#f92672">.</span>build_units()
+        self<span style="color:#f92672">.</span>attack()
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OrcsAI</span>(GameAI):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">build_structures</span>(self):
+        <span style="color:#66d9ef">return</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">c</span><span style="color:#e6db74">&#39;</span>]
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">build_units</span>(self):
+        <span style="color:#66d9ef">return</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">u1</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">u2</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">u3</span><span style="color:#e6db74">&#39;</span>]
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">send_scouts</span>(self, position):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{} send scouts to {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, position))
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">send_warriors</span>(self, position):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{} send warriors to {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, position))
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MonstersAI</span>(GameAI):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">collection_resources</span>(self):
+        <span style="color:#66d9ef">pass</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">build_structures</span>(self):
+        <span style="color:#66d9ef">pass</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">build_units</span>(self):
+        <span style="color:#66d9ef">pass</span>
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+    orcs_ai <span style="color:#f92672">=</span> OrcsAI()
+    orcs_ai<span style="color:#f92672">.</span>turn()
+    monsters_ai <span style="color:#f92672">=</span> MonstersAI()
+    monsters_ai<span style="color:#f92672">.</span>turn()
+
+</code></pre></div><h3 id="适用性-20">适用性</h3>
+<ul>
+<li>希望客户端扩展某个特定算法步骤， 而不是整个算法或其结构</li>
+<li>多个类的算法除一些细微不同之外几乎完全一样时， 你可使用该模式。 但其后果就是， 只要算法发生变化， 你就可能需要修改所有的类。</li>
+</ul>
+<h3 id="实现步骤-20">实现步骤</h3>
+<ul>
+<li>分析目标算法， 确定能否将其分解为多个步骤</li>
+<li>创建抽象基类并声明一个模板方法和代表算法步骤的一系列抽象方法</li>
+<li>可考虑在算法的关键步骤之间添加钩子，改变算法流程</li>
+<li>为每个算法变体新建一个具体子类， 实现抽象步骤</li>
+</ul>
+<h3 id="优缺点-20">优缺点</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox">允许客户端重写一个大型算法中的特定部分</li>
+<li><input checked="" disabled="" type="checkbox">将重复代码提取到一个超类中</li>
+<li><input disabled="" type="checkbox">部分客户端可能会受到算法框架的限制</li>
+<li><input disabled="" type="checkbox">违反里氏替换原则</li>
+<li><input disabled="" type="checkbox">模板方法中的步骤越多， 其维护工作就可能会越困难</li>
+</ul>
+<h2 id="访问者模式">访问者模式</h2>
+<h3 id="意图-21">意图</h3>
+<p>访问者的目的是让你能为整个类层次结构添加 “外部” 操作， 而无需修改这些类的已有代码。</p>
+<h3 id="问题-21">问题</h3>
+<p>已有的地图产品需要实现地图节点 XML 导出模块，可以修改原有的类实现导出功能，但是可能引入潜在的风险</p>
+<h3 id="解决方案-21">解决方案</h3>
+<p>访问者模式建议将新行为放入一个名为访问者的独立类中， 而不是试图将其整合到已有类中。 现在， 需要执行操作的原始对象将作为参数被传递给访问者中的方法， 让方法能访问对象所包含的一切必要数据。</p>
+<p>访问者类访问不同的节点对象时，由于节点对象各自处理方法不同，需要进行判断。访问模式实现了双分派技巧，将处理的方法委派给作为参数传递给访问者的节点对象</p>
+<h3 id="uml-结构-21">UML 结构</h3>
+<pre><code class="language-plantuml" data-lang="plantuml">interface Visitor{
+    + visit(e: ElementA)
+    + visit(e: ElementB)
+}
+interface Element{
+    + accept(v: Visitor)
+}
+class ElementA{
+    + featureA()
+    + accept(v: Visitor)
+}
+class ElementB{
+    + featureB()
+    + accept(v: Visitor)
+}
+class ConcreteVisitors{
+    + visit(e: ElementA)
+    + visit(e: ElementB)
+}
+class Client
+Client --&gt; ConcreteVisitors
+Client --&gt; Element
+Element --&gt; Visitor
+Visitor --&gt; ElementA
+Visitor --&gt; ElementB
+ConcreteVisitors ..|&gt; Visitor
+ElementA ..|&gt; Element
+ElementB ..|&gt; Element
+</code></pre><ul>
+<li>Visitor 抽象接口声明节点对象访问方法</li>
+<li>Element 抽象节点声明接收访问者的方法</li>
+<li>ElementA 具体节点类</li>
+<li>ConcreteVisitors 具体访问者</li>
+</ul>
+<p><img src="https://refactoring.guru/images/patterns/diagrams/visitor/structure.png" alt="visitor structure"></p>
+<h3 id="应用示例-21">应用示例</h3>
+<p>几何图像层次结构添加了对于 XML 文件导出功能</p>
+<pre><code class="language-plantuml" data-lang="plantuml">interface Visitor{
+    + visitDot(d: Dot)
+    + visitCircle(c: Circle)
+    + visitRectangle(r: Rectangle)
+    + visitCompundGraphic(cs: CompoundGraphic)
+}
+interface Shape{
+    + move(x, y)
+    + draw()
+    + accept(v: Visitor)
+}
+class Dot
+class Circle
+class Rectangle
+class CompundGraphic
+class XMLExportVisitor{
+    + visitDot(d: Dot)
+    + visitCircle(c: Circle)
+    + visitRectangle(r: Rectangle)
+    + visitCompundGraphic(cs: CompoundGraphic)
+}
+class Application
+Application --&gt; XMLExportVisitor
+Application --&gt; Shape
+Shape --&gt; Visitor
+Visitor --&gt; Dot
+Visitor --&gt; Circle
+Visitor --&gt; Rectangle
+Visitor --&gt; CompundGraphic
+</code></pre><p><img src="https://refactoring.guru/images/patterns/diagrams/visitor/example.png" alt="visitor example">
+<a href="https://refactoring.guru/design-patterns/visitor-double-dispatch">visitor and double dispatch</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+
+<span style="color:#f92672">from</span> abc <span style="color:#f92672">import</span> ABCMeta, abstractmethod
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Shape</span>(metaclass<span style="color:#f92672">=</span>ABCMeta):
+
+    <span style="color:#75715e"># @abstractmethod</span>
+    <span style="color:#75715e"># def move(self, x, y):</span>
+    <span style="color:#75715e">#     pass</span>
+
+    <span style="color:#75715e"># @abstractmethod</span>
+    <span style="color:#75715e"># def draw(self):</span>
+    <span style="color:#75715e">#     pass</span>
+
+    <span style="color:#a6e22e">@abstractmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">accept</span>(self, visitor):
+        <span style="color:#66d9ef">pass</span>
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Visitor</span>(metaclass<span style="color:#f92672">=</span>ABCMeta):
+
+    <span style="color:#a6e22e">@abstractmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">visitDot</span>(self, shape):
+        <span style="color:#66d9ef">pass</span>
+
+    <span style="color:#a6e22e">@abstractmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">visitCircle</span>(self, shape):
+        <span style="color:#66d9ef">pass</span>
+
+    <span style="color:#a6e22e">@abstractmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">visitRectangle</span>(self, shape):
+        <span style="color:#66d9ef">pass</span>
+
+    <span style="color:#a6e22e">@abstractmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">visitCompoundShape</span>(self, shape):
+        <span style="color:#66d9ef">pass</span>
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Dot</span>(Shape):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">accept</span>(self, visitor):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class: {}, visitor: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, visitor))
+        visitor<span style="color:#f92672">.</span>visitDot(self)
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Circle</span>(Shape):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">accept</span>(self, visitor):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class: {}, visitor: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, visitor))
+        visitor<span style="color:#f92672">.</span>visitCircle(self)
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Rectangle</span>(Shape):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">accept</span>(self, visitor):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class: {}, visitor: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, visitor))
+        visitor<span style="color:#f92672">.</span>visitRectangle(self)
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CompoundShape</span>(Shape):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">accept</span>(self, visitor):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class: {}, visitor: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, visitor))
+        visitor<span style="color:#f92672">.</span>visitCompoundShape(self)
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">XMLExportVisitor</span>(Visitor):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">visitDot</span>(self, shape):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class: {}, self: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, self))
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">visitCircle</span>(self, shape):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class: {}, self: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, self))
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">visitRectangle</span>(self, shape):
+        super()<span style="color:#f92672">.</span>visitRectangle(shape)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class: {}, self: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, self))
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">visitCompoundShape</span>(self, shape):
+        super()<span style="color:#f92672">.</span>visitCompoundShape(shape)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class: {}, self: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, self))
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+    export_visitor <span style="color:#f92672">=</span> XMLExportVisitor()
+    shapes <span style="color:#f92672">=</span> [Dot(), Circle(), Rectangle(), CompoundShape()]
+    <span style="color:#66d9ef">for</span> shape <span style="color:#f92672">in</span> shapes:
+        shape<span style="color:#f92672">.</span>accept(export_visitor)
+
+</code></pre></div><h3 id="适用性-21">适用性</h3>
+<ul>
+<li>对一个复杂对象结构 （例如对象树） 中的所有元素执行某些操作， 可使用访问者模式。</li>
+<li>可使用访问者模式来清理辅助行为的业务逻辑。</li>
+<li>当某个行为仅在类层次结构中的一些类中有意义， 而在其他类中没有意义时， 可使用该模式。</li>
+</ul>
+<h3 id="实现步骤-21">实现步骤</h3>
+<ul>
+<li>在访问者接口中声明一组 “访问” 方法， 分别对应程序中的每个具体元素类。</li>
+<li>声明元素接口，该方法必须接受访问者对象作为参数。</li>
+<li>在所有具体元素类中实现接收方法。 这些方法必须将调用重定向到当前元素对应的访问者对象中的访问者方法上。</li>
+<li>元素类只能通过访问者接口与访问者进行交互。</li>
+<li>为每个无法在元素层次结构中实现的行为创建一个具体访问者类并实现所有的访问者方法。</li>
+</ul>
+<h3 id="优缺点-21">优缺点</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox">开闭原则</li>
+<li><input checked="" disabled="" type="checkbox">单一职责原则</li>
+<li><input disabled="" type="checkbox">访问者对象可以在与各种对象交互时收集一些有用的信息。</li>
+<li><input disabled="" type="checkbox">每次在元素层次结构中添加或移除一个类时， 你都要更新所有的访问者。</li>
+<li><input disabled="" type="checkbox">在访问者同某个元素进行交互时， 它们可能没有访问元素私有成员变量和方法的必要权限。</li>
 </ul>
 <h1 id="reference">Reference</h1>
 <ul>

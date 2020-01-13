@@ -61,12 +61,12 @@
   <h1 class="subtitle is-size-4-mobile is-size-3-desktop">Python 装饰器</h1>
   <div class="content">
     <p>Python 装饰器</p>
-<h1 id="heading">装饰器的定义</h1>
+<h1 id="装饰器的定义">装饰器的定义</h1>
 <blockquote>
 <p>装饰器本质上是一个Python函数，它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。
 它经常用于有切面需求的场景，比如：插入日志、性能测试、事务处理、缓存、权限校验等场景。装饰器是解决这类问题的绝佳设计，有了装饰器，我们就可以抽离出大量与函数功能本身无关的雷同代码并继续重用。</p>
 </blockquote>
-<h1 id="heading-1">为什么需要装饰器</h1>
+<h1 id="为什么需要装饰器">为什么需要装饰器</h1>
 <p>假设你原先的程序实现了简单的 <code>fun()</code> 函数</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fun</span>():
@@ -101,7 +101,7 @@ fun <span style="color:#f92672">=</span> timethis(fun)
 
 fun()
 </code></pre></div><p>通过上述函数对原函数进行包装，原函数 <code>fun()</code> 就向被装饰了一样，而<code>timethis()</code> 返回的是装饰后函数。</p>
-<h1 id="heading-2">函数元数据</h1>
+<h1 id="函数元数据">函数元数据</h1>
 <p>装饰器作用在某个函数时，这个函数重要的元数据，如名字、文档字符串、注解等信息都丢失了</p>
 <pre><code># 未装饰前
 &gt;&gt;&gt; fun()
@@ -128,7 +128,7 @@ hello
 </code></pre><p>可以看出函数的元数据被替换为 <code>wrapper</code> 函数对象的元数据。通过调用 <code>@wraps()</code> 装饰器，可以保留原函数的元数据</p>
 <p><strong>Note</strong> <code>@wraps(func)</code> 注解是很重要的，它能保留原始函数的元数据。可通过属性访问 <code>__wrapped__</code> 被包装的函数。当多个装饰器作用于同一个函数时，<code>__wrapped__</code> 属性调用的行为是不可预知的，应当避免这样做。</p>
 <p><strong>Note</strong> 并不是所有的装饰器都使用了 <code>@wraps()</code>，内置装饰器 <code>@staticmethod</code> 和 <code>@classmethod</code> 是将原函数属性储存在 <code>__func__</code> 中。</p>
-<h1 id="heading-3">定义一个带参数的装饰器</h1>
+<h1 id="定义一个带参数的装饰器">定义一个带参数的装饰器</h1>
 <p>假设你需要一个装饰器，给函数添加日志功能，同时可以指定日志的级别或其他选项。你可以这样定义装饰器</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
 
@@ -171,7 +171,7 @@ hello
 </span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
     <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">hello</span><span style="color:#e6db74">&#39;</span>)
 </code></pre></div><p><code>decorate</code> 返回一个可调用对象（包含 <code>__call__</code> 方法），并传入被包装函数作为参数。</p>
-<h1 id="heading-4">自定义属性的装饰器</h1>
+<h1 id="自定义属性的装饰器">自定义属性的装饰器</h1>
 <p>使用一个装饰器包装一个函数，并允许运行时修改用户提供的参数。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
 
@@ -235,7 +235,7 @@ wrapper<span style="color:#f92672">.</span>log <span style="color:#f92672">=</sp
 <blockquote>
 <p>直接修改的方法也可能正常工作，但前提是它必须是最外层的装饰器才行。 如果它的上面还有另外的装饰器，那么它会隐藏底层属性，使得修改它们没有任何作用。</p>
 </blockquote>
-<h1 id="heading-5">可选参数装饰器</h1>
+<h1 id="可选参数装饰器">可选参数装饰器</h1>
 <p>写一个装饰器，可以不传参数 <code>@logged</code>，或者是传递可选参数如 <code>@logged(logging.DEBUG)</code>。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
 
@@ -280,9 +280,9 @@ wrapper<span style="color:#f92672">.</span>log <span style="color:#f92672">=</sp
 <span style="color:#75715e"># 等价于 fun = logged(level=loggin.DEBUG)(fun)</span>
 </code></pre></div><p>简单装饰器将被包装函数作为第一个参数传递给 <code>logged</code> 函数，因此，<code>logged()</code> 中第一个参数就是被包装函数自身。</p>
 <p>带参数装饰器调用时没有将被包装函数传递给 <code>logged</code> 函数，因此在装饰器内，它必须是可选的。这个反过来会迫使其他参数必须使用关键字来指定。 并且，但这些参数被传递进来后，装饰器要返回一个接受一个函数参数并包装它的函数。 为了这样做，我们使用了一个技巧，就是利用 <code>functools.partial</code> 。 它会返回一个未完全初始化的自身，除了被包装函数外其他参数都已经确定下来了。</p>
-<h1 id="heading-6">利用装饰器进行参数检查</h1>
+<h1 id="利用装饰器进行参数检查">利用装饰器进行参数检查</h1>
 <p>// TODO</p>
-<h1 id="heading-7">类中定义装饰器</h1>
+<h1 id="类中定义装饰器">类中定义装饰器</h1>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> functools <span style="color:#f92672">import</span> wraps
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span>(object):
@@ -315,7 +315,7 @@ a <span style="color:#f92672">=</span> A()
 </code></pre></div><p>可以看出一个是实例调用，另一个是类调用。装饰器要被定义成类方法并且你必须显式的使用父类名去调用它。</p>
 <p>在类中定义装饰器初看上去好像很奇怪，但是在标准库中有很多这样的例子。 特别的，<code>@property</code> 装饰器实际上是一个类，它里面定义了三个方法 <code>getter()</code>, <code>setter()</code>, <code>deleter()</code>, 每一个方法都是一个装饰器。</p>
 <p>它为什么要这么定义的主要原因是各种不同的装饰器方法会在关联的 <code>property</code> 实例上操作它的状态。 因此，任何时候只要你碰到需要在装饰器中记录或绑定信息，那么这不失为一种可行方法。</p>
-<h1 id="heading-8">类作为装饰器</h1>
+<h1 id="类作为装饰器">类作为装饰器</h1>
 <p>使用装饰器包装函数，但是希望返回一个可调用实例。为了实现类装饰器，你需要确保它实现了 <code>__call__()</code> 和 <code>__get__()</code> 方法</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> types
 <span style="color:#f92672">from</span> functools <span style="color:#f92672">import</span> wraps

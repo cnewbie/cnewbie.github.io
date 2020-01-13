@@ -60,8 +60,8 @@
   <h2 class="subtitle is-6">July 16, 2018</h2>
   <h1 class="subtitle is-size-4-mobile is-size-3-desktop">Iptables 配置</h1>
   <div class="content">
-    <h1 id="filternatmangle-">filter,nat,mangle 规则表</h1>
-<h2 id="filter">filter表</h2>
+    <h1 id="filternatmangle-规则表">filter,nat,mangle 规则表</h1>
+<h2 id="filter表">filter表</h2>
 <p>数据包过滤,根据规则决定是否放行数据包（DROP,ACCEPT,REJECT,LOG）</p>
 <p>三条规则链</p>
 <ul>
@@ -69,7 +69,7 @@
 <li>FORWARD 不是本地产生且负责转发的包</li>
 <li>OUTPUT 本地产生的包</li>
 </ul>
-<h2 id="nat">nat表</h2>
+<h2 id="nat表">nat表</h2>
 <p>修改数据包ip地址、端口等信息（SNAT,DNAT,MASQUERADE,REDIRECT）</p>
 <p>三条规则链</p>
 <ul>
@@ -77,10 +77,10 @@
 <li>OUTPUT 改变本地产生包的目的地址</li>
 <li>POSTROUTING 改变发出数据包的源地址</li>
 </ul>
-<h2 id="mangle">mangle表</h2>
+<h2 id="mangle表">mangle表</h2>
 <p>修改数据包的TOS，TTL及数据包的Mark</p>
 <p>五个规则链 PREROUTING，POSTROUTING，INPUT，OUTPUT，FORWARD</p>
-<h2 id="raw">raw表</h2>
+<h2 id="raw表">raw表</h2>
 <p>决定数据包是否被状态跟踪机制处理</p>
 <p>两条规则链 OUTPUT,PREROUTING</p>
 <p>四种状态</p>
@@ -90,7 +90,7 @@
 <li>ESTABLISHED 发送后接到应答的数据包</li>
 <li>INVALID 无法识别的数据包</li>
 </ul>
-<h1 id="heading">规则链和规则</h1>
+<h1 id="规则链和规则">规则链和规则</h1>
 <p>在处理各种数据包时，根据防火墙规则的不同时机，iptables供涉及5种默认规则链：</p>
 <ul>
 <li>INPUT 当接收到防火墙本机地址的数据包（入站）时,应用此链中的规则。。</li>
@@ -123,7 +123,7 @@
 <p>除去最后一个LOG，前3条规则匹配数据包后，该数据包不会再往下继续匹配了，所以编写的规则顺序极其关键。</p>
 <p>Linux数据包路由原理</p>
 <p><img src="/images/2017-packetflow.jpg" alt="数据包流程"></p>
-<h1 id="iptables">iptables编写规则</h1>
+<h1 id="iptables编写规则">iptables编写规则</h1>
 <p><img src="/images/2017-iptables.png" alt="命令格式"></p>
 <ul>
 <li>[-t 表名]：该规则所操作的哪个表，可以使用filter、nat等，如果没有指定则默认为filter</li>
@@ -151,7 +151,7 @@
 </li>
 <li>&lt;-j 动作&gt;：处理数据包的动作，包括ACCEPT、DROP、REJECT等</li>
 </ul>
-<h1 id="iptables-1">iptables常用实例备查</h1>
+<h1 id="iptables常用实例备查">iptables常用实例备查</h1>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">iptables -P INPUT DROP
 iptables -P FORWARD ACCEPT
 iptables -P OUTPUT ACCEPT
@@ -185,7 +185,7 @@ iptables -A INPUT -p tcp --syn -m limit --limit 5/s --limit-burst <span style="c
 iptables -A FORWARD -p tcp --syn -m limit --limit 1/s -j ACCEPT
 iptables -A FORWARD -p icmp -m limit --limit 2/s --limit-burst <span style="color:#ae81ff">10</span> -j ACCEPT
 iptables -A INPUT -p icmp --icmp-type <span style="color:#ae81ff">0</span> -s ! 172.29.73.0/24 -j DROP
-</code></pre></div><h1 id="heading-1">引用</h1>
+</code></pre></div><h1 id="引用">引用</h1>
 <p><a href="http://seanlook.com/2014/02/23/iptables-understand/">Seanlook</a></p>
 
   </div>

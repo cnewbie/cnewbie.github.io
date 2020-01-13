@@ -61,7 +61,7 @@
   <h1 class="subtitle is-size-4-mobile is-size-3-desktop">常用排序算法总结</h1>
   <div class="content">
     <hr>
-<h1 id="heading">工具函数</h1>
+<h1 id="工具函数">工具函数</h1>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#</span><span style="color:#75715e">include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#75715e">#</span><span style="color:#75715e">include</span> <span style="color:#75715e">&lt;ctime&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
@@ -80,7 +80,7 @@
     }
     cout <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> endl;
 }
-</code></pre></div><h1 id="bubble-sort-">Bubble Sort 冒泡排序</h1>
+</code></pre></div><h1 id="bubble-sort-冒泡排序">Bubble Sort 冒泡排序</h1>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bubble_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a, <span style="color:#66d9ef">int</span> n){
     <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>;<span style="color:#f92672">-</span><span style="color:#f92672">-</span>i){
         <span style="color:#66d9ef">for</span>(size_t j <span style="color:#f92672">=</span> i; j <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>;<span style="color:#f92672">-</span><span style="color:#f92672">-</span>j)
@@ -104,7 +104,7 @@
             <span style="color:#66d9ef">break</span>;
     }
 }
-</code></pre></div><h1 id="cocktail-sort-">Cocktail Sort 鸡尾酒排序</h1>
+</code></pre></div><h1 id="cocktail-sort-鸡尾酒排序">Cocktail Sort 鸡尾酒排序</h1>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">cocktail_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
     <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
     <span style="color:#66d9ef">int</span> right <span style="color:#f92672">=</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
@@ -143,7 +143,7 @@
         }
     }
 }
-</code></pre></div><h1 id="selection-sort-">Selection Sort 选择排序</h1>
+</code></pre></div><h1 id="selection-sort-选择排序">Selection Sort 选择排序</h1>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">selection_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a, <span style="color:#66d9ef">int</span> n){
     <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;i <span style="color:#f92672">&lt;</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">+</span><span style="color:#f92672">+</span>){
         <span style="color:#66d9ef">int</span> index <span style="color:#f92672">=</span> i;
@@ -155,7 +155,7 @@
             swap(a[i],a[index]);
     }
 }
-</code></pre></div><h1 id="insertion-sort-">Insertion Sort 插入排序</h1>
+</code></pre></div><h1 id="insertion-sort-插入排序">Insertion Sort 插入排序</h1>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">insertion_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a, <span style="color:#66d9ef">int</span> n){
     <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;i <span style="color:#f92672">&lt;</span> n;i<span style="color:#f92672">+</span><span style="color:#f92672">+</span>){
         <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> a[i];
@@ -167,7 +167,7 @@
         a[j] <span style="color:#f92672">=</span> tmp;
     }
 }
-</code></pre></div><h1 id="shell-sort-">Shell Sort 希尔排序</h1>
+</code></pre></div><h1 id="shell-sort-希尔排序">Shell Sort 希尔排序</h1>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">shell_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
     <span style="color:#66d9ef">int</span> h,i,j,t;
     <span style="color:#66d9ef">for</span>(h <span style="color:#f92672">=</span> n;h<span style="color:#f92672">/</span><span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>;){
@@ -196,7 +196,7 @@
         }
     }
 }
-</code></pre></div><h1 id="merge-sort">Merge Sort归并排序</h1>
+</code></pre></div><h1 id="merge-sort归并排序">Merge Sort归并排序</h1>
 <p>递归版本</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">merge_arr</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> m,<span style="color:#66d9ef">int</span> n){
     <span style="color:#66d9ef">int</span> i,j,k;
@@ -268,7 +268,7 @@
         }
     }
 }
-</code></pre></div><h1 id="qucik-sort-">Qucik Sort 快速排序</h1>
+</code></pre></div><h1 id="qucik-sort-快速排序">Qucik Sort 快速排序</h1>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">quick_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> len){
     <span style="color:#66d9ef">if</span>(len<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">2</span>)
         <span style="color:#66d9ef">return</span>;
@@ -304,7 +304,7 @@
     quick_sort2(a,i);
     quick_sort2(a<span style="color:#f92672">+</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,n<span style="color:#f92672">-</span>i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
 }
-</code></pre></div><h1 id="heap-sort-">Heap Sort 堆排序</h1>
+</code></pre></div><h1 id="heap-sort-堆排序">Heap Sort 堆排序</h1>
 <p>递归版本</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// i is index of array,the left child index is 2*i+1,the right one is 2*i+2,the father index is floor((i-1)/2)
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">siftDown</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a, <span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> n)
@@ -362,7 +362,7 @@
         heap_down(a,<span style="color:#ae81ff">0</span>,i);
     }
 }
-</code></pre></div><h1 id="counting-sort-">Counting Sort 计数排序</h1>
+</code></pre></div><h1 id="counting-sort-计数排序">Counting Sort 计数排序</h1>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">couting_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
     <span style="color:#66d9ef">int</span> range <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
     <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>C <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[range];
@@ -387,7 +387,7 @@
     <span style="color:#66d9ef">delete</span> [] C;
     <span style="color:#66d9ef">delete</span> [] temp;
 }
-</code></pre></div><h1 id="heading-1">算法对比</h1>
+</code></pre></div><h1 id="算法对比">算法对比</h1>
 <blockquote>
 <p>稳定：如果a原本在b前面，而a=b，排序之后a仍然在b的前面。</p>
 </blockquote>
@@ -502,7 +502,7 @@
 </tr>
 </tbody>
 </table>
-<h1 id="heading-2">引用</h1>
+<h1 id="引用">引用</h1>
 <ul>
 <li><a href="http://liaoxl.github.io/blog/20140907/sort/">Moondark</a></li>
 <li><a href="https://www.cnblogs.com/eniac12/p/5329396.html">SteveWang</a></li>
