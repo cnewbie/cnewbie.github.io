@@ -92,8 +92,8 @@
 x <span style="color:#f92672">=</span> Derived()
 x<span style="color:#f92672">.</span>get_counter()
 <span style="color:#75715e"># 动态创建</span>
-Base <span style="color:#f92672">=</span> type(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Base</span><span style="color:#e6db74">&#39;</span>, (), {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">counter</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">10</span>})
-Derived <span style="color:#f92672">=</span> type(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Derived</span><span style="color:#e6db74">&#39;</span>, (Base,), dict(get_counter<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> self: self<span style="color:#f92672">.</span>counter))
+Base <span style="color:#f92672">=</span> type(<span style="color:#e6db74">&#39;Base&#39;</span>, (), {<span style="color:#e6db74">&#39;counter&#39;</span>: <span style="color:#ae81ff">10</span>})
+Derived <span style="color:#f92672">=</span> type(<span style="color:#e6db74">&#39;Derived&#39;</span>, (Base,), dict(get_counter<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> self: self<span style="color:#f92672">.</span>counter))
 
 x <span style="color:#f92672">=</span> Derived()
 x<span style="color:#f92672">.</span>get_counter()
@@ -101,9 +101,9 @@ x<span style="color:#f92672">.</span>get_counter()
 <span style="color:#75715e"># type 函数</span>
 type(name, bases, dict):
 
-    name: <span style="color:#960050;background-color:#1e0010">字</span><span style="color:#960050;background-color:#1e0010">符</span><span style="color:#960050;background-color:#1e0010">串</span><span style="color:#960050;background-color:#1e0010">类</span><span style="color:#960050;background-color:#1e0010">型</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#960050;background-color:#1e0010">存</span><span style="color:#960050;background-color:#1e0010">放</span><span style="color:#960050;background-color:#1e0010">新</span><span style="color:#960050;background-color:#1e0010">类</span><span style="color:#960050;background-color:#1e0010">的</span><span style="color:#960050;background-color:#1e0010">名</span><span style="color:#960050;background-color:#1e0010">字</span>
-    bases: <span style="color:#960050;background-color:#1e0010">元</span><span style="color:#960050;background-color:#1e0010">组</span>(tuple)<span style="color:#960050;background-color:#1e0010">类</span><span style="color:#960050;background-color:#1e0010">型</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#960050;background-color:#1e0010">指</span><span style="color:#960050;background-color:#1e0010">定</span><span style="color:#960050;background-color:#1e0010">类</span><span style="color:#960050;background-color:#1e0010">的</span><span style="color:#960050;background-color:#1e0010">基</span><span style="color:#960050;background-color:#1e0010">类</span><span style="color:#f92672">/</span><span style="color:#960050;background-color:#1e0010">父</span><span style="color:#960050;background-color:#1e0010">类</span>
-    dict: <span style="color:#960050;background-color:#1e0010">字</span><span style="color:#960050;background-color:#1e0010">典</span><span style="color:#960050;background-color:#1e0010">类</span><span style="color:#960050;background-color:#1e0010">型</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#960050;background-color:#1e0010">存</span><span style="color:#960050;background-color:#1e0010">放</span><span style="color:#960050;background-color:#1e0010">该</span><span style="color:#960050;background-color:#1e0010">类</span><span style="color:#960050;background-color:#1e0010">的</span><span style="color:#960050;background-color:#1e0010">所</span><span style="color:#960050;background-color:#1e0010">有</span><span style="color:#960050;background-color:#1e0010">属</span><span style="color:#960050;background-color:#1e0010">性</span>(attributes)<span style="color:#960050;background-color:#1e0010">和</span><span style="color:#960050;background-color:#1e0010">方</span><span style="color:#960050;background-color:#1e0010">法</span>(method)
+    name: <span style="color:#960050;background-color:#1e0010">字符串类型，存放新类的名字</span>
+    bases: <span style="color:#960050;background-color:#1e0010">元组</span>(tuple)<span style="color:#960050;background-color:#1e0010">类型，指定类的基类</span><span style="color:#f92672">/</span><span style="color:#960050;background-color:#1e0010">父类</span>
+    dict: <span style="color:#960050;background-color:#1e0010">字典类型，存放该类的所有属性</span>(attributes)<span style="color:#960050;background-color:#1e0010">和方法</span>(method)
 
 </code></pre></div><p>现在我们都知道类（对象）可以使用 class 关键字创建，我们还知道类（对象）的类型是 type，既然知道了它的类型是　type，那么肯定可以通过 type（元类）来创建。</p>
 <h1 id="类的创建过程">类的创建过程</h1>
@@ -115,16 +115,16 @@ type(name, bases, dict):
 <h1 id="定义元类">定义元类</h1>
 <h2 id="函数方式">函数方式</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">upper_attr</span>(cls, base, attr):
-    attrs <span style="color:#f92672">=</span> ((name, value) <span style="color:#66d9ef">for</span> name, value <span style="color:#f92672">in</span> attr<span style="color:#f92672">.</span>items() <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> namw<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__</span><span style="color:#e6db74">&#39;</span>))
+    attrs <span style="color:#f92672">=</span> ((name, value) <span style="color:#66d9ef">for</span> name, value <span style="color:#f92672">in</span> attr<span style="color:#f92672">.</span>items() <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> namw<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#39;__&#39;</span>))
     uppercase_attr <span style="color:#f92672">=</span> dict((name<span style="color:#f92672">.</span>upper(), value) <span style="color:#66d9ef">for</span> name, value <span style="color:#f92672">in</span> attrs)
     <span style="color:#66d9ef">return</span> type(cls, base, attr)
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Foo</span>(object):
     __metaclass__ <span style="color:#f92672">=</span> upper_attr
-    bar <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">bar</span><span style="color:#e6db74">&#39;</span>
-<span style="color:#66d9ef">print</span> hasattr(Foo, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">bar</span><span style="color:#e6db74">&#39;</span>)
+    bar <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;bar&#39;</span>
+<span style="color:#66d9ef">print</span> hasattr(Foo, <span style="color:#e6db74">&#39;bar&#39;</span>)
 <span style="color:#75715e"># 输出: False</span>
-<span style="color:#66d9ef">print</span> hasattr(Foo, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">BAR</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#66d9ef">print</span> hasattr(Foo, <span style="color:#e6db74">&#39;BAR&#39;</span>)
 <span style="color:#75715e"># 输出:True</span>
 
 f <span style="color:#f92672">=</span> Foo()
@@ -139,7 +139,7 @@ f <span style="color:#f92672">=</span> Foo()
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UpperAttrMetaclass</span>(type):
     <span style="color:#66d9ef">def</span> __new__(cls, name, bases, dct):
-        attrs <span style="color:#f92672">=</span> ((name, value) <span style="color:#66d9ef">for</span> name, value <span style="color:#f92672">in</span> dct<span style="color:#f92672">.</span>items() <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> name<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__</span><span style="color:#e6db74">&#39;</span>))
+        attrs <span style="color:#f92672">=</span> ((name, value) <span style="color:#66d9ef">for</span> name, value <span style="color:#f92672">in</span> dct<span style="color:#f92672">.</span>items() <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> name<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#39;__&#39;</span>))
         uppercase_attr <span style="color:#f92672">=</span> dict((name<span style="color:#f92672">.</span>upper(), value) <span style="color:#66d9ef">for</span> name, value <span style="color:#f92672">in</span> attrs)
         <span style="color:#66d9ef">return</span> super(UpperAttrMetaclass, cls)<span style="color:#f92672">.</span>__new__(cls, name, bases, uppercase_attr)
 </code></pre></div><h1 id="元类的应用">元类的应用</h1>
@@ -152,32 +152,32 @@ f <span style="color:#f92672">=</span> Foo()
 <p>实例：<code>__call__</code> &raquo;&gt; <code>__new__</code> &raquo;&gt; <code>__init__</code> &raquo;&gt; instance</p>
 <p>类实例：<code>__prepare__</code> &raquo;&gt; <code>__call__</code> &raquo;&gt; <code>__new__</code> &raquo;&gt; <code>__init__</code> &raquo;&gt; class instance</p>
 <h1 id="特殊函数签名">特殊函数签名</h1>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>(type):
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>     <span style="color:#a6e22e">@classmethod</span>
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__prepare__</span>(mcs, name, bases, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>         <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">  Meta.__prepare__(mcs=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, name=</span><span style="color:#e6db74">%r</span><span style="color:#e6db74">, bases=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, **</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>             mcs, name, bases, kwargs
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>         ))
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>         <span style="color:#66d9ef">return</span> {}
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>(type):
+<span style="color:#f92672">...</span>     <span style="color:#a6e22e">@classmethod</span>
+<span style="color:#f92672">...</span>     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__prepare__</span>(mcs, name, bases, <span style="color:#f92672">**</span>kwargs):
+<span style="color:#f92672">...</span>         <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;  Meta.__prepare__(mcs=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, name=</span><span style="color:#e6db74">%r</span><span style="color:#e6db74">, bases=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, **</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">)&#39;</span> <span style="color:#f92672">%</span> (
+<span style="color:#f92672">...</span>             mcs, name, bases, kwargs
+<span style="color:#f92672">...</span>         ))
+<span style="color:#f92672">...</span>         <span style="color:#66d9ef">return</span> {}
 
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>     <span style="color:#66d9ef">def</span> __new__(mcs, name, bases, attrs, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>         <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">  Meta.__new__(mcs=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, name=</span><span style="color:#e6db74">%r</span><span style="color:#e6db74">, bases=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, attrs=[</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">], **</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>             mcs, name, bases, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">, </span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>join(attrs), kwargs
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>         ))
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>         <span style="color:#66d9ef">return</span> super()<span style="color:#f92672">.</span>__new__(mcs, name, bases, attrs)
+<span style="color:#f92672">...</span>     <span style="color:#66d9ef">def</span> __new__(mcs, name, bases, attrs, <span style="color:#f92672">**</span>kwargs):
+<span style="color:#f92672">...</span>         <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;  Meta.__new__(mcs=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, name=</span><span style="color:#e6db74">%r</span><span style="color:#e6db74">, bases=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, attrs=[</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">], **</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">)&#39;</span> <span style="color:#f92672">%</span> (
+<span style="color:#f92672">...</span>             mcs, name, bases, <span style="color:#e6db74">&#39;, &#39;</span><span style="color:#f92672">.</span>join(attrs), kwargs
+<span style="color:#f92672">...</span>         ))
+<span style="color:#f92672">...</span>         <span style="color:#66d9ef">return</span> super()<span style="color:#f92672">.</span>__new__(mcs, name, bases, attrs)
 
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>     <span style="color:#66d9ef">def</span> __init__(cls, name, bases, attrs, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>         <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">  Meta.__init__(cls=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, name=</span><span style="color:#e6db74">%r</span><span style="color:#e6db74">, bases=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, attrs=[</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">], **</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>             cls, name, bases, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">, </span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>join(attrs), kwargs
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>         ))
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>         <span style="color:#66d9ef">return</span> super()<span style="color:#f92672">.</span>__init__(name, bases, attrs)
+<span style="color:#f92672">...</span>     <span style="color:#66d9ef">def</span> __init__(cls, name, bases, attrs, <span style="color:#f92672">**</span>kwargs):
+<span style="color:#f92672">...</span>         <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;  Meta.__init__(cls=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, name=</span><span style="color:#e6db74">%r</span><span style="color:#e6db74">, bases=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, attrs=[</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">], **</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">)&#39;</span> <span style="color:#f92672">%</span> (
+<span style="color:#f92672">...</span>             cls, name, bases, <span style="color:#e6db74">&#39;, &#39;</span><span style="color:#f92672">.</span>join(attrs), kwargs
+<span style="color:#f92672">...</span>         ))
+<span style="color:#f92672">...</span>         <span style="color:#66d9ef">return</span> super()<span style="color:#f92672">.</span>__init__(name, bases, attrs)
 
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>     <span style="color:#66d9ef">def</span> __call__(cls, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>         <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">  Meta.__call__(cls=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, args=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, kwargs=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>             cls, args, kwargs
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>         ))
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>         <span style="color:#66d9ef">return</span> super()<span style="color:#f92672">.</span>__call__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
+<span style="color:#f92672">...</span>     <span style="color:#66d9ef">def</span> __call__(cls, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+<span style="color:#f92672">...</span>         <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;  Meta.__call__(cls=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, args=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, kwargs=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">)&#39;</span> <span style="color:#f92672">%</span> (
+<span style="color:#f92672">...</span>             cls, args, kwargs
+<span style="color:#f92672">...</span>         ))
+<span style="color:#f92672">...</span>         <span style="color:#66d9ef">return</span> super()<span style="color:#f92672">.</span>__call__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+<span style="color:#f92672">...</span>
 </code></pre></div><h1 id="元类-super-方法">元类 super 方法</h1>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> random
 
@@ -185,45 +185,45 @@ f <span style="color:#f92672">=</span> Foo()
     <span style="color:#75715e"># 类变量</span>
     _instance <span style="color:#f92672">=</span> None
 
-    <span style="color:#66d9ef">def</span> __call__(cls, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">meta: call: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> cls)
+    <span style="color:#66d9ef">def</span> __call__(cls, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;meta: call: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> cls)
         <span style="color:#66d9ef">if</span> cls<span style="color:#f92672">.</span>_instance <span style="color:#f92672">is</span> None:
-            cls<span style="color:#f92672">.</span>_instance <span style="color:#f92672">=</span> super(Meta, cls)<span style="color:#f92672">.</span>__call__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">meta: call: returning </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">@</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (cls<span style="color:#f92672">.</span>_instance<span style="color:#f92672">.</span>__class__, id(cls<span style="color:#f92672">.</span>_instance)))
+            cls<span style="color:#f92672">.</span>_instance <span style="color:#f92672">=</span> super(Meta, cls)<span style="color:#f92672">.</span>__call__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;meta: call: returning </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">@</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (cls<span style="color:#f92672">.</span>_instance<span style="color:#f92672">.</span>__class__, id(cls<span style="color:#f92672">.</span>_instance)))
         <span style="color:#66d9ef">return</span> cls<span style="color:#f92672">.</span>_instance
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClassA</span>(object):
     __metaclass__ <span style="color:#f92672">=</span> Meta
 
-    <span style="color:#66d9ef">def</span> __new__(cls, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">classA: new</span><span style="color:#e6db74">&#39;</span>)
-        <span style="color:#66d9ef">return</span> super(ClassA, cls)<span style="color:#f92672">.</span>__new__(cls, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
+    <span style="color:#66d9ef">def</span> __new__(cls, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;classA: new&#39;</span>)
+        <span style="color:#66d9ef">return</span> super(ClassA, cls)<span style="color:#f92672">.</span>__new__(cls, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
 
-    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
         self<span style="color:#f92672">.</span>val <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1000</span>)
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">classA: init</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;classA: init&#39;</span>)
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClassB</span>(object):
     __metaclass__ <span style="color:#f92672">=</span> Meta
 
-    <span style="color:#66d9ef">def</span> __new__(cls, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">classB: new</span><span style="color:#e6db74">&#39;</span>)
-        <span style="color:#66d9ef">return</span> super(ClassB, cls)<span style="color:#f92672">.</span>__new__(cls, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
+    <span style="color:#66d9ef">def</span> __new__(cls, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;classB: new&#39;</span>)
+        <span style="color:#66d9ef">return</span> super(ClassB, cls)<span style="color:#f92672">.</span>__new__(cls, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
 
-    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">classB: init</span><span style="color:#e6db74">&#39;</span>)
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;classB: init&#39;</span>)
         self<span style="color:#f92672">.</span>val <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1000</span>)
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClassC</span>(ClassB):
-    <span style="color:#66d9ef">def</span> __new__(cls, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">classC: new</span><span style="color:#e6db74">&#39;</span>)
-        <span style="color:#66d9ef">return</span> super(ClassC, cls)<span style="color:#f92672">.</span>__new__(cls, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
+    <span style="color:#66d9ef">def</span> __new__(cls, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;classC: new&#39;</span>)
+        <span style="color:#66d9ef">return</span> super(ClassC, cls)<span style="color:#f92672">.</span>__new__(cls, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
 
-    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">classC: init</span><span style="color:#e6db74">&#39;</span>)
-        super(ClassC, self)<span style="color:#f92672">.</span>__init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;classC: init&#39;</span>)
+        super(ClassC, self)<span style="color:#f92672">.</span>__init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
         self<span style="color:#f92672">.</span>test <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
 
 
@@ -239,7 +239,7 @@ f <span style="color:#f92672">=</span> Foo()
     <span style="color:#66d9ef">print</span>(a2<span style="color:#f92672">.</span>val)
     <span style="color:#66d9ef">print</span>(b2<span style="color:#f92672">.</span>val)
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     main()
 </code></pre></div><p><code>x = Foo() == type(Foo).__call__(Foo)</code></p>
 <p>元类中的 <code>super() == super(Singleton, cls)</code> 方法调用了待实例化的类 <code>__new__ and __init__</code></p>
@@ -284,7 +284,7 @@ f <span style="color:#f92672">=</span> Foo()
 </div>
 <section class="section">
   <div class="container has-text-centered">
-    <p>&copy; <a href="https://github.com/cnewbie/">cnewbie</a> 2018 - 2019</p>
+    <p>&copy; <a href="https://github.com/cnewbie/">cnewbie</a> 2018 - 2020</p>
   </div>
 </section>
 

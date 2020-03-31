@@ -123,7 +123,7 @@ Creator --&gt; Product
         <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">on_click</span>(self):
-        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">click</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;click&#39;</span>)
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LinuxButton</span>(Button):
@@ -132,7 +132,7 @@ Creator --&gt; Product
         <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">on_click</span>(self):
-        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">click</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;click&#39;</span>)
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Dialog</span>(object):
@@ -156,7 +156,7 @@ Creator --&gt; Product
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_butoon</span>(self):
         <span style="color:#66d9ef">return</span> LinuxButton()
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     dailog <span style="color:#f92672">=</span> WindowsDialog()
     dailog<span style="color:#f92672">.</span>render()
 </code></pre></div><h3 id="适用性">适用性</h3>
@@ -175,10 +175,10 @@ Creator --&gt; Product
 </ol>
 <h3 id="优缺点">优缺点</h3>
 <ul>
-<li><input checked="" disabled="" type="checkbox">解耦创建者和产品</li>
-<li><input checked="" disabled="" type="checkbox">单一职责原则</li>
-<li><input checked="" disabled="" type="checkbox">开闭原则</li>
-<li><input disabled="" type="checkbox">代码层级复杂</li>
+<li><input checked="" disabled="" type="checkbox"> 解耦创建者和产品</li>
+<li><input checked="" disabled="" type="checkbox"> 单一职责原则</li>
+<li><input checked="" disabled="" type="checkbox"> 开闭原则</li>
+<li><input disabled="" type="checkbox"> 代码层级复杂</li>
 </ul>
 <h2 id="抽象工厂-abstract-factory">抽象工厂 Abstract Factory</h2>
 <h3 id="意图-1">意图</h3>
@@ -265,22 +265,22 @@ Client o--&gt; AbstractFactory
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WinFactory</span>(GUIFactory):
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_button</span>(self):
-        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">button</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;button&#39;</span>)
         <span style="color:#66d9ef">return</span> WinButton()
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_checkbox</span>(self):
-        <span style="color:#66d9ef">print</span>(slef<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">checkbox</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(slef<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;checkbox&#39;</span>)
         <span style="color:#66d9ef">return</span> WinCheckBox()
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MacFactory</span>(GUIFactory):
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_button</span>(self):
-        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">button</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;button&#39;</span>)
         <span style="color:#66d9ef">return</span> MacButton()
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_checkbox</span>(self):
-        <span style="color:#66d9ef">print</span>(slef<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">checkbox</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(slef<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;checkbox&#39;</span>)
         <span style="color:#66d9ef">return</span> MacCheckBox()
 
 
@@ -293,7 +293,7 @@ Client o--&gt; AbstractFactory
         self<span style="color:#f92672">.</span>button <span style="color:#f92672">=</span> factory<span style="color:#f92672">.</span>create_button()
 
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     factory <span style="color:#f92672">=</span> WinFactory()
     app <span style="color:#f92672">=</span> Application(factory)
     app<span style="color:#f92672">.</span>create_ui()
@@ -311,11 +311,11 @@ Client o--&gt; AbstractFactory
 </ol>
 <h3 id="优缺点-1">优缺点</h3>
 <ul>
-<li><input checked="" disabled="" type="checkbox">确保工厂生产的产品相互匹配</li>
-<li><input checked="" disabled="" type="checkbox">解耦具体工厂与客户端代码</li>
-<li><input checked="" disabled="" type="checkbox">单一职责原则</li>
-<li><input checked="" disabled="" type="checkbox">开闭原则</li>
-<li><input disabled="" type="checkbox">代码复杂</li>
+<li><input checked="" disabled="" type="checkbox"> 确保工厂生产的产品相互匹配</li>
+<li><input checked="" disabled="" type="checkbox"> 解耦具体工厂与客户端代码</li>
+<li><input checked="" disabled="" type="checkbox"> 单一职责原则</li>
+<li><input checked="" disabled="" type="checkbox"> 开闭原则</li>
+<li><input disabled="" type="checkbox"> 代码复杂</li>
 </ul>
 <h2 id="创建者-builder">创建者 Builder</h2>
 <h3 id="意图-2">意图</h3>
@@ -414,19 +414,19 @@ Client --&gt; ConcreteBuilder1
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">reset</span>(self):
         self<span style="color:#f92672">.</span>_car <span style="color:#f92672">=</span> Car()
-        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">reset</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;reset&#39;</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_seats</span>(self, number):
-        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">set seats</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;set seats&#39;</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_engine</span>(self, engine):
-        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">set engine</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;set engine&#39;</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_trip_computer</span>(self, <span style="color:#f92672">*</span>args):
-        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">set trip computer</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;set trip computer&#39;</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_gps</span>(self, <span style="color:#f92672">*</span>args):
-        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">set gps</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;set gps&#39;</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_result</span>(self):
         <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_car
@@ -436,19 +436,19 @@ Client --&gt; ConcreteBuilder1
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">reset</span>(self):
         self<span style="color:#f92672">.</span>_car_manual <span style="color:#f92672">=</span> CarManual()
-        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">reset</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;reset&#39;</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_seats</span>(self, number):
-        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">set seats</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;set seats&#39;</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_engine</span>(self, engine):
-        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">set engine</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;set engine&#39;</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_trip_computer</span>(self, <span style="color:#f92672">*</span>args):
-        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">set trip computer</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;set trip computer&#39;</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_gps</span>(self, <span style="color:#f92672">*</span>args):
-        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">set gps</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;set gps&#39;</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_result</span>(self):
         <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_car_manual
@@ -471,7 +471,7 @@ Client --&gt; ConcreteBuilder1
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">construct_SUV</span>(self, builder):
         <span style="color:#66d9ef">pass</span>
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     director <span style="color:#f92672">=</span> Director()
     builder <span style="color:#f92672">=</span> CarBuilder()
     director<span style="color:#f92672">.</span>construct_sports_car(builder)
@@ -494,10 +494,10 @@ Client --&gt; ConcreteBuilder1
 </ol>
 <h3 id="优缺点-2">优缺点</h3>
 <ul>
-<li><input checked="" disabled="" type="checkbox">逐步创建复杂对象</li>
-<li><input checked="" disabled="" type="checkbox">重用相同构造代码</li>
-<li><input checked="" disabled="" type="checkbox">单一职责原则</li>
-<li><input disabled="" type="checkbox">创建多个类，增加复杂性</li>
+<li><input checked="" disabled="" type="checkbox"> 逐步创建复杂对象</li>
+<li><input checked="" disabled="" type="checkbox"> 重用相同构造代码</li>
+<li><input checked="" disabled="" type="checkbox"> 单一职责原则</li>
+<li><input disabled="" type="checkbox"> 创建多个类，增加复杂性</li>
 </ul>
 <h2 id="原型模式">原型模式</h2>
 <h3 id="意图-3">意图</h3>
@@ -639,7 +639,7 @@ Application o--&gt; Shape
         <span style="color:#66d9ef">return</span> ret
 
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     app <span style="color:#f92672">=</span> Application()
     app<span style="color:#f92672">.</span>clone_all()
 </code></pre></div><h3 id="适用性-3">适用性</h3>
@@ -656,11 +656,11 @@ Application o--&gt; Shape
 </ul>
 <h3 id="优缺点-3">优缺点</h3>
 <ul>
-<li><input checked="" disabled="" type="checkbox">克隆对象接口具体子类</li>
-<li><input checked="" disabled="" type="checkbox">摆脱重复初始化代码</li>
-<li><input checked="" disabled="" type="checkbox">更方便的生产复杂对象</li>
-<li><input checked="" disabled="" type="checkbox">除继承之外的处理复杂对象预先配置</li>
-<li><input disabled="" type="checkbox">复杂对象循环引用问题</li>
+<li><input checked="" disabled="" type="checkbox"> 克隆对象接口具体子类</li>
+<li><input checked="" disabled="" type="checkbox"> 摆脱重复初始化代码</li>
+<li><input checked="" disabled="" type="checkbox"> 更方便的生产复杂对象</li>
+<li><input checked="" disabled="" type="checkbox"> 除继承之外的处理复杂对象预先配置</li>
+<li><input disabled="" type="checkbox"> 复杂对象循环引用问题</li>
 </ul>
 <h2 id="单例模式">单例模式</h2>
 <h3 id="意图-4">意图</h3>
@@ -698,68 +698,68 @@ Client --&gt; Singleton
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SingletonMeta</span>(type):
-    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
         self<span style="color:#f92672">.</span>_instance <span style="color:#f92672">=</span> None
         self<span style="color:#f92672">.</span>single_lock <span style="color:#f92672">=</span> Lock()
-        super(SingletonMeta, self)<span style="color:#f92672">.</span>__init__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
+        super(SingletonMeta, self)<span style="color:#f92672">.</span>__init__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
 
-    <span style="color:#66d9ef">def</span> __call__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+    <span style="color:#66d9ef">def</span> __call__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
         <span style="color:#66d9ef">with</span> self<span style="color:#f92672">.</span>_local:
             <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>_instance <span style="color:#f92672">is</span> None:
-                self<span style="color:#f92672">.</span>_instance <span style="color:#f92672">=</span> super(SingletonMeta, self)<span style="color:#f92672">.</span>__call__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
+                self<span style="color:#f92672">.</span>_instance <span style="color:#f92672">=</span> super(SingletonMeta, self)<span style="color:#f92672">.</span>__call__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
         <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_instance
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Database</span>(metaclass<span style="color:#f92672">=</span>SingletonMeta):
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">query</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{} {} {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self, args, kwargs))
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">query</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{} {} {}&#39;</span><span style="color:#f92672">.</span>format(self, args, kwargs))
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Database2</span>(object):
     vars <span style="color:#f92672">=</span> {}
     single_lock <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Lock()
-    <span style="color:#66d9ef">def</span> __new__(cls, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+    <span style="color:#66d9ef">def</span> __new__(cls, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
         <span style="color:#66d9ef">if</span> cls <span style="color:#f92672">in</span> cls<span style="color:#f92672">.</span>vars:
             <span style="color:#66d9ef">return</span> cls<span style="color:#f92672">.</span>vars[cls]
         cls<span style="color:#f92672">.</span>single_lock<span style="color:#f92672">.</span>acquire()
         <span style="color:#66d9ef">try</span>:
             <span style="color:#66d9ef">if</span> cls <span style="color:#f92672">in</span> cls<span style="color:#f92672">.</span>vars:
                 <span style="color:#66d9ef">return</span> cls<span style="color:#f92672">.</span>vars[cls]
-            cls<span style="color:#f92672">.</span>vars[cls] <span style="color:#f92672">=</span> super()<span style="color:#f92672">.</span>__new__(cls, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
+            cls<span style="color:#f92672">.</span>vars[cls] <span style="color:#f92672">=</span> super()<span style="color:#f92672">.</span>__new__(cls, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
             <span style="color:#66d9ef">return</span> cls<span style="color:#f92672">.</span>vars[cls]
         <span style="color:#66d9ef">finally</span>:
             cls<span style="color:#f92672">.</span>single_lock<span style="color:#f92672">.</span>release()
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">query</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{} {} {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self, args, kwargs))
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">query</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{} {} {}&#39;</span><span style="color:#f92672">.</span>format(self, args, kwargs))
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Application</span>(object):
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>(self,  <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>(self,  <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
         db <span style="color:#f92672">=</span> Database()
-        db<span style="color:#f92672">.</span>query(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">haha</span><span style="color:#e6db74">&#39;</span>)
+        db<span style="color:#f92672">.</span>query(<span style="color:#e6db74">&#39;haha&#39;</span>)
 
         db <span style="color:#f92672">=</span> Database()
-        db<span style="color:#f92672">.</span>query(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">heihei</span><span style="color:#e6db74">&#39;</span>)
+        db<span style="color:#f92672">.</span>query(<span style="color:#e6db74">&#39;heihei&#39;</span>)
 
         db <span style="color:#f92672">=</span> Database2()
-        db<span style="color:#f92672">.</span>query(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">haha2</span><span style="color:#e6db74">&#39;</span>)
+        db<span style="color:#f92672">.</span>query(<span style="color:#e6db74">&#39;haha2&#39;</span>)
 
         db <span style="color:#f92672">=</span> Database2()
-        db<span style="color:#f92672">.</span>query(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">heihei2</span><span style="color:#e6db74">&#39;</span>)
+        db<span style="color:#f92672">.</span>query(<span style="color:#e6db74">&#39;heihei2&#39;</span>)
 
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     db <span style="color:#f92672">=</span> Database()
-    db<span style="color:#f92672">.</span>query(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">haha</span><span style="color:#e6db74">&#39;</span>)
+    db<span style="color:#f92672">.</span>query(<span style="color:#e6db74">&#39;haha&#39;</span>)
 
     db <span style="color:#f92672">=</span> Database()
-    db<span style="color:#f92672">.</span>query(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">heihei</span><span style="color:#e6db74">&#39;</span>)
+    db<span style="color:#f92672">.</span>query(<span style="color:#e6db74">&#39;heihei&#39;</span>)
 
     db <span style="color:#f92672">=</span> Database2()
-    db<span style="color:#f92672">.</span>query(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">haha2</span><span style="color:#e6db74">&#39;</span>)
+    db<span style="color:#f92672">.</span>query(<span style="color:#e6db74">&#39;haha2&#39;</span>)
 
     db <span style="color:#f92672">=</span> Database2()
-    db<span style="color:#f92672">.</span>query(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">heihei2</span><span style="color:#e6db74">&#39;</span>)
+    db<span style="color:#f92672">.</span>query(<span style="color:#e6db74">&#39;heihei2&#39;</span>)
 </code></pre></div><h3 id="适用性-4">适用性</h3>
 <ul>
 <li>程序中类的对于所有客户端只有一个可用实例</li>
@@ -774,11 +774,11 @@ Client --&gt; Singleton
 </ul>
 <h3 id="优缺点-4">优缺点</h3>
 <ul>
-<li><input checked="" disabled="" type="checkbox">确保类实例唯一</li>
-<li><input checked="" disabled="" type="checkbox">全局访问入口</li>
-<li><input checked="" disabled="" type="checkbox">延迟加载</li>
-<li><input disabled="" type="checkbox">违反单一职责原则</li>
-<li><input disabled="" type="checkbox">多线程环境需要加锁</li>
+<li><input checked="" disabled="" type="checkbox"> 确保类实例唯一</li>
+<li><input checked="" disabled="" type="checkbox"> 全局访问入口</li>
+<li><input checked="" disabled="" type="checkbox"> 延迟加载</li>
+<li><input disabled="" type="checkbox"> 违反单一职责原则</li>
+<li><input disabled="" type="checkbox"> 多线程环境需要加锁</li>
 </ul>
 <h1 id="结构型模式">结构型模式</h1>
 <p>结构型模式介绍如何将对象和类组装成较大的结构， 并同时保持结构的灵活和高效。</p>
@@ -864,7 +864,7 @@ SquarePeg &lt;|--o SquarePegAdapter
         <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_radius
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fits</span>(self, peg):
-        ret <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>get_radius() <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> peg<span style="color:#f92672">.</span>get_radius()
+        ret <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>get_radius() <span style="color:#f92672">&gt;=</span> peg<span style="color:#f92672">.</span>get_radius()
         <span style="color:#66d9ef">print</span>(ret)
         <span style="color:#66d9ef">return</span> ret
 
@@ -896,7 +896,7 @@ SquarePeg &lt;|--o SquarePegAdapter
         <span style="color:#66d9ef">return</span> math<span style="color:#f92672">.</span>sqrt(self<span style="color:#f92672">.</span>_peg<span style="color:#f92672">.</span>get_width()) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>
 
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     hole <span style="color:#f92672">=</span> RoundHole(<span style="color:#ae81ff">5</span>)
     rpeg <span style="color:#f92672">=</span> RoundPeg(<span style="color:#ae81ff">5</span>)
     hole<span style="color:#f92672">.</span>fits(rpeg)
@@ -998,26 +998,26 @@ Client --&gt; Remote
         self<span style="color:#f92672">.</span>_device <span style="color:#f92672">=</span> device
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">toggle_power</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">switch power</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;switch power&#39;</span>)
         <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>_device<span style="color:#f92672">.</span>is_enable():
             self<span style="color:#f92672">.</span>_device<span style="color:#f92672">.</span>disable()
         <span style="color:#66d9ef">else</span>:
             self<span style="color:#f92672">.</span>_device<span style="color:#f92672">.</span>enable()
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">volume_down</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">volume down</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;volume down&#39;</span>)
         self<span style="color:#f92672">.</span>_device<span style="color:#f92672">.</span>volume <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_device<span style="color:#f92672">.</span>volume <span style="color:#f92672">-</span> <span style="color:#ae81ff">10</span>
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">volume_up</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">volume up</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;volume up&#39;</span>)
         self<span style="color:#f92672">.</span>_device<span style="color:#f92672">.</span>volume <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_device<span style="color:#f92672">.</span>volume <span style="color:#f92672">+</span> <span style="color:#ae81ff">10</span>
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">channel_down</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">channel down</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;channel down&#39;</span>)
         self<span style="color:#f92672">.</span>_device<span style="color:#f92672">.</span>channel <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_device<span style="color:#f92672">.</span>channel <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">channel_up</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">channel up</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;channel up&#39;</span>)
         self<span style="color:#f92672">.</span>_device<span style="color:#f92672">.</span>channel <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_device<span style="color:#f92672">.</span>channel <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
 
 
@@ -1089,11 +1089,11 @@ remote<span style="color:#f92672">.</span>volume_down()
 </ul>
 <h3 id="优缺点-6">优缺点</h3>
 <ul>
-<li><input checked="" disabled="" type="checkbox">创建与平台无关的类</li>
-<li><input checked="" disabled="" type="checkbox">客户端代码与高层抽象互动</li>
-<li><input checked="" disabled="" type="checkbox">开闭原则</li>
-<li><input checked="" disabled="" type="checkbox">单一职责原则</li>
-<li><input disabled="" type="checkbox">高内聚类使用该方法可能会更复杂</li>
+<li><input checked="" disabled="" type="checkbox"> 创建与平台无关的类</li>
+<li><input checked="" disabled="" type="checkbox"> 客户端代码与高层抽象互动</li>
+<li><input checked="" disabled="" type="checkbox"> 开闭原则</li>
+<li><input checked="" disabled="" type="checkbox"> 单一职责原则</li>
+<li><input disabled="" type="checkbox"> 高内聚类使用该方法可能会更复杂</li>
 </ul>
 <h2 id="组合模式">组合模式</h2>
 <h3 id="意图-7">意图</h3>
@@ -1176,11 +1176,11 @@ Circle --|&gt; Dot
         self<span style="color:#f92672">.</span>_y <span style="color:#f92672">=</span> y
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">move</span>(self, x, y):
-        self<span style="color:#f92672">.</span>_x <span style="color:#f92672">+</span><span style="color:#f92672">=</span> x
-        self<span style="color:#f92672">.</span>_y <span style="color:#f92672">+</span><span style="color:#f92672">=</span> y
+        self<span style="color:#f92672">.</span>_x <span style="color:#f92672">+=</span> x
+        self<span style="color:#f92672">.</span>_y <span style="color:#f92672">+=</span> y
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">draw</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">draw graphic</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;draw graphic&#39;</span>)
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Circle</span>(Dot):
@@ -1190,7 +1190,7 @@ Circle --|&gt; Dot
         self<span style="color:#f92672">.</span>_raidus <span style="color:#f92672">=</span> radius
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">draw</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">draw Circle</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;draw Circle&#39;</span>)
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CompoundGraphic</span>(Graphic):
@@ -1227,7 +1227,7 @@ Circle --|&gt; Dot
         self<span style="color:#f92672">.</span>cg<span style="color:#f92672">.</span>draw()
 
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     ie <span style="color:#f92672">=</span> ImageEditor()
     ie<span style="color:#f92672">.</span>load()
     ie<span style="color:#f92672">.</span>group_selected(Dot(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>))
@@ -1337,10 +1337,10 @@ DataSourceDecorator o--&gt; DataSource
         self<span style="color:#f92672">.</span>_filename <span style="color:#f92672">=</span> filename
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">write_data</span>(self, data):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">write data</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;write data&#39;</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">read_data</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">read data</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;read data&#39;</span>)
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DataSourceDecorator</span>(DataSource):
@@ -1350,43 +1350,43 @@ DataSourceDecorator o--&gt; DataSource
 
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">write_data</span>(self, data):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">decorator write data</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;decorator write data&#39;</span>)
         self<span style="color:#f92672">.</span>_wrappee<span style="color:#f92672">.</span>write_data(data)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">read_data</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">decorator read data</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;decorator read data&#39;</span>)
         <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_wrappee<span style="color:#f92672">.</span>read_data()
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EncryptionDecorator</span>(DataSourceDecorator):
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">write_data</span>(self, data):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">encrypt data</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;encrypt data&#39;</span>)
         super()<span style="color:#f92672">.</span>write_data(data)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">read_data</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">decrypt data</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;decrypt data&#39;</span>)
         super()<span style="color:#f92672">.</span>read_data()
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CompressionDecorator</span>(DataSourceDecorator):
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">write_data</span>(self, data):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">compress data</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;compress data&#39;</span>)
         super()<span style="color:#f92672">.</span>write_data(data)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">read_data</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">decompress data</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;decompress data&#39;</span>)
         super()<span style="color:#f92672">.</span>read_data()
 
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
-    source <span style="color:#f92672">=</span> FileDataSource(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">haha</span><span style="color:#e6db74">&#39;</span>)
-    source<span style="color:#f92672">.</span>write_data(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">abc</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    source <span style="color:#f92672">=</span> FileDataSource(<span style="color:#e6db74">&#39;haha&#39;</span>)
+    source<span style="color:#f92672">.</span>write_data(<span style="color:#e6db74">&#39;abc&#39;</span>)
     c_source <span style="color:#f92672">=</span> CompressionDecorator(source)
-    c_source<span style="color:#f92672">.</span>write_data(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">abc</span><span style="color:#e6db74">&#39;</span>)
+    c_source<span style="color:#f92672">.</span>write_data(<span style="color:#e6db74">&#39;abc&#39;</span>)
     e_source <span style="color:#f92672">=</span> EncryptionDecorator(source)
-    e_source<span style="color:#f92672">.</span>write_data(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">abc</span><span style="color:#e6db74">&#39;</span>)
+    e_source<span style="color:#f92672">.</span>write_data(<span style="color:#e6db74">&#39;abc&#39;</span>)
 </code></pre></div><h3 id="适用性-8">适用性</h3>
 <ul>
 <li>不修改代码的情况下增加对象的功能</li>
@@ -1460,14 +1460,14 @@ VideoConverter ..&gt; CodecFactory
 
     <span style="color:#66d9ef">def</span> __init__(self, filename<span style="color:#f92672">=</span>None):
         self<span style="color:#f92672">.</span>filename <span style="color:#f92672">=</span> filename
-        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">init</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;init&#39;</span>)
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CodecFactory</span>(object):
 
     <span style="color:#a6e22e">@staticmethod</span>
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">extract</span>(file_<span style="color:#f92672">=</span>None):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">CodecFactory extract</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;CodecFactory extract&#39;</span>)
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VideoConverter</span>(object):
@@ -1478,9 +1478,9 @@ VideoConverter ..&gt; CodecFactory
         <span style="color:#66d9ef">return</span> source_codec
 
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     convertor <span style="color:#f92672">=</span> VideoConverter()
-    mp4 <span style="color:#f92672">=</span> convertor<span style="color:#f92672">.</span>convert(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">adfd</span><span style="color:#e6db74">&#39;</span>)
+    mp4 <span style="color:#f92672">=</span> convertor<span style="color:#f92672">.</span>convert(<span style="color:#e6db74">&#39;adfd&#39;</span>)
 </code></pre></div><h3 id="适用性-9">适用性</h3>
 <ul>
 <li>需要一个复杂子系统的直接接口，且该接口功能有限</li>
@@ -1569,7 +1569,7 @@ Forest o--&gt; Tree
         self<span style="color:#f92672">.</span>texture <span style="color:#f92672">=</span> texture
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">draw</span>(self, canvas, x, y):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">tree type draw</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;tree type draw&#39;</span>)
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TreeFactory</span>(object):
@@ -1620,10 +1620,10 @@ Forest o--&gt; Tree
             tree<span style="color:#f92672">.</span>draw(canvas)
 
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     forest <span style="color:#f92672">=</span> Forest()
-    forest<span style="color:#f92672">.</span>plant_tree(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">tree</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">red</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">p</span><span style="color:#e6db74">&#39;</span>)
-    forest<span style="color:#f92672">.</span>draw(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">canvas</span><span style="color:#e6db74">&#39;</span>)
+    forest<span style="color:#f92672">.</span>plant_tree(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;tree&#39;</span>, <span style="color:#e6db74">&#39;red&#39;</span>, <span style="color:#e6db74">&#39;p&#39;</span>)
+    forest<span style="color:#f92672">.</span>draw(<span style="color:#e6db74">&#39;canvas&#39;</span>)
 
 </code></pre></div><h3 id="适用性-10">适用性</h3>
 <ul>
@@ -1639,9 +1639,9 @@ Forest o--&gt; Tree
 </ul>
 <h3 id="优缺点-10">优缺点</h3>
 <ul>
-<li><input checked="" disabled="" type="checkbox">节省内存</li>
-<li><input disabled="" type="checkbox">牺牲速度换取内存</li>
-<li><input disabled="" type="checkbox">代码复杂</li>
+<li><input checked="" disabled="" type="checkbox"> 节省内存</li>
+<li><input disabled="" type="checkbox"> 牺牲速度换取内存</li>
+<li><input disabled="" type="checkbox"> 代码复杂</li>
 </ul>
 <h2 id="代理模式">代理模式</h2>
 <h3 id="意图-11">意图</h3>
@@ -1718,13 +1718,13 @@ CachedVideo o--&gt; YoutubeVideo
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">YoutubeVideo</span>(YoutubeLib):
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">list_videos</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">origin list</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;origin list&#39;</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_video_info</span>(self, id_):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">id {} origin info</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(id_))
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;id {} origin info&#39;</span><span style="color:#f92672">.</span>format(id_))
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">download_video</span>(self, id_):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">origin download video</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;origin download video&#39;</span>)
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CachedVideo</span>(YoutubeLib):
@@ -1765,7 +1765,7 @@ CachedVideo o--&gt; YoutubeVideo
         <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>render_video_page(id_), self<span style="color:#f92672">.</span>render_list_panel()
 
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     youtube_service <span style="color:#f92672">=</span> YoutubeVideo()
     service_proxy <span style="color:#f92672">=</span> CachedVideo(youtube_service)
     manager <span style="color:#f92672">=</span> YoutubeManager(service_proxy)
@@ -1790,11 +1790,11 @@ CachedVideo o--&gt; YoutubeVideo
 </ul>
 <h3 id="优缺点-11">优缺点</h3>
 <ul>
-<li><input checked="" disabled="" type="checkbox">客户端无感知控制服务对象</li>
-<li><input checked="" disabled="" type="checkbox">可管理服务对象生命周期</li>
-<li><input checked="" disabled="" type="checkbox">开闭原则</li>
-<li><input disabled="" type="checkbox">代码复杂</li>
-<li><input disabled="" type="checkbox">服务延迟响应</li>
+<li><input checked="" disabled="" type="checkbox"> 客户端无感知控制服务对象</li>
+<li><input checked="" disabled="" type="checkbox"> 可管理服务对象生命周期</li>
+<li><input checked="" disabled="" type="checkbox"> 开闭原则</li>
+<li><input disabled="" type="checkbox"> 代码复杂</li>
+<li><input disabled="" type="checkbox"> 服务延迟响应</li>
 </ul>
 <h1 id="行为模式">行为模式</h1>
 <p>行为模式负责对象间的高效沟通和职责委派</p>
@@ -1880,7 +1880,7 @@ Dialog --&gt; Container
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_help</span>(self):
         <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>help_text:
-            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">component help</span><span style="color:#e6db74">&#39;</span>)
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;component help&#39;</span>)
         <span style="color:#66d9ef">else</span>:
             self<span style="color:#f92672">.</span>container<span style="color:#f92672">.</span>help()
 
@@ -1909,7 +1909,7 @@ Dialog --&gt; Container
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_help</span>(self):
         <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>help_text:
-            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">modal_text</span><span style="color:#e6db74">&#39;</span>)
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;modal_text&#39;</span>)
         <span style="color:#66d9ef">else</span>:
             super()<span style="color:#f92672">.</span>show_help()
 
@@ -1921,16 +1921,16 @@ Dialog --&gt; Container
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_help</span>(self):
         <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>help_text:
-            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">dialog text</span><span style="color:#e6db74">&#39;</span>)
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;dialog text&#39;</span>)
         <span style="color:#66d9ef">else</span>:
             super()<span style="color:#f92672">.</span>show_help()
 
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
-    dialog <span style="color:#f92672">=</span> Dialog(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">haha</span><span style="color:#e6db74">&#39;</span>)
-    panel <span style="color:#f92672">=</span> Panel(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">panel</span><span style="color:#e6db74">&#39;</span>)
-    button <span style="color:#f92672">=</span> Button(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">button</span><span style="color:#e6db74">&#39;</span>)
-    button1 <span style="color:#f92672">=</span> Button(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">button1</span><span style="color:#e6db74">&#39;</span>)
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    dialog <span style="color:#f92672">=</span> Dialog(<span style="color:#e6db74">&#39;haha&#39;</span>)
+    panel <span style="color:#f92672">=</span> Panel(<span style="color:#e6db74">&#39;panel&#39;</span>)
+    button <span style="color:#f92672">=</span> Button(<span style="color:#e6db74">&#39;button&#39;</span>)
+    button1 <span style="color:#f92672">=</span> Button(<span style="color:#e6db74">&#39;button1&#39;</span>)
     panel<span style="color:#f92672">.</span>add(button)
     panel<span style="color:#f92672">.</span>add(button1)
     dialog<span style="color:#f92672">.</span>add(panel)
@@ -1951,10 +1951,10 @@ Dialog --&gt; Container
 </ul>
 <h3 id="优缺点-12">优缺点</h3>
 <ul>
-<li><input checked="" disabled="" type="checkbox">控制请求处理顺序</li>
-<li><input checked="" disabled="" type="checkbox">单一职责原则</li>
-<li><input checked="" disabled="" type="checkbox">开闭原则</li>
-<li><input disabled="" type="checkbox">部分请求可能未处理</li>
+<li><input checked="" disabled="" type="checkbox"> 控制请求处理顺序</li>
+<li><input checked="" disabled="" type="checkbox"> 单一职责原则</li>
+<li><input checked="" disabled="" type="checkbox"> 开闭原则</li>
+<li><input disabled="" type="checkbox"> 部分请求可能未处理</li>
 </ul>
 <h2 id="命令模式">命令模式</h2>
 <h3 id="意图-13">意图</h3>
@@ -2080,7 +2080,7 @@ UndoCommand --&gt; Application
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CopyCommand</span>(Command):
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute</span>(self):
-        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">execute</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;execute&#39;</span>)
         self<span style="color:#f92672">.</span>app<span style="color:#f92672">.</span>clipboard <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>editor<span style="color:#f92672">.</span>get_selection()
         <span style="color:#66d9ef">return</span> False
 
@@ -2088,7 +2088,7 @@ UndoCommand --&gt; Application
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CutCommand</span>(Command):
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute</span>(self):
-        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">execute</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;execute&#39;</span>)
         self<span style="color:#f92672">.</span>save_backup()
         self<span style="color:#f92672">.</span>app<span style="color:#f92672">.</span>clipboard <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>editor<span style="color:#f92672">.</span>get_selection()
         self<span style="color:#f92672">.</span>editor<span style="color:#f92672">.</span>delete_selection()
@@ -2098,7 +2098,7 @@ UndoCommand --&gt; Application
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PasteCommand</span>(Command):
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute</span>(self):
-        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">execute</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;execute&#39;</span>)
         self<span style="color:#f92672">.</span>save_backup()
         self<span style="color:#f92672">.</span>editor<span style="color:#f92672">.</span>repalce_selection(self<span style="color:#f92672">.</span>app<span style="color:#f92672">.</span>clipboard)
         <span style="color:#66d9ef">return</span> True
@@ -2107,7 +2107,7 @@ UndoCommand --&gt; Application
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UndoCommand</span>(Command):
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute</span>(self):
-        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">execute</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;execute&#39;</span>)
         self<span style="color:#f92672">.</span>app<span style="color:#f92672">.</span>undo()
         <span style="color:#66d9ef">return</span> False
 
@@ -2127,19 +2127,19 @@ UndoCommand --&gt; Application
 <span style="color:#75715e"># 接受者</span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Editor</span>(object):
 
-    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
         self<span style="color:#f92672">.</span>text <span style="color:#f92672">=</span> None
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_selection</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">editor get selection</span><span style="color:#e6db74">&#39;</span>)
-        ret <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;editor get selection&#39;</span>)
+        ret <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
         <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>text:
             ret <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>text
         <span style="color:#66d9ef">return</span> ret
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">delete_selection</span>(self):
         <span style="color:#66d9ef">pass</span>
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">editor delete selection</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;editor delete selection&#39;</span>)
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Button</span>(object):
@@ -2158,7 +2158,7 @@ UndoCommand --&gt; Application
 <span style="color:#75715e"># 发送者</span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Application</span>(object):
 
-    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
         self<span style="color:#f92672">.</span>clipboard <span style="color:#f92672">=</span> None
         self<span style="color:#f92672">.</span>editors <span style="color:#f92672">=</span> None
         self<span style="color:#f92672">.</span>active_editor <span style="color:#f92672">=</span> Editor()
@@ -2188,7 +2188,7 @@ UndoCommand --&gt; Application
         <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> buttons:
             i<span style="color:#f92672">.</span>execute()
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     app <span style="color:#f92672">=</span> Application()
     copy_button <span style="color:#f92672">=</span> Button()
     undo_button <span style="color:#f92672">=</span> Button()
@@ -2213,12 +2213,12 @@ UndoCommand --&gt; Application
 </ul>
 <h3 id="优缺点-13">优缺点</h3>
 <ul>
-<li><input checked="" disabled="" type="checkbox">单一职责</li>
-<li><input checked="" disabled="" type="checkbox">开闭原则</li>
-<li><input checked="" disabled="" type="checkbox">实现撤销与恢复</li>
-<li><input checked="" disabled="" type="checkbox">实现延迟操作</li>
-<li><input checked="" disabled="" type="checkbox">将一组简单命令组合成复杂命令</li>
-<li><input disabled="" type="checkbox">代码复杂</li>
+<li><input checked="" disabled="" type="checkbox"> 单一职责</li>
+<li><input checked="" disabled="" type="checkbox"> 开闭原则</li>
+<li><input checked="" disabled="" type="checkbox"> 实现撤销与恢复</li>
+<li><input checked="" disabled="" type="checkbox"> 实现延迟操作</li>
+<li><input checked="" disabled="" type="checkbox"> 将一组简单命令组合成复杂命令</li>
+<li><input disabled="" type="checkbox"> 代码复杂</li>
 </ul>
 <h2 id="迭代器模式">迭代器模式</h2>
 <h3 id="意图-14">意图</h3>
@@ -2359,7 +2359,7 @@ Facebook o--&gt; Profile
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_next</span>(self):
         <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>has_more():
             ret <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>cache[self<span style="color:#f92672">.</span>current_pos]
-            self<span style="color:#f92672">.</span>current_pos <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+            self<span style="color:#f92672">.</span>current_pos <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
             <span style="color:#66d9ef">return</span> ret
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">has_more</span>(self):
@@ -2371,14 +2371,14 @@ Facebook o--&gt; Profile
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Facebook</span>(SocialNetwork):
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_friends_iterator</span>(self, profile_id):
-        <span style="color:#66d9ef">return</span> FacebookIterator(self, profile_id, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">friends</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">return</span> FacebookIterator(self, profile_id, <span style="color:#e6db74">&#39;friends&#39;</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_coworkers_iterator</span>(self, profile_id):
-        <span style="color:#66d9ef">return</span> FacebookIterator(self, profile_id, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coworkers</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">return</span> FacebookIterator(self, profile_id, <span style="color:#e6db74">&#39;coworkers&#39;</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">social_graph_request</span>(self, profile_id, type_):
         ret <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]
-        <span style="color:#66d9ef">if</span> type_ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coworkers</span><span style="color:#e6db74">&#39;</span>:
+        <span style="color:#66d9ef">if</span> type_ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;coworkers&#39;</span>:
             ret<span style="color:#f92672">.</span>append(<span style="color:#ae81ff">4</span>)
         <span style="color:#66d9ef">return</span> ret
 
@@ -2388,24 +2388,24 @@ Facebook o--&gt; Profile
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">send</span>(self, iterator, message):
         <span style="color:#66d9ef">while</span> iterator<span style="color:#f92672">.</span>has_more():
             profile <span style="color:#f92672">=</span> iterator<span style="color:#f92672">.</span>get_next()
-            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">send email {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(profile))
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;send email {}&#39;</span><span style="color:#f92672">.</span>format(profile))
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Application</span>(object):
 
-    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
         self<span style="color:#f92672">.</span>network <span style="color:#f92672">=</span> Facebook()
         self<span style="color:#f92672">.</span>spammer <span style="color:#f92672">=</span> SocialSpammer()
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">send_sapm_to_friends</span>(self, profile):
         iterator <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>network<span style="color:#f92672">.</span>create_friends_iterator(profile<span style="color:#f92672">.</span>get_id())
-        self<span style="color:#f92672">.</span>spammer<span style="color:#f92672">.</span>send(iterator, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">haha</span><span style="color:#e6db74">&#39;</span>)
+        self<span style="color:#f92672">.</span>spammer<span style="color:#f92672">.</span>send(iterator, <span style="color:#e6db74">&#39;haha&#39;</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">send_spam_to_coworkers</span>(self, profile):
         iterator <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>network<span style="color:#f92672">.</span>create_coworkers_iterator(profile<span style="color:#f92672">.</span>get_id())
-        self<span style="color:#f92672">.</span>spammer<span style="color:#f92672">.</span>send(iterator, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">haha</span><span style="color:#e6db74">&#39;</span>)
+        self<span style="color:#f92672">.</span>spammer<span style="color:#f92672">.</span>send(iterator, <span style="color:#e6db74">&#39;haha&#39;</span>)
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     app <span style="color:#f92672">=</span> Application()
     profile <span style="color:#f92672">=</span> Profile()
     app<span style="color:#f92672">.</span>send_sapm_to_friends(profile)
@@ -2426,11 +2426,11 @@ Facebook o--&gt; Profile
 </ul>
 <h3 id="优缺点-14">优缺点</h3>
 <ul>
-<li><input checked="" disabled="" type="checkbox">单一职责</li>
-<li><input checked="" disabled="" type="checkbox">开闭原则</li>
-<li><input checked="" disabled="" type="checkbox">并行遍历集合</li>
-<li><input checked="" disabled="" type="checkbox">可暂停后继续遍历集合</li>
-<li><input disabled="" type="checkbox">特殊集合迭代器效率低</li>
+<li><input checked="" disabled="" type="checkbox"> 单一职责</li>
+<li><input checked="" disabled="" type="checkbox"> 开闭原则</li>
+<li><input checked="" disabled="" type="checkbox"> 并行遍历集合</li>
+<li><input checked="" disabled="" type="checkbox"> 可暂停后继续遍历集合</li>
+<li><input disabled="" type="checkbox"> 特殊集合迭代器效率低</li>
 </ul>
 <h2 id="中介者模式">中介者模式</h2>
 <h3 id="意图-15">意图</h3>
@@ -2516,7 +2516,7 @@ AuthenticationDialog ..|&gt; Mediator
 <span style="color:#75715e"># 具体实现</span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AuthenticationDialog</span>(Mediator):
 
-    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
         self<span style="color:#f92672">.</span>title <span style="color:#f92672">=</span> None
         self<span style="color:#f92672">.</span>login_or_register_chkbx <span style="color:#f92672">=</span> True
         self<span style="color:#f92672">.</span>login_username <span style="color:#f92672">=</span> None
@@ -2531,16 +2531,16 @@ AuthenticationDialog ..|&gt; Mediator
         self<span style="color:#f92672">.</span>login_or_register_chkbx <span style="color:#f92672">=</span> chk
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">notify</span>(self, sender, event):
-        <span style="color:#66d9ef">if</span> sender <span style="color:#f92672">==</span> self<span style="color:#f92672">.</span>login_or_register_chkbx <span style="color:#f92672">and</span> event <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">check</span><span style="color:#e6db74">&#39;</span>:
+        <span style="color:#66d9ef">if</span> sender <span style="color:#f92672">==</span> self<span style="color:#f92672">.</span>login_or_register_chkbx <span style="color:#f92672">and</span> event <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;check&#39;</span>:
             <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>login_or_register_chkbx<span style="color:#f92672">.</span>checked:
-                self<span style="color:#f92672">.</span>title <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">log in</span><span style="color:#e6db74">&#39;</span>
+                self<span style="color:#f92672">.</span>title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;log in&#39;</span>
             <span style="color:#66d9ef">else</span>:
-                self<span style="color:#f92672">.</span>title <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">register</span><span style="color:#e6db74">&#39;</span>
-        <span style="color:#66d9ef">elif</span> sender <span style="color:#f92672">==</span> self<span style="color:#f92672">.</span>ok_btn <span style="color:#f92672">and</span> event <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">click</span><span style="color:#e6db74">&#39;</span>:
+                self<span style="color:#f92672">.</span>title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;register&#39;</span>
+        <span style="color:#66d9ef">elif</span> sender <span style="color:#f92672">==</span> self<span style="color:#f92672">.</span>ok_btn <span style="color:#f92672">and</span> event <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;click&#39;</span>:
             <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>login_or_register<span style="color:#f92672">.</span>checked:
-                self<span style="color:#f92672">.</span>title <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">click</span><span style="color:#e6db74">&#39;</span>
+                self<span style="color:#f92672">.</span>title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;click&#39;</span>
         <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>title:
-            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>title))
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{}&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>title))
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Component</span>(object):
@@ -2549,10 +2549,10 @@ AuthenticationDialog ..|&gt; Mediator
         self<span style="color:#f92672">.</span>dialog <span style="color:#f92672">=</span> dialog
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click</span>(self):
-        self<span style="color:#f92672">.</span>dialog<span style="color:#f92672">.</span>notify(self, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">click</span><span style="color:#e6db74">&#39;</span>)
+        self<span style="color:#f92672">.</span>dialog<span style="color:#f92672">.</span>notify(self, <span style="color:#e6db74">&#39;click&#39;</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">keypress</span>(self):
-        self<span style="color:#f92672">.</span>dialog<span style="color:#f92672">.</span>notify(self, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">keypress</span><span style="color:#e6db74">&#39;</span>)
+        self<span style="color:#f92672">.</span>dialog<span style="color:#f92672">.</span>notify(self, <span style="color:#e6db74">&#39;keypress&#39;</span>)
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Button</span>(Component):
@@ -2565,14 +2565,14 @@ AuthenticationDialog ..|&gt; Mediator
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Checkbox</span>(Component):
 
-    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
-        super()<span style="color:#f92672">.</span>__init__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        super()<span style="color:#f92672">.</span>__init__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
         self<span style="color:#f92672">.</span>checked <span style="color:#f92672">=</span> True
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check</span>(self):
-        self<span style="color:#f92672">.</span>dialog<span style="color:#f92672">.</span>notify(self, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">check</span><span style="color:#e6db74">&#39;</span>)
+        self<span style="color:#f92672">.</span>dialog<span style="color:#f92672">.</span>notify(self, <span style="color:#e6db74">&#39;check&#39;</span>)
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     ad <span style="color:#f92672">=</span> AuthenticationDialog()
     btn <span style="color:#f92672">=</span> Button(ad)
     chk <span style="color:#f92672">=</span> Checkbox(ad)
@@ -2596,11 +2596,11 @@ AuthenticationDialog ..|&gt; Mediator
 </ul>
 <h3 id="优缺点-15">优缺点</h3>
 <ul>
-<li><input checked="" disabled="" type="checkbox">单一职责</li>
-<li><input checked="" disabled="" type="checkbox">开闭原则</li>
-<li><input checked="" disabled="" type="checkbox">减轻组件之间的耦合</li>
-<li><input checked="" disabled="" type="checkbox">复用组件</li>
-<li><input disabled="" type="checkbox">中介者过于复杂</li>
+<li><input checked="" disabled="" type="checkbox"> 单一职责</li>
+<li><input checked="" disabled="" type="checkbox"> 开闭原则</li>
+<li><input checked="" disabled="" type="checkbox"> 减轻组件之间的耦合</li>
+<li><input checked="" disabled="" type="checkbox"> 复用组件</li>
+<li><input disabled="" type="checkbox"> 中介者过于复杂</li>
 </ul>
 <h2 id="备忘录模式">备忘录模式</h2>
 <h3 id="意图-16">意图</h3>
@@ -2715,7 +2715,7 @@ ConcreteOriginator &lt;--&gt; ConcreteMemento
         self<span style="color:#f92672">.</span>selection_width <span style="color:#f92672">=</span> width
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_snapshot</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">create snap</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;create snap&#39;</span>)
         <span style="color:#66d9ef">return</span> Snapshot(self, self<span style="color:#f92672">.</span>text, self<span style="color:#f92672">.</span>cur_x, self<span style="color:#f92672">.</span>cur_y, self<span style="color:#f92672">.</span>selection_width)
 
 
@@ -2729,7 +2729,7 @@ ConcreteOriginator &lt;--&gt; ConcreteMemento
         self<span style="color:#f92672">.</span>selection_width <span style="color:#f92672">=</span> selection_width
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">restore</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">restore snap</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;restore snap&#39;</span>)
         self<span style="color:#f92672">.</span>editor<span style="color:#f92672">.</span>set_text(self<span style="color:#f92672">.</span>text)
         self<span style="color:#f92672">.</span>editor<span style="color:#f92672">.</span>set_cursor(self<span style="color:#f92672">.</span>cur_x, self<span style="color:#f92672">.</span>cur_y)
         self<span style="color:#f92672">.</span>editor<span style="color:#f92672">.</span>set_selection_width(self<span style="color:#f92672">.</span>selection_width)
@@ -2747,9 +2747,9 @@ ConcreteOriginator &lt;--&gt; ConcreteMemento
         <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>backup:
             self<span style="color:#f92672">.</span>backup<span style="color:#f92672">.</span>restore()
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     cmd <span style="color:#f92672">=</span> Command()
-    editor <span style="color:#f92672">=</span> Editor(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">text</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>)
+    editor <span style="color:#f92672">=</span> Editor(<span style="color:#e6db74">&#39;text&#39;</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>)
     cmd<span style="color:#f92672">.</span>make_backup(editor)
     cmd<span style="color:#f92672">.</span>undo(editor)
 
@@ -2769,11 +2769,11 @@ ConcreteOriginator &lt;--&gt; ConcreteMemento
 </ul>
 <h3 id="优缺点-16">优缺点</h3>
 <ul>
-<li><input checked="" disabled="" type="checkbox">不破坏对象封装情况的前提下创建对象状态快照</li>
-<li><input checked="" disabled="" type="checkbox">通过负责人维护原生类状态历史</li>
-<li><input disabled="" type="checkbox">客户端频繁创建备忘录会消耗大量内存</li>
-<li><input disabled="" type="checkbox">负责人必须跟踪原生类生命周期，才能销毁不使用的备忘录</li>
-<li><input disabled="" type="checkbox">动态编程语言不能确保备忘录状态不能被更改</li>
+<li><input checked="" disabled="" type="checkbox"> 不破坏对象封装情况的前提下创建对象状态快照</li>
+<li><input checked="" disabled="" type="checkbox"> 通过负责人维护原生类状态历史</li>
+<li><input disabled="" type="checkbox"> 客户端频繁创建备忘录会消耗大量内存</li>
+<li><input disabled="" type="checkbox"> 负责人必须跟踪原生类生命周期，才能销毁不使用的备忘录</li>
+<li><input disabled="" type="checkbox"> 动态编程语言不能确保备忘录状态不能被更改</li>
 </ul>
 <h2 id="观察者模式">观察者模式</h2>
 <h3 id="意图-17">意图</h3>
@@ -2845,7 +2845,7 @@ LoggingListener ..|&gt; EventListeners
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EventManager</span>(object):
 
-    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
         self<span style="color:#f92672">.</span>_listeners <span style="color:#f92672">=</span> defaultdict(list)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">subscribe</span>(self, event_type, listener):
@@ -2861,17 +2861,17 @@ LoggingListener ..|&gt; EventListeners
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Editor</span>(object):
 
-    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
         self<span style="color:#f92672">.</span>file <span style="color:#f92672">=</span> None
         self<span style="color:#f92672">.</span>events <span style="color:#f92672">=</span> EventManager()
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">open_file</span>(self, path):
-        self<span style="color:#f92672">.</span>file <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">open file</span><span style="color:#e6db74">&#39;</span>
-        self<span style="color:#f92672">.</span>events<span style="color:#f92672">.</span>notify(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">open</span><span style="color:#e6db74">&#39;</span>, self<span style="color:#f92672">.</span>file)
+        self<span style="color:#f92672">.</span>file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;open file&#39;</span>
+        self<span style="color:#f92672">.</span>events<span style="color:#f92672">.</span>notify(<span style="color:#e6db74">&#39;open&#39;</span>, self<span style="color:#f92672">.</span>file)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">save_file</span>(self):
-        self<span style="color:#f92672">.</span>file <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">write file</span><span style="color:#e6db74">&#39;</span>
-        self<span style="color:#f92672">.</span>events<span style="color:#f92672">.</span>notify(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">save</span><span style="color:#e6db74">&#39;</span>, self<span style="color:#f92672">.</span>file)
+        self<span style="color:#f92672">.</span>file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;write file&#39;</span>
+        self<span style="color:#f92672">.</span>events<span style="color:#f92672">.</span>notify(<span style="color:#e6db74">&#39;save&#39;</span>, self<span style="color:#f92672">.</span>file)
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EventListener</span>(metaclass<span style="color:#f92672">=</span>ABCMeta):
@@ -2888,7 +2888,7 @@ LoggingListener ..|&gt; EventListeners
         self<span style="color:#f92672">.</span>message <span style="color:#f92672">=</span> message
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">update</span>(self, file_name):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{} {} update</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>log, file_name))
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{} {} update&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>log, file_name))
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EmailAlertsListener</span>(EventListener):
@@ -2899,15 +2899,15 @@ LoggingListener ..|&gt; EventListeners
 
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">update</span>(self, file_name):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{} {} update</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>email, file_name))
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{} {} update&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>email, file_name))
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     editor <span style="color:#f92672">=</span> Editor()
-    logger <span style="color:#f92672">=</span> LoggingListener(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">log</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">file 1</span><span style="color:#e6db74">&#39;</span>)
-    editor<span style="color:#f92672">.</span>events<span style="color:#f92672">.</span>subscribe(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">open</span><span style="color:#e6db74">&#39;</span>, logger)
-    email <span style="color:#f92672">=</span> EmailAlertsListener(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">email</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">haha</span><span style="color:#e6db74">&#39;</span>)
-    editor<span style="color:#f92672">.</span>events<span style="color:#f92672">.</span>subscribe(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">save</span><span style="color:#e6db74">&#39;</span>, email)
-    editor<span style="color:#f92672">.</span>open_file(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">file2</span><span style="color:#e6db74">&#39;</span>)
+    logger <span style="color:#f92672">=</span> LoggingListener(<span style="color:#e6db74">&#39;log&#39;</span>, <span style="color:#e6db74">&#39;file 1&#39;</span>)
+    editor<span style="color:#f92672">.</span>events<span style="color:#f92672">.</span>subscribe(<span style="color:#e6db74">&#39;open&#39;</span>, logger)
+    email <span style="color:#f92672">=</span> EmailAlertsListener(<span style="color:#e6db74">&#39;email&#39;</span>, <span style="color:#e6db74">&#39;haha&#39;</span>)
+    editor<span style="color:#f92672">.</span>events<span style="color:#f92672">.</span>subscribe(<span style="color:#e6db74">&#39;save&#39;</span>, email)
+    editor<span style="color:#f92672">.</span>open_file(<span style="color:#e6db74">&#39;file2&#39;</span>)
     editor<span style="color:#f92672">.</span>save_file()
 
 </code></pre></div><h3 id="适用性-17">适用性</h3>
@@ -2926,9 +2926,9 @@ LoggingListener ..|&gt; EventListeners
 </ul>
 <h3 id="优缺点-17">优缺点</h3>
 <ul>
-<li><input checked="" disabled="" type="checkbox">开闭原则</li>
-<li><input checked="" disabled="" type="checkbox">可以运行时建立对象之间的联系</li>
-<li><input disabled="" type="checkbox">订阅者的通知顺序是随机的</li>
+<li><input checked="" disabled="" type="checkbox"> 开闭原则</li>
+<li><input checked="" disabled="" type="checkbox"> 可以运行时建立对象之间的联系</li>
+<li><input disabled="" type="checkbox"> 订阅者的通知顺序是随机的</li>
 </ul>
 <h2 id="状态模式">状态模式</h2>
 <h3 id="意图-18">意图</h3>
@@ -3003,9 +3003,9 @@ Player o--&gt; State
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AudioPlay</span>(object):
 
-    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
         self<span style="color:#f92672">.</span>state <span style="color:#f92672">=</span> ReadyState(self)
-        self<span style="color:#f92672">.</span>UI <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">UI</span><span style="color:#e6db74">&#39;</span>
+        self<span style="color:#f92672">.</span>UI <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;UI&#39;</span>
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">change_state</span>(self, state):
         self<span style="color:#f92672">.</span>state <span style="color:#f92672">=</span> state
@@ -3069,13 +3069,13 @@ Player o--&gt; State
         self<span style="color:#f92672">.</span>player<span style="color:#f92672">.</span>change_state(LockedState(self<span style="color:#f92672">.</span>player))
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_next</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">next song</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;next song&#39;</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_previous</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">previous song</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;previous song&#39;</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_play</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">play song</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;play song&#39;</span>)
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PlayingState</span>(State):
@@ -3084,16 +3084,16 @@ Player o--&gt; State
         self<span style="color:#f92672">.</span>player<span style="color:#f92672">.</span>change_state(LockedState(self<span style="color:#f92672">.</span>player))
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_play</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">stop play</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;stop play&#39;</span>)
         self<span style="color:#f92672">.</span>player<span style="color:#f92672">.</span>change_state(ReadyState(self<span style="color:#f92672">.</span>player))
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_next</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">next song</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;next song&#39;</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">click_previous</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">previous song</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;previous song&#39;</span>)
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     play <span style="color:#f92672">=</span> AudioPlay()
     play<span style="color:#f92672">.</span>click_next()
     play<span style="color:#f92672">.</span>click_previous()
@@ -3131,10 +3131,10 @@ Player o--&gt; State
 </ul>
 <h3 id="优缺点-18">优缺点</h3>
 <ul>
-<li><input checked="" disabled="" type="checkbox">单一职责原则</li>
-<li><input checked="" disabled="" type="checkbox">开闭原则</li>
-<li><input checked="" disabled="" type="checkbox">消除臃肿的状态机条件语句简化上下文代码</li>
-<li><input disabled="" type="checkbox">状态机只有很少的几个状态， 或者很少发生改变， 那么应用该模式可能会显得小题大作</li>
+<li><input checked="" disabled="" type="checkbox"> 单一职责原则</li>
+<li><input checked="" disabled="" type="checkbox"> 开闭原则</li>
+<li><input checked="" disabled="" type="checkbox"> 消除臃肿的状态机条件语句简化上下文代码</li>
+<li><input disabled="" type="checkbox"> 状态机只有很少的几个状态， 或者很少发生改变， 那么应用该模式可能会显得小题大作</li>
 </ul>
 <h2 id="策略模式">策略模式</h2>
 <h3 id="意图-19">意图</h3>
@@ -3176,35 +3176,35 @@ ConcreteStrategies ..|&gt; Strategy
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Strategy</span>(metaclass<span style="color:#f92672">=</span>ABCMeta):
 
     <span style="color:#a6e22e">@abstractmethod</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
         <span style="color:#66d9ef">pass</span>
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ConcreteStrategyAdd</span>(Strategy):
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
         ret <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
         <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> args:
-            ret <span style="color:#f92672">+</span><span style="color:#f92672">=</span> int(i)
+            ret <span style="color:#f92672">+=</span> int(i)
         <span style="color:#66d9ef">return</span> ret
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ConcreteStrategySubtract</span>(Strategy):
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
         ret <span style="color:#f92672">=</span> args[<span style="color:#ae81ff">0</span>]
         <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> args[<span style="color:#ae81ff">1</span>:]:
-            ret <span style="color:#f92672">-</span><span style="color:#f92672">=</span> int(i)
+            ret <span style="color:#f92672">-=</span> int(i)
         <span style="color:#66d9ef">return</span> ret
 
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ConcreteStrategyMultiply</span>(Strategy):
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
         ret <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
         <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> args:
-            ret <span style="color:#f92672">*</span><span style="color:#f92672">=</span> int(i)
+            ret <span style="color:#f92672">*=</span> int(i)
         <span style="color:#66d9ef">return</span> ret
 
 
@@ -3221,7 +3221,7 @@ ConcreteStrategies ..|&gt; Strategy
         <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>strategy<span style="color:#f92672">.</span>execute(<span style="color:#f92672">*</span>args)
 
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
 
     a <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
     b <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>
@@ -3250,13 +3250,13 @@ ConcreteStrategies ..|&gt; Strategy
 </ul>
 <h3 id="优缺点-19">优缺点</h3>
 <ul>
-<li><input checked="" disabled="" type="checkbox">在运行时切换对象内的算法。</li>
-<li><input checked="" disabled="" type="checkbox">将算法的实现和使用算法的代码隔离开来。</li>
-<li><input checked="" disabled="" type="checkbox">使用组合来代替继承。</li>
-<li><input checked="" disabled="" type="checkbox">开闭原则</li>
-<li><input disabled="" type="checkbox">如果你的算法极少发生改变， 那么没有任何理由引入新的类和接口。</li>
-<li><input disabled="" type="checkbox">客户端必须知晓策略间的不同——它需要选择合适的策略。</li>
-<li><input disabled="" type="checkbox">许多现代编程语言支持函数类型功能， 允许你在一组匿名函数中实现不同版本的算法。</li>
+<li><input checked="" disabled="" type="checkbox"> 在运行时切换对象内的算法。</li>
+<li><input checked="" disabled="" type="checkbox"> 将算法的实现和使用算法的代码隔离开来。</li>
+<li><input checked="" disabled="" type="checkbox"> 使用组合来代替继承。</li>
+<li><input checked="" disabled="" type="checkbox"> 开闭原则</li>
+<li><input disabled="" type="checkbox"> 如果你的算法极少发生改变， 那么没有任何理由引入新的类和接口。</li>
+<li><input disabled="" type="checkbox"> 客户端必须知晓策略间的不同——它需要选择合适的策略。</li>
+<li><input disabled="" type="checkbox"> 许多现代编程语言支持函数类型功能， 允许你在一组匿名函数中实现不同版本的算法。</li>
 </ul>
 <h2 id="模版方法模式">模版方法模式</h2>
 <h3 id="意图-20">意图</h3>
@@ -3314,14 +3314,14 @@ ConcreteClass2 --|&gt; AbstractClass
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">collection_resources</span>(self):
         <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>build_structures():
-            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">collection {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(i))
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;collection {}&#39;</span><span style="color:#f92672">.</span>format(i))
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">attack</span>(self):
         enemy <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>closest_enemy()
         <span style="color:#66d9ef">if</span> enemy:
-            self<span style="color:#f92672">.</span>send_warriors(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">x1</span><span style="color:#e6db74">&#39;</span>)
+            self<span style="color:#f92672">.</span>send_warriors(<span style="color:#e6db74">&#39;x1&#39;</span>)
         <span style="color:#66d9ef">else</span>:
-            self<span style="color:#f92672">.</span>send_scouts(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">y1</span><span style="color:#e6db74">&#39;</span>)
+            self<span style="color:#f92672">.</span>send_scouts(<span style="color:#e6db74">&#39;y1&#39;</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">turn</span>(self):
         <span style="color:#75715e"># template method</span>
@@ -3334,16 +3334,16 @@ ConcreteClass2 --|&gt; AbstractClass
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OrcsAI</span>(GameAI):
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">build_structures</span>(self):
-        <span style="color:#66d9ef">return</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">c</span><span style="color:#e6db74">&#39;</span>]
+        <span style="color:#66d9ef">return</span> [<span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;c&#39;</span>]
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">build_units</span>(self):
-        <span style="color:#66d9ef">return</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">u1</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">u2</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">u3</span><span style="color:#e6db74">&#39;</span>]
+        <span style="color:#66d9ef">return</span> [<span style="color:#e6db74">&#39;u1&#39;</span>, <span style="color:#e6db74">&#39;u2&#39;</span>, <span style="color:#e6db74">&#39;u3&#39;</span>]
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">send_scouts</span>(self, position):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{} send scouts to {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, position))
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{} send scouts to {}&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, position))
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">send_warriors</span>(self, position):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{} send warriors to {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, position))
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{} send warriors to {}&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, position))
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MonstersAI</span>(GameAI):
@@ -3357,7 +3357,7 @@ ConcreteClass2 --|&gt; AbstractClass
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">build_units</span>(self):
         <span style="color:#66d9ef">pass</span>
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     orcs_ai <span style="color:#f92672">=</span> OrcsAI()
     orcs_ai<span style="color:#f92672">.</span>turn()
     monsters_ai <span style="color:#f92672">=</span> MonstersAI()
@@ -3377,11 +3377,11 @@ ConcreteClass2 --|&gt; AbstractClass
 </ul>
 <h3 id="优缺点-20">优缺点</h3>
 <ul>
-<li><input checked="" disabled="" type="checkbox">允许客户端重写一个大型算法中的特定部分</li>
-<li><input checked="" disabled="" type="checkbox">将重复代码提取到一个超类中</li>
-<li><input disabled="" type="checkbox">部分客户端可能会受到算法框架的限制</li>
-<li><input disabled="" type="checkbox">违反里氏替换原则</li>
-<li><input disabled="" type="checkbox">模板方法中的步骤越多， 其维护工作就可能会越困难</li>
+<li><input checked="" disabled="" type="checkbox"> 允许客户端重写一个大型算法中的特定部分</li>
+<li><input checked="" disabled="" type="checkbox"> 将重复代码提取到一个超类中</li>
+<li><input disabled="" type="checkbox"> 部分客户端可能会受到算法框架的限制</li>
+<li><input disabled="" type="checkbox"> 违反里氏替换原则</li>
+<li><input disabled="" type="checkbox"> 模板方法中的步骤越多， 其维护工作就可能会越困难</li>
 </ul>
 <h2 id="访问者模式">访问者模式</h2>
 <h3 id="意图-21">意图</h3>
@@ -3502,49 +3502,49 @@ Visitor --&gt; CompundGraphic
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Dot</span>(Shape):
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">accept</span>(self, visitor):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class: {}, visitor: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, visitor))
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;class: {}, visitor: {}&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, visitor))
         visitor<span style="color:#f92672">.</span>visitDot(self)
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Circle</span>(Shape):
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">accept</span>(self, visitor):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class: {}, visitor: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, visitor))
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;class: {}, visitor: {}&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, visitor))
         visitor<span style="color:#f92672">.</span>visitCircle(self)
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Rectangle</span>(Shape):
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">accept</span>(self, visitor):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class: {}, visitor: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, visitor))
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;class: {}, visitor: {}&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, visitor))
         visitor<span style="color:#f92672">.</span>visitRectangle(self)
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CompoundShape</span>(Shape):
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">accept</span>(self, visitor):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class: {}, visitor: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, visitor))
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;class: {}, visitor: {}&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, visitor))
         visitor<span style="color:#f92672">.</span>visitCompoundShape(self)
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">XMLExportVisitor</span>(Visitor):
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">visitDot</span>(self, shape):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class: {}, self: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, self))
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;class: {}, self: {}&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, self))
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">visitCircle</span>(self, shape):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class: {}, self: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, self))
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;class: {}, self: {}&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, self))
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">visitRectangle</span>(self, shape):
         super()<span style="color:#f92672">.</span>visitRectangle(shape)
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class: {}, self: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, self))
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;class: {}, self: {}&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, self))
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">visitCompoundShape</span>(self, shape):
         super()<span style="color:#f92672">.</span>visitCompoundShape(shape)
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class: {}, self: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, self))
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;class: {}, self: {}&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, self))
 
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     export_visitor <span style="color:#f92672">=</span> XMLExportVisitor()
     shapes <span style="color:#f92672">=</span> [Dot(), Circle(), Rectangle(), CompoundShape()]
     <span style="color:#66d9ef">for</span> shape <span style="color:#f92672">in</span> shapes:
@@ -3566,11 +3566,11 @@ Visitor --&gt; CompundGraphic
 </ul>
 <h3 id="优缺点-21">优缺点</h3>
 <ul>
-<li><input checked="" disabled="" type="checkbox">开闭原则</li>
-<li><input checked="" disabled="" type="checkbox">单一职责原则</li>
-<li><input disabled="" type="checkbox">访问者对象可以在与各种对象交互时收集一些有用的信息。</li>
-<li><input disabled="" type="checkbox">每次在元素层次结构中添加或移除一个类时， 你都要更新所有的访问者。</li>
-<li><input disabled="" type="checkbox">在访问者同某个元素进行交互时， 它们可能没有访问元素私有成员变量和方法的必要权限。</li>
+<li><input checked="" disabled="" type="checkbox"> 开闭原则</li>
+<li><input checked="" disabled="" type="checkbox"> 单一职责原则</li>
+<li><input disabled="" type="checkbox"> 访问者对象可以在与各种对象交互时收集一些有用的信息。</li>
+<li><input disabled="" type="checkbox"> 每次在元素层次结构中添加或移除一个类时， 你都要更新所有的访问者。</li>
+<li><input disabled="" type="checkbox"> 在访问者同某个元素进行交互时， 它们可能没有访问元素私有成员变量和方法的必要权限。</li>
 </ul>
 <h1 id="reference">Reference</h1>
 <ul>
@@ -3598,7 +3598,7 @@ Visitor --&gt; CompundGraphic
 </div>
 <section class="section">
   <div class="container has-text-centered">
-    <p>&copy; <a href="https://github.com/cnewbie/">cnewbie</a> 2018 - 2019</p>
+    <p>&copy; <a href="https://github.com/cnewbie/">cnewbie</a> 2018 - 2020</p>
   </div>
 </section>
 

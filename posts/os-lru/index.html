@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<title>LRU 缓存淘汰策略 | Hugo Blog</title>
+
+<link rel="stylesheet" href="https://cnewbie.github.io/css/styles.css">
+
+<link href="https://cdn.bootcss.com/font-awesome/5.2.0/css/all.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+
+
+
+<link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/zenburn.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://cnewbie.github.io/js/highlight.js"></script>
+
+
+
+<link href="https://cdn.bootcss.com/jsSocials/1.4.0/jssocials.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/jsSocials/1.4.0/jssocials-theme-minima.css" rel="stylesheet">
+
+<script type="text/javascript" src="https://cnewbie.github.io/js/jssocials.js"></script>
+
+
+
+
+<div class="container">
+    <nav class="navbar level">
+      <div class="navbar-brand">
+          <a class="nav-item" href="https://cnewbie.github.io"><h1 class="title is-3">Hugo Blog</h1></a>
+      </div>           
+      <div class="navbar-menu has-text-centered is-active">
+          <div class="navbar-end is-centered">
+              
+                <a href="https://cnewbie.github.io/about" rel="me">
+                  <span class="icon">
+                    <i class="fas fa-info"></i>
+                  </span>
+                </a>
+              
+                <a href="https://github.com/cnewbie/" rel="me">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+              
+           </div>
+      </div>
+    </nav>
+  </div>
+
+<div class="container">
+  <h2 class="subtitle is-6">March 30, 2020</h2>
+  <h1 class="subtitle is-size-4-mobile is-size-3-desktop">LRU 缓存淘汰策略</h1>
+  <div class="content">
+    <h1 id="lruleast-recent-used缓存淘汰策略">LRU（Least Recent Used）缓存淘汰策略</h1>
+<p>LRU 算法根据数据的历史访问记录来进行淘汰数据，其核心思想是“如果数据最近被访问过，那么将来被访问的几率也更高”。</p>
+<h1 id="实现细节">实现细节</h1>
+<p>核心思想使用 map 结构做到 save 和 get key的时间都是 O(1)，配合双向链表完成 O(1) 时间将节点放置在缓存头部。</p>
+<p>编码细节：</p>
+<ul>
+<li>save(key, value)
+<ul>
+<li>首先在 Map 找到 Key 对应的节点，如果节点存在，更新节点的值，并把这个节点移动队头。</li>
+<li>如果不存在，需要构造新的节点，并且尝试把节点塞到队头，如果LRU空间不足，则通过 tail 淘汰掉队尾的节点，同时在 Map 中移除 Key。</li>
+</ul>
+</li>
+<li>get(key)
+<ul>
+<li>通过 Map 找到 LRU 链表节点，因为根据LRU 原理，这个节点是最新访问的，所以要把节点插入到队头，然后返回缓存的值。</li>
+</ul>
+</li>
+</ul>
+<h1 id="python-实现">Python 实现</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python</span>
+<span style="color:#75715e"># -*- coding: utf-8 -*-</span>
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Node</span>(object):
+    <span style="color:#e6db74">&#34;&#34;&#34;节点包含前后指针和键值&#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">def</span> __init__(self, key, value, pre<span style="color:#f92672">=</span>None, post<span style="color:#f92672">=</span>None):
+        self<span style="color:#f92672">.</span>key <span style="color:#f92672">=</span> key
+        self<span style="color:#f92672">.</span>value <span style="color:#f92672">=</span> value
+        self<span style="color:#f92672">.</span>pre <span style="color:#f92672">=</span> pre
+        self<span style="color:#f92672">.</span>post <span style="color:#f92672">=</span> post
+
+    <span style="color:#66d9ef">def</span> __repr__(self):
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;Node({},{})&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>key, self<span style="color:#f92672">.</span>value)
+
+    __str__ <span style="color:#f92672">=</span> __repr__
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LRUCache</span>(object):
+
+    <span style="color:#66d9ef">def</span> __init__(self, capacity<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>):
+        <span style="color:#e6db74">&#34;&#34;&#34;容量大小，初始化头尾节点&#34;&#34;&#34;</span>
+        self<span style="color:#f92672">.</span>size <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        self<span style="color:#f92672">.</span>capacity <span style="color:#f92672">=</span> capacity
+        self<span style="color:#f92672">.</span>head <span style="color:#f92672">=</span> Node(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+        self<span style="color:#f92672">.</span>tail <span style="color:#f92672">=</span> Node(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+        self<span style="color:#f92672">.</span>head<span style="color:#f92672">.</span>post <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>tail
+        self<span style="color:#f92672">.</span>tail<span style="color:#f92672">.</span>pre <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>head
+        self<span style="color:#f92672">.</span>key_map <span style="color:#f92672">=</span> dict()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set</span>(self, k, v):
+        node <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>key_map<span style="color:#f92672">.</span>get(k)
+        <span style="color:#66d9ef">if</span> node <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+            self<span style="color:#f92672">.</span>key_map[k] <span style="color:#f92672">=</span> v
+            self<span style="color:#f92672">.</span>_move_node(node)
+        <span style="color:#66d9ef">else</span>:
+            node <span style="color:#f92672">=</span> Node(k, v)
+            self<span style="color:#f92672">.</span>_add_node(node)
+            self<span style="color:#f92672">.</span>key_map[k] <span style="color:#f92672">=</span> node
+            self<span style="color:#f92672">.</span>size <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+            <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>size <span style="color:#f92672">&gt;=</span> self<span style="color:#f92672">.</span>capacity:
+                node <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_pop_node()
+                self<span style="color:#f92672">.</span>key_map<span style="color:#f92672">.</span>pop(node<span style="color:#f92672">.</span>key)
+                self<span style="color:#f92672">.</span>size <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get</span>(self, k):
+        <span style="color:#e6db74">&#34;&#34;&#34;获取操作&#34;&#34;&#34;</span>
+        node <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>key_map<span style="color:#f92672">.</span>get(k)
+        <span style="color:#66d9ef">if</span> node <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+            self<span style="color:#f92672">.</span>_move_node(node)
+            <span style="color:#66d9ef">return</span> node<span style="color:#f92672">.</span>value
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;miss key&#39;</span>)
+            <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
+            <span style="color:#75715e"># raise KeyError(&#39;key not exist&#39;)</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_add_node</span>(self, node):
+        <span style="color:#e6db74">&#34;&#34;&#34;增加node至head后&#34;&#34;&#34;</span>
+        node<span style="color:#f92672">.</span>pre <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>head
+        node<span style="color:#f92672">.</span>post <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>head<span style="color:#f92672">.</span>post
+        self<span style="color:#f92672">.</span>head<span style="color:#f92672">.</span>post<span style="color:#f92672">.</span>pre <span style="color:#f92672">=</span> node
+        self<span style="color:#f92672">.</span>head<span style="color:#f92672">.</span>post <span style="color:#f92672">=</span> node
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_remove_node</span>(self, node):
+        <span style="color:#e6db74">&#34;&#34;&#34;删除node&#34;&#34;&#34;</span>
+        node<span style="color:#f92672">.</span>pre<span style="color:#f92672">.</span>post <span style="color:#f92672">=</span> node<span style="color:#f92672">.</span>post
+        node<span style="color:#f92672">.</span>post<span style="color:#f92672">.</span>pre <span style="color:#f92672">=</span> node<span style="color:#f92672">.</span>pre
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_move_node</span>(self, node):
+        <span style="color:#e6db74">&#34;&#34;&#34;移动至头部&#34;&#34;&#34;</span>
+        self<span style="color:#f92672">.</span>_remove_node(node)
+        self<span style="color:#f92672">.</span>_add_node(node)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_pop_node</span>(self):
+        <span style="color:#e6db74">&#34;&#34;&#34;弹出尾节点&#34;&#34;&#34;</span>
+        node <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>tail<span style="color:#f92672">.</span>pre
+        self<span style="color:#f92672">.</span>_remove_node(node)
+        <span style="color:#66d9ef">return</span> node
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">print_node</span>(self):
+        node <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>head
+        <span style="color:#66d9ef">while</span> node<span style="color:#f92672">.</span>post <span style="color:#f92672">!=</span> self<span style="color:#f92672">.</span>tail:
+            <span style="color:#66d9ef">yield</span> node<span style="color:#f92672">.</span>post
+            node <span style="color:#f92672">=</span> node<span style="color:#f92672">.</span>post
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    <span style="color:#f92672">import</span> random
+    cache <span style="color:#f92672">=</span> LRUCache()
+
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">20</span>):
+        k <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">5</span>)
+        <span style="color:#66d9ef">if</span> k <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+            cache<span style="color:#f92672">.</span>set(i, i)
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;set {}&#39;</span><span style="color:#f92672">.</span>format(i))
+        <span style="color:#66d9ef">else</span>:
+            v <span style="color:#f92672">=</span> cache<span style="color:#f92672">.</span>get(k)
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;get {}, value {}&#39;</span><span style="color:#f92672">.</span>format(k, v))
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;-&gt;&#39;</span><span style="color:#f92672">.</span>join(str(i) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> cache<span style="color:#f92672">.</span>print_node()))
+
+</code></pre></div><h1 id="reference">Reference</h1>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/34133067">不懂机器学习的架构师不是好CTO</a></li>
+</ul>
+
+  </div>
+</div>
+<div class="container has-text-centered">
+    
+    <aside><div id="share"></div></aside>
+    <script type="text/javascript">
+        $("#share").jsSocials({
+            showLabel: false,
+            showCount: false,
+            shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+        });
+    </script>
+    
+</div>
+
+<div class="container has-text-centered">
+  
+</div>
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/cnewbie/">cnewbie</a> 2018 - 2020</p>
+  </div>
+</section>
+
+

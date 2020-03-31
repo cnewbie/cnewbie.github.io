@@ -71,14 +71,14 @@
 <span style="color:#f92672">from</span> functools <span style="color:#f92672">import</span> wraps
 <span style="color:#f92672">import</span> logging
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_time</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_time</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
     <span style="color:#a6e22e">@wraps</span>(func)
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__wrapper</span>(func):
         logging<span style="color:#f92672">.</span>getLogger(__name__)
         start <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
-        ret <span style="color:#f92672">=</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
+        ret <span style="color:#f92672">=</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
         end <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
-        logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">running time: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(end<span style="color:#f92672">-</span>start))
+        logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74">&#39;running time: {}&#39;</span><span style="color:#f92672">.</span>format(end<span style="color:#f92672">-</span>start))
         <span style="color:#66d9ef">return</span> ret
     <span style="color:#66d9ef">return</span> __wrapper
 </code></pre></div><h1 id="timenow">time.now</h1>
@@ -90,17 +90,17 @@
 <span style="color:#f92672">from</span> functools <span style="color:#f92672">import</span> wraps
 <span style="color:#f92672">import</span> logging
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_time</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_time</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
     <span style="color:#a6e22e">@wraps</span>(func)
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__wrapper</span>(func):
         logging<span style="color:#f92672">.</span>getLogger(__name__)
         start <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
         start_2 <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>clock()
-        ret <span style="color:#f92672">=</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
+        ret <span style="color:#f92672">=</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
         end <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
         end_2 <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>clock()
-        logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">running time: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(end<span style="color:#f92672">-</span>start))
-        logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">running time2: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(end_2<span style="color:#f92672">-</span>start_2))
+        logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74">&#39;running time: {}&#39;</span><span style="color:#f92672">.</span>format(end<span style="color:#f92672">-</span>start))
+        logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74">&#39;running time2: {}&#39;</span><span style="color:#f92672">.</span>format(end_2<span style="color:#f92672">-</span>start_2))
         <span style="color:#66d9ef">return</span> ret
     <span style="color:#66d9ef">return</span> __wrapper
 </code></pre></div><h1 id="timeit">timeit</h1>
@@ -112,14 +112,14 @@
 <span style="color:#f92672">from</span> functools <span style="color:#f92672">import</span> wraps
 <span style="color:#f92672">import</span> logging
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_time</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_time</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
     <span style="color:#a6e22e">@wraps</span>(func)
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__wrapper</span>(func):
         logging<span style="color:#f92672">.</span>getLogger(__name__)
         start <span style="color:#f92672">=</span> timeit<span style="color:#f92672">.</span>default_timer()
-        ret <span style="color:#f92672">=</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
+        ret <span style="color:#f92672">=</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
         end <span style="color:#f92672">=</span> timeit<span style="color:#f92672">.</span>default_timer()
-        logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">running time: {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(end<span style="color:#f92672">-</span>start))
+        logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74">&#39;running time: {}&#39;</span><span style="color:#f92672">.</span>format(end<span style="color:#f92672">-</span>start))
         <span style="color:#66d9ef">return</span> ret
     <span style="color:#66d9ef">return</span> __wrapper
 </code></pre></div><h1 id="方法对比">方法对比</h1>
@@ -150,7 +150,7 @@
 </div>
 <section class="section">
   <div class="container has-text-centered">
-    <p>&copy; <a href="https://github.com/cnewbie/">cnewbie</a> 2018 - 2019</p>
+    <p>&copy; <a href="https://github.com/cnewbie/">cnewbie</a> 2018 - 2020</p>
   </div>
 </section>
 

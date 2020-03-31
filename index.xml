@@ -6,11 +6,23 @@
     <description>Recent content on Hugo Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/cnewbie/&#34;&gt;cnewbie&lt;/a&gt; 2018 - 2019</copyright>
-    <lastBuildDate>Sun, 15 Dec 2019 08:00:00 +0800</lastBuildDate>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/cnewbie/&#34;&gt;cnewbie&lt;/a&gt; 2018 - 2020</copyright>
+    <lastBuildDate>Mon, 30 Mar 2020 22:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://cnewbie.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>LRU 缓存淘汰策略</title>
+      <link>https://cnewbie.github.io/posts/os-lru/</link>
+      <pubDate>Mon, 30 Mar 2020 22:00:00 +0800</pubDate>
+      
+      <guid>https://cnewbie.github.io/posts/os-lru/</guid>
+      <description>LRU（Least Recent Used）缓存淘汰策略 LRU 算法根据数据的历史访问记录来进行淘汰数据，其核心思想是“如果数据最近被访问过，那么将来被访问的几率也更高”。
+实现细节 核心思想使用 map 结构做到 save 和 get key的时间都是 O(1)，配合双向链表完成 O(1) 时间将节点放置在缓存头部。
+编码细节：
+ save(key, value)  首先在 Map 找到 Key 对应的节点，如果节点存在，更新节点的值，并把这个节点移动队头。 如果不存在，需要构造新的节点，并且尝试把节点塞到队头，如果LRU空间不足，则通过 tail 淘汰掉队尾的节点，同时在 Map 中移除 Key。   get(key)  通过 Map 找到 LRU 链表节点，因为根据LRU 原理，这个节点是最新访问的，所以要把节点插入到队头，然后返回缓存的值。    Python 实现 #!/usr/bin/env python # -*- coding: utf-8 -*- class Node(object): &amp;#34;&amp;#34;&amp;#34;节点包含前后指针和键值&amp;#34;&amp;#34;&amp;#34; def __init__(self, key, value, pre=None, post=None): self.key = key self.value = value self.pre = pre self.</description>
+    </item>
     
     <item>
       <title>Binary Search</title>
@@ -18,7 +30,7 @@
       <pubDate>Sun, 15 Dec 2019 08:00:00 +0800</pubDate>
       
       <guid>https://cnewbie.github.io/posts/algorithm-binary-search/</guid>
-      <description>二分查找 二分查找模版 def binary_search(arr, target): if not arr: return -1 left = 0 right = len(arr) - 1 while left &amp;lt;= right: mid = left + ((right - left)&amp;gt;&amp;gt;1) pivot = arr[mid] if pivot &amp;lt; target: left = mid + 1 elif pivot &amp;gt; target: right = mid - 1 else pass # ??? ret = -1 # ??? return ret 二分查找实现 #!/usr/bin/env python3 # -*- coding:utf-8 -*- import bisect def binary_search(arr, target): &amp;#34;&amp;#34;&amp;#34;二分查找不存在返回 -1 &amp;#34;&amp;#34;&amp;#34; ret = -1 if not arr: return ret arr_len = len(arr) left = 0 right = arr_len while left &amp;lt; right: mid = left + ((right - left)&amp;gt;&amp;gt;1) v = arr[mid] if v &amp;lt; target: left = mid + 1 elif v &amp;gt; target: right = mid else: return mid return ret def low_bound(arr, target): &amp;#34;&amp;#34;&amp;#34;返回左边界 第一个大于等于 &amp;#34;&amp;#34;&amp;#34; ret = -1 if not arr: return ret arr_len = len(arr) left = 0 right = arr_len while left &amp;lt; right: mid = left + ((right - left)&amp;gt;&amp;gt;1) v = arr[mid] # v &amp;gt;= target right = mid if v &amp;lt; target: left = mid + 1 elif v &amp;gt; target: right = mid else: right = mid ret = left return ret def upper_bound(arr, target): &amp;#34;&amp;#34;&amp;#34;返回边界 第一个大于&amp;#34;&amp;#34;&amp;#34; ret = -1 if not arr: return ret arr_len = len(arr) left = 0 right = arr_len while left &amp;lt; right: mid = left + ((right - left)&amp;gt;&amp;gt;1) v = arr[mid] # v &amp;lt;= target left = mid + 1 if v &amp;lt; target: left = mid + 1 elif v &amp;gt; target: right = mid else: left = mid + 1 ret = right return ret def low_bound_reverse(arr, target): &amp;#34;&amp;#34;&amp;#34;逆序数组，返回左边界 第一个小于等于 &amp;#34;&amp;#34;&amp;#34; ret = -1 if not arr: return ret arr_len = len(arr) left = 0 right = arr_len while left &amp;lt; right: mid = left + ((right - left)&amp;gt;&amp;gt;1) v = arr[mid] # v &amp;gt;= target left = mid + 1 if v &amp;gt;= target: left = mid + 1 elif v &amp;lt; target: right = mid ret = left return ret def upper_bound_reverse(arr, target): &amp;#34;&amp;#34;&amp;#34;逆序数组，返回边界 第一个小于&amp;#34;&amp;#34;&amp;#34; ret = -1 if not arr: return ret arr_len = len(arr) left = 0 right = arr_len while left &amp;lt; right: mid = left + ((right - left)&amp;gt;&amp;gt;1) v = arr[mid] # v &amp;lt;= target right = mid if v &amp;gt; target: left = mid + 1 elif v &amp;lt;= target: right = mid ret = right return ret def _main(): # arr = list(range(1, 11)) # 数组从小到大 arr = list(range(11)) pivot = 7 arr[8] = pivot print(&amp;#39;origin: {}&amp;#39;.</description>
+      <description>二分查找 二分查找模版 def binary_search(arr, target): if not arr: return -1 left = 0 right = len(arr) - 1 while left &amp;lt;= right: mid = left + ((right - left)&amp;gt;&amp;gt;1) pivot = arr[mid] if pivot &amp;lt; target: left = mid + 1 elif pivot &amp;gt; target: right = mid - 1 else pass # ??? ret = -1 # ??? return ret 二分查找实现 #!/usr/bin/env python3 # -*- coding:utf-8 -*- import bisect def binary_search(arr, target): &amp;#34;&amp;#34;&amp;#34; 二分查找不存在返回 -1 &amp;#34;&amp;#34;&amp;#34; ret = -1 if not arr: return ret arr_len = len(arr) left = 0 right = arr_len while left &amp;lt; right: mid = left + ((right - left)&amp;gt;&amp;gt;1) v = arr[mid] if v &amp;lt; target: left = mid + 1 elif v &amp;gt; target: right = mid else: return mid return ret def low_bound(arr, target): &amp;#34;&amp;#34;&amp;#34; 返回左边界 第一个大于等于 &amp;#34;&amp;#34;&amp;#34; ret = -1 if not arr: return ret arr_len = len(arr) left = 0 right = arr_len while left &amp;lt; right: mid = left + ((right - left)&amp;gt;&amp;gt;1) v = arr[mid] # v &amp;gt;= target right = mid if v &amp;lt; target: left = mid + 1 elif v &amp;gt; target: right = mid else: right = mid ret = left return ret def upper_bound(arr, target): &amp;#34;&amp;#34;&amp;#34; 返回边界 第一个大于&amp;#34;&amp;#34;&amp;#34; ret = -1 if not arr: return ret arr_len = len(arr) left = 0 right = arr_len while left &amp;lt; right: mid = left + ((right - left)&amp;gt;&amp;gt;1) v = arr[mid] # v &amp;lt;= target left = mid + 1 if v &amp;lt; target: left = mid + 1 elif v &amp;gt; target: right = mid else: left = mid + 1 ret = right return ret def low_bound_reverse(arr, target): &amp;#34;&amp;#34;&amp;#34; 逆序数组，返回左边界 第一个小于等于 &amp;#34;&amp;#34;&amp;#34; ret = -1 if not arr: return ret arr_len = len(arr) left = 0 right = arr_len while left &amp;lt; right: mid = left + ((right - left)&amp;gt;&amp;gt;1) v = arr[mid] # v &amp;gt;= target left = mid + 1 if v &amp;gt;= target: left = mid + 1 elif v &amp;lt; target: right = mid ret = left return ret def upper_bound_reverse(arr, target): &amp;#34;&amp;#34;&amp;#34; 逆序数组，返回边界 第一个小于&amp;#34;&amp;#34;&amp;#34; ret = -1 if not arr: return ret arr_len = len(arr) left = 0 right = arr_len while left &amp;lt; right: mid = left + ((right - left)&amp;gt;&amp;gt;1) v = arr[mid] # v &amp;lt;= target right = mid if v &amp;gt; target: left = mid + 1 elif v &amp;lt;= target: right = mid ret = right return ret def _main(): # arr = list(range(1, 11)) # 数组从小到大 arr = list(range(11)) pivot = 7 arr[8] = pivot print(&amp;#39;origin: {}&amp;#39;.</description>
     </item>
     
     <item>
@@ -85,8 +97,7 @@ datetime #! /usr/bin/env python # -*- coding:utf-8 -*- import datetime from func
 装饰器的定义  装饰器本质上是一个Python函数，它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。 它经常用于有切面需求的场景，比如：插入日志、性能测试、事务处理、缓存、权限校验等场景。装饰器是解决这类问题的绝佳设计，有了装饰器，我们就可以抽离出大量与函数功能本身无关的雷同代码并继续重用。
  为什么需要装饰器 假设你原先的程序实现了简单的 fun() 函数
 #!/usr/bin/env python3 def fun(): print(&amp;#39;hello&amp;#39;) fun() 随后需要统计函数的运行时间，你当然可以对原函数进行修改，但是如果其他函数也实现该功能，逐个修改会添加大量重复代码。为了复用代码可以定义一个函数用于处理统计运行时间的需求。
-#!/usr/bin/env python3 import time from functools import wraps def timethis(func): &amp;#39;&amp;#39;&amp;#39;Decorator that reports the execution time.&amp;#39;&amp;#39;&amp;#39; @wraps(func) def wrapper(*args, **kwargs): start = time.time() result = func(*args, **kwargs) end = time.time() print(func.__name__, end-start) return result return wrapper @timethis def fun(): &amp;#34;&amp;#34;&amp;#34;hello&amp;#34;&amp;#34;&amp;#34; print(&amp;#39;hello&amp;#39;) # 等同于 fun = timethis(fun) fun() 通过上述函数对原函数进行包装，原函数 fun() 就向被装饰了一样，而timethis() 返回的是装饰后函数。
-函数元数据 装饰器作用在某个函数时，这个函数重要的元数据，如名字、文档字符串、注解等信息都丢失了</description>
+#!/usr/bin/env python3 import time from functools import wraps def timethis(func): &amp;#39;&amp;#39;&amp;#39; Decorator that reports the execution time. &amp;#39;&amp;#39;&amp;#39; @wraps(func) def wrapper(*args, **kwargs): start = time.time() result = func(*args, **kwargs) end = time.time() print(func.__name__, end-start) return result return wrapper @timethis def fun(): &amp;#34;&amp;#34;&amp;#34; hello &amp;#34;&amp;#34;&amp;#34; print(&amp;#39;hello&amp;#39;) # 等同于 fun = timethis(fun) fun() 通过上述函数对原函数进行包装，原函数 fun() 就向被装饰了一样，而timethis() 返回的是装饰后函数。</description>
     </item>
     
     <item>
@@ -172,7 +183,7 @@ SQL语句对大小写不敏感
       <pubDate>Sun, 05 Aug 2018 08:00:00 +0800</pubDate>
       
       <guid>https://cnewbie.github.io/posts/algorithm-sort-algorithms/</guid>
-      <description>工具函数 #include &amp;lt;iostream&amp;gt;#include &amp;lt;ctime&amp;gt; using namespace std; void swap(int &amp;amp;a,int &amp;amp;b){ int tmp = a; a = b; b = tmp; } void printarr(int *a,int n){ for(size_t i = 0; i &amp;lt; n; i++) { cout &amp;lt;&amp;lt; a[i] &amp;lt;&amp;lt; &amp;#34;&amp;#34;; } cout &amp;lt;&amp;lt; endl; } Bubble Sort 冒泡排序 void bubble_sort(int *a, int n){ for(size_t i = n-1; i &amp;gt; 0;--i){ for(size_t j = i; j &amp;gt; 0;--j) { if(a[j] &amp;lt; a[j-1]) swap(a[j],a[j-1]); } } } void bubble_sort_speedup(int *a, int n){ for(size_t i = 0; i &amp;lt; n-1; i++){ int flag = 0; for(size_t j = 0; j &amp;lt; n-1-i; ++j){ if(a[j] &amp;gt; a[j+1]){ swap(a[j],a[j+1]); flag = 1; } } if(!</description>
+      <description>工具函数 #include &amp;lt;iostream&amp;gt;#include &amp;lt;ctime&amp;gt; using namespace std; void swap(int &amp;amp;a,int &amp;amp;b){ int tmp = a; a = b; b = tmp; } void printarr(int *a,int n){ for(size_t i = 0; i &amp;lt; n; i++) { cout &amp;lt;&amp;lt; a[i] &amp;lt;&amp;lt; &amp;#34; &amp;#34;; } cout &amp;lt;&amp;lt; endl; } Bubble Sort 冒泡排序 void bubble_sort(int *a, int n){ for(size_t i = n-1; i &amp;gt; 0;--i){ for(size_t j = i; j &amp;gt; 0;--j) { if(a[j] &amp;lt; a[j-1]) swap(a[j],a[j-1]); } } } void bubble_sort_speedup(int *a, int n){ for(size_t i = 0; i &amp;lt; n-1; i++){ int flag = 0; for(size_t j = 0; j &amp;lt; n-1-i; ++j){ if(a[j] &amp;gt; a[j+1]){ swap(a[j],a[j+1]); flag = 1; } } if(!</description>
     </item>
     
     <item>
@@ -182,7 +193,7 @@ SQL语句对大小写不敏感
       
       <guid>https://cnewbie.github.io/posts/markdown-pandoc/</guid>
       <description>Philosophy 哲学 Markdown is designed to be easy to write,and,even more importantly,easy to read.
- A Markdown-formatted document should be publishable as-is,as plain text,without looking like it&#39;s been marked up with tags or formatting instructions. - John Gruber
+ A Markdown-formatted document should be publishable as-is,as plain text,without looking like it&amp;rsquo;s been marked up with tags or formatting instructions. - John Gruber
  Paragraphs 段落 一个段落包含一行或多行文字，通过行后跟随一个或多个空白行，换行符（newlines）和空格（spaces）作用一样，如果需要硬换行（hard line break），在行后添加两个以上的空格。
 Extension escaped_line_breaks
 反斜杠（backslash）后跟随换行符也是一种硬换行

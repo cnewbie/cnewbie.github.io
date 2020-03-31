@@ -60,6 +60,32 @@
   <main class="container">
       
       
+      <h1 class="title is-3">2020</h1>
+      
+      <article class="columns">
+        <div class="column is-2">
+          <h6 class="is-inline" style="white-space: nowrap">Mar 30</h2>
+        </div>
+        <div class="column">
+          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/os-lru/">LRU 缓存淘汰策略</a></h1>
+          <div class="content is-hidden-mobile">
+            LRU（Least Recent Used）缓存淘汰策略 LRU 算法根据数据的历史访问记录来进行淘汰数据，其核心思想是“如果数据最近被访问过，那么将来被访问的几率也更高”。
+实现细节 核心思想使用 map 结构做到 save 和 get key的时间都是 O(1)，配合双向链表完成 O(1) 时间将节点放置在缓存头部。
+编码细节：
+ save(key, value)  首先在 Map 找到 Key 对应的节点，如果节点存在，更新节点的值，并把这个节点移动队头。 如果不存在，需要构造新的节点，并且尝试把节点塞到队头，如果LRU空间不足，则通过 tail 淘汰掉队尾的节点，同时在 Map 中移除 Key。   get(key)  通过 Map 找到 LRU 链表节点，因为根据LRU 原理，这个节点是最新访问的，所以要把节点插入到队头，然后返回缓存的值。    Python …
+            
+            <br>
+            <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/os-lru/">
+            <span class="icon-link is-small" style="line-height: 100%">
+                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+              </span>
+              <p style="padding:0 5px"></p>more</p>
+            </a>
+            
+          </div>
+      </article>
+      
+      
       <h1 class="title is-3">2019</h1>
       
       <article class="columns">
@@ -259,29 +285,6 @@ SQL语句对大小写不敏感
           </div>
       </article>
       
-      <article class="columns">
-        <div class="column is-2">
-          <h6 class="is-inline" style="white-space: nowrap">Mar 15</h2>
-        </div>
-        <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/linux-tmux/">Tmux and Screen</a></h1>
-          <div class="content is-hidden-mobile">
-            Terminal Multiplexers: Screen, Tmux
-终端多路复用：Screen，Tmux
-命令行选项 术语对照表
-   英文 中文     session 会话   attach 连接   detach 脱离   prefix 前缀   multiplexer 多路复用   window 窗口   regions 区域   panes 面板   buffer 缓存   mark 标记       用途 screen tmux     创建指定名称的会话并连接 screen -S foo tmux new -s foo   创建会话并脱离 screen -S foo -d -m tmux new -s foo -d   列出所有会话 screen -list tmux ls   连接 screen -r tmux attach   连接到指定会话 screen -r …
-            
-            <br>
-            <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/linux-tmux/">
-            <span class="icon-link is-small" style="line-height: 100%">
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-              </span>
-              <p style="padding:0 5px"></p>more</p>
-            </a>
-            
-          </div>
-      </article>
-      
       
       
     </main>
@@ -318,7 +321,7 @@ SQL语句对大小写不敏感
 
   <section class="section">
   <div class="container has-text-centered">
-    <p>&copy; <a href="https://github.com/cnewbie/">cnewbie</a> 2018 - 2019</p>
+    <p>&copy; <a href="https://github.com/cnewbie/">cnewbie</a> 2018 - 2020</p>
   </div>
 </section>
 
