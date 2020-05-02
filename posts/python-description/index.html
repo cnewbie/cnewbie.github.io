@@ -70,7 +70,7 @@
     descr<span style="color:#f92672">.</span>__delete__(self, obj) <span style="color:#f92672">--&gt;</span> None
 </code></pre></div><p><code>__get__</code> 方法接受两个参数，一个是实例对象，另一个是实例的类型。<code>__set__</code>方法接受两个参数，一个是实例对象，另一个是数值。而 <code>__delete__</code> 方法包含一个实例对象参数，并在实例对象被删除时调用。</p>
 <p><code>__dict__</code> （每个对象均具备该属性）字典类型，存放本对象的属性，key(键)即为属性名，value(值)即为属性的值，形式为 <code>{attr_key : attr_value}</code></p>
-<p>Python 对象的属性控制默认是这样的,从对象的字典 <code>__dict__</code> 中获取 get，设置 set ,删除 delete ，比如：对于实例 <code>a</code>，<code>a.x</code> 的查找顺序为 <code>a.__dict__['x']</code>,然后是<code>type(a).__dict__['x']</code>.如果还是没找到就往上级(父类)中查找。具体顺序见<a href="./python-PropertyOrder.md">属性访问顺序</a>。</p>
+<p>Python 对象的属性控制默认是这样的,从对象的字典 <code>__dict__</code> 中获取 get，设置 set ,删除 delete ，比如：对于实例 <code>a</code>，<code>a.x</code> 的查找顺序为 <code>a.__dict__['x']</code>,然后是<code>type(a).__dict__['x']</code>.如果还是没找到就往上级(父类)中查找。具体顺序见<a href="../python-propertyorder/">属性访问顺序</a>。</p>
 <p>描述符会改变这种默认的控制行为，如果属性 <code>x</code> 是一个描述符，那么访问 <code>a.x</code> 时不再从字典 <code>__dict__</code> 中读取，而是调用描述符的 <code>__get__()</code> 方法，对于设置和删除也是同样的原理。</p>
 <h1 id="property-属性">property 属性</h1>
 <p>通过 <code>property</code> 将函数调用伪装成属性调用。</p>
