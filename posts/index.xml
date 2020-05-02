@@ -7,10 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/cnewbie/&#34;&gt;cnewbie&lt;/a&gt; 2018 - 2020</copyright>
-    <lastBuildDate>Mon, 30 Mar 2020 22:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 01 May 2020 08:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://cnewbie.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python 属性访问顺序</title>
+      <link>https://cnewbie.github.io/posts/python-propertyorder/</link>
+      <pubDate>Fri, 01 May 2020 08:00:00 +0800</pubDate>
+      
+      <guid>https://cnewbie.github.io/posts/python-propertyorder/</guid>
+      <description>Python 属性访问顺序
+实例属性访问顺序  类的 __getattribute__() 方法 类的数据描述符：(定义了描述符方法)（若人为的重载了该 __getattribute__() 方法，可能会导致无法调用描述符） 实例的属性字典（若与描述符对象同名，会被覆盖哦） 类的非数据描述符(只定义了 __get__() 方法，而没有定义 __set__(), __delete__() 方法) 类的属性字典 类的 __getattr__() 方法  类属性访问顺序 假设类为元类的实例，相比于实例多了一个类数据描述符的查找。
+ 元类的 __getattribute__() 方法 元类的数据描述符 类的数据描述符 类的属性字典 元类的非数据描述符 元类的属性字典 元类的 __getattr__() 方法  Reference  windy135 betterprogramming ionelmc  </description>
+    </item>
+    
+    <item>
+      <title>Python 描述符</title>
+      <link>https://cnewbie.github.io/posts/python-description/</link>
+      <pubDate>Fri, 01 May 2020 08:00:00 +0800</pubDate>
+      
+      <guid>https://cnewbie.github.io/posts/python-description/</guid>
+      <description>Python 描述符
+什么是描述符（Descriptor） 定义了 __get__(),__set__(),__delete__()中任意一个描述符协议的对象成为描述符。简单来说，描述符就是可重用的属性。描述符具有诸多优点，诸如：保护属性不受修改、属性类型检查和自动更新某个依赖属性的值等。
+descr.__get__(self, obj, type=None) --&amp;gt; value descr.__set__(self, obj, value) --&amp;gt; None descr.__delete__(self, obj) --&amp;gt; None __get__ 方法接受两个参数，一个是实例对象，另一个是实例的类型。__set__方法接受两个参数，一个是实例对象，另一个是数值。而 __delete__ 方法包含一个实例对象参数，并在实例对象被删除时调用。
+__dict__ （每个对象均具备该属性）字典类型，存放本对象的属性，key(键)即为属性名，value(值)即为属性的值，形式为 {attr_key : attr_value}
+Python 对象的属性控制默认是这样的,从对象的字典 __dict__ 中获取 get，设置 set ,删除 delete ，比如：对于实例 a，a.x 的查找顺序为 a.__dict__[&#39;x&#39;],然后是type(a).__dict__[&#39;x&#39;].如果还是没找到就往上级(父类)中查找。具体顺序见属性访问顺序。
+描述符会改变这种默认的控制行为，如果属性 x 是一个描述符，那么访问 a.x 时不再从字典 __dict__ 中读取，而是调用描述符的 __get__() 方法，对于设置和删除也是同样的原理。
+property 属性 通过 property 将函数调用伪装成属性调用。
+#!/usr/bin/env python class Movie(object): def __init__(self, title, rating, runtime, budget, gross): self._budget = None self.title = title self.</description>
+    </item>
     
     <item>
       <title>LRU 缓存淘汰策略</title>
@@ -84,7 +111,7 @@ UML 结构 interface Product{ -doStuff() } class ConcreteProductA{ } class Concr
       <guid>https://cnewbie.github.io/posts/python-code-running-time/</guid>
       <description>Python 运行时间
 在很多的时候我们需要计算我们程序的性能，这个时候我们常常需要统计程序运行的时间。下面我们就来说说怎么统计程序的运行时间。
-datetime #! /usr/bin/env python # -*- coding:utf-8 -*- import datetime from functools import wraps import logging def run_time(*args, **kwargs): @wraps(func) def __wrapper(func): logging.getLogger(__name__) start = datetime.datetime.now() ret = func(*args, **kwargs) end = datetime.datetime.now() logging.debug(&amp;#39;running time: {}&amp;#39;.format(end-start)) return ret return __wrapper time.now #! /usr/bin/env python # -*- coding:utf-8 -*- import time from functools import wraps import logging def run_time(*args, **kwargs): @wraps(func) def __wrapper(func): logging.getLogger(__name__) start = time.time() start_2 = time.</description>
+datetime #! /usr/bin/env python # -*- coding:utf-8 -*- import datetime from functools import wraps import logging def run_time(func): @wraps(func) def __wrapper(*args, **kwargs): logging.getLogger(__name__) start = datetime.datetime.now() ret = func(*args, **kwargs) end = datetime.datetime.now() logging.debug(&amp;#39;running time: {}&amp;#39;.format(end-start)) return ret return __wrapper time.now #! /usr/bin/env python # -*- coding:utf-8 -*- import time from functools import wraps import logging def run_time(func): @wraps(func) def __wrapper(*args, **kwargs): logging.getLogger(__name__) start = time.time() start_2 = time.</description>
     </item>
     
     <item>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<title>Python 描述符 | Hugo Blog</title>
+
+<link rel="stylesheet" href="https://cnewbie.github.io/css/styles.css">
+
+<link href="https://cdn.bootcss.com/font-awesome/5.2.0/css/all.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+
+
+
+<link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/zenburn.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://cnewbie.github.io/js/highlight.js"></script>
+
+
+
+<link href="https://cdn.bootcss.com/jsSocials/1.4.0/jssocials.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/jsSocials/1.4.0/jssocials-theme-minima.css" rel="stylesheet">
+
+<script type="text/javascript" src="https://cnewbie.github.io/js/jssocials.js"></script>
+
+
+
+
+<div class="container">
+    <nav class="navbar level">
+      <div class="navbar-brand">
+          <a class="nav-item" href="https://cnewbie.github.io"><h1 class="title is-3">Hugo Blog</h1></a>
+      </div>           
+      <div class="navbar-menu has-text-centered is-active">
+          <div class="navbar-end is-centered">
+              
+                <a href="https://cnewbie.github.io/about" rel="me">
+                  <span class="icon">
+                    <i class="fas fa-info"></i>
+                  </span>
+                </a>
+              
+                <a href="https://github.com/cnewbie/" rel="me">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+              
+           </div>
+      </div>
+    </nav>
+  </div>
+
+<div class="container">
+  <h2 class="subtitle is-6">May 1, 2020</h2>
+  <h1 class="subtitle is-size-4-mobile is-size-3-desktop">Python 描述符</h1>
+  <div class="content">
+    <p>Python 描述符</p>
+<h1 id="什么是描述符descriptor">什么是描述符（Descriptor）</h1>
+<p>定义了 <code>__get__()</code>,<code>__set__()</code>,<code>__delete__()</code>中任意一个描述符协议的对象成为描述符。简单来说，描述符就是可重用的属性。描述符具有诸多优点，诸如：保护属性不受修改、属性类型检查和自动更新某个依赖属性的值等。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    descr<span style="color:#f92672">.</span>__get__(self, obj, type<span style="color:#f92672">=</span>None) <span style="color:#f92672">--&gt;</span> value
+
+    descr<span style="color:#f92672">.</span>__set__(self, obj, value) <span style="color:#f92672">--&gt;</span> None
+
+    descr<span style="color:#f92672">.</span>__delete__(self, obj) <span style="color:#f92672">--&gt;</span> None
+</code></pre></div><p><code>__get__</code> 方法接受两个参数，一个是实例对象，另一个是实例的类型。<code>__set__</code>方法接受两个参数，一个是实例对象，另一个是数值。而 <code>__delete__</code> 方法包含一个实例对象参数，并在实例对象被删除时调用。</p>
+<p><code>__dict__</code> （每个对象均具备该属性）字典类型，存放本对象的属性，key(键)即为属性名，value(值)即为属性的值，形式为 <code>{attr_key : attr_value}</code></p>
+<p>Python 对象的属性控制默认是这样的,从对象的字典 <code>__dict__</code> 中获取 get，设置 set ,删除 delete ，比如：对于实例 <code>a</code>，<code>a.x</code> 的查找顺序为 <code>a.__dict__['x']</code>,然后是<code>type(a).__dict__['x']</code>.如果还是没找到就往上级(父类)中查找。具体顺序见<a href="./python-PropertyOrder.md">属性访问顺序</a>。</p>
+<p>描述符会改变这种默认的控制行为，如果属性 <code>x</code> 是一个描述符，那么访问 <code>a.x</code> 时不再从字典 <code>__dict__</code> 中读取，而是调用描述符的 <code>__get__()</code> 方法，对于设置和删除也是同样的原理。</p>
+<h1 id="property-属性">property 属性</h1>
+<p>通过 <code>property</code> 将函数调用伪装成属性调用。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Movie</span>(object):
+    <span style="color:#66d9ef">def</span> __init__(self, title, rating, runtime, budget, gross):
+        self<span style="color:#f92672">.</span>_budget <span style="color:#f92672">=</span> None
+        self<span style="color:#f92672">.</span>title <span style="color:#f92672">=</span> title
+        self<span style="color:#f92672">.</span>rating <span style="color:#f92672">=</span> rating
+        self<span style="color:#f92672">.</span>runtime <span style="color:#f92672">=</span> runtime
+        self<span style="color:#f92672">.</span>gross <span style="color:#f92672">=</span> gross
+        self<span style="color:#f92672">.</span>budget <span style="color:#f92672">=</span> budget
+
+    <span style="color:#a6e22e">@property</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">budget</span>(self):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_budget
+
+    <span style="color:#a6e22e">@budget.setter</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">budget</span>(self, value):
+        <span style="color:#66d9ef">if</span> value <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
+            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#34;Negative value not allowed: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> value)
+        self<span style="color:#f92672">.</span>_budget <span style="color:#f92672">=</span> value
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">profit</span>(self):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>gross <span style="color:#f92672">-</span> self<span style="color:#f92672">.</span>budget
+
+m <span style="color:#f92672">=</span> Movie(<span style="color:#e6db74">&#39;Casablanca&#39;</span>, <span style="color:#ae81ff">97</span>, <span style="color:#ae81ff">102</span>, <span style="color:#ae81ff">964000</span>, <span style="color:#ae81ff">1300000</span>)
+<span style="color:#66d9ef">print</span> m<span style="color:#f92672">.</span>budget       <span style="color:#75715e"># calls m.budget(), returns result</span>
+<span style="color:#66d9ef">try</span>:
+    m<span style="color:#f92672">.</span>budget <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">100</span>  <span style="color:#75715e"># calls budget.setter(-100), and raises ValueError</span>
+<span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span>:
+    <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34;Woops. Not allowed&#34;</span>
+
+<span style="color:#75715e"># results</span>
+
+<span style="color:#ae81ff">964000</span>
+Woops<span style="color:#f92672">.</span> Not allowed
+</code></pre></div><p>当试图访问 budget 属性，Python 就会自动调用相应的 <code>getter/setter</code> 方法。比方说，当遇到 <code>m.budget = value</code> 这样的代码时就会自动调用 <code>budget.setter</code>。</p>
+<p><code>property</code> 将自定义的代码同变量的访问/设定联系在了一起，同时使类保持一个简单的访问属性的接口。</p>
+<p>但是当使用 <code>property</code> 对参数进行检查，需要对每个属性进行检查无法对代码进行复用。</p>
+<h1 id="描述符">描述符</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python</span>
+<span style="color:#f92672">from</span> weakref <span style="color:#f92672">import</span> WeakKeyDictionary
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NonNegative</span>(object):
+    <span style="color:#e6db74">&#34;&#34;&#34;A descriptor that forbids negative values&#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">def</span> __init__(self, default):
+        self<span style="color:#f92672">.</span>default <span style="color:#f92672">=</span> default
+        self<span style="color:#f92672">.</span>data <span style="color:#f92672">=</span> WeakKeyDictionary()
+
+    <span style="color:#66d9ef">def</span> __get__(self, instance, owner):
+        <span style="color:#75715e"># we get here when someone calls x.d, and d is a NonNegative instance</span>
+        <span style="color:#75715e"># instance = x</span>
+        <span style="color:#75715e"># owner = type(x)</span>
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>get(instance, self<span style="color:#f92672">.</span>default)
+
+    <span style="color:#66d9ef">def</span> __set__(self, instance, value):
+        <span style="color:#75715e"># we get here when someone calls x.d = val, and d is a NonNegative instance</span>
+        <span style="color:#75715e"># instance = x</span>
+        <span style="color:#75715e"># value = val</span>
+        <span style="color:#66d9ef">if</span> value <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
+            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#34;Negative value not allowed: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> value)
+        self<span style="color:#f92672">.</span>data[instance] <span style="color:#f92672">=</span> value
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Movie</span>(object):
+
+    <span style="color:#75715e">#always put descriptors at the class-level</span>
+    rating <span style="color:#f92672">=</span> NonNegative(<span style="color:#ae81ff">0</span>)
+    runtime <span style="color:#f92672">=</span> NonNegative(<span style="color:#ae81ff">0</span>)
+    budget <span style="color:#f92672">=</span> NonNegative(<span style="color:#ae81ff">0</span>)
+    gross <span style="color:#f92672">=</span> NonNegative(<span style="color:#ae81ff">0</span>)
+
+    <span style="color:#66d9ef">def</span> __init__(self, title, rating, runtime, budget, gross):
+        self<span style="color:#f92672">.</span>title <span style="color:#f92672">=</span> title
+        self<span style="color:#f92672">.</span>rating <span style="color:#f92672">=</span> rating
+        self<span style="color:#f92672">.</span>runtime <span style="color:#f92672">=</span> runtime
+        self<span style="color:#f92672">.</span>budget <span style="color:#f92672">=</span> budget
+        self<span style="color:#f92672">.</span>gross <span style="color:#f92672">=</span> gross
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">profit</span>(self):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>gross <span style="color:#f92672">-</span> self<span style="color:#f92672">.</span>budget
+
+m <span style="color:#f92672">=</span> Movie(<span style="color:#e6db74">&#39;Casablanca&#39;</span>, <span style="color:#ae81ff">97</span>, <span style="color:#ae81ff">102</span>, <span style="color:#ae81ff">964000</span>, <span style="color:#ae81ff">1300000</span>)
+<span style="color:#66d9ef">print</span> m<span style="color:#f92672">.</span>budget  <span style="color:#75715e"># calls Movie.budget.__get__(m, Movie)</span>
+m<span style="color:#f92672">.</span>rating <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>  <span style="color:#75715e"># calls Movie.budget.__set__(m, 100)</span>
+<span style="color:#66d9ef">try</span>:
+    m<span style="color:#f92672">.</span>rating <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>   <span style="color:#75715e"># calls Movie.budget.__set__(m, -100)</span>
+<span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span>:
+    <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34;Woops, negative value&#34;</span>
+
+<span style="color:#75715e"># results</span>
+
+<span style="color:#ae81ff">964000</span>
+Woops, negative value
+</code></pre></div><p>当函数调用 <code>m.budget</code> 时，会将其视为具有 <code>__get__</code> 方法的描述符，然后调用 <code>Moive.budget.__get__</code> 返回结果。</p>
+<h1 id="reference">Reference</h1>
+<ul>
+<li><a href="http://python.jobbole.com/81899/">伯乐在线</a></li>
+<li><a href="https://foofish.net/what-is-descriptor-in-python.html">foofish</a></li>
+<li><a href="https://www.cnblogs.com/chenyangyao/p/python_descriptor.html">chengyangyao</a></li>
+</ul>
+
+  </div>
+</div>
+<div class="container has-text-centered">
+    
+    <aside><div id="share"></div></aside>
+    <script type="text/javascript">
+        $("#share").jsSocials({
+            showLabel: false,
+            showCount: false,
+            shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+        });
+    </script>
+    
+</div>
+
+<div class="container has-text-centered">
+  
+</div>
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/cnewbie/">cnewbie</a> 2018 - 2020</p>
+  </div>
+</section>
+
+

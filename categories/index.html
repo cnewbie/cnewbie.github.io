@@ -65,6 +65,43 @@
       
       <article class="columns">
         <div class="column is-2">
+          <h6 class="is-inline" style="white-space: nowrap">May 1</h2>
+        </div>
+        <div class="column">
+          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/python-description/">Python 描述符</a></h1>
+          <div class="content is-hidden-mobile">
+            Python 描述符
+什么是描述符（Descriptor） 定义了 __get__(),__set__(),__delete__()中任意一个描述符协议的对象成为描述符。简单来说，描述符就是可重用的属性。描述符具有诸多优点，诸如：保护属性不受修改、属性类型检查和自动更新某个依赖属性的值等。
+descr.__get__(self, obj, type=None) --&gt; value descr.__set__(self, obj, value) --&gt; None descr.__delete__(self, obj) --&gt; None __get__ 方法接受两个参数，一个是实例对象，另一个是实例的类型。__set__方法接受两个参数，一个是实例对象，另一个是数值。而 __delete__ 方法包含一个实例对象参数，并在实例对象被删除时调用。
+__dict__ （每个对象均 …
+            
+            <br>
+            <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/python-description/">
+            <span class="icon-link is-small" style="line-height: 100%">
+                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+              </span>
+              <p style="padding:0 5px"></p>more</p>
+            </a>
+            
+          </div>
+      </article>
+      
+      <article class="columns">
+        <div class="column is-2">
+          <h6 class="is-inline" style="white-space: nowrap">May 1</h2>
+        </div>
+        <div class="column">
+          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/python-propertyorder/">Python 属性访问顺序</a></h1>
+          <div class="content is-hidden-mobile">
+            Python 属性访问顺序
+实例属性访问顺序  类的 __getattribute__() 方法 类的数据描述符：(定义了描述符方法)（若人为的重载了该 __getattribute__() 方法，可能会导致无法调用描述符） 实例的属性字典（若与描述符对象同名，会被覆盖哦） 类的非数据描述符(只定义了 __get__() 方法，而没有定义 __set__(), __delete__() 方法) 类的属性字典 类的 __getattr__() 方法  类属性访问顺序 假设类为元类的实例，相比于实例多了一个类数据描述符的查找。
+ 元类的 __getattribute__() 方法 元类的数据描述符 类的数据描述符 类的属性字典 元类的非数据描述符 元类的属性字典 元类的 __getattr__() 方法  Reference  windy135 betterprogramming …
+            
+          </div>
+      </article>
+      
+      <article class="columns">
+        <div class="column is-2">
           <h6 class="is-inline" style="white-space: nowrap">Mar 30</h2>
         </div>
         <div class="column">
@@ -182,7 +219,7 @@ UML 结构 interface Product{ -doStuff() } class ConcreteProductA{ } class Concr
           <div class="content is-hidden-mobile">
             Python 运行时间
 在很多的时候我们需要计算我们程序的性能，这个时候我们常常需要统计程序运行的时间。下面我们就来说说怎么统计程序的运行时间。
-datetime #! /usr/bin/env python # -*- coding:utf-8 -*- import datetime from functools import wraps import logging def run_time(*args, **kwargs): @wraps(func) def __wrapper(func): logging.getLogger(__name__) start = datetime.datetime.now() ret = func(*args, **kwargs) end = datetime.datetime.now() logging.debug(&#39;running …
+datetime #! /usr/bin/env python # -*- coding:utf-8 -*- import datetime from functools import wraps import logging def run_time(func): @wraps(func) def __wrapper(*args, **kwargs): logging.getLogger(__name__) start = datetime.datetime.now() ret = func(*args, **kwargs) end = datetime.datetime.now() logging.debug(&#39;running …
             
             <br>
             <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/python-code-running-time/">
@@ -229,59 +266,6 @@ datetime #! /usr/bin/env python # -*- coding:utf-8 -*- import datetime from func
             Python 闭包
 首先还得从基本概念说起，什么是闭包呢？来看下维基上的解释: 在计算机科学中，闭包（Closure）是词法闭包（Lexical Closure）的简称，是引用了自由变量的函数。这个被引用的自由变量将和这个函数一同存在，即使已经离开了创造它的环境也不例外。所以，有另一种说法认为闭包是由函数和与其相关的引用环境组合而成的实体。闭包在运行时可以有多个实例，不同的引用环境和相同的函数组合可以产生不同的实例。
 上面提到了两个关键的地方： 自由变量 和 函数, 这两个关键稍后再说。还是得在赘述下“闭包”的意思，望文知意，可以形象的把它理解为一个封闭的包裹，这个包裹就是一个函数，当然还有函数内部对应的逻辑，包裹里面的东西就是自由变量，自由变量可以在随着包裹到处游荡。当然还得有个前提，这个包裹是被创建出来的。 在通过Python的语言介绍一下，一个闭包就是你调用了一个函数A，这个函数A返 …
-            
-          </div>
-      </article>
-      
-      <article class="columns">
-        <div class="column is-2">
-          <h6 class="is-inline" style="white-space: nowrap">Apr 15</h2>
-        </div>
-        <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/oop-relationship-of-class/">类间关系</a></h1>
-          <div class="content is-hidden-mobile">
-            类之间的关系
-泛化（Generalization） 泛化关系：是一种继承关系，表示一般与特殊的关系，通过继承增加子类的能力，它指定了子类如何特化父类的所有特征和行为。例如：老虎是动物的一种，即有老虎的特性也有动物的共性。
-箭头指向：带三角箭头的实线，箭头指向父类
-Fruit &lt;|-- Apple 实现（Realization） 实现关系：是一种类与接口的关系，表示类是接口所有特征和行为的实现。
-箭头指向：带三角箭头的虚线，箭头指向接口
-State&lt;|..BattleState 依赖（Dependency） 依赖关系：是一种使用的关系，即一个类的实现需要另一个类的协助，这种关系具有偶然性、临时性。类A要完成某个功能引用了类B，则类A依赖类B。被依赖的类会影响到依赖类，所以要尽量不使用双向的互相依赖。
-代码表现：类A的某个成员函数的返回值、局部变量、方法的参数或者对静态方法的调用， …
-            
-            <br>
-            <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/oop-relationship-of-class/">
-            <span class="icon-link is-small" style="line-height: 100%">
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-              </span>
-              <p style="padding:0 5px"></p>more</p>
-            </a>
-            
-          </div>
-      </article>
-      
-      <article class="columns">
-        <div class="column is-2">
-          <h6 class="is-inline" style="white-space: nowrap">Mar 26</h2>
-        </div>
-        <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/database-mysql/">MySQL 命令速查</a></h1>
-          <div class="content is-hidden-mobile">
-            教程地址
-SQL语句对大小写不敏感
-基础语法  SELECT 列名称 FROM 表名称
- DISTINCT 用语返回唯一的值
- SELECT DISTINCT 列名称 FROM 表名称
- WHERE 有条件从表中选取数据
- SELECT 列名称 FROM 表名称 WHERE 列 运算符 值
-    操作符 描述     = 等于   &lt;&gt; 不等于   &gt; 大于   &lt; 小于   &gt;= 大于等于   &lt;= 小于等于   BETWEEN 在某个范围内   LIKE 搜索某种模式    AND 和 OR 运算符是基于一个以上条件对记录进行过滤
-            
-            <br>
-            <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/database-mysql/">
-            <span class="icon-link is-small" style="line-height: 100%">
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-              </span>
-              <p style="padding:0 5px"></p>more</p>
-            </a>
             
           </div>
       </article>
