@@ -1,349 +1,72 @@
-
-<div class="container">
-  <!DOCTYPE html>
-<html lang="zh-CN">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-
-
-<title>Posts | Hugo Blog</title>
-
-<link rel="stylesheet" href="https://cnewbie.github.io/css/styles.css">
-
-<link href="https://cdn.bootcss.com/font-awesome/5.2.0/css/all.css" rel="stylesheet">
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
-
-
-
-<link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/zenburn.min.css" rel="stylesheet">
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-
-<script>hljs.initHighlightingOnLoad();</script>
-<script src="https://cnewbie.github.io/js/highlight.js"></script>
-
-
-
-<link href="https://cdn.bootcss.com/jsSocials/1.4.0/jssocials.css" rel="stylesheet">
-<link href="https://cdn.bootcss.com/jsSocials/1.4.0/jssocials-theme-minima.css" rel="stylesheet">
-
-<script type="text/javascript" src="https://cnewbie.github.io/js/jssocials.js"></script>
-
-
-
-
-  <div class="container">
-    <nav class="navbar level">
-      <div class="navbar-brand">
-          <a class="nav-item" href="https://cnewbie.github.io"><h1 class="title is-3">Hugo Blog</h1></a>
-      </div>           
-      <div class="navbar-menu has-text-centered is-active">
-          <div class="navbar-end is-centered">
-              
-                <a href="https://cnewbie.github.io/about" rel="me">
-                  <span class="icon">
-                    <i class="fas fa-info"></i>
-                  </span>
-                </a>
-              
-                <a href="https://github.com/cnewbie/" rel="me">
-                  <span class="icon">
-                    <i class="fab fa-github"></i>
-                  </span>
-                </a>
-              
-           </div>
-      </div>
-    </nav>
-  </div>
-
-  <main class="container">
-      
-      
-      <h1 class="title is-3">2019</h1>
-      
-      <article class="columns">
-        <div class="column is-2">
-          <h6 class="is-inline" style="white-space: nowrap">Apr 15</h2>
-        </div>
-        <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/oop-relationship-of-class/">类间关系</a></h1>
-          <div class="content is-hidden-mobile">
-            类之间的关系
-泛化（Generalization） 泛化关系：是一种继承关系，表示一般与特殊的关系，通过继承增加子类的能力，它指定了子类如何特化父类的所有特征和行为。例如：老虎是动物的一种，即有老虎的特性也有动物的共性。
-箭头指向：带三角箭头的实线，箭头指向父类
-Fruit &lt;|-- Apple 实现（Realization） 实现关系：是一种类与接口的关系，表示类是接口所有特征和行为的实现。
-箭头指向：带三角箭头的虚线，箭头指向接口
-State&lt;|..BattleState 依赖（Dependency） 依赖关系：是一种使用的关系，即一个类的实现需要另一个类的协助，这种关系具有偶然性、临时性。类A要完成某个功能引用了类B，则类A依赖类B。被依赖的类会影响到依赖类，所以要尽量不使用双向的互相依赖。
-代码表现：类A的某个成员函数的返回值、局部变量、方法的参数或者对静态方法的调用， …
-            
-            <br>
-            <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/oop-relationship-of-class/">
-            <span class="icon-link is-small" style="line-height: 100%">
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-              </span>
-              <p style="padding:0 5px"></p>more</p>
-            </a>
-            
-          </div>
-      </article>
-      
-      <article class="columns">
-        <div class="column is-2">
-          <h6 class="is-inline" style="white-space: nowrap">Mar 26</h2>
-        </div>
-        <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/database-mysql/">MySQL 命令速查</a></h1>
-          <div class="content is-hidden-mobile">
-            教程地址
-SQL语句对大小写不敏感
-基础语法  SELECT 列名称 FROM 表名称
- DISTINCT 用语返回唯一的值
- SELECT DISTINCT 列名称 FROM 表名称
- WHERE 有条件从表中选取数据
- SELECT 列名称 FROM 表名称 WHERE 列 运算符 值
-    操作符 描述     = 等于   &lt;&gt; 不等于   &gt; 大于   &lt; 小于   &gt;= 大于等于   &lt;= 小于等于   BETWEEN 在某个范围内   LIKE 搜索某种模式    AND 和 OR 运算符是基于一个以上条件对记录进行过滤
-            
-            <br>
-            <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/database-mysql/">
-            <span class="icon-link is-small" style="line-height: 100%">
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-              </span>
-              <p style="padding:0 5px"></p>more</p>
-            </a>
-            
-          </div>
-      </article>
-      
-      <article class="columns">
-        <div class="column is-2">
-          <h6 class="is-inline" style="white-space: nowrap">Mar 15</h2>
-        </div>
-        <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/linux-tmux/">Tmux and Screen</a></h1>
-          <div class="content is-hidden-mobile">
-            Terminal Multiplexers: Screen, Tmux
-终端多路复用：Screen，Tmux
-命令行选项 术语对照表
-   英文 中文     session 会话   attach 连接   detach 脱离   prefix 前缀   multiplexer 多路复用   window 窗口   regions 区域   panes 面板   buffer 缓存   mark 标记       用途 screen tmux     创建指定名称的会话并连接 screen -S foo tmux new -s foo   创建会话并脱离 screen -S foo -d -m tmux new -s foo -d   列出所有会话 screen -list tmux ls   连接 screen -r tmux attach   连接到指定会话 screen -r …
-            
-            <br>
-            <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/linux-tmux/">
-            <span class="icon-link is-small" style="line-height: 100%">
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-              </span>
-              <p style="padding:0 5px"></p>more</p>
-            </a>
-            
-          </div>
-      </article>
-      
-      <article class="columns">
-        <div class="column is-2">
-          <h6 class="is-inline" style="white-space: nowrap">Mar 15</h2>
-        </div>
-        <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/python-metaclass/">Python 元类</a></h1>
-          <div class="content is-hidden-mobile">
-            Python 元类（metaclass）
-对象 Python 中一切皆对象，连类也不例外。
-对象中包含三个关键性属性：
- 标识 使用 id() 方法查看 对象值 类型 使用 type() 方法查看  类与对象 Python 中使用 class 关键字定义类，通过定义的类生成类实例。实例称之为实例对象。Python 中类是一个对象，所有内建类型的类型都是 type，这个 type 就是元类，元类就是 Python 中的造物主。
-道生一，一生二，二生三，三生万物。
-道 即是 type 一 即是 metaclass(元类，或者叫类生成器) 二 即是 class(类，或者叫实例生成器) 三 即是 instance(实例) 万物 即是 实例的各种属性与方法，我们平常使用python时，调用的就是它们。 …
-            
-            <br>
-            <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/python-metaclass/">
-            <span class="icon-link is-small" style="line-height: 100%">
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-              </span>
-              <p style="padding:0 5px"></p>more</p>
-            </a>
-            
-          </div>
-      </article>
-      
-      
-      <h1 class="title is-3">2018</h1>
-      
-      <article class="columns">
-        <div class="column is-2">
-          <h6 class="is-inline" style="white-space: nowrap">Aug 5</h2>
-        </div>
-        <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/algorithm-sort-algorithms/">常用排序算法总结</a></h1>
-          <div class="content is-hidden-mobile">
-            工具函数 #include &lt;iostream&gt;#include &lt;ctime&gt; using namespace std; void swap(int &amp;a,int &amp;b){ int tmp = a; a = b; b = tmp; } void printarr(int *a,int n){ for(size_t i = 0; i &lt; n; i++) { cout &lt;&lt; a[i] &lt;&lt; &#34; &#34;; } cout &lt;&lt; endl; } Bubble Sort 冒泡排序 void bubble_sort(int *a, int n){ for(size_t i = n-1; i &gt; 0;--i){ for(size_t j = i; j &gt; 0;--j) { if(a[j] &lt; …
-            
-            <br>
-            <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/algorithm-sort-algorithms/">
-            <span class="icon-link is-small" style="line-height: 100%">
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-              </span>
-              <p style="padding:0 5px"></p>more</p>
-            </a>
-            
-          </div>
-      </article>
-      
-      <article class="columns">
-        <div class="column is-2">
-          <h6 class="is-inline" style="white-space: nowrap">Aug 4</h2>
-        </div>
-        <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/markdown-pandoc/">Pandoc Markdown 文档</a></h1>
-          <div class="content is-hidden-mobile">
-            Philosophy 哲学 Markdown is designed to be easy to write,and,even more importantly,easy to read.
- A Markdown-formatted document should be publishable as-is,as plain text,without looking like it&rsquo;s been marked up with tags or formatting instructions. - John Gruber
- Paragraphs 段落 一个段落包含一行或多行文字，通过行后跟随一个或多个空白行，换行符（newlines）和空格（spaces）作用一样，如果需要硬换行（hard line break），在行后添加两个以上的空格。
-Extension …
-            
-            <br>
-            <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/markdown-pandoc/">
-            <span class="icon-link is-small" style="line-height: 100%">
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-              </span>
-              <p style="padding:0 5px"></p>more</p>
-            </a>
-            
-          </div>
-      </article>
-      
-      <article class="columns">
-        <div class="column is-2">
-          <h6 class="is-inline" style="white-space: nowrap">Jul 16</h2>
-        </div>
-        <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/linux-iptables/">Iptables 配置</a></h1>
-          <div class="content is-hidden-mobile">
-            filter,nat,mangle 规则表 filter表 数据包过滤,根据规则决定是否放行数据包（DROP,ACCEPT,REJECT,LOG）
-三条规则链
- INPUT 进入本地的包 FORWARD 不是本地产生且负责转发的包 OUTPUT 本地产生的包  nat表 修改数据包ip地址、端口等信息（SNAT,DNAT,MASQUERADE,REDIRECT）
-三条规则链
- PREROUTING 改变进入数据包的目的地址 OUTPUT 改变本地产生包的目的地址 POSTROUTING 改变发出数据包的源地址  mangle表 修改数据包的TOS，TTL及数据包的Mark
-五个规则链 PREROUTING，POSTROUTING，INPUT，OUTPUT，FORWARD
-raw表 决定数据包是否被状态跟踪机制处理
-两条规则链 OUTPUT,PREROUTING
-四种状态
- NEW 开始一个 …
-            
-            <br>
-            <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/linux-iptables/">
-            <span class="icon-link is-small" style="line-height: 100%">
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-              </span>
-              <p style="padding:0 5px"></p>more</p>
-            </a>
-            
-          </div>
-      </article>
-      
-      <article class="columns">
-        <div class="column is-2">
-          <h6 class="is-inline" style="white-space: nowrap">Jul 16</h2>
-        </div>
-        <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/tools-git/">Git 命令速查</a></h1>
-          <div class="content is-hidden-mobile">
-            Git 基础 基础操作 初始化仓库
-git init
-git clone [url]
-检查文件状态
-git status
-跟踪文件
-git add [file name] 跟踪新文件/暂存已修改文件
-对比文件修改内容
-git diff [file name]
-git diff --cached/staged [file name] 对比暂存区文件
-提交更新
-git commit
-git commit -m [message] 更新纪录
-git commit -a -m [message] 跳过暂存文件步骤直接提交
-移除文件
-git rm [file name] 删除文件并取消跟踪
-git rm --cached [file name] 取消跟踪文件
-重命名文件
-git mv [file name]
-mv old_name new_name git rm old_name git add …
-            
-            <br>
-            <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/tools-git/">
-            <span class="icon-link is-small" style="line-height: 100%">
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-              </span>
-              <p style="padding:0 5px"></p>more</p>
-            </a>
-            
-          </div>
-      </article>
-      
-      
-      <h1 class="title is-3">2017</h1>
-      
-      <article class="columns">
-        <div class="column is-2">
-          <h6 class="is-inline" style="white-space: nowrap">Apr 12</h2>
-        </div>
-        <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://cnewbie.github.io/posts/algorithm-ga-en/">Introduction of Genetic Algorithm</a></h1>
-          <div class="content is-hidden-mobile">
-            Outline of GA Outline of the Basic Genetic Algorithm
-  [Start] Generate random population of n chromosomes (suitable solutions for the problem)
-  [Fitness] Evaluate the fitness f(x) of each chromosome x in the population
-  [New population] Create a new population by repeating following steps until the new population is complete
-  [Selection] Select two parent chromosomes from a population …
-            
-            <br>
-            <a class="button is-marginless is-paddingless" href="https://cnewbie.github.io/posts/algorithm-ga-en/">
-            <span class="icon-link is-small" style="line-height: 100%">
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-              </span>
-              <p style="padding:0 5px"></p>more</p>
-            </a>
-            
-          </div>
-      </article>
-      
-      
-      
-  </main>
-  <section class="section">
-  <div class="container">
-    <nav class="level is-mobile">
-      <div class="level-left">
-        <div class="level-item">
-          
-          <a class="button is-rounded" href="/posts/">
-            <span class="icon is-small is-marginless">
-              <i class="fa fa-angle-left"></i>
-            </span>
-            Newer
-          </a>
-          
-        </div>
-      </div>
-      <div class="level-right is-marginless">
-        <div class="level-item">
-          
-          <a class="button is-rounded" disabled>
-            Older
-            <span class="icon is-small is-marginless">
-              <i class="fa fa-angle-right"></i>
-            </span>
-          </a>
-          
-        </div>
-      </div>
-    </nav>
-  </div>
-</section>
-
-  <section class="section">
-  <div class="container has-text-centered">
-    <p>&copy; <a href="https://github.com/cnewbie/">cnewbie</a> 2018 - 2020</p>
-  </div>
-</section>
-
-
-</div>
+<!doctype html><html lang=zh-CN data-theme=dark><head><meta charset=UTF-8><meta name=viewport content="width=device-width"><meta name=theme-color content="#222" media="(prefers-color-scheme: dark)"><meta name=generator content="Hugo 0.121.1"><link rel="shortcut icon" type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/png sizes=16x16 href=/imgs/icons/favicon_16x16_next.png><link rel=icon type=image/png sizes=32x32 href=/imgs/icons/favicon_32_32_next.png><link rel=apple-touch-icon sizes=180x180 href=/imgs/icons/apple_touch_icon_next.png><meta itemprop=name content="Posts"><meta itemprop=description content="KISS"><meta itemprop=image content="https://cnewbie.github.io/imgs/hugo_next_avatar.png"><meta itemprop=keywords content="Hugo,NexT,Linux"><meta property="og:type" content="website"><meta property="og:title" content="Posts"><meta property="og:description" content="KISS"><meta property="og:image" content="/imgs/hugo_next_avatar.png"><meta property="og:image:width" content="312"><meta property="og:image:height" content="312"><meta property="og:image:type" content="image/jpeg/png/svg/jpg"><meta property="og:url" content="https://cnewbie.github.io/posts/"><meta property="og:site_name" content="Hugo NexT Blog"><meta property="og:locale" content="zh-CN"><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/font-awesome/6.1.2/css/all.min.css><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/animate.css/3.1.1/animate.min.css><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.css><link rel=stylesheet href=/css/main.min.613cdd93403a6fc6667e9d7305a30b932cdc5a2fcc77df9f66518c9a9fa56b3c.css><style type=text/css>.post-footer,.flinks-list-footer hr:after{content:"~ 我可是有底线的哟 ~"}</style><script type=text/javascript>(function(){localDB={set:function(e,t,n){if(n===0)return;const s=new Date,o=n*864e5,i={value:t,expiry:s.getTime()+o};localStorage.setItem(e,JSON.stringify(i))},get:function(e){const t=localStorage.getItem(e);if(!t)return void 0;const n=JSON.parse(t),s=new Date;return s.getTime()>n.expiry?(localStorage.removeItem(e),void 0):n.value}},theme={active:function(){const e=localDB.get("theme");if(e==null)return;theme.toggle(e),window.matchMedia("(prefers-color-scheme: dark)").addListener(function(e){theme.toggle(e.matches?"dark":"light")})},toggle:function(e){document.documentElement.setAttribute("data-theme",e),localDB.set("theme",e,2);const t=document.querySelector("iframe.giscus-frame");if(t){const n={setConfig:{theme:e}};t.contentWindow.postMessage({giscus:n},"https://giscus.app")}}},theme.active()})(window)</script><script class=next-config data-name=page type=application/json>{"comments":true,"isHome":false,"isPage":false,"path":"posts","permalink":"https://cnewbie.github.io/posts/","title":"Posts","waline":{"js":[{"alias":"waline","alias_name":"@waline/client","file":"dist/pageview.js","name":"pageview","version":"2.13.0"},{"alias":"waline","alias_name":"@waline/client","file":"dist/comment.js","name":"comment","version":"2.13.0"}]}}</script><script type=text/javascript>document.addEventListener("DOMContentLoaded",()=>{var e=document.createElement("script");e.charset="UTF-8",e.src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",e.async=!1,e.defer=!0,document.head.appendChild(e),e.onload=function(){NexT.utils.fmtBusuanzi()}})</script><title>posts - Hugo NexT Blog</title><noscript><link rel=stylesheet href=/css/noscript.css></noscript></head><body itemscope itemtype=http://schema.org/WebPage class=use-motion><div class=headband></div><main class=main><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle aria-label role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div></div><div class=site-meta><a href=/ class=brand rel=start><i class=logo-line></i><h1 class=site-title>Hugo NexT Blog</h1><i class=logo-line></i></a><p class=site-subtitle itemprop=description>cnewbie的小窝</p></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href=/ class=hvr-icon-pulse rel=section><i class="fa fa-home hvr-icon"></i>首页</a></li><li class="menu-item menu-item-about"><a href=/ class=hvr-icon-pulse rel=section><i class="fa fa-user hvr-icon"></i>关于</a></li><li class="menu-item menu-item-archives"><a href=/ class=hvr-icon-pulse rel=section><i class="fa fa-archive hvr-icon"></i>归档
+<span class=badge>20</span></a></li><li class="menu-item menu-item-search"><a role=button class="popup-trigger hvr-icon-pulse"><i class="fa fa-search fa-fw hvr-icon"></i>搜索</a></li></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon><i class="fa fa-search"></i></span><div class=search-input-container><input autocomplete=off autocapitalize=off maxlength=80 placeholder=搜索... spellcheck=false type=search class=search-input></div><span class=popup-btn-close role=button><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class=search-result-icon><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle" role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div><aside class=sidebar><div class="sidebar-inner sidebar-overview-active"><ul class=sidebar-nav><li class=sidebar-nav-toc>文章目录</li><li class=sidebar-nav-overview>站点概览</li></ul><div class=sidebar-panel-container><div class="post-toc-wrap sidebar-panel"><div class="post-toc animated"></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author site-overview-item animated" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image alt=cnewbie src=/imgs/img-lazy-loading.gif data-src=/imgs/hugo_next_avatar.png><p class=site-author-name itemprop=name>cnewbie</p><div class=site-description itemprop=description>KISS</div></div><div class="site-state-wrap site-overview-item animated"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/archives/><span class=site-state-item-count>20</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=/categories/><span class=site-state-item-count>1</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/><span class=site-state-item-count>35</span>
+<span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-social site-overview-item animated"><span class=links-of-social-item><a href=https://github.com/cnewbie title="Github → https://github.com/cnewbie" rel=noopener class=hvr-icon-pulse target=_blank><i class="fab fa-github fa-fw hvr-icon"></i>
+Github</a></span></div><div class="cc-license animated" itemprop=license><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh class=cc-opacity rel=noopener target=_blank title=共享知识><img src=/imgs/img-lazy-loading.gif data-src=/imgs/cc/big/by_nc_sa.svg alt=共享知识></a></div><div class="links-of-blogroll site-overview-item animated"><div class=links-of-blogroll-title><i class="fa fa-globe fa-fw"></i>
+友情链接</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://github.com/hugo-next/hugo-theme-next title=https://github.com/hugo-next/hugo-theme-next target=_blank>Hugo-NexT</a></li><li class=links-of-blogroll-item><a href=https://lisenhui.cn title=https://lisenhui.cn target=_blank>凡梦星尘空间站</a></li></ul></div></div></div></div><div id=siteinfo-card-widget class=sidebar-card-widget><div class=item-headline><i class="fas fa-chart-line"></i>
+<span>网站资讯</span></div><div class=siteinfo><div class=siteinfo-item><div class=item-name><i class="fa-solid fa-calendar-check"></i>已运行：</div><div class=item-count id=runTimes data-publishdate=2017-04-12T08:36:54+08:00></div></div><div class=siteinfo-item><div class=item-name><i class="fas fa fa-user"></i>总访客数：</div><div class=item-count id=busuanzi_value_site_uv><i class="fa fa-sync fa-spin"></i></div></div><div class=siteinfo-item><div class=item-name><i class="fas fa fa-eye"></i>页面浏览：</div><div class=item-count id=busuanzi_value_site_pv><i class="fa fa-sync fa-spin"></i></div></div><div class=siteinfo-item><div class=item-name><i class="fa fa-font"></i>总字数：</div><div class=item-count id=wordsCount data-count=79417></div></div><div class=siteinfo-item><div class=item-name><i class="fa fa-mug-hot"></i>阅读约：</div><div class=item-count id=readTimes data-times=170></div></div><div class=siteinfo-item><div class=item-name><i class="fa fa-clock-rotate-left"></i>最后更新于：</div><div class=item-count id=last-push-date data-lastpushdate=2024-01-18T10:13:10+08:00></div></div></div></div></aside><div class=sidebar-dimmer></div></header><div class=tool-buttons><div id=goto-comments class="button goto-comments" title=直达评论><i class="fas fa-comments"></i></div><div id=goto-gtranslate class=button title=多语言翻译><i class="fas fa-globe"></i></div><div id=toggle-theme class=button title=深浅模式切换><i class="fas fa-adjust"></i></div><div class=back-to-top role=button title=返回顶部><i class="fa fa-arrow-up"></i>
+<span>0%</span></div></div><div class=reading-progress-bar></div><a role=button class="book-mark-link book-mark-link-fixed"></a><a href=https://github.com/cnewbie rel="noopener external nofollow noreferrer" target=_blank title="Follow me on GitHub" class="exturl github-corner"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0 0 115 115h15l12 27L250 250V0z"/><path d="M128.3 109C113.8 99.7 119 89.6 119 89.6 122 82.7 120.5 78.6 120.5 78.6 119.2 72 123.4 76.3 123.4 76.3 127.3 80.9 125.5 87.3 125.5 87.3 122.9 97.6 130.6 101.9 134.4 103.2" fill="currentcolor" style="transform-origin:130px 106px" class="octo-arm"/><path d="M115 115C114.9 115.1 118.7 116.5 119.8 115.4l13.9-13.8C136.9 99.2 139.9 98.4 142.2 98.6 133.8 88 127.5 74.4 143.8 58 148.5 53.4 154 51.2 159.7 51 160.3 49.4 163.2 43.6 171.4 40.1 171.4 40.1 176.1 42.5 178.8 56.2 183.1 58.6 187.2 61.8 190.9 65.4 194.5 69 197.7 73.2 200.1 77.6 213.8 80.2 216.3 84.9 216.3 84.9 212.7 93.1 206.9 96 205.4 96.6 205.1 102.4 203 107.8 198.3 112.5 181.9 128.9 168.3 122.5 157.7 114.1 157.9 116.9 156.7 120.9 152.7 124.9L141 136.5C139.8 137.7 141.6 141.9 141.8 141.8z" fill="currentcolor" class="octo-body"/></svg></a><script type=text/javascript src=//sidecar.gitter.im/dist/sidecar.v1.js async></script><script type=text/javascript>((window.gitter={}).chat={}).options={room:"hugo-next/community"}</script><noscript><div class=noscript-warning>Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner index posts-expand"><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=https://cnewbie.github.io/posts/python-closure/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/hugo_next_avatar.png"><meta itemprop=name content="cnewbie"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="cnewbie"><meta itemprop=description content="KISS"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="Python 闭包"><meta itemprop=description content="Python 闭包"></span><header class=post-header><h2 class=post-title itemprop="name headline"><a href=/posts/python-closure/ itemprop=url class=post-title-link>Python 闭包</a></h2><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar"></i>
+</span><span class=post-meta-item-text title=发表于>发表于：
+</span><time title="创建时间：2019-04-17 08:00:00 +0800 CST" itemprop="dateCreated datePublished" datetime="2019-04-17 08:00:00 +0800 CST">2019-04-17
+</time></span><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-folder-open"></i>
+</span><span class=post-meta-item-text title=分类于>分类于：
+</span><span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/tech itemprop=url rel=index><span itemprop=name>tech</span></a></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody>Python 闭包 首先还得从基本概念说起，什么是闭包呢？来看下维基上的解释: 在计算机科学中，闭包（Closure）是词法闭包（Lexical Closur</div><footer class=post-footer><div class=post-button><a class=btn href=/posts/python-closure/#more rel=contents>阅读全文 &#187;</a></div><div class=post-eof></div></footer></article></div><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=https://cnewbie.github.io/posts/oop-relationship-of-class/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/hugo_next_avatar.png"><meta itemprop=name content="cnewbie"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="cnewbie"><meta itemprop=description content="KISS"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="类间关系"><meta itemprop=description content="类间关系"></span><header class=post-header><h2 class=post-title itemprop="name headline"><a href=/posts/oop-relationship-of-class/ itemprop=url class=post-title-link>类间关系</a></h2><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar"></i>
+</span><span class=post-meta-item-text title=发表于>发表于：
+</span><time title="创建时间：2019-04-15 08:00:00 +0800 CST" itemprop="dateCreated datePublished" datetime="2019-04-15 08:00:00 +0800 CST">2019-04-15
+</time></span><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-folder-open"></i>
+</span><span class=post-meta-item-text title=分类于>分类于：
+</span><span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/tech itemprop=url rel=index><span itemprop=name>tech</span></a></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody>类之间的关系 泛化（Generalization） 泛化关系：是一种继承关系，表示一般与特殊的关系，通过继承增加子类的能力，它指定了子类如何特化</div><footer class=post-footer><div class=post-button><a class=btn href=/posts/oop-relationship-of-class/#more rel=contents>阅读全文 &#187;</a></div><div class=post-eof></div></footer></article></div><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=https://cnewbie.github.io/posts/database-mysql/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/hugo_next_avatar.png"><meta itemprop=name content="cnewbie"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="cnewbie"><meta itemprop=description content="KISS"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="MySQL 命令速查"><meta itemprop=description content="MySQL 命令速查"></span><header class=post-header><h2 class=post-title itemprop="name headline"><a href=/posts/database-mysql/ itemprop=url class=post-title-link>MySQL 命令速查</a></h2><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar"></i>
+</span><span class=post-meta-item-text title=发表于>发表于：
+</span><time title="创建时间：2019-03-26 08:00:00 +0800 CST" itemprop="dateCreated datePublished" datetime="2019-03-26 08:00:00 +0800 CST">2019-03-26
+</time></span><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-folder-open"></i>
+</span><span class=post-meta-item-text title=分类于>分类于：
+</span><span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/tech itemprop=url rel=index><span itemprop=name>tech</span></a></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody>教程地址 SQL语句对大小写不敏感 基础语法 SELECT 列名称 FROM 表名称 DISTINCT 用语返回唯一的值 SELECT DISTINCT 列名称 FROM 表名称 WHERE 有条件从表中选取数据 SELECT 列名称 FROM 表名称 WHERE 列 运算符</div><footer class=post-footer><div class=post-button><a class=btn href=/posts/database-mysql/#more rel=contents>阅读全文 &#187;</a></div><div class=post-eof></div></footer></article></div><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=https://cnewbie.github.io/posts/python-metaclass/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/hugo_next_avatar.png"><meta itemprop=name content="cnewbie"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="cnewbie"><meta itemprop=description content="KISS"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="Python 元类"><meta itemprop=description content="Python 元类"></span><header class=post-header><h2 class=post-title itemprop="name headline"><a href=/posts/python-metaclass/ itemprop=url class=post-title-link>Python 元类</a></h2><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar"></i>
+</span><span class=post-meta-item-text title=发表于>发表于：
+</span><time title="创建时间：2019-03-15 08:00:00 +0800 CST" itemprop="dateCreated datePublished" datetime="2019-03-15 08:00:00 +0800 CST">2019-03-15
+</time></span><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-folder-open"></i>
+</span><span class=post-meta-item-text title=分类于>分类于：
+</span><span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/tech itemprop=url rel=index><span itemprop=name>tech</span></a></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody>Python 元类（metaclass） 对象 Python 中一切皆对象，连类也不例外。 对象中包含三个关键性属性： 标识 使用 id() 方法查看 对象值 类型 使用 type() 方法查看 类与对象 Python</div><footer class=post-footer><div class=post-button><a class=btn href=/posts/python-metaclass/#more rel=contents>阅读全文 &#187;</a></div><div class=post-eof></div></footer></article></div><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=https://cnewbie.github.io/posts/linux-tmux/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/hugo_next_avatar.png"><meta itemprop=name content="cnewbie"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="cnewbie"><meta itemprop=description content="KISS"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="Tmux and Screen"><meta itemprop=description content="Tmux and Screen"></span><header class=post-header><h2 class=post-title itemprop="name headline"><a href=/posts/linux-tmux/ itemprop=url class=post-title-link>Tmux and Screen</a></h2><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar"></i>
+</span><span class=post-meta-item-text title=发表于>发表于：
+</span><time title="创建时间：2019-03-15 08:00:00 +0800 CST" itemprop="dateCreated datePublished" datetime="2019-03-15 08:00:00 +0800 CST">2019-03-15
+</time></span><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-folder-open"></i>
+</span><span class=post-meta-item-text title=分类于>分类于：
+</span><span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/tech itemprop=url rel=index><span itemprop=name>tech</span></a></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody>Terminal Multiplexers: Screen, Tmux 终端多路复用：Screen，Tmux 命令行选项 术语对照表 英文 中文 session 会话 attach 连接 detach 脱离 prefix 前缀 multiplexer 多路复用 window 窗口 regions 区域 panes 面板 buffer 缓存 mark 标记 用途</div><footer class=post-footer><div class=post-button><a class=btn href=/posts/linux-tmux/#more rel=contents>阅读全文 &#187;</a></div><div class=post-eof></div></footer></article></div><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=https://cnewbie.github.io/posts/algorithm-sort-algorithms/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/hugo_next_avatar.png"><meta itemprop=name content="cnewbie"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="cnewbie"><meta itemprop=description content="KISS"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="常用排序算法总结"><meta itemprop=description content="常用排序算法总结"></span><header class=post-header><h2 class=post-title itemprop="name headline"><a href=/posts/algorithm-sort-algorithms/ itemprop=url class=post-title-link>常用排序算法总结</a></h2><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar"></i>
+</span><span class=post-meta-item-text title=发表于>发表于：
+</span><time title="创建时间：2018-08-05 08:00:00 +0800 CST" itemprop="dateCreated datePublished" datetime="2018-08-05 08:00:00 +0800 CST">2018-08-05
+</time></span><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-folder-open"></i>
+</span><span class=post-meta-item-text title=分类于>分类于：
+</span><span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/tech itemprop=url rel=index><span itemprop=name>tech</span></a></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody>工具函数 #include &lt;iostream> #include &lt;ctime> using namespace std; void swap(int &amp;a,int &amp;b){ int tmp = a; a = b; b = tmp; } void printarr(int *a,int n){ for(size_t i = 0; i &lt; n; i++) { cout &lt;&lt; a[i] &lt;&lt; " "; } cout &lt;&lt; endl; } Bubble Sort 冒泡排序 void bubble_sort(int *a, int n){ for(size_t i = n-1; i > 0;--i){ for(size_t j</div><footer class=post-footer><div class=post-button><a class=btn href=/posts/algorithm-sort-algorithms/#more rel=contents>阅读全文 &#187;</a></div><div class=post-eof></div></footer></article></div><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=https://cnewbie.github.io/posts/markdown-pandoc/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/hugo_next_avatar.png"><meta itemprop=name content="cnewbie"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="cnewbie"><meta itemprop=description content="KISS"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="Pandoc Markdown 文档"><meta itemprop=description content="Pandoc Markdown 文档"></span><header class=post-header><h2 class=post-title itemprop="name headline"><a href=/posts/markdown-pandoc/ itemprop=url class=post-title-link>Pandoc Markdown 文档</a></h2><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar"></i>
+</span><span class=post-meta-item-text title=发表于>发表于：
+</span><time title="创建时间：2018-08-04 08:00:00 +0800 CST" itemprop="dateCreated datePublished" datetime="2018-08-04 08:00:00 +0800 CST">2018-08-04
+</time></span><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-folder-open"></i>
+</span><span class=post-meta-item-text title=分类于>分类于：
+</span><span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/tech itemprop=url rel=index><span itemprop=name>tech</span></a></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody>Philosophy 哲学 Markdown is designed to be easy to write,and,even more importantly,easy to read. A Markdown-formatted document should be publishable as-is,as plain text,without looking like it&rsquo;s been marked up with tags or formatting instructions. - John Gruber Paragraphs 段落 一个段落包含一行或多行文字，通过行后跟随一个或多个空白行，</div><footer class=post-footer><div class=post-button><a class=btn href=/posts/markdown-pandoc/#more rel=contents>阅读全文 &#187;</a></div><div class=post-eof></div></footer></article></div><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=https://cnewbie.github.io/posts/tools-git/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/hugo_next_avatar.png"><meta itemprop=name content="cnewbie"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="cnewbie"><meta itemprop=description content="KISS"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="Git 命令速查"><meta itemprop=description content="Git 命令速查"></span><header class=post-header><h2 class=post-title itemprop="name headline"><a href=/posts/tools-git/ itemprop=url class=post-title-link>Git 命令速查</a></h2><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar"></i>
+</span><span class=post-meta-item-text title=发表于>发表于：
+</span><time title="创建时间：2018-07-16 08:00:00 +0800 CST" itemprop="dateCreated datePublished" datetime="2018-07-16 08:00:00 +0800 CST">2018-07-16
+</time></span><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-folder-open"></i>
+</span><span class=post-meta-item-text title=分类于>分类于：
+</span><span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/tech itemprop=url rel=index><span itemprop=name>tech</span></a></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody>Git 基础 基础操作 初始化仓库 git init git clone [url] 检查文件状态 git status 跟踪文件 git add [file name] 跟踪新文件/暂存已修改文件 对比文件修改内容 git diff [file name] git diff --cached/staged [file name] 对比暂存区文件</div><footer class=post-footer><div class=post-button><a class=btn href=/posts/tools-git/#more rel=contents>阅读全文 &#187;</a></div><div class=post-eof></div></footer></article></div><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=https://cnewbie.github.io/posts/linux-iptables/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/hugo_next_avatar.png"><meta itemprop=name content="cnewbie"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="cnewbie"><meta itemprop=description content="KISS"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="Iptables 配置"><meta itemprop=description content="Iptables 配置"></span><header class=post-header><h2 class=post-title itemprop="name headline"><a href=/posts/linux-iptables/ itemprop=url class=post-title-link>Iptables 配置</a></h2><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar"></i>
+</span><span class=post-meta-item-text title=发表于>发表于：
+</span><time title="创建时间：2018-07-16 08:00:00 +0800 CST" itemprop="dateCreated datePublished" datetime="2018-07-16 08:00:00 +0800 CST">2018-07-16
+</time></span><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-folder-open"></i>
+</span><span class=post-meta-item-text title=分类于>分类于：
+</span><span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/tech itemprop=url rel=index><span itemprop=name>tech</span></a></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody>filter,nat,mangle 规则表 filter表 数据包过滤,根据规则决定是否放行数据包（DROP,ACCEPT,REJECT,LOG） 三条规则链 INPUT 进入本地的包 FORWARD 不是本</div><footer class=post-footer><div class=post-button><a class=btn href=/posts/linux-iptables/#more rel=contents>阅读全文 &#187;</a></div><div class=post-eof></div></footer></article></div><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=https://cnewbie.github.io/posts/algorithm-ga-en/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/hugo_next_avatar.png"><meta itemprop=name content="cnewbie"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="cnewbie"><meta itemprop=description content="KISS"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="Introduction of Genetic Algorithm"><meta itemprop=description content="Introduction of Genetic Algorithm"></span><header class=post-header><h2 class=post-title itemprop="name headline"><a href=/posts/algorithm-ga-en/ itemprop=url class=post-title-link>Introduction of Genetic Algorithm</a></h2><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar"></i>
+</span><span class=post-meta-item-text title=发表于>发表于：
+</span><time title="创建时间：2017-04-12 08:36:54 +0800 CST" itemprop="dateCreated datePublished" datetime="2017-04-12 08:36:54 +0800 CST">2017-04-12
+</time></span><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-folder-open"></i>
+</span><span class=post-meta-item-text title=分类于>分类于：
+</span><span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/tech itemprop=url rel=index><span itemprop=name>tech</span></a></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody>Outline of GA Outline of the Basic Genetic Algorithm
+[Start] Generate random population of n chromosomes (suitable solutions for the problem)
+[Fitness] Evaluate the fitness f(x) of each chromosome x in the population
+[New population] Create a new population by repeating following steps until the new population is complete
+[Selection] Select two parent chromosomes from a population according to their fitness (the better fitness, the bigger chance to be selected)</div><footer class=post-footer><div class=post-button><a class=btn href=/posts/algorithm-ga-en/#more rel=contents>阅读全文 &#187;</a></div><div class=post-eof></div></footer></article></div><nav class=pagination><a class="extend prev" rel=prev href=/posts/><i class="fa fa-angle-left"></i>
+</a><a class=page-number href=/posts/>1</a>
+<span class="page-number current">2</span></nav></div></main><footer class=footer><div class=footer-inner><div id=gtranslate class=google-translate><i class="fa fa-language"></i><div id=google_translate_element></div></div><div class=copyright>&copy;
+<span itemprop=copyrightYear>2010 - 2024
+</span><span class=with-love><i class="fa fa-heart"></i>
+</span><span class=author itemprop=copyrightHolder>cnewbie</span></div><div class=powered-by>由 <a href=https://gohugo.io title=0.121.1 target=_blank>Hugo</a> & <a href=https://github.com/hugo-next/hugo-theme-next title=4.5.3 target=_blank>Hugo NexT.Gemini</a> 强力驱动</div></div></footer><script type=text/javascript src=https://cdn.staticfile.org/animejs/3.2.1/anime.min.js defer></script><script type=text/javascript src=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.js defer></script><script class=next-config data-name=main type=application/json>{"bookmark":{"color":"#222","enable":true,"save":"manual"},"copybtn":true,"darkmode":true,"giscus":{"cfg":{"category":"Comments","categoryid":null,"emit":false,"inputposition":"top","mapping":"title","reactions":false,"repo":"cnewbie/cnewbie.github.io","repoid":null,"theme":"preferred_color_scheme"},"js":"https://giscus.app/client.js"},"hostname":"https://cnewbie.github.io","i18n":{"ds_day":" 天前","ds_days":" 天 ","ds_hour":" 小时前","ds_hours":" 小时 ","ds_just":"刚刚","ds_min":" 分钟前","ds_mins":" 分钟","ds_month":" 个月前","ds_years":" 年 ","empty":"没有找到任何搜索结果：${query}","hits":"找到 ${hits} 个搜索结果","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","placeholder":"搜索..."},"lang":"zh-CN","lazyload":false,"localSearch":{"enable":true,"limit":1e3,"path":"/searchindexes.xml","preload":false,"topnperarticle":-1,"trigger":"auto","unescape":false},"motion":{"async":true,"enable":true,"transition":{"collheader":"fadeInLeft","postblock":"fadeIn","postbody":"fadeInDown","postheader":"fadeInDown","sidebar":"fadeInUp"}},"postmeta":{"comments":{"enable":false,"plugin":"waline"},"views":{"enable":true,"plugin":"busuanzi"}},"root":"/","scheme":"Gemini","sidebar":{"display":"post","offset":12,"padding":18,"position":"left","width":256},"vendor":{"plugins":"qiniu","router":"https://cdn.staticfile.org"},"version":"4.5.3","waline":{"cfg":{"emoji":false,"imguploader":false,"placeholder":"请文明发言哟 ヾ(≧▽≦*)o","reaction":true,"reactiontext":["点赞","踩一下","得意","不屑","尴尬","睡觉"],"reactiontitle":"你认为这篇文章怎么样？","requiredmeta":["nick","mail"],"serverurl":null,"sofa":"快来发表你的意见吧 (≧∀≦)ゞ","wordlimit":200},"css":{"alias":"waline","file":"dist/waline.css","name":"@waline/client","version":"2.13.0"},"js":{"alias":"waline","file":"dist/waline.js","name":"@waline/client","version":"2.13.0"}}}</script><script type=text/javascript src=/js/main.min.b0c78e5a4df586ee46d02716ffa91a4a322e56763e04e91eb2ba052c9469ed02.js defer></script></body></html>

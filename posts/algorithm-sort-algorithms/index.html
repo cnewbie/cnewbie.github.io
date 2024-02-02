@@ -1,537 +1,364 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-
-
-<title>常用排序算法总结 | Hugo Blog</title>
-
-<link rel="stylesheet" href="https://cnewbie.github.io/css/styles.css">
-
-<link href="https://cdn.bootcss.com/font-awesome/5.2.0/css/all.css" rel="stylesheet">
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
-
-
-
-<link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/zenburn.min.css" rel="stylesheet">
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-
-<script>hljs.initHighlightingOnLoad();</script>
-<script src="https://cnewbie.github.io/js/highlight.js"></script>
-
-
-
-<link href="https://cdn.bootcss.com/jsSocials/1.4.0/jssocials.css" rel="stylesheet">
-<link href="https://cdn.bootcss.com/jsSocials/1.4.0/jssocials-theme-minima.css" rel="stylesheet">
-
-<script type="text/javascript" src="https://cnewbie.github.io/js/jssocials.js"></script>
-
-
-
-
-<div class="container">
-    <nav class="navbar level">
-      <div class="navbar-brand">
-          <a class="nav-item" href="https://cnewbie.github.io"><h1 class="title is-3">Hugo Blog</h1></a>
-      </div>           
-      <div class="navbar-menu has-text-centered is-active">
-          <div class="navbar-end is-centered">
-              
-                <a href="https://cnewbie.github.io/about" rel="me">
-                  <span class="icon">
-                    <i class="fas fa-info"></i>
-                  </span>
-                </a>
-              
-                <a href="https://github.com/cnewbie/" rel="me">
-                  <span class="icon">
-                    <i class="fab fa-github"></i>
-                  </span>
-                </a>
-              
-           </div>
-      </div>
-    </nav>
-  </div>
-
-<div class="container">
-  <h2 class="subtitle is-6">August 5, 2018</h2>
-  <h1 class="subtitle is-size-4-mobile is-size-3-desktop">常用排序算法总结</h1>
-  <div class="content">
-    <hr>
-<h1 id="工具函数">工具函数</h1>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;ctime&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
-
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">swap</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>a,<span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>b){
-    <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> a;
-    a <span style="color:#f92672">=</span> b;
-    b <span style="color:#f92672">=</span> tmp;
-}
-
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printarr</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
-    <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
-    {
-        cout <span style="color:#f92672">&lt;&lt;</span> a[i] <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
-    }
-    cout <span style="color:#f92672">&lt;&lt;</span> endl;
-}
-</code></pre></div><h1 id="bubble-sort-冒泡排序">Bubble Sort 冒泡排序</h1>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bubble_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a, <span style="color:#66d9ef">int</span> n){
-    <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>;<span style="color:#f92672">--</span>i){
-        <span style="color:#66d9ef">for</span>(size_t j <span style="color:#f92672">=</span> i; j <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>;<span style="color:#f92672">--</span>j)
-        {
-            <span style="color:#66d9ef">if</span>(a[j] <span style="color:#f92672">&lt;</span> a[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
-                swap(a[j],a[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]);
-        }
-    }
-}
-
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bubble_sort_speedup</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a, <span style="color:#66d9ef">int</span> n){
-    <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>){
-        <span style="color:#66d9ef">int</span> flag <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-        <span style="color:#66d9ef">for</span>(size_t j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">-</span>i; <span style="color:#f92672">++</span>j){
-            <span style="color:#66d9ef">if</span>(a[j] <span style="color:#f92672">&gt;</span> a[j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]){
-                swap(a[j],a[j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]);
-                flag <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-            }
-        }
-        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>flag)
-            <span style="color:#66d9ef">break</span>;
-    }
-}
-</code></pre></div><h1 id="cocktail-sort-鸡尾酒排序">Cocktail Sort 鸡尾酒排序</h1>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">cocktail_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
-    <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-    <span style="color:#66d9ef">int</span> right <span style="color:#f92672">=</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
-    <span style="color:#66d9ef">while</span>(left <span style="color:#f92672">&lt;</span> right){
-        <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> left; i<span style="color:#f92672">&lt;</span>right;<span style="color:#f92672">++</span>i){
-            <span style="color:#66d9ef">if</span>(a[i] <span style="color:#f92672">&gt;</span> a[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>])
-                swap(a[i],a[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]);
-        }
-        right<span style="color:#f92672">--</span>;
-        <span style="color:#66d9ef">for</span>(size_t j <span style="color:#f92672">=</span> right;j<span style="color:#f92672">&gt;</span>left;<span style="color:#f92672">--</span>j){
-            <span style="color:#66d9ef">if</span>(a[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">&gt;</span> a[j]){
-                swap(a[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>],a[j]);
-            }
-        }
-        left<span style="color:#f92672">++</span>;
-    }
-}
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">cocktail_sort_speedup</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
-    <span style="color:#66d9ef">bool</span> sorted <span style="color:#f92672">=</span> false;
-    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>sorted){
-        sorted <span style="color:#f92672">=</span> true;
-        <span style="color:#66d9ef">for</span>( <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span> ){
-            <span style="color:#66d9ef">if</span>( a[i] <span style="color:#f92672">&gt;</span> a[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] ){
-                swap( a[i], a[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] );
-                sorted <span style="color:#f92672">=</span> false;
-            }
-        }
-        <span style="color:#66d9ef">if</span>(sorted)
-            <span style="color:#66d9ef">break</span>;
-        sorted <span style="color:#f92672">=</span> true;
-        <span style="color:#66d9ef">for</span>( <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>; j<span style="color:#f92672">--</span> ){
-            <span style="color:#66d9ef">if</span>( a[j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&gt;</span> a[j] ){
-                swap( a[j], a[j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] );
-                sorted <span style="color:#f92672">=</span> false;
-            }
-        }
-    }
-}
-</code></pre></div><h1 id="selection-sort-选择排序">Selection Sort 选择排序</h1>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">selection_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a, <span style="color:#66d9ef">int</span> n){
-    <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;i <span style="color:#f92672">&lt;</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">++</span>){
-        <span style="color:#66d9ef">int</span> index <span style="color:#f92672">=</span> i;
-        <span style="color:#66d9ef">for</span>(size_t j <span style="color:#f92672">=</span> i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;j <span style="color:#f92672">&lt;</span> n;j<span style="color:#f92672">++</span>){
-            <span style="color:#66d9ef">if</span>(a[j] <span style="color:#f92672">&lt;</span> a[index])
-                index <span style="color:#f92672">=</span> j;
-        }
-        <span style="color:#66d9ef">if</span>(i<span style="color:#f92672">!=</span>index)
-            swap(a[i],a[index]);
-    }
-}
-</code></pre></div><h1 id="insertion-sort-插入排序">Insertion Sort 插入排序</h1>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">insertion_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a, <span style="color:#66d9ef">int</span> n){
-    <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;i <span style="color:#f92672">&lt;</span> n;i<span style="color:#f92672">++</span>){
-        <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> a[i];
-        size_t j <span style="color:#f92672">=</span> i;
-        <span style="color:#66d9ef">while</span>(j <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> tmp <span style="color:#f92672">&lt;</span> a[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]){
-            a[j] <span style="color:#f92672">=</span> a[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
-            <span style="color:#f92672">--</span>j;
-        }
-        a[j] <span style="color:#f92672">=</span> tmp;
-    }
-}
-</code></pre></div><h1 id="shell-sort-希尔排序">Shell Sort 希尔排序</h1>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">shell_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
-    <span style="color:#66d9ef">int</span> h,i,j,t;
-    <span style="color:#66d9ef">for</span>(h <span style="color:#f92672">=</span> n;h<span style="color:#f92672">/=</span><span style="color:#ae81ff">2</span>;){
-        <span style="color:#75715e">// iterator
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span>h;i<span style="color:#f92672">&lt;</span>n;i<span style="color:#f92672">++</span>){
-            t<span style="color:#f92672">=</span>a[i];
-            <span style="color:#66d9ef">for</span>(j<span style="color:#f92672">=</span>i;j<span style="color:#f92672">&gt;=</span>h <span style="color:#f92672">&amp;&amp;</span> t<span style="color:#f92672">&lt;</span>a[j<span style="color:#f92672">-</span>h];j<span style="color:#f92672">-=</span>h){
-                a[j] <span style="color:#f92672">=</span> a[j<span style="color:#f92672">-</span>h];
-            }
-            a[j] <span style="color:#f92672">=</span> t;
-        }
-    }
-}
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">shell_sort_speedup</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
-    <span style="color:#66d9ef">int</span> i,j,tmp,step;
-    step <span style="color:#f92672">=</span> n;
-    <span style="color:#66d9ef">while</span>(step<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span>){
-        step <span style="color:#f92672">=</span> step<span style="color:#f92672">/</span><span style="color:#ae81ff">3</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
-        <span style="color:#75715e">// insert sort
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span>step;i<span style="color:#f92672">&lt;</span>n;i<span style="color:#f92672">++</span>){
-            tmp <span style="color:#f92672">=</span> a[i];
-            <span style="color:#66d9ef">for</span>(j<span style="color:#f92672">=</span>i;j<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> a[j] <span style="color:#f92672">&lt;</span> a[j<span style="color:#f92672">-</span>step];j<span style="color:#f92672">-=</span>step){
-                a[j] <span style="color:#f92672">=</span> a[j<span style="color:#f92672">-</span>step];
-            }
-            a[j] <span style="color:#f92672">=</span> tmp;
-        }
-    }
-}
-</code></pre></div><h1 id="merge-sort归并排序">Merge Sort归并排序</h1>
-<p>递归版本</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">merge_arr</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> m,<span style="color:#66d9ef">int</span> n){
-    <span style="color:#66d9ef">int</span> i,j,k;
-    <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>temp <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[n];
-    <span style="color:#75715e">// 0 ---&gt; n
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,j<span style="color:#f92672">=</span>m,k<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;k<span style="color:#f92672">&lt;</span>n;k<span style="color:#f92672">++</span>){
-        temp[k] <span style="color:#f92672">=</span> j <span style="color:#f92672">==</span> n <span style="color:#f92672">?</span>
-            a[i<span style="color:#f92672">++</span>]<span style="color:#f92672">:</span>i <span style="color:#f92672">==</span> m <span style="color:#f92672">?</span>
-            a[j<span style="color:#f92672">++</span>]<span style="color:#f92672">:</span>a[j] <span style="color:#f92672">&lt;</span> a[i]<span style="color:#f92672">?</span>
-            a[j<span style="color:#f92672">++</span>]<span style="color:#f92672">:</span>a[i<span style="color:#f92672">++</span>];
-    }
-    <span style="color:#66d9ef">for</span>(k<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;k<span style="color:#f92672">&lt;</span>n;k<span style="color:#f92672">++</span>){
-        a[k] <span style="color:#f92672">=</span> temp[k];
-    }
-    <span style="color:#66d9ef">delete</span> [] temp;
-}
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">merge_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
-    <span style="color:#66d9ef">if</span>(n <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>)
-        <span style="color:#66d9ef">return</span>;
-    <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> n<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>;
-    merge_sort(a,m);
-    merge_sort(a<span style="color:#f92672">+</span>m,n<span style="color:#f92672">-</span>m);
-    merge_arr(a,m,n);
-}
-</code></pre></div><p>非递归版本</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">merge_arr2</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> left,<span style="color:#66d9ef">int</span> mid,<span style="color:#66d9ef">int</span> right){
-    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> left;
-    <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
-    <span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-    <span style="color:#66d9ef">int</span> len <span style="color:#f92672">=</span> right<span style="color:#f92672">-</span>left<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
-    <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>temp <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[len];
-    <span style="color:#75715e">// while(i &lt;= mid &amp;&amp; j &lt;= right){
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">//     temp[k++] = a[i] &lt;= a[j] ? a[i++] : a[j++];
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// }
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// while(i &lt;= mid){
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">//     temp[k++] = a[i++];
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// }
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// while(j &lt;= right){
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">//     temp[k++] = a[j++];
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// }
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(;k<span style="color:#f92672">&lt;</span>len;k<span style="color:#f92672">++</span>){
-        temp[k] <span style="color:#f92672">=</span> j <span style="color:#f92672">&gt;</span> right<span style="color:#f92672">?</span>
-                a[i<span style="color:#f92672">++</span>]<span style="color:#f92672">:</span>i <span style="color:#f92672">&gt;</span> mid<span style="color:#f92672">?</span>
-                a[j<span style="color:#f92672">++</span>]<span style="color:#f92672">:</span>a[i] <span style="color:#f92672">&lt;</span> a[j]<span style="color:#f92672">?</span>
-                a[i<span style="color:#f92672">++</span>]<span style="color:#f92672">:</span>a[j<span style="color:#f92672">++</span>];
-    }
-    <span style="color:#66d9ef">for</span>(k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k<span style="color:#f92672">&lt;</span> len;){
-        a[left<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> temp[k<span style="color:#f92672">++</span>];
-    }
-
-    <span style="color:#66d9ef">delete</span> [] temp;
-}
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">merge_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> len){
-    <span style="color:#75715e">// int left,mid,right,n;
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> left,n;
-    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;i<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">&lt;</span> len;i<span style="color:#f92672">*=</span><span style="color:#ae81ff">2</span>){
-        <span style="color:#75715e">// left = 0;
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// for(left=0;left+i&lt;len;){
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">//     mid = left + i - 1;
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">//     right = mid + i &lt; len ? mid + i : len - 1;
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">//     n = mid + i &lt; len ? 2*i : len - left+1;
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">//     merge_arr(a+left,mid,n);
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">//     left = right + 1 ;
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// }
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;left <span style="color:#f92672">&lt;</span> len;left<span style="color:#f92672">+=</span>i){
-            <span style="color:#75715e">// mid = left + i/2;
-</span><span style="color:#75715e"></span>            n <span style="color:#f92672">=</span> left <span style="color:#f92672">+</span> i <span style="color:#f92672">&lt;</span> len<span style="color:#f92672">?</span>i:len<span style="color:#f92672">-</span>left;
-            merge_arr(a<span style="color:#f92672">+</span>left,i<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>,n);
-        }
-    }
-}
-</code></pre></div><h1 id="qucik-sort-快速排序">Qucik Sort 快速排序</h1>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">quick_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> len){
-    <span style="color:#66d9ef">if</span>(len<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">2</span>)
-        <span style="color:#66d9ef">return</span>;
-    <span style="color:#66d9ef">int</span> i,j;
-    <span style="color:#66d9ef">int</span> pivot <span style="color:#f92672">=</span> a[len<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>];
-    <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,j<span style="color:#f92672">=</span>len<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;;i<span style="color:#f92672">++</span>,j<span style="color:#f92672">--</span>){
-        <span style="color:#66d9ef">while</span>(a[i] <span style="color:#f92672">&lt;</span> pivot) i<span style="color:#f92672">++</span>;
-        <span style="color:#66d9ef">while</span>(a[j] <span style="color:#f92672">&gt;</span> pivot) j<span style="color:#f92672">--</span>;
-        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&gt;=</span> j) <span style="color:#66d9ef">break</span>;
-        <span style="color:#75715e">// swap value
-</span><span style="color:#75715e"></span>        swap(a[i],a[j]);
-    }
-    quick_sort(a,i);
-    quick_sort(a<span style="color:#f92672">+</span>i,len<span style="color:#f92672">-</span>i);
-}
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">quick_sort2</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
-    <span style="color:#66d9ef">if</span>(n<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">return</span>;
-    <span style="color:#66d9ef">int</span> mid<span style="color:#f92672">=</span>a[<span style="color:#ae81ff">0</span>]; <span style="color:#75715e">// pivot
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,j<span style="color:#f92672">=</span>n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
-    <span style="color:#66d9ef">while</span>(i<span style="color:#f92672">&lt;</span>j){
-        <span style="color:#66d9ef">while</span>(j<span style="color:#f92672">&gt;</span>i <span style="color:#f92672">&amp;&amp;</span> a[j]<span style="color:#f92672">&gt;=</span>mid) j<span style="color:#f92672">--</span>;
-        <span style="color:#66d9ef">if</span>(j<span style="color:#f92672">&gt;</span>i){
-            a[i]<span style="color:#f92672">=</span>a[j];
-            i<span style="color:#f92672">++</span>;
-        }
-        <span style="color:#66d9ef">while</span>(i<span style="color:#f92672">&lt;</span>j <span style="color:#f92672">&amp;&amp;</span> a[i]<span style="color:#f92672">&lt;</span>mid) i<span style="color:#f92672">++</span>;
-        <span style="color:#66d9ef">if</span>(i<span style="color:#f92672">&lt;</span>j){
-            a[j]<span style="color:#f92672">=</span>a[i];
-            j<span style="color:#f92672">--</span>;
-        }
-    }
-    a[i]<span style="color:#f92672">=</span>mid;
-    quick_sort2(a,i);
-    quick_sort2(a<span style="color:#f92672">+</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,n<span style="color:#f92672">-</span>i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
-}
-</code></pre></div><h1 id="heap-sort-堆排序">Heap Sort 堆排序</h1>
-<p>递归版本</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// i is index of array,the left child index is 2*i+1,the right one is 2*i+2,the father index is floor((i-1)/2)
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">siftDown</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a, <span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> n)
-{
-    <span style="color:#66d9ef">int</span> lhs<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
-    <span style="color:#66d9ef">int</span> rhs<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>;
-    <span style="color:#66d9ef">int</span> maxid<span style="color:#f92672">=</span>i;
-    <span style="color:#66d9ef">if</span>(lhs<span style="color:#f92672">&lt;</span>n <span style="color:#f92672">&amp;&amp;</span> a[maxid]<span style="color:#f92672">&lt;</span>a[lhs]) maxid<span style="color:#f92672">=</span>lhs;
-    <span style="color:#66d9ef">if</span>(rhs<span style="color:#f92672">&lt;</span>n <span style="color:#f92672">&amp;&amp;</span> a[maxid]<span style="color:#f92672">&lt;</span>a[rhs]) maxid<span style="color:#f92672">=</span>rhs;
-    <span style="color:#66d9ef">if</span>(maxid<span style="color:#f92672">!=</span>i)
-    {
-        swap(a[i],a[maxid]);
-        siftDown(a,maxid,n);
-    }
-}
-
-<span style="color:#75715e">// void makeHeap(int *a, int n){
-</span><span style="color:#75715e">//     for(int i=n/2-1; i&gt;=0; i--)
-</span><span style="color:#75715e">//     {
-</span><span style="color:#75715e">//         siftDown(a,i,n);
-</span><span style="color:#75715e">//     }
-</span><span style="color:#75715e">// }
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">heap_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
-    <span style="color:#75715e">// makeHeap(a,n);
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>n<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; i<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>){
-        siftDown(a,i,n);
-    }
-    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; i<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>){
-        swap(a[<span style="color:#ae81ff">0</span>],a[i]);
-        siftDown(a,<span style="color:#ae81ff">0</span>,i);
-    }
-}
-</code></pre></div><p>非递归版本</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">heap_down</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> i,<span style="color:#66d9ef">int</span> n){
-    <span style="color:#66d9ef">int</span> lc <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
-    <span style="color:#66d9ef">for</span>(;lc<span style="color:#f92672">&lt;</span>n;i<span style="color:#f92672">=</span>lc,lc<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>){
-        <span style="color:#75715e">// lc + 1 &lt; n right chid index can&#39;t greater than the array length
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(lc<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;&amp;</span> a[lc]<span style="color:#f92672">&lt;</span>a[lc<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>])
-            lc<span style="color:#f92672">++</span>;
-        <span style="color:#66d9ef">if</span>(a[i] <span style="color:#f92672">&gt;=</span> a[lc])
-            <span style="color:#66d9ef">break</span>;
-        <span style="color:#66d9ef">else</span>
-            swap(a[i],a[lc]);
-    }
-}
-
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">heap_sort2</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
-    <span style="color:#75715e">// makeHeap(a,n);
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>n<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; i<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>){
-        heap_down(a,i,n);
-    }
-    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; i<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>){
-        swap(a[<span style="color:#ae81ff">0</span>],a[i]);
-        heap_down(a,<span style="color:#ae81ff">0</span>,i);
-    }
-}
-</code></pre></div><h1 id="counting-sort-计数排序">Counting Sort 计数排序</h1>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">couting_sort</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a,<span style="color:#66d9ef">int</span> n){
-    <span style="color:#66d9ef">int</span> range <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
-    <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>C <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[range];
-    <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>temp <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[n];
-    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;i <span style="color:#f92672">&lt;</span> range;i<span style="color:#f92672">++</span>){
-        C[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-        <span style="color:#66d9ef">if</span>(i<span style="color:#f92672">&lt;</span>n)
-            temp[i]<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
-    }
-    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;j <span style="color:#f92672">&lt;</span> n;j<span style="color:#f92672">++</span>){
-        C[a[j]]<span style="color:#f92672">++</span>;
-    }
-    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;i <span style="color:#f92672">&lt;</span> range;i<span style="color:#f92672">++</span>){
-        C[i]<span style="color:#f92672">+=</span>C[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
-    }
-    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;j <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>;j<span style="color:#f92672">--</span>){
-        temp[<span style="color:#f92672">--</span>C[a[j]]] <span style="color:#f92672">=</span> a[j];
-    }
-    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>){
-        a[j] <span style="color:#f92672">=</span> temp[j];
-    }
-    <span style="color:#66d9ef">delete</span> [] C;
-    <span style="color:#66d9ef">delete</span> [] temp;
-}
-</code></pre></div><h1 id="算法对比">算法对比</h1>
-<blockquote>
-<p>稳定：如果a原本在b前面，而a=b，排序之后a仍然在b的前面。</p>
-</blockquote>
-<blockquote>
-<p>不稳定：如果a原本在b的前面，而a=b，排序之后 a 可能会出现在 b 的后面。</p>
-</blockquote>
-<blockquote>
-<p>时间复杂度：对排序数据的总的操作次数。反映当n变化时，操作次数呈现什么规律。</p>
-</blockquote>
-<blockquote>
-<p>空间复杂度：是指算法在计算机内执行时所需存储空间的度量，它也是数据规模n的函数。</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th align="left">算法名称</th>
-<th align="center">时间复杂度（最好）</th>
-<th align="center">时间复杂度（平均）</th>
-<th align="center">时间复杂度（最坏）</th>
-<th align="center">空间复杂度</th>
-<th align="center">稳定性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">Insertion Sort</td>
-<td align="center">O(n)</td>
-<td align="center">O(n^2)</td>
-<td align="center">O(n^2)</td>
-<td align="center">O(1)</td>
-<td align="center">稳定</td>
-</tr>
-<tr>
-<td align="left">Shell Sort</td>
-<td align="center">O(n)</td>
-<td align="center">O(n^1.3)</td>
-<td align="center">O(n^2)</td>
-<td align="center">O(1)</td>
-<td align="center">不稳定</td>
-</tr>
-<tr>
-<td align="left">Selection Sort</td>
-<td align="center">O(n^2)</td>
-<td align="center">O(n^2)</td>
-<td align="center">O(n^2)</td>
-<td align="center">O(1)</td>
-<td align="center">不稳定</td>
-</tr>
-<tr>
-<td align="left">Heap Sort</td>
-<td align="center">O(nlog n)</td>
-<td align="center">O(nlog n)</td>
-<td align="center">O(nlog n)</td>
-<td align="center">O(1)</td>
-<td align="center">稳定</td>
-</tr>
-<tr>
-<td align="left">Bubble Sort</td>
-<td align="center">O(n)</td>
-<td align="center">O(n^2)</td>
-<td align="center">O(n^2)</td>
-<td align="center">O(1)</td>
-<td align="center">稳定</td>
-</tr>
-<tr>
-<td align="left">Cocktail Sort</td>
-<td align="center">O(n)</td>
-<td align="center">O(n^2)</td>
-<td align="center">O(n^2)</td>
-<td align="center">O(1)</td>
-<td align="center">稳定</td>
-</tr>
-<tr>
-<td align="left">Qucik Sort</td>
-<td align="center">O(nlog n)</td>
-<td align="center">O(nlog n)</td>
-<td align="center">O(n^2)</td>
-<td align="center">O(nlog n)~O(n)</td>
-<td align="center">不稳定</td>
-</tr>
-<tr>
-<td align="left">Merge Sort</td>
-<td align="center">O(nlog n)</td>
-<td align="center">O(nlog n)</td>
-<td align="center">O(nlog n)</td>
-<td align="center">O(n)</td>
-<td align="center">稳定</td>
-</tr>
-<tr>
-<td align="left">Counting Sort</td>
-<td align="center">O(n+k)</td>
-<td align="center">O(n+k)</td>
-<td align="center">O(n+k)</td>
-<td align="center">O(n+k)</td>
-<td align="center">稳定</td>
-</tr>
-<tr>
-<td align="left">Bucket Sort</td>
-<td align="center">O(n)</td>
-<td align="center">O(n+k)</td>
-<td align="center">O(n^2)</td>
-<td align="center">O(n+k)</td>
-<td align="center">稳定</td>
-</tr>
-<tr>
-<td align="left">Radix Sort</td>
-<td align="center">O(n*k)</td>
-<td align="center">O(n*k)</td>
-<td align="center">O(n*k)</td>
-<td align="center">O(n+k)</td>
-<td align="center">稳定</td>
-</tr>
-</tbody>
-</table>
-<h1 id="引用">引用</h1>
-<ul>
-<li><a href="http://liaoxl.github.io/blog/20140907/sort/">Moondark</a></li>
-<li><a href="https://www.cnblogs.com/eniac12/p/5329396.html">SteveWang</a></li>
-<li><a href="http://rosettacode.org/wiki/Sorting_algorithms">rosettacode</a></li>
-<li><a href="https://www.cnblogs.com/onepixel/articles/7674659.html">一像素</a></li>
-</ul>
-
-  </div>
-</div>
-<div class="container has-text-centered">
-    
-    <aside><div id="share"></div></aside>
-    <script type="text/javascript">
-        $("#share").jsSocials({
-            showLabel: false,
-            showCount: false,
-            shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
-        });
-    </script>
-    
-</div>
-
-<div class="container has-text-centered">
-  
-</div>
-<section class="section">
-  <div class="container has-text-centered">
-    <p>&copy; <a href="https://github.com/cnewbie/">cnewbie</a> 2018 - 2020</p>
-  </div>
-</section>
-
-
+<!doctype html><html lang=zh-CN data-theme=dark><head><meta charset=UTF-8><meta name=viewport content="width=device-width"><meta name=theme-color content="#222" media="(prefers-color-scheme: dark)"><meta name=generator content="Hugo 0.121.1"><link rel="shortcut icon" type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/png sizes=16x16 href=/imgs/icons/favicon_16x16_next.png><link rel=icon type=image/png sizes=32x32 href=/imgs/icons/favicon_32_32_next.png><link rel=apple-touch-icon sizes=180x180 href=/imgs/icons/apple_touch_icon_next.png><meta itemprop=name content="常用排序算法总结"><meta itemprop=description content="常用排序算法总结"><meta itemprop=datePublished zgotmplz><meta itemprop=dateModified zgotmplz><meta itemprop=image content="https://cnewbie.github.io/imgs/hugo_next_avatar.png"><meta itemprop=keywords content="python,cpp,sort algorithm"><meta property="og:type" content="article"><meta property="og:title" content="常用排序算法总结"><meta property="og:description" content="常用排序算法总结"><meta property="og:image" content="/imgs/hugo_next_avatar.png"><meta property="og:image:width" content="312"><meta property="og:image:height" content="312"><meta property="og:image:type" content="image/jpeg/png/svg/jpg"><meta property="og:url" content="https://cnewbie.github.io/posts/algorithm-sort-algorithms/"><meta property="og:site_name" content="Hugo NexT Blog"><meta property="og:locale" content="zh-CN"><meta property="article:author" content="cnewbie"><meta property="article:published_time" content="2018-08-05 08:00:00 +0800 CST"><meta property="article:modified_time" content="2018-08-05 08:00:00 +0800 CST"><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/font-awesome/6.1.2/css/all.min.css><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/animate.css/3.1.1/animate.min.css><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.css><link rel=stylesheet href=/css/main.min.613cdd93403a6fc6667e9d7305a30b932cdc5a2fcc77df9f66518c9a9fa56b3c.css><style type=text/css>.post-footer,.flinks-list-footer hr:after{content:"~ 我可是有底线的哟 ~"}</style><script type=text/javascript>(function(){localDB={set:function(e,t,n){if(n===0)return;const s=new Date,o=n*864e5,i={value:t,expiry:s.getTime()+o};localStorage.setItem(e,JSON.stringify(i))},get:function(e){const t=localStorage.getItem(e);if(!t)return void 0;const n=JSON.parse(t),s=new Date;return s.getTime()>n.expiry?(localStorage.removeItem(e),void 0):n.value}},theme={active:function(){const e=localDB.get("theme");if(e==null)return;theme.toggle(e),window.matchMedia("(prefers-color-scheme: dark)").addListener(function(e){theme.toggle(e.matches?"dark":"light")})},toggle:function(e){document.documentElement.setAttribute("data-theme",e),localDB.set("theme",e,2);const t=document.querySelector("iframe.giscus-frame");if(t){const n={setConfig:{theme:e}};t.contentWindow.postMessage({giscus:n},"https://giscus.app")}}},theme.active()})(window)</script><script class=next-config data-name=page type=application/json>{"comments":true,"isHome":false,"isPage":true,"path":"algorithm-sort-algorithms","permalink":"https://cnewbie.github.io/posts/algorithm-sort-algorithms/","title":"常用排序算法总结","waline":{"js":[{"alias":"waline","alias_name":"@waline/client","file":"dist/pageview.js","name":"pageview","version":"2.13.0"},{"alias":"waline","alias_name":"@waline/client","file":"dist/comment.js","name":"comment","version":"2.13.0"}]}}</script><script type=text/javascript>document.addEventListener("DOMContentLoaded",()=>{var e=document.createElement("script");e.charset="UTF-8",e.src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",e.async=!1,e.defer=!0,document.head.appendChild(e),e.onload=function(){NexT.utils.fmtBusuanzi()}})</script><title>常用排序算法总结 - Hugo NexT Blog</title><noscript><link rel=stylesheet href=/css/noscript.css></noscript></head><body itemscope itemtype=http://schema.org/WebPage class=use-motion><div class=headband></div><main class=main><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle aria-label role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div></div><div class=site-meta><a href=/ class=brand rel=start><i class=logo-line></i><h1 class=site-title>Hugo NexT Blog</h1><i class=logo-line></i></a><p class=site-subtitle itemprop=description>cnewbie的小窝</p></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href=/ class=hvr-icon-pulse rel=section><i class="fa fa-home hvr-icon"></i>首页</a></li><li class="menu-item menu-item-about"><a href=/ class=hvr-icon-pulse rel=section><i class="fa fa-user hvr-icon"></i>关于</a></li><li class="menu-item menu-item-archives"><a href=/ class=hvr-icon-pulse rel=section><i class="fa fa-archive hvr-icon"></i>归档
+<span class=badge>20</span></a></li><li class="menu-item menu-item-search"><a role=button class="popup-trigger hvr-icon-pulse"><i class="fa fa-search fa-fw hvr-icon"></i>搜索</a></li></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon><i class="fa fa-search"></i></span><div class=search-input-container><input autocomplete=off autocapitalize=off maxlength=80 placeholder=搜索... spellcheck=false type=search class=search-input></div><span class=popup-btn-close role=button><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class=search-result-icon><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle" role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div><aside class=sidebar><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class=sidebar-nav><li class=sidebar-nav-toc>文章目录</li><li class=sidebar-nav-overview>站点概览</li></ul><div class=sidebar-panel-container><div class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><nav id=TableOfContents><ul><li><a href=#工具函数>工具函数</a></li><li><a href=#bubble-sort-冒泡排序>Bubble Sort 冒泡排序</a></li><li><a href=#cocktail-sort-鸡尾酒排序>Cocktail Sort 鸡尾酒排序</a></li><li><a href=#selection-sort-选择排序>Selection Sort 选择排序</a></li><li><a href=#insertion-sort-插入排序>Insertion Sort 插入排序</a></li><li><a href=#shell-sort-希尔排序>Shell Sort 希尔排序</a></li><li><a href=#merge-sort归并排序>Merge Sort归并排序</a></li><li><a href=#qucik-sort-快速排序>Qucik Sort 快速排序</a></li><li><a href=#heap-sort-堆排序>Heap Sort 堆排序</a></li><li><a href=#counting-sort-计数排序>Counting Sort 计数排序</a></li><li><a href=#算法对比>算法对比</a></li><li><a href=#引用>引用</a></li></ul></nav></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author site-overview-item animated" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image alt=cnewbie src=/imgs/img-lazy-loading.gif data-src=/imgs/hugo_next_avatar.png><p class=site-author-name itemprop=name>cnewbie</p><div class=site-description itemprop=description>KISS</div></div><div class="site-state-wrap site-overview-item animated"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/archives/><span class=site-state-item-count>20</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=/categories/><span class=site-state-item-count>1</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/><span class=site-state-item-count>35</span>
+<span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-social site-overview-item animated"><span class=links-of-social-item><a href=https://github.com/cnewbie title="Github → https://github.com/cnewbie" rel=noopener class=hvr-icon-pulse target=_blank><i class="fab fa-github fa-fw hvr-icon"></i>
+Github</a></span></div><div class="cc-license animated" itemprop=license><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh class=cc-opacity rel=noopener target=_blank title=共享知识><img src=/imgs/img-lazy-loading.gif data-src=/imgs/cc/big/by_nc_sa.svg alt=共享知识></a></div><div class="links-of-blogroll site-overview-item animated"><div class=links-of-blogroll-title><i class="fa fa-globe fa-fw"></i>
+友情链接</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://github.com/hugo-next/hugo-theme-next title=https://github.com/hugo-next/hugo-theme-next target=_blank>Hugo-NexT</a></li><li class=links-of-blogroll-item><a href=https://lisenhui.cn title=https://lisenhui.cn target=_blank>凡梦星尘空间站</a></li></ul></div></div></div></div><div id=siteinfo-card-widget class=sidebar-card-widget><div class=item-headline><i class="fas fa-chart-line"></i>
+<span>网站资讯</span></div><div class=siteinfo><div class=siteinfo-item><div class=item-name><i class="fa-solid fa-calendar-check"></i>已运行：</div><div class=item-count id=runTimes data-publishdate=2017-04-12T08:36:54+08:00></div></div><div class=siteinfo-item><div class=item-name><i class="fas fa fa-user"></i>总访客数：</div><div class=item-count id=busuanzi_value_site_uv><i class="fa fa-sync fa-spin"></i></div></div><div class=siteinfo-item><div class=item-name><i class="fas fa fa-eye"></i>页面浏览：</div><div class=item-count id=busuanzi_value_site_pv><i class="fa fa-sync fa-spin"></i></div></div><div class=siteinfo-item><div class=item-name><i class="fa fa-font"></i>总字数：</div><div class=item-count id=wordsCount data-count=79417></div></div><div class=siteinfo-item><div class=item-name><i class="fa fa-mug-hot"></i>阅读约：</div><div class=item-count id=readTimes data-times=170></div></div><div class=siteinfo-item><div class=item-name><i class="fa fa-clock-rotate-left"></i>最后更新于：</div><div class=item-count id=last-push-date data-lastpushdate=2024-01-18T10:13:10+08:00></div></div></div></div></aside><div class=sidebar-dimmer></div></header><div class=tool-buttons><div id=goto-comments class="button goto-comments" title=直达评论><i class="fas fa-comments"></i></div><div id=goto-gtranslate class=button title=多语言翻译><i class="fas fa-globe"></i></div><div id=toggle-theme class=button title=深浅模式切换><i class="fas fa-adjust"></i></div><div class=back-to-top role=button title=返回顶部><i class="fa fa-arrow-up"></i>
+<span>0%</span></div></div><div class=reading-progress-bar></div><a role=button class="book-mark-link book-mark-link-fixed"></a><a href=https://github.com/cnewbie rel="noopener external nofollow noreferrer" target=_blank title="Follow me on GitHub" class="exturl github-corner"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0 0 115 115h15l12 27L250 250V0z"/><path d="M128.3 109C113.8 99.7 119 89.6 119 89.6 122 82.7 120.5 78.6 120.5 78.6 119.2 72 123.4 76.3 123.4 76.3 127.3 80.9 125.5 87.3 125.5 87.3 122.9 97.6 130.6 101.9 134.4 103.2" fill="currentcolor" style="transform-origin:130px 106px" class="octo-arm"/><path d="M115 115C114.9 115.1 118.7 116.5 119.8 115.4l13.9-13.8C136.9 99.2 139.9 98.4 142.2 98.6 133.8 88 127.5 74.4 143.8 58 148.5 53.4 154 51.2 159.7 51 160.3 49.4 163.2 43.6 171.4 40.1 171.4 40.1 176.1 42.5 178.8 56.2 183.1 58.6 187.2 61.8 190.9 65.4 194.5 69 197.7 73.2 200.1 77.6 213.8 80.2 216.3 84.9 216.3 84.9 212.7 93.1 206.9 96 205.4 96.6 205.1 102.4 203 107.8 198.3 112.5 181.9 128.9 168.3 122.5 157.7 114.1 157.9 116.9 156.7 120.9 152.7 124.9L141 136.5C139.8 137.7 141.6 141.9 141.8 141.8z" fill="currentcolor" class="octo-body"/></svg></a><script type=text/javascript src=//sidecar.gitter.im/dist/sidecar.v1.js async></script><script type=text/javascript>((window.gitter={}).chat={}).options={room:"hugo-next/community"}</script><noscript><div class=noscript-warning>Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=https://cnewbie.github.io/posts/algorithm-sort-algorithms/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/hugo_next_avatar.png"><meta itemprop=name content="cnewbie"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="cnewbie"><meta itemprop=description content="KISS"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="常用排序算法总结"><meta itemprop=description content="常用排序算法总结"></span><header class=post-header><h1 class=post-title itemprop="name headline">常用排序算法总结</h1><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar"></i>
+</span><span class=post-meta-item-text title=发表于>发表于：
+</span><time title="创建时间：2018-08-05 08:00:00 +0800 CST" itemprop="dateCreated datePublished" datetime="2018-08-05 08:00:00 +0800 CST">2018-08-05
+</time></span><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-folder-open"></i>
+</span><span class=post-meta-item-text title=分类于>分类于：
+</span><span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/tech itemprop=url rel=index><span itemprop=name>tech</span></a></span></span></div><div class=post-meta-items><span class=post-meta-item title=字数><span class=post-meta-item-icon><i class="far fa-file-word"></i>
+</span><span class=post-meta-item-text>字数：</span>
+<span>1266</span>
+</span><span class=post-meta-item title=阅读><span class=post-meta-item-icon><i class="far fa-clock"></i>
+</span><span class=post-meta-item-text>阅读：&ap;</span>
+<span>3分钟</span>
+</span><span class=post-meta-item title=浏览><span class=post-meta-item-icon><i class="far fa-eye"></i>
+</span><span class=post-meta-item-text>浏览：
+</span><span id=busuanzi_value_page_pv data-path=/posts/algorithm-sort-algorithms/><i class="fa fa-sync fa-spin"></i></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><hr><h1 id=工具函数>工具函数
+<a class=header-anchor href=#%e5%b7%a5%e5%85%b7%e5%87%bd%e6%95%b0></a></h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;ctime&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>swap</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>&amp;</span>a,<span style=color:#66d9ef>int</span> <span style=color:#f92672>&amp;</span>b){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> tmp <span style=color:#f92672>=</span> a;
+</span></span><span style=display:flex><span>    a <span style=color:#f92672>=</span> b;
+</span></span><span style=display:flex><span>    b <span style=color:#f92672>=</span> tmp;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>printarr</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>a,<span style=color:#66d9ef>int</span> n){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(size_t i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> n; i<span style=color:#f92672>++</span>)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        cout <span style=color:#f92672>&lt;&lt;</span> a[i] <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34; &#34;</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    cout <span style=color:#f92672>&lt;&lt;</span> endl;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h1 id=bubble-sort-冒泡排序>Bubble Sort 冒泡排序
+<a class=header-anchor href=#bubble-sort-%e5%86%92%e6%b3%a1%e6%8e%92%e5%ba%8f></a></h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>bubble_sort</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>a, <span style=color:#66d9ef>int</span> n){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(size_t i <span style=color:#f92672>=</span> n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span>;<span style=color:#f92672>--</span>i){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(size_t j <span style=color:#f92672>=</span> i; j <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span>;<span style=color:#f92672>--</span>j)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span>(a[j] <span style=color:#f92672>&lt;</span> a[j<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>])
+</span></span><span style=display:flex><span>                swap(a[j],a[j<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>bubble_sort_speedup</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>a, <span style=color:#66d9ef>int</span> n){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(size_t i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>; i<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> flag <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(size_t j <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; j <span style=color:#f92672>&lt;</span> n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span><span style=color:#f92672>-</span>i; <span style=color:#f92672>++</span>j){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span>(a[j] <span style=color:#f92672>&gt;</span> a[j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>]){
+</span></span><span style=display:flex><span>                swap(a[j],a[j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>]);
+</span></span><span style=display:flex><span>                flag <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(<span style=color:#f92672>!</span>flag)
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h1 id=cocktail-sort-鸡尾酒排序>Cocktail Sort 鸡尾酒排序
+<a class=header-anchor href=#cocktail-sort-%e9%b8%a1%e5%b0%be%e9%85%92%e6%8e%92%e5%ba%8f></a></h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>cocktail_sort</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>a,<span style=color:#66d9ef>int</span> n){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> left <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> right <span style=color:#f92672>=</span> n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span>(left <span style=color:#f92672>&lt;</span> right){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(size_t i <span style=color:#f92672>=</span> left; i<span style=color:#f92672>&lt;</span>right;<span style=color:#f92672>++</span>i){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span>(a[i] <span style=color:#f92672>&gt;</span> a[i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>])
+</span></span><span style=display:flex><span>                swap(a[i],a[i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>]);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        right<span style=color:#f92672>--</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(size_t j <span style=color:#f92672>=</span> right;j<span style=color:#f92672>&gt;</span>left;<span style=color:#f92672>--</span>j){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span>(a[j<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>&gt;</span> a[j]){
+</span></span><span style=display:flex><span>                swap(a[j<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>],a[j]);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        left<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>cocktail_sort_speedup</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>a,<span style=color:#66d9ef>int</span> n){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>bool</span> sorted <span style=color:#f92672>=</span> false;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span>(<span style=color:#f92672>!</span>sorted){
+</span></span><span style=display:flex><span>        sorted <span style=color:#f92672>=</span> true;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>( <span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> n <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>; i<span style=color:#f92672>++</span> ){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span>( a[i] <span style=color:#f92672>&gt;</span> a[i <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>] ){
+</span></span><span style=display:flex><span>                swap( a[i], a[i <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>] );
+</span></span><span style=display:flex><span>                sorted <span style=color:#f92672>=</span> false;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(sorted)
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>        sorted <span style=color:#f92672>=</span> true;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>( <span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> n <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>; j <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span>; j<span style=color:#f92672>--</span> ){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span>( a[j <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>] <span style=color:#f92672>&gt;</span> a[j] ){
+</span></span><span style=display:flex><span>                swap( a[j], a[j <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>] );
+</span></span><span style=display:flex><span>                sorted <span style=color:#f92672>=</span> false;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h1 id=selection-sort-选择排序>Selection Sort 选择排序
+<a class=header-anchor href=#selection-sort-%e9%80%89%e6%8b%a9%e6%8e%92%e5%ba%8f></a></h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>selection_sort</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>a, <span style=color:#66d9ef>int</span> n){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(size_t i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;i <span style=color:#f92672>&lt;</span> n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>;i<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> index <span style=color:#f92672>=</span> i;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(size_t j <span style=color:#f92672>=</span> i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>;j <span style=color:#f92672>&lt;</span> n;j<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span>(a[j] <span style=color:#f92672>&lt;</span> a[index])
+</span></span><span style=display:flex><span>                index <span style=color:#f92672>=</span> j;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(i<span style=color:#f92672>!=</span>index)
+</span></span><span style=display:flex><span>            swap(a[i],a[index]);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h1 id=insertion-sort-插入排序>Insertion Sort 插入排序
+<a class=header-anchor href=#insertion-sort-%e6%8f%92%e5%85%a5%e6%8e%92%e5%ba%8f></a></h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>insertion_sort</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>a, <span style=color:#66d9ef>int</span> n){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(size_t i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;i <span style=color:#f92672>&lt;</span> n;i<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> tmp <span style=color:#f92672>=</span> a[i];
+</span></span><span style=display:flex><span>        size_t j <span style=color:#f92672>=</span> i;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span>(j <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span> <span style=color:#f92672>&amp;&amp;</span> tmp <span style=color:#f92672>&lt;</span> a[j<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]){
+</span></span><span style=display:flex><span>            a[j] <span style=color:#f92672>=</span> a[j<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>];
+</span></span><span style=display:flex><span>            <span style=color:#f92672>--</span>j;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        a[j] <span style=color:#f92672>=</span> tmp;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h1 id=shell-sort-希尔排序>Shell Sort 希尔排序
+<a class=header-anchor href=#shell-sort-%e5%b8%8c%e5%b0%94%e6%8e%92%e5%ba%8f></a></h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>shell_sort</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>a,<span style=color:#66d9ef>int</span> n){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> h,i,j,t;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(h <span style=color:#f92672>=</span> n;h<span style=color:#f92672>/=</span><span style=color:#ae81ff>2</span>;){
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// iterator
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span>(i<span style=color:#f92672>=</span>h;i<span style=color:#f92672>&lt;</span>n;i<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>            t<span style=color:#f92672>=</span>a[i];
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span>(j<span style=color:#f92672>=</span>i;j<span style=color:#f92672>&gt;=</span>h <span style=color:#f92672>&amp;&amp;</span> t<span style=color:#f92672>&lt;</span>a[j<span style=color:#f92672>-</span>h];j<span style=color:#f92672>-=</span>h){
+</span></span><span style=display:flex><span>                a[j] <span style=color:#f92672>=</span> a[j<span style=color:#f92672>-</span>h];
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            a[j] <span style=color:#f92672>=</span> t;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>shell_sort_speedup</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>a,<span style=color:#66d9ef>int</span> n){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> i,j,tmp,step;
+</span></span><span style=display:flex><span>    step <span style=color:#f92672>=</span> n;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span>(step<span style=color:#f92672>&gt;</span><span style=color:#ae81ff>1</span>){
+</span></span><span style=display:flex><span>        step <span style=color:#f92672>=</span> step<span style=color:#f92672>/</span><span style=color:#ae81ff>3</span><span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// insert sort
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span>(i<span style=color:#f92672>=</span>step;i<span style=color:#f92672>&lt;</span>n;i<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>            tmp <span style=color:#f92672>=</span> a[i];
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span>(j<span style=color:#f92672>=</span>i;j<span style=color:#f92672>&gt;</span><span style=color:#ae81ff>0</span> <span style=color:#f92672>&amp;&amp;</span> a[j] <span style=color:#f92672>&lt;</span> a[j<span style=color:#f92672>-</span>step];j<span style=color:#f92672>-=</span>step){
+</span></span><span style=display:flex><span>                a[j] <span style=color:#f92672>=</span> a[j<span style=color:#f92672>-</span>step];
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            a[j] <span style=color:#f92672>=</span> tmp;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h1 id=merge-sort归并排序>Merge Sort归并排序
+<a class=header-anchor href=#merge-sort%e5%bd%92%e5%b9%b6%e6%8e%92%e5%ba%8f></a></h1><p>递归版本</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>merge_arr</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>a,<span style=color:#66d9ef>int</span> m,<span style=color:#66d9ef>int</span> n){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> i,j,k;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>temp <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span>[n];
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 0 ---&gt; n
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>for</span>(i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,j<span style=color:#f92672>=</span>m,k<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;k<span style=color:#f92672>&lt;</span>n;k<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        temp[k] <span style=color:#f92672>=</span> j <span style=color:#f92672>==</span> n <span style=color:#f92672>?</span>
+</span></span><span style=display:flex><span>            a[i<span style=color:#f92672>++</span>]<span style=color:#f92672>:</span>i <span style=color:#f92672>==</span> m <span style=color:#f92672>?</span>
+</span></span><span style=display:flex><span>            a[j<span style=color:#f92672>++</span>]<span style=color:#f92672>:</span>a[j] <span style=color:#f92672>&lt;</span> a[i]<span style=color:#f92672>?</span>
+</span></span><span style=display:flex><span>            a[j<span style=color:#f92672>++</span>]<span style=color:#f92672>:</span>a[i<span style=color:#f92672>++</span>];
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(k<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;k<span style=color:#f92672>&lt;</span>n;k<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        a[k] <span style=color:#f92672>=</span> temp[k];
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>delete</span> [] temp;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>merge_sort</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>a,<span style=color:#66d9ef>int</span> n){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span>(n <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>2</span>)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> m <span style=color:#f92672>=</span> n<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>;
+</span></span><span style=display:flex><span>    merge_sort(a,m);
+</span></span><span style=display:flex><span>    merge_sort(a<span style=color:#f92672>+</span>m,n<span style=color:#f92672>-</span>m);
+</span></span><span style=display:flex><span>    merge_arr(a,m,n);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>非递归版本</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>merge_arr2</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>a,<span style=color:#66d9ef>int</span> left,<span style=color:#66d9ef>int</span> mid,<span style=color:#66d9ef>int</span> right){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> left;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> mid <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> k <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> len <span style=color:#f92672>=</span> right<span style=color:#f92672>-</span>left<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>temp <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span>[len];
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// while(i &lt;= mid &amp;&amp; j &lt;= right){
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//     temp[k++] = a[i] &lt;= a[j] ? a[i++] : a[j++];
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>// }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>// while(i &lt;= mid){
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//     temp[k++] = a[i++];
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>// }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>// while(j &lt;= right){
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//     temp[k++] = a[j++];
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>// }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>for</span>(;k<span style=color:#f92672>&lt;</span>len;k<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        temp[k] <span style=color:#f92672>=</span> j <span style=color:#f92672>&gt;</span> right<span style=color:#f92672>?</span>
+</span></span><span style=display:flex><span>                a[i<span style=color:#f92672>++</span>]<span style=color:#f92672>:</span>i <span style=color:#f92672>&gt;</span> mid<span style=color:#f92672>?</span>
+</span></span><span style=display:flex><span>                a[j<span style=color:#f92672>++</span>]<span style=color:#f92672>:</span>a[i] <span style=color:#f92672>&lt;</span> a[j]<span style=color:#f92672>?</span>
+</span></span><span style=display:flex><span>                a[i<span style=color:#f92672>++</span>]<span style=color:#f92672>:</span>a[j<span style=color:#f92672>++</span>];
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(k <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; k<span style=color:#f92672>&lt;</span> len;){
+</span></span><span style=display:flex><span>        a[left<span style=color:#f92672>++</span>] <span style=color:#f92672>=</span> temp[k<span style=color:#f92672>++</span>];
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>delete</span> [] temp;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>merge_sort</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>a,<span style=color:#66d9ef>int</span> len){
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// int left,mid,right,n;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> left,n;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>2</span>;i<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span> <span style=color:#f92672>&lt;</span> len;i<span style=color:#f92672>*=</span><span style=color:#ae81ff>2</span>){
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// left = 0;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// for(left=0;left+i&lt;len;){
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     mid = left + i - 1;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     right = mid + i &lt; len ? mid + i : len - 1;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     n = mid + i &lt; len ? 2*i : len - left+1;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     merge_arr(a+left,mid,n);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     left = right + 1 ;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span>(left <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;left <span style=color:#f92672>&lt;</span> len;left<span style=color:#f92672>+=</span>i){
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// mid = left + i/2;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            n <span style=color:#f92672>=</span> left <span style=color:#f92672>+</span> i <span style=color:#f92672>&lt;</span> len<span style=color:#f92672>?</span>i:len<span style=color:#f92672>-</span>left;
+</span></span><span style=display:flex><span>            merge_arr(a<span style=color:#f92672>+</span>left,i<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>,n);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h1 id=qucik-sort-快速排序>Qucik Sort 快速排序
+<a class=header-anchor href=#qucik-sort-%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f></a></h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>quick_sort</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>a,<span style=color:#66d9ef>int</span> len){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span>(len<span style=color:#f92672>&lt;</span><span style=color:#ae81ff>2</span>)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> i,j;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> pivot <span style=color:#f92672>=</span> a[len<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>];
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,j<span style=color:#f92672>=</span>len<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>;;i<span style=color:#f92672>++</span>,j<span style=color:#f92672>--</span>){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span>(a[i] <span style=color:#f92672>&lt;</span> pivot) i<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span>(a[j] <span style=color:#f92672>&gt;</span> pivot) j<span style=color:#f92672>--</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(i <span style=color:#f92672>&gt;=</span> j) <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// swap value
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        swap(a[i],a[j]);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    quick_sort(a,i);
+</span></span><span style=display:flex><span>    quick_sort(a<span style=color:#f92672>+</span>i,len<span style=color:#f92672>-</span>i);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>quick_sort2</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>a,<span style=color:#66d9ef>int</span> n){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span>(n<span style=color:#f92672>&lt;</span><span style=color:#ae81ff>2</span>) <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> mid<span style=color:#f92672>=</span>a[<span style=color:#ae81ff>0</span>]; <span style=color:#75715e>// pivot
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,j<span style=color:#f92672>=</span>n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span>(i<span style=color:#f92672>&lt;</span>j){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span>(j<span style=color:#f92672>&gt;</span>i <span style=color:#f92672>&amp;&amp;</span> a[j]<span style=color:#f92672>&gt;=</span>mid) j<span style=color:#f92672>--</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(j<span style=color:#f92672>&gt;</span>i){
+</span></span><span style=display:flex><span>            a[i]<span style=color:#f92672>=</span>a[j];
+</span></span><span style=display:flex><span>            i<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span>(i<span style=color:#f92672>&lt;</span>j <span style=color:#f92672>&amp;&amp;</span> a[i]<span style=color:#f92672>&lt;</span>mid) i<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(i<span style=color:#f92672>&lt;</span>j){
+</span></span><span style=display:flex><span>            a[j]<span style=color:#f92672>=</span>a[i];
+</span></span><span style=display:flex><span>            j<span style=color:#f92672>--</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    a[i]<span style=color:#f92672>=</span>mid;
+</span></span><span style=display:flex><span>    quick_sort2(a,i);
+</span></span><span style=display:flex><span>    quick_sort2(a<span style=color:#f92672>+</span>i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>,n<span style=color:#f92672>-</span>i<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h1 id=heap-sort-堆排序>Heap Sort 堆排序
+<a class=header-anchor href=#heap-sort-%e5%a0%86%e6%8e%92%e5%ba%8f></a></h1><p>递归版本</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#75715e>// i is index of array,the left child index is 2*i+1,the right one is 2*i+2,the father index is floor((i-1)/2)
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>siftDown</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>a, <span style=color:#66d9ef>int</span> i, <span style=color:#66d9ef>int</span> n)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> lhs<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> rhs<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>i<span style=color:#f92672>+</span><span style=color:#ae81ff>2</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> maxid<span style=color:#f92672>=</span>i;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span>(lhs<span style=color:#f92672>&lt;</span>n <span style=color:#f92672>&amp;&amp;</span> a[maxid]<span style=color:#f92672>&lt;</span>a[lhs]) maxid<span style=color:#f92672>=</span>lhs;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span>(rhs<span style=color:#f92672>&lt;</span>n <span style=color:#f92672>&amp;&amp;</span> a[maxid]<span style=color:#f92672>&lt;</span>a[rhs]) maxid<span style=color:#f92672>=</span>rhs;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span>(maxid<span style=color:#f92672>!=</span>i)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        swap(a[i],a[maxid]);
+</span></span><span style=display:flex><span>        siftDown(a,maxid,n);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// void makeHeap(int *a, int n){
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//     for(int i=n/2-1; i&gt;=0; i--)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//     {
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//         siftDown(a,i,n);
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//     }
+</span></span></span><span style=display:flex><span><span style=color:#75715e>// }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>heap_sort</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>a,<span style=color:#66d9ef>int</span> n){
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// makeHeap(a,n);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span>n<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>; i<span style=color:#f92672>&gt;=</span><span style=color:#ae81ff>0</span>; i<span style=color:#f92672>--</span>){
+</span></span><span style=display:flex><span>        siftDown(a,i,n);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span>n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>; i<span style=color:#f92672>&gt;</span><span style=color:#ae81ff>0</span>; i<span style=color:#f92672>--</span>){
+</span></span><span style=display:flex><span>        swap(a[<span style=color:#ae81ff>0</span>],a[i]);
+</span></span><span style=display:flex><span>        siftDown(a,<span style=color:#ae81ff>0</span>,i);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>非递归版本</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>heap_down</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>a,<span style=color:#66d9ef>int</span> i,<span style=color:#66d9ef>int</span> n){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> lc <span style=color:#f92672>=</span> <span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(;lc<span style=color:#f92672>&lt;</span>n;i<span style=color:#f92672>=</span>lc,lc<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>){
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// lc + 1 &lt; n right chid index can&#39;t greater than the array length
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span>(lc<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span> <span style=color:#f92672>&lt;</span> n <span style=color:#f92672>&amp;&amp;</span> a[lc]<span style=color:#f92672>&lt;</span>a[lc<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>])
+</span></span><span style=display:flex><span>            lc<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(a[i] <span style=color:#f92672>&gt;=</span> a[lc])
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>            swap(a[i],a[lc]);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>heap_sort2</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>a,<span style=color:#66d9ef>int</span> n){
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// makeHeap(a,n);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span>n<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>; i<span style=color:#f92672>&gt;=</span><span style=color:#ae81ff>0</span>; i<span style=color:#f92672>--</span>){
+</span></span><span style=display:flex><span>        heap_down(a,i,n);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span>n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>; i<span style=color:#f92672>&gt;</span><span style=color:#ae81ff>0</span>; i<span style=color:#f92672>--</span>){
+</span></span><span style=display:flex><span>        swap(a[<span style=color:#ae81ff>0</span>],a[i]);
+</span></span><span style=display:flex><span>        heap_down(a,<span style=color:#ae81ff>0</span>,i);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h1 id=counting-sort-计数排序>Counting Sort 计数排序
+<a class=header-anchor href=#counting-sort-%e8%ae%a1%e6%95%b0%e6%8e%92%e5%ba%8f></a></h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>couting_sort</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>a,<span style=color:#66d9ef>int</span> n){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> range <span style=color:#f92672>=</span> <span style=color:#ae81ff>20</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>C <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span>[range];
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>temp <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span>[n];
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;i <span style=color:#f92672>&lt;</span> range;i<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        C[i] <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(i<span style=color:#f92672>&lt;</span>n)
+</span></span><span style=display:flex><span>            temp[i]<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;j <span style=color:#f92672>&lt;</span> n;j<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        C[a[j]]<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;i <span style=color:#f92672>&lt;</span> range;i<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        C[i]<span style=color:#f92672>+=</span>C[i<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>];
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>;j <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>0</span>;j<span style=color:#f92672>--</span>){
+</span></span><span style=display:flex><span>        temp[<span style=color:#f92672>--</span>C[a[j]]] <span style=color:#f92672>=</span> a[j];
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; j <span style=color:#f92672>&lt;</span> n; j<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        a[j] <span style=color:#f92672>=</span> temp[j];
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>delete</span> [] C;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>delete</span> [] temp;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h1 id=算法对比>算法对比
+<a class=header-anchor href=#%e7%ae%97%e6%b3%95%e5%af%b9%e6%af%94></a></h1><blockquote><p>稳定：如果a原本在b前面，而a=b，排序之后a仍然在b的前面。</p></blockquote><blockquote><p>不稳定：如果a原本在b的前面，而a=b，排序之后 a 可能会出现在 b 的后面。</p></blockquote><blockquote><p>时间复杂度：对排序数据的总的操作次数。反映当n变化时，操作次数呈现什么规律。</p></blockquote><blockquote><p>空间复杂度：是指算法在计算机内执行时所需存储空间的度量，它也是数据规模n的函数。</p></blockquote><table><thead><tr><th style=text-align:left>算法名称</th><th style=text-align:center>时间复杂度（最好）</th><th style=text-align:center>时间复杂度（平均）</th><th style=text-align:center>时间复杂度（最坏）</th><th style=text-align:center>空间复杂度</th><th style=text-align:center>稳定性</th></tr></thead><tbody><tr><td style=text-align:left>Insertion Sort</td><td style=text-align:center>O(n)</td><td style=text-align:center>O(n^2)</td><td style=text-align:center>O(n^2)</td><td style=text-align:center>O(1)</td><td style=text-align:center>稳定</td></tr><tr><td style=text-align:left>Shell Sort</td><td style=text-align:center>O(n)</td><td style=text-align:center>O(n^1.3)</td><td style=text-align:center>O(n^2)</td><td style=text-align:center>O(1)</td><td style=text-align:center>不稳定</td></tr><tr><td style=text-align:left>Selection Sort</td><td style=text-align:center>O(n^2)</td><td style=text-align:center>O(n^2)</td><td style=text-align:center>O(n^2)</td><td style=text-align:center>O(1)</td><td style=text-align:center>不稳定</td></tr><tr><td style=text-align:left>Heap Sort</td><td style=text-align:center>O(nlog n)</td><td style=text-align:center>O(nlog n)</td><td style=text-align:center>O(nlog n)</td><td style=text-align:center>O(1)</td><td style=text-align:center>稳定</td></tr><tr><td style=text-align:left>Bubble Sort</td><td style=text-align:center>O(n)</td><td style=text-align:center>O(n^2)</td><td style=text-align:center>O(n^2)</td><td style=text-align:center>O(1)</td><td style=text-align:center>稳定</td></tr><tr><td style=text-align:left>Cocktail Sort</td><td style=text-align:center>O(n)</td><td style=text-align:center>O(n^2)</td><td style=text-align:center>O(n^2)</td><td style=text-align:center>O(1)</td><td style=text-align:center>稳定</td></tr><tr><td style=text-align:left>Qucik Sort</td><td style=text-align:center>O(nlog n)</td><td style=text-align:center>O(nlog n)</td><td style=text-align:center>O(n^2)</td><td style=text-align:center>O(nlog n)~O(n)</td><td style=text-align:center>不稳定</td></tr><tr><td style=text-align:left>Merge Sort</td><td style=text-align:center>O(nlog n)</td><td style=text-align:center>O(nlog n)</td><td style=text-align:center>O(nlog n)</td><td style=text-align:center>O(n)</td><td style=text-align:center>稳定</td></tr><tr><td style=text-align:left>Counting Sort</td><td style=text-align:center>O(n+k)</td><td style=text-align:center>O(n+k)</td><td style=text-align:center>O(n+k)</td><td style=text-align:center>O(n+k)</td><td style=text-align:center>稳定</td></tr><tr><td style=text-align:left>Bucket Sort</td><td style=text-align:center>O(n)</td><td style=text-align:center>O(n+k)</td><td style=text-align:center>O(n^2)</td><td style=text-align:center>O(n+k)</td><td style=text-align:center>稳定</td></tr><tr><td style=text-align:left>Radix Sort</td><td style=text-align:center>O(n*k)</td><td style=text-align:center>O(n*k)</td><td style=text-align:center>O(n*k)</td><td style=text-align:center>O(n+k)</td><td style=text-align:center>稳定</td></tr></tbody></table><h1 id=引用>引用
+<a class=header-anchor href=#%e5%bc%95%e7%94%a8></a></h1><ul><li><a href=http://liaoxl.github.io/blog/20140907/sort/ title=Moondark rel="noopener external nofollow noreferrer" target=_blank class=exturl>Moondark
+<i class="fa fa-external-link-alt"></i></a></li><li><a href=https://www.cnblogs.com/eniac12/p/5329396.html title=SteveWang rel="noopener external nofollow noreferrer" target=_blank class=exturl>SteveWang
+<i class="fa fa-external-link-alt"></i></a></li><li><a href=http://rosettacode.org/wiki/Sorting_algorithms title=rosettacode rel="noopener external nofollow noreferrer" target=_blank class=exturl>rosettacode
+<i class="fa fa-external-link-alt"></i></a></li><li><a href=https://www.cnblogs.com/onepixel/articles/7674659.html title=一像素 rel="noopener external nofollow noreferrer" target=_blank class=exturl>一像素
+<i class="fa fa-external-link-alt"></i></a></li></ul></div><footer class=post-footer><div class=post-tags><a href=/tags/python>python
+</a><a href=/tags/cpp>cpp
+</a><a href=/tags/sort-algorithm>sort algorithm</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-copyright><img src=/imgs/cc/cc.svg width=75 height=75 align=right alt=共享知识><ul><li class=post-copyright-title><strong>文章标题：</strong>
+常用排序算法总结</li><li class=post-copyright-author><strong>本文作者： </strong>cnewbie</li><li class=post-copyright-link><strong>本文链接：</strong>
+<a id=post-cr-link href=https://cnewbie.github.io/posts/algorithm-sort-algorithms/ title=常用排序算法总结>https://cnewbie.github.io/posts/algorithm-sort-algorithms/</a></li><li class=post-copyright-license><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <i class="fab fa-fw fa-creative-commons"></i><a target=_blank href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh>BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div><div class=followme><span>欢迎关注我的其它发布渠道</span><div class=social-list><div class=social-item><a target=_blank class=social-link href=/rss.xml><span class=icon><i class="fa fa-rss"></i>
+</span><span class=label>RSS</span></a></div></div></div><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/posts/linux-tmux/ rel=next title="Tmux and Screen"><i class="fa fa-chevron-left"></i> Tmux and Screen</a></div><div class="post-nav-prev post-nav-item"><a href=/posts/markdown-pandoc/ rel=prev title="Pandoc Markdown 文档">Pandoc Markdown 文档
+<i class="fa fa-chevron-right"></i></a></div></div></footer></article></div><div id=comments class=post-comments><div class=comment-head><div class=comment-headline><i class="fas fa-comments fa-fw"></i>
+<span>评论交流</span></div></div><div class=comment-wrap><div><div class=comment-loading><i class="fa fa-sync fa-spin"></i></div><div class=giscus-container></div></div></div></div></div></main><footer class=footer><div class=footer-inner><div id=gtranslate class=google-translate><i class="fa fa-language"></i><div id=google_translate_element></div></div><div class=copyright>&copy;
+<span itemprop=copyrightYear>2010 - 2024
+</span><span class=with-love><i class="fa fa-heart"></i>
+</span><span class=author itemprop=copyrightHolder>cnewbie</span></div><div class=powered-by>由 <a href=https://gohugo.io title=0.121.1 target=_blank>Hugo</a> & <a href=https://github.com/hugo-next/hugo-theme-next title=4.5.3 target=_blank>Hugo NexT.Gemini</a> 强力驱动</div></div></footer><script type=text/javascript src=https://cdn.staticfile.org/animejs/3.2.1/anime.min.js defer></script><script type=text/javascript src=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.js defer></script><script class=next-config data-name=main type=application/json>{"bookmark":{"color":"#222","enable":true,"save":"manual"},"copybtn":true,"darkmode":true,"giscus":{"cfg":{"category":"Comments","categoryid":null,"emit":false,"inputposition":"top","mapping":"title","reactions":false,"repo":"cnewbie/cnewbie.github.io","repoid":null,"theme":"preferred_color_scheme"},"js":"https://giscus.app/client.js"},"hostname":"https://cnewbie.github.io","i18n":{"ds_day":" 天前","ds_days":" 天 ","ds_hour":" 小时前","ds_hours":" 小时 ","ds_just":"刚刚","ds_min":" 分钟前","ds_mins":" 分钟","ds_month":" 个月前","ds_years":" 年 ","empty":"没有找到任何搜索结果：${query}","hits":"找到 ${hits} 个搜索结果","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","placeholder":"搜索..."},"lang":"zh-CN","lazyload":false,"localSearch":{"enable":true,"limit":1e3,"path":"/searchindexes.xml","preload":false,"topnperarticle":-1,"trigger":"auto","unescape":false},"motion":{"async":true,"enable":true,"transition":{"collheader":"fadeInLeft","postblock":"fadeIn","postbody":"fadeInDown","postheader":"fadeInDown","sidebar":"fadeInUp"}},"postmeta":{"comments":{"enable":false,"plugin":"waline"},"views":{"enable":true,"plugin":"busuanzi"}},"root":"/","scheme":"Gemini","sidebar":{"display":"post","offset":12,"padding":18,"position":"left","width":256},"vendor":{"plugins":"qiniu","router":"https://cdn.staticfile.org"},"version":"4.5.3","waline":{"cfg":{"emoji":false,"imguploader":false,"placeholder":"请文明发言哟 ヾ(≧▽≦*)o","reaction":true,"reactiontext":["点赞","踩一下","得意","不屑","尴尬","睡觉"],"reactiontitle":"你认为这篇文章怎么样？","requiredmeta":["nick","mail"],"serverurl":null,"sofa":"快来发表你的意见吧 (≧∀≦)ゞ","wordlimit":200},"css":{"alias":"waline","file":"dist/waline.css","name":"@waline/client","version":"2.13.0"},"js":{"alias":"waline","file":"dist/waline.js","name":"@waline/client","version":"2.13.0"}}}</script><script type=text/javascript src=/js/main.min.b0c78e5a4df586ee46d02716ffa91a4a322e56763e04e91eb2ba052c9469ed02.js defer></script></body></html>

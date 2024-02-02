@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>静态网站评论系统对比</title><url>/posts/site-comment/</url><categories><category>tech</category></categories><tags><tag>github</tag><tag>comment</tag><tag>javascript</tag></tags><content type="html"> 静态网站评论系统对比 由于博客年久失修，很久没有产出文章了，之前的主题已经很久没有更新（自己不太会前端），突然心血来潮想要更新一下，并且增加评论功能，便产生了写一篇文章的想法，本文不包含软件使用上的教学内容，仅仅是写一下自身了解的信息。
+功能需求 评论系统现在已经很成熟，而且有很多不同的产品，一开始挑选会眼花缭乱，为了快速完成评论功能的接入，就明确了以下需求点：
+完善的文档支持 基本的文字评论功能 优先选择无需服务器部署 开源最好是免费 产品对比 经过简单的搜索，看了其他文章的总结，大概将评论系统分为基于github平台的方案与服务自建的方案。总体来说就是需要一个储存评论的地方（Github issues，DB数据库），然后就是前端展示的地方（通常是JS接入）。
+基本上了解的差不多了，就选取了部分评论系统查看了一下文档。以下列出相关的功能对比：
+功能对比 功能对比基本上从后端储存与提供的功能点入手，按照自己的理解将评论系统分类成账号注册类、云部署类、Github类，所以信息均来自网络，属于个人看法，如果描述存在不准确的地方，可以通过评论系统进行留言交流。
+注册类 该类别仅需要注册账号获取到授权后即可使用，没有服务搭建的步骤，但是存在隐私以及数据安全方面的问题，不在乎以上问题且懒得折腾的小伙伴可以选择。
+Disqus 介绍： The #1 way to build your audience
+Disqus 就是目前最优秀的评论系统。久经考验，服务稳定，体验良好。对国内的网络环境没有优化，不建议国内用户使用。
+LiveRe 介绍： 以聪明的方式评论
+韩国公司开发的软件，功能与上述软件类似，支持SNS方式登陆，接入方便。
+云部署类 该类别主要支持云函数部署或者Serverless部署，需要搭配不同的后端存储完成评论系统的搭建。
+Valine 介绍：一款快速、简洁且高效的无后端评论系统。
+Valine 诞生于2017年8月7日，是一款基于LeanCloud的快速、简洁且高效的无后端评论系统。
+该系统说是没有后端存储，但是依赖LeanCloud这个平台，并且因为未知原因不公布源码了，功能上支持Markdown、Emoji、文章阅读量统计。
+Waline 介绍：一款简洁、安全的评论系统。
+与Valine类似，但是后端存储支持多种，除了官方默认的 LeanCloud 之 …</content></entry><entry><title>Python 描述符</title><url>/posts/python-description/</url><categories><category>tech</category></categories><tags><tag>python</tag><tag>description</tag></tags><content type="html"><![CDATA[  Python 描述符
+什么是描述符（Descriptor） 定义了 __get__(),__set__(),__delete__()中任意一个描述符协议的对象成为描述符。简单来说，描述符就是可重用的属性。描述符具有诸多优点，诸如：保护属性不受修改、属性类型检查和自动更新某个依赖属性的值等。
+descr.__get__(self, obj, type=None) --&gt; value descr.__set__(self, obj, value) --&gt; None descr.__delete__(self, obj) --&gt; None __get__ 方法接受两个参数，一个是实例对象，另一个是实例的类型。__set__方法接受两个参数，一个是实例对象，另一个是数值。而 __delete__ 方法包含一个实例对象参数，并在实例对象被删除时调用。
+__dict__ （每个对象均具备该属性）字典类型，存放本对象的属性，key(键)即为属性名，value(值)即为属性的值，形式为 {attr_key : attr_value}
+Python 对象的属性控制默认是这样的,从对象的字典 __dict__ 中获取 get，设置 set ,删除 delete ，比如：对于实例 a，a.x 的查找顺序为 a.__dict__['x'],然后是type(a).__dict__['x'].如果还是没找到就往上级(父类)中查找。具体顺序见 属性访问顺序 。
+描述符会改变这种默认的控制行为，如果属性 x 是一个描述符，那么访问 a.x 时不再从字典 __dict__ 中读取，而是调用描述符的 __get__() 方法，对于设置和删除也是同样的原理。
+property 属性 通过 property 将函数调用伪装成属性调用。
+#!/usr/bin/env python class Movie(object): def __init__(self, title, rating, runtime, budget, gross): self._budget = None self.title = title self.rating = rating self.runtime = runtime self.gross = gross self.budget = budget @property def budget(self): return self._budget @budget.setter def budget(self, value): if value &lt; 0: raise ValueError(&#34;Negative value not allowed: %s&#34; % value) self._budget = value def profit(self): return self.gross - self.budget m = Movie(&#39;Casablanca&#39;, 97, 102, 964000, 1300000) print m.budget # calls m.budget(), returns result try: m.budget = -100 # calls budget.setter(-100), and raises ValueError except ValueError: print &#34;Woops. Not allowed&#34; # results 964000 Woops. Not allowed 当试图访问 budget 属性，Python 就会自动调用相应的 getter/setter 方法。比方说，当遇到 m.budget = value 这样的代码时就会自动调用 budget.setter。
+property 将自定义的代码同变量的访问/设定联系在了一起，同时使类保持一个简单的访问属性的接口。
+但是当使用 property 对参数进行检查，需要对每个属性进行检查无法对代码进行复用。
+描述符 #!/usr/bin/env python from weakref import WeakKeyDictionary class NonNegative(object): &#34;&#34;&#34;A descriptor that forbids negative values&#34;&#34;&#34; def __init__(self, default): self.default = default self.data = WeakKeyDictionary() def __get__(self, instance, owner): # we get here when someone calls x.d, and d is a NonNegative instance # instance = x # owner = type(x) return self.data.get(instance, self.default) def __set__(self, instance, value): # we get here when someone calls x.d = val, and d is a NonNegative instance # instance = x # value = val if value &lt; 0: raise ValueError(&#34;Negative value not allowed: %s&#34; % value) self.data[instance] = value class Movie(object): #always put descriptors at the class-level rating = NonNegative(0) runtime = NonNegative(0) budget = NonNegative(0) gross = NonNegative(0) def __init__(self, title, rating, runtime, budget, gross): self.title = title self.rating = rating self.runtime = runtime self.budget = budget self.gross = gross def profit(self): return self.gross - self.budget m = Movie(&#39;Casablanca&#39;, 97, 102, 964000, 1300000) print m.budget # calls Movie.budget.__get__(m, Movie) m.rating = 100 # calls Movie.budget.__set__(m, 100) try: m.rating = -1 # calls Movie.budget.__set__(m, -100) except ValueError: print &#34;Woops, negative value&#34; # results 964000 Woops, negative value 当函数调用 m.budget 时，会将其视为具有 __get__ 方法的描述符，然后调用 Moive.budget.__get__ 返回结果。
+Reference 伯乐在线 foofish chengyangyao   ]]></content></entry><entry><title>Python 属性访问顺序</title><url>/posts/python-propertyorder/</url><categories><category>tech</category></categories><tags><tag>python</tag><tag>property</tag></tags><content type="html"> Python 属性访问顺序
+实例属性访问顺序 类的 __getattribute__() 方法 类的数据描述符：(定义了描述符方法)（若人为的重载了该 __getattribute__() 方法，可能会导致无法调用描述符） 实例的属性字典（若与描述符对象同名，会被覆盖哦） 类的非数据描述符(只定义了 __get__() 方法，而没有定义 __set__(), __delete__() 方法) 类的属性字典 类的 __getattr__() 方法 类属性访问顺序 假设类为元类的实例，相比于实例多了一个类数据描述符的查找。
+元类的 __getattribute__() 方法 元类的数据描述符 类的数据描述符 类的属性字典 元类的非数据描述符 元类的属性字典 元类的 __getattr__() 方法 Reference windy135 betterprogramming ionelmc</content></entry><entry><title>LRU 缓存淘汰策略</title><url>/posts/os-lru/</url><categories><category>tech</category></categories><tags><tag>python</tag><tag>LRU</tag><tag>Cache</tag></tags><content type="html"><![CDATA[  LRU（Least Recent Used）缓存淘汰策略 LRU 算法根据数据的历史访问记录来进行淘汰数据，其核心思想是“如果数据最近被访问过，那么将来被访问的几率也更高”。
+实现细节 核心思想使用 map 结构做到 save 和 get key的时间都是 O(1)，配合双向链表完成 O(1) 时间将节点放置在缓存头部。
+编码细节：
+save(key, value) 首先在 Map 找到 Key 对应的节点，如果节点存在，更新节点的值，并把这个节点移动队头。 如果不存在，需要构造新的节点，并且尝试把节点塞到队头，如果LRU空间不足，则通过 tail 淘汰掉队尾的节点，同时在 Map 中移除 Key。 get(key) 通过 Map 找到 LRU 链表节点，因为根据LRU 原理，这个节点是最新访问的，所以要把节点插入到队头，然后返回缓存的值。 Python 实现 #!/usr/bin/env python # -*- coding: utf-8 -*- class Node(object): &#34;&#34;&#34;节点包含前后指针和键值&#34;&#34;&#34; def __init__(self, key, value, pre=None, post=None): self.key = key self.value = value self.pre = pre self.post = post def __repr__(self): return &#39;Node({},{})&#39;.format(self.key, self.value) __str__ = __repr__ class LRUCache(object): def __init__(self, capacity=10): &#34;&#34;&#34;容量大小，初始化头尾节点&#34;&#34;&#34; self.size = 0 self.capacity = capacity self.head = Node(-1, -1) self.tail = Node(-1, -1) self.head.post = self.tail self.tail.pre = self.head self.key_map = dict() def set(self, k, v): node = self.key_map.get(k) if node is not None: self.key_map[k] = v self._move_node(node) else: node = Node(k, v) self._add_node(node) self.key_map[k] = node self.size += 1 if self.size &gt;= self.capacity: node = self._pop_node() self.key_map.pop(node.key) self.size -= 1 def get(self, k): &#34;&#34;&#34;获取操作&#34;&#34;&#34; node = self.key_map.get(k) if node is not None: self._move_node(node) return node.value else: print(&#39;miss key&#39;) return -1 # raise KeyError(&#39;key not exist&#39;) def _add_node(self, node): &#34;&#34;&#34;增加node至head后&#34;&#34;&#34; node.pre = self.head node.post = self.head.post self.head.post.pre = node self.head.post = node def _remove_node(self, node): &#34;&#34;&#34;删除node&#34;&#34;&#34; node.pre.post = node.post node.post.pre = node.pre def _move_node(self, node): &#34;&#34;&#34;移动至头部&#34;&#34;&#34; self._remove_node(node) self._add_node(node) def _pop_node(self): &#34;&#34;&#34;弹出尾节点&#34;&#34;&#34; node = self.tail.pre self._remove_node(node) return node def print_node(self): node = self.head while node.post != self.tail: yield node.post node = node.post if __name__ == &#39;__main__&#39;: import random cache = LRUCache() for i in range(20): k = random.randint(0, 5) if k % 2 == 0: cache.set(i, i) print(&#39;set {}&#39;.format(i)) else: v = cache.get(k) print(&#39;get {}, value {}&#39;.format(k, v)) print(&#39;-&gt;&#39;.join(str(i) for i in cache.print_node())) Reference 不懂机器学习的架构师不是好CTO   ]]></content></entry><entry><title>Binary Search</title><url>/posts/algorithm-binary-search/</url><categories><category>tech</category></categories><tags><tag>python</tag><tag>binary search</tag><tag>algorithm</tag></tags><content type="html"><![CDATA[  二分查找 二分查找模版 def binary_search(arr, target): if not arr: return -1 left = 0 right = len(arr) - 1 while left &amp;lt;= right: mid = left + ((right - left)&amp;gt;&amp;gt;1) pivot = arr[mid] if pivot &amp;lt; target: left = mid + 1 elif pivot &amp;gt; target: right = mid - 1 else pass # ??? ret = -1 # ??? return ret 二分查找实现 #!/usr/bin/env python3 # -*- coding:utf-8 -*- import bisect def binary_search(arr, target): &amp;#34;&amp;#34;&amp;#34; 二分查找不存在返回 -1 &amp;#34;&amp;#34;&amp;#34; ret = -1 if not arr: return ret arr_len = len(arr) left = 0 right = arr_len while left &amp;lt; right: mid = left + ((right - left)&amp;gt;&amp;gt;1) v = arr[mid] if v &amp;lt; target: left = mid + 1 elif v &amp;gt; target: right = mid else: return mid return ret def low_bound(arr, target): &amp;#34;&amp;#34;&amp;#34; 返回左边界 第一个大于等于 &amp;#34;&amp;#34;&amp;#34; ret = -1 if not arr: return ret arr_len = len(arr) left = 0 right = arr_len while left &amp;lt; right: mid = left + ((right - left)&amp;gt;&amp;gt;1) v = arr[mid] # v &amp;gt;= target right = mid if v &amp;lt; target: left = mid + 1 elif v &amp;gt; target: right = …  ]]></content></entry><entry><title>设计模式</title><url>/posts/oop-design-pattern/</url><categories><category>tech</category></categories><tags><tag>python</tag><tag>uml</tag><tag>design pattern</tag></tags><content type="html"><![CDATA[  面向对象之设计模式
+创建型模式 创建型模式提供了创建对象的机制， 能够提升已有代码的灵活性和可复用性。
+工厂方法 Factory Method 意图 父类中提供创建对象的接口，但是允许子类修改需要创建对象的类型
+问题 创建物流管理类，起先实现了火车类，随着业务的增长，需要进行水路运输。 在修改物流管理类时，需要修改所有运输的代码。
+解决方案 工厂方法通过调用特殊的工厂方法替代直接使用构造方法构建对象，通过工厂方法返回的对象称之为产品。
+UML 结构 interface Product{ -doStuff() } class ConcreteProductA{ } class ConcreteProductB{ } class Creator{ +someOperation() +createProduct(): Product } class ConcreteCreatorA{ } class ConcreteCreatorB{ } ConcreteProductA ..|&amp;gt; Product ConcreteProductB ..|&amp;gt; Product ConcreteCreatorA --|&amp;gt; Creator ConcreteCreatorB --|&amp;gt; Creator Creator --&amp;gt; Product Product 抽象产品接口 ConcreteProduct 产品类 Creator 抽象工厂方法，依赖抽象产品接口 ConcreteCreator 工厂方法 应用示例 多平台 UI 元素
+#!/usr/bin/env python3 from abc import ABCMeta, abstractmethod class Button(metaclass=ABCMeta): @abstractmethod def render(self): pass @abstractmethod def on_click(self): pass class WindowsButton(Button): def render(self): print(self.__class__.__name__) def on_click(self): print(self.__class__.__name__+&amp;#39;click&amp;#39;) class …  ]]></content></entry><entry><title>Python Cookbook</title><url>/posts/python-cookbook/</url><categories><category>tech</category></categories><tags><tag>python</tag><tag>cookbook</tag></tags><content type="html"><![CDATA[  数据结构与算法 小顶堆 import heapq nums = [1, 8, 2, 23, 7, -4, 18, 23, 42, 37, 2] heap = list(nums) heapq.heapify(heap) heap # [-4, 2, 1, 23, 7, 2, 18, 23, 42, 37, 8] print(heapq.nlargest(3, nums)) # Prints [42, 37, 23] print(heapq.nsmallest(3, nums)) # Prints [-4, 1, 2] nlargest() 和 nsmallest() 适合查找元素数量少的情况，如果查找数量较多，通常先排序后切片更快。sorted(items)[:N]
+优先队列 import heapq class PriorityQueue(object): def __init__(self): self._queue = [] self._index = 0 def push(self, item, priority): heapq.heappush(self._queue, (-priority, self._index, item)) self._index += 1 def pop(self): return heapq.heappop(self._queue)[-1] heapq 是小顶堆，队列中包含 (-priority, index, item) 元组，优先级为负数的目的是使得元素按照优先级从高到低排序，index 变量的作用是保证同等优先级元素的正确排序。通过保存一个不断增加的 index 下标变量，可以确保元素按照它们插入的顺序排序。
+multidict 多值字典 from collections import defaultdict d = defaultdict(set) d[&amp;#39;a&amp;#39;].add(1) d[&amp;#39;a&amp;#39;].add(2) d[&amp;#39;b&amp;#39;].add(4) # 传统字典模拟 d = {} # 一个普通的字典 d.setdefault(&amp;#39;a&amp;#39;, []).append(1) d.setdefault(&amp;#39;a&amp;#39;, []).append(2) …  ]]></content></entry><entry><title>Python 内存拷贝</title><url>/posts/python-deepcopy/</url><categories><category>tech</category></categories><tags><tag>python</tag><tag>deepcopy</tag></tags><content type="html"> Python 浅拷贝、深拷贝 深复制，即将被复制对象完全再复制一遍作为独立的新个体单独存在。所以改变原有被复制对象不会对已经复制出来的新对象产生影响。
+等于赋值，并不会产生一个独立的对象单独存在，他只是将原有的数据块打上一个新标签，所以当其中一个标签被改变的时候，数据块就会发生变化，另一个标签也会随之改变。
+而浅复制要分两种情况进行讨论：
+当浅复制的值是不可变对象（数值，字符串，元组）时和“等于赋值”的情况一样，对象的id值与浅复制原来的值相同。
+当浅复制的值是可变对象（列表和元组）时会产生一个“不是那么独立的对象”存在。有两种情况：
+第一种情况：复制的 对象中无复杂子对象，原来值的改变并不会影响浅复制的值，同时浅复制的值改变也并不会影响原来的值。原来值的id值与浅复制原来的值不同。
+第二种情况：复制的对象中有复杂子对象 （例如列表中的一个子元素是一个列表），如果不改变其中复杂子对象，浅复制的值改变并不会影响原来的值。但是改变原来的值中的复杂子对象的值会影响浅复制的值。
+对于简单的 object，例如不可变对象（数值，字符串，元组），用 shallow copy 和 deep copy 没区别
+复杂的 object， 如 list 中套着 list 的情况，shallow copy 中的 子list，并未从原 object 真的「独立」出来。也就是说，如果你改变原 object 的子 list 中的一个元素，你的 copy 就会跟着一起变。这跟我们直觉上对「复制」的理解不同。
+Reference runoob eva-j doc stackoverflow</content></entry><entry><title>Python 统计代码运行时间</title><url>/posts/python-code-running-time/</url><categories><category>tech</category></categories><tags><tag>python</tag><tag>gist</tag><tag>snippet</tag></tags><content type="html"><![CDATA[  Python 运行时间
+在很多的时候我们需要计算我们程序的性能，这个时候我们常常需要统计程序运行的时间。下面我们就来说说怎么统计程序的运行时间。
+datetime #! /usr/bin/env python # -*- coding:utf-8 -*- import datetime from functools import wraps import logging def run_time(func): @wraps(func) def __wrapper(*args, **kwargs): logging.getLogger(__name__) start = datetime.datetime.now() ret = func(*args, **kwargs) end = datetime.datetime.now() logging.debug(&#39;running time: {}&#39;.format(end-start)) return ret return __wrapper time.now #! /usr/bin/env python # -*- coding:utf-8 -*- import time from functools import wraps import logging def run_time(func): @wraps(func) def __wrapper(*args, **kwargs): logging.getLogger(__name__) start = time.time() start_2 = time.clock() ret = func(*args, **kwargs) end = time.time() end_2 = time.clock() logging.debug(&#39;running time: {}&#39;.format(end-start)) logging.debug(&#39;running time2: {}&#39;.format(end_2-start_2)) return ret return __wrapper timeit #! /usr/bin/env python # -*- coding:utf-8 -*- import timeit from functools import wraps import logging def run_time(func): @wraps(func) def __wrapper(*args, **kwargs): logging.getLogger(__name__) start = timeit.default_timer() ret = func(*args, **kwargs) end = timeit.default_timer() logging.debug(&#39;running time: {}&#39;.format(end-start)) return ret return __wrapper 方法对比 方法二的精度比较高。方法一基本上是性能最差的。 **uix 平台方法 datetime.now() 和 time.time() 都包含了其他程序使用CPU的时间。方法 time.clock() 只计算了程序运行CPU的时间。 *nix 使用 time.time()，windows 使用 time.clock()。 timeit 可跨平台，推荐使用   ]]></content></entry><entry><title>Python 装饰器</title><url>/posts/python-decorator/</url><categories><category>tech</category></categories><tags><tag>python</tag><tag>decorator</tag></tags><content type="html"><![CDATA[  Python 装饰器
+装饰器的定义 装饰器本质上是一个Python函数，它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。 它经常用于有切面需求的场景，比如：插入日志、性能测试、事务处理、缓存、权限校验等场景。装饰器是解决这类问题的绝佳设计，有了装饰器，我们就可以抽离出大量与函数功能本身无关的雷同代码并继续重用。
+为什么需要装饰器 假设你原先的程序实现了简单的 fun() 函数
+#!/usr/bin/env python3 def fun(): print(&amp;#39;hello&amp;#39;) fun() 随后需要统计函数的运行时间，你当然可以对原函数进行修改，但是如果其他函数也实现该功能，逐个修改会添加大量重复代码。为了复用代码可以定义一个函数用于处理统计运行时间的需求。
+#!/usr/bin/env python3 import time from functools import wraps def timethis(func): &amp;#39;&amp;#39;&amp;#39; Decorator that reports the execution time. &amp;#39;&amp;#39;&amp;#39; @wraps(func) def wrapper(*args, **kwargs): start = time.time() result = func(*args, **kwargs) end = time.time() print(func.__name__, end-start) return result return wrapper @timethis def fun(): &amp;#34;&amp;#34;&amp;#34; hello &amp;#34;&amp;#34;&amp;#34; print(&amp;#39;hello&amp;#39;) # 等同于 fun = timethis(fun) fun() 通过上述函数对原函数进行包装，原函数 fun() 就向被装饰了一样，而timethis() 返回的是装饰后函数。
+函数元数据 装饰器作用在某个函数时，这个函数重要的元数据，如名字、文档字符串、注解等信息都丢失了
+# 未装饰前 &amp;gt;&amp;gt;&amp;gt; fun() hello &amp;gt;&amp;gt;&amp;gt; fun.__name__ &amp;#39;fun&amp;#39; &amp;gt;&amp;gt;&amp;gt; …  ]]></content></entry><entry><title>Python 闭包</title><url>/posts/python-closure/</url><categories><category>tech</category></categories><tags><tag>python</tag><tag>closure</tag><tag>function pattern</tag></tags><content type="html"> Python 闭包
+首先还得从基本概念说起，什么是闭包呢？来看下维基上的解释: 在计算机科学中，闭包（Closure）是词法闭包（Lexical Closure）的简称，是引用了自由变量的函数。这个被引用的自由变量将和这个函数一同存在，即使已经离开了创造它的环境也不例外。所以，有另一种说法认为闭包是由函数和与其相关的引用环境组合而成的实体。闭包在运行时可以有多个实例，不同的引用环境和相同的函数组合可以产生不同的实例。
+上面提到了两个关键的地方： 自由变量 和 函数, 这两个关键稍后再说。还是得在赘述下“闭包”的意思，望文知意，可以形象的把它理解为一个封闭的包裹，这个包裹就是一个函数，当然还有函数内部对应的逻辑，包裹里面的东西就是自由变量，自由变量可以在随着包裹到处游荡。当然还得有个前提，这个包裹是被创建出来的。 在通过Python的语言介绍一下，一个闭包就是你调用了一个函数A，这个函数A返回了一个函数B给你。这个返回的函数B就叫做闭包。你在调用函数A的时候传递的参数就是自由变量。
+另外再说一点，闭包并不是Python中特有的概念，所有把函数做为一等公民的语言均有闭包的概念。不过像Java这样以class为一等公民的语言中也可以使用闭包，只是它得用类或接口来实现。
+闭包的最大特点是可以将父函数的变量与内部函数绑定，并返回绑定变量后的函数（也即闭包），此时即便生成闭包的环境（父函数）已经释放，闭包仍然存在，这个过程很像类（父函数）生成实例（闭包），不同的是父函数只在调用时执行，执行完毕后其环境就会释放，而类则在文件执行时创建，一般程序执行完毕后作用域才释放，因此对一些需要重用的功能且不足以定义为类的行为，使用闭包会比使用类占用更少的资源，且更轻巧灵活。
+所有函数都有一个 __closure__ 属性，如果这个函数是一个闭包的话，那么它返回的是一个由 cell 对象 组成的元组对象。cell 对象的cell_contents 属性就是闭包中的自由变量。
+Refernece xuzhoufeng foofish</content></entry><entry><title>类间关系</title><url>/posts/oop-relationship-of-class/</url><categories><category>tech</category></categories><tags><tag>cpp</tag><tag>class</tag><tag>uml</tag></tags><content type="html"><![CDATA[  类之间的关系
+泛化（Generalization） 泛化关系：是一种继承关系，表示一般与特殊的关系，通过继承增加子类的能力，它指定了子类如何特化父类的所有特征和行为。例如：老虎是动物的一种，即有老虎的特性也有动物的共性。
+箭头指向：带三角箭头的实线，箭头指向父类
+Fruit &amp;lt;|-- Apple 实现（Realization） 实现关系：是一种类与接口的关系，表示类是接口所有特征和行为的实现。
+箭头指向：带三角箭头的虚线，箭头指向接口
+State&amp;lt;|..BattleState 依赖（Dependency） 依赖关系：是一种使用的关系，即一个类的实现需要另一个类的协助，这种关系具有偶然性、临时性。类A要完成某个功能引用了类B，则类A依赖类B。被依赖的类会影响到依赖类，所以要尽量不使用双向的互相依赖。
+代码表现：类A的某个成员函数的返回值、局部变量、方法的参数或者对静态方法的调用，则表示类A引用了类B。
+箭头及指向：带箭头的虚线，指向被依赖者
+Computer&amp;lt;..Student class Computer { public: static void start(){ cout&amp;lt;&amp;lt;&amp;#34;电脑正在启动&amp;#34;&amp;lt;&amp;lt;endl; } }; class Student { public: //返回值构成依赖 Computer&amp;amp; program(); //形参构成依赖 void program(Computer&amp;amp;); void playGame() { //局部变量构成依赖 Computer* computer=new Computer; ... //静态方法调用构成依赖 Computer::star(); } }; 关联（Association） 关联关系：是一种拥有的关系，它使一个类知道另一个类的属性和方法，体现为两个类、或者类与接口之间语义级别的一种强依赖关系；如：老师与学生，丈夫与妻子关联可以是双向的，也可以是单向的。双向的关联可以有两个箭头或者没有箭头，单向的关联有一个箭头。
+代码体现：成员变量
+箭头及指向：带普通箭头的实心线，指向被拥有者（被关联）
+Student &amp;#34;n&amp;#34; --&amp;gt; &amp;#34;n&amp;#34; Teacher class Teacher; class Student{ …  ]]></content></entry><entry><title>MySQL 命令速查</title><url>/posts/database-mysql/</url><categories><category>tech</category></categories><tags><tag>mysql</tag><tag>cheatsheet</tag></tags><content type="html"><![CDATA[   教程地址 SQL语句对大小写不敏感
+基础语法 SELECT 列名称 FROM 表名称
+DISTINCT 用语返回唯一的值
+SELECT DISTINCT 列名称 FROM 表名称
+WHERE 有条件从表中选取数据
+SELECT 列名称 FROM 表名称 WHERE 列 运算符 值
+操作符 描述 = 等于 &amp;lt;&amp;gt; 不等于 &amp;gt; 大于 &amp;lt; 小于 &amp;gt;= 大于等于 &amp;lt;= 小于等于 BETWEEN 在某个范围内 LIKE 搜索某种模式 AND 和 OR 运算符是基于一个以上条件对记录进行过滤
+ORDER BY 语句用于对结果集进行升序排序,如降序进行排序，可以使用 DESC 关键字
+INSERT INTO 向表格中插入新的行
+INSERT INTO 表名称 VALUES (值1,值2,&amp;hellip;)
+INSERT INTO 表名称 (列1,列2,&amp;hellip;) VALUES (值1,值2,&amp;hellip;)
+UPDATE 修改表中的数据
+UPDATE 表名称 SET 列名称=新值 WHERE 列名称=新值
+DELETE 删除表中的行
+DELETE FROM 表名称 WHERE 列名称=值
+高级语法 LIKE 操作符用于在 WHERE 子句中搜索列中的指定模式（&amp;quot;%&amp;quot; 可用于定义通配符）
+SELECT 列名称 FROM 表名称 WHERE 列名称 LIKE 模式
+% 替代一个或多个字符 _ 仅替代一个字符 [charlist] 字符列中的任何单一字符 [^charlist] [!charlist] 不在字符列中的任何单一字符 IN 操作符允许我们在 WHERE 子句中规定多个值
+SELECT 列名称 FROM 表名称 WHERE 列名称 IN (值1,值2,&amp;hellip;)
+BETWEEN 操作符在 WHERE 子句中使用，作用是选取介于两个值之间的数据范围
+SELECT 列名称 FROM 表名称 WHERE 列名称 BETWEEN 值1 AND 值2
+Alias 别名
+SELECT 列名称 FROM 表名称 AS 别名
+SELECT 列名称 AS 别名 FROM 表名
+JOIN 用于根据两个或多个表中的列之间的关系，从这些表中查询数据
+SELECT A.a, A.b, B.a FROM A JOIN B ON …  ]]></content></entry><entry><title>Python 元类</title><url>/posts/python-metaclass/</url><categories><category>tech</category></categories><tags><tag>python</tag><tag>class</tag></tags><content type="html"><![CDATA[  Python 元类（metaclass）
+对象 Python 中一切皆对象，连类也不例外。
+对象中包含三个关键性属性：
+标识 使用 id() 方法查看 对象值 类型 使用 type() 方法查看 类与对象 Python 中使用 class 关键字定义类，通过定义的类生成类实例。实例称之为实例对象。Python 中类是一个对象，所有内建类型的类型都是 type，这个 type 就是元类，元类就是 Python 中的造物主。
+道生一，一生二，二生三，三生万物。
+道 即是 type 一 即是 metaclass(元类，或者叫类生成器) 二 即是 class(类，或者叫实例生成器) 三 即是 instance(实例) 万物 即是 实例的各种属性与方法，我们平常使用python时，调用的就是它们。 type&amp;gt;&amp;gt;&amp;gt;metaclass&amp;gt;&amp;gt;&amp;gt;class&amp;gt;&amp;gt;&amp;gt;instance ^ | |&amp;lt;&amp;lt;| # class 关键词创建 class Base: counter = 10 class Derived(Base): def get_counter(self): return self.counter x = Derived() x.get_counter() # 动态创建 Base = type(&amp;#39;Base&amp;#39;, (), {&amp;#39;counter&amp;#39;: 10}) Derived = type(&amp;#39;Derived&amp;#39;, (Base,), dict(get_counter=lambda self: self.counter)) x = Derived() x.get_counter() # type 函数 type(name, bases, dict): name: 字符串类型，存放新类的名字 bases: 元组(tuple)类型，指定类的基类/父类 dict: 字典类型，存放该类的所有属性(attributes)和方法(method) 现在我们都知道类（对象）可以使用 class 关键字创建，我们还知道类（对象）的类型是 type，既然知道了它的类型是　type，那么肯定可以通过 type（元类）来创建。
+类的创建过程 确定类的父类是否包含 metaclass 参数，没有就执行下一步 确定类 …  ]]></content></entry><entry><title>Tmux and Screen</title><url>/posts/linux-tmux/</url><categories><category>tech</category></categories><tags><tag>tmux</tag><tag>screen</tag><tag>terminal</tag><tag>linux</tag></tags><content type="html"> Terminal Multiplexers: Screen, Tmux
+终端多路复用：Screen，Tmux
+命令行选项 术语对照表
+英文 中文 session 会话 attach 连接 detach 脱离 prefix 前缀 multiplexer 多路复用 window 窗口 regions 区域 panes 面板 buffer 缓存 mark 标记 用途 screen tmux 创建指定名称的会话并连接 screen -S foo tmux new -s foo 创建会话并脱离 screen -S foo -d -m tmux new -s foo -d 列出所有会话 screen -list tmux ls 连接 screen -r tmux attach 连接到指定会话 screen -r foo tmux attach -t foo 通过 pid 连接会话 screen -r pid 连接到运行中的会话 screen -x foo 销毁指定会话 screen -r foo -X quit tmux kill-session -t foo 发送命令到指定会话 screen -r foo -X command tmux command -t foo 脱离会话 screen -d name 按键绑定 用途 screen screen command tmux tmux command 帮助 ? :help ? :help 发送前缀至其他应用 a :meta C-b :send-prefix 暂停多路复用 C-z :suspend C-z :suspend-client 显示前一个多路复用终端信息 m/C-m :lastmsg ~ :show-messages 加载配置文件 :source filename :source-file filename session 新建会话 :new 新建命名会话 :new -s name 切换会话 s :choose-session 重命名会话 :sessionname newname $ rename-session newname 销毁会话 C-\ :quit windows 创建窗口 c/C-c :screen c :new-window 切换下一个窗口 n/C-n/&amp;amp;lt;SPACE&amp;amp;gt; :next n …</content></entry><entry><title>常用排序算法总结</title><url>/posts/algorithm-sort-algorithms/</url><categories><category>tech</category></categories><tags><tag>python</tag><tag>cpp</tag><tag>sort algorithm</tag></tags><content type="html"><![CDATA[   工具函数 #include &amp;lt;iostream&amp;gt; #include &amp;lt;ctime&amp;gt; using namespace std; void swap(int &amp;amp;a,int &amp;amp;b){ int tmp = a; a = b; b = tmp; } void printarr(int *a,int n){ for(size_t i = 0; i &amp;lt; n; i++) { cout &amp;lt;&amp;lt; a[i] &amp;lt;&amp;lt; &amp;#34; &amp;#34;; } cout &amp;lt;&amp;lt; endl; } Bubble Sort 冒泡排序 void bubble_sort(int *a, int n){ for(size_t i = n-1; i &amp;gt; 0;--i){ for(size_t j = i; j &amp;gt; 0;--j) { if(a[j] &amp;lt; a[j-1]) swap(a[j],a[j-1]); } } } void bubble_sort_speedup(int *a, int n){ for(size_t i = 0; i &amp;lt; n-1; i++){ int flag = 0; for(size_t j = 0; j &amp;lt; n-1-i; ++j){ if(a[j] &amp;gt; a[j+1]){ swap(a[j],a[j+1]); flag = 1; } } if(!flag) break; } } Cocktail Sort 鸡尾酒排序 void cocktail_sort(int *a,int n){ int left = 0; int right = n-1; while(left &amp;lt; right){ for(size_t i = left; i&amp;lt;right;++i){ if(a[i] &amp;gt; a[i+1]) swap(a[i],a[i+1]); } right--; for(size_t j = right;j&amp;gt;left;--j){ if(a[j-1] &amp;gt; a[j]){ swap(a[j-1],a[j]); } } left++; } } void cocktail_sort_speedup(int *a,int n){ bool sorted = false; …  ]]></content></entry><entry><title>Pandoc Markdown 文档</title><url>/posts/markdown-pandoc/</url><categories><category>tech</category></categories><tags><tag>markdown</tag><tag>pandoc</tag><tag>python</tag></tags><content type="html"> Philosophy 哲学 Markdown is designed to be easy to write,and,even more importantly,easy to read.
+A Markdown-formatted document should be publishable as-is,as plain text,without looking like it&amp;amp;rsquo;s been marked up with tags or formatting instructions. - John Gruber Paragraphs 段落 一个段落包含一行或多行文字，通过行后跟随一个或多个空白行，换行符（newlines）和空格（spaces）作用一样，如果需要硬换行（hard line break），在行后添加两个以上的空格。
+Extension escaped_line_breaks
+反斜杠（backslash）后跟随换行符也是一种硬换行
+Note 在多行和表格中，这种方式是唯一的方式进行硬换行，因为表格中空格会被忽略。
+Headers 标题 标题风格 两种风格的标题 Setext 和 ATX
+Setext 风格 A level-one header ================== A level-two header ------------------ ATX 风格 # A level-one header ## A level-two header ### A level-three header ### Extension blank_before_header
+标准 Markdown 语法不需要在标题前空白行，Pandoc 需要 空白行（除了在文档开头）。原因是可能由于自动断行后产生歧义。
+I like several of their flavors of ice cream: #22, for example, and #5. Extension space_in_atx_header
+大多数 Markdown 语法不需要在#与标题文字间添加 空格，但是Pandoc需要空格。
+Header identifiers 标题标识符 Extension header_attributes
+可以标题文字后添加属 …</content></entry><entry><title>Git 命令速查</title><url>/posts/tools-git/</url><categories><category>tech</category></categories><tags><tag>git</tag><tag>svn</tag></tags><content type="html"> Git 基础 基础操作 初始化仓库
+git init
+git clone [url]
+检查文件状态
+git status
+跟踪文件
+git add [file name] 跟踪新文件/暂存已修改文件
+对比文件修改内容
+git diff [file name]
+git diff --cached/staged [file name] 对比暂存区文件
+提交更新
+git commit
+git commit -m [message] 更新纪录
+git commit -a -m [message] 跳过暂存文件步骤直接提交
+移除文件
+git rm [file name] 删除文件并取消跟踪
+git rm --cached [file name] 取消跟踪文件
+重命名文件
+git mv [file name]
+mv old_name new_name git rm old_name git add new_name 查看提交历史
+git log git log git log --pretty=format: &amp;quot;%h %s&amp;quot; --graph
+撤销提交
+git commmit --amend
+git rebase -i
+撤销暂存文件
+git reset HEAD [file name]
+git reset --hard [file name] 当前文件修改丢失
+撤销文件修改
+git checkout -- [file name]
+远程仓库 查看远程仓库
+git remote -v
+添加远程仓库
+git remote add [short name] [url]
+从远程仓库获取文件
+git fetch [remote name]
+推送到远程分支
+git push [remote name] [branch name]
+查看远程仓库
+git remote show [remote-name]
+远程仓库重命名
+git remote rename [old name] [new name]
+删除远程仓库
+git rm [remote name]
+标签 查看标签
+git tag
+添加附注标签
+git tag -a [tag name] -m [message]
+查看标签详情
+git show [tag name]
+添加轻量标签
+git tag [tag name]
+推送标签至远程服务器
+git push [remote branch name] [tag name]
+推送所有标签
+git push [remote branch name] --tags
+特定标签上建立分支
+git checkout -b [branch name] [tag name]
+Git 分支 分支基本操作 分支创建
+git branch [branch name]
+分支切换
+git checkout [branch name]
+查看分支历史
+git log --oneline --decorate --graph --all
+合并分支
+git merge [branch name]
+删除分支
+git branch -d [branch name]
+远程分支 查看远程分支
+git ls-remote or git remote show [remote name]
+推送分支
+git push [remote] [local branch] == git push [remote] [local branch:remote branch name]
+跟踪分支
+git chenckout -b [branch] [remote name]/[branch]
+设置上游分支
+git branch -u [remote name]/[branch]
+查看跟踪分支
+git branch -vv
+抓取分支更新
+git fetch --all
+删除远程分支
+git push [remote] --delete [branch name] or git push [remote] :[branch naem]
+example 分支合并
+git rebase/merge rebase历史纪录更简洁 变基 Git 工具 引用日志
+查看分支引用的历史纪录
+git reflog
+提交区间
+双点语法,查看后者引用中特定的提交
+git log [ref name1]..[ref name2]
+多点语法,不包含最后引用的提交
+git log refA refB ^refC == git log refA refB --not refC
+三点语法,查看两引用的差异提交
+git log [ref name1]...[ref name2]
+储藏与清理 储藏工作空间
+git stash save
+查看储藏列表
+git stash list
+应用储藏
+git stash apply [ref]
+删除储藏
+git stash drop [ref]
+不储藏暂存区文件
+git stash save --kep-index
+应用储藏包括暂存区
+git stash apply --index
+储藏包含未跟踪的文件
+git stash -u/--include-untracked
+新建分支并应用储藏
+git stash branch [nranch name]
+移除为跟踪文件
+git clean
+移除所用文件并储藏
+git stash --all
+重写历史 修改最后一次提交
+git commit --amend
+交互式修改ref开始的所有提交
+git rebase -i [ref]
+批量修改提交
+git filter-branch --tree-filter [command] [ref]
+切换根目录
+git filter-branch --subdirectory-filter [directory name] [ref]
+重置对比 相反操作操作提交指针
+git reset --soft HEAD~ | git commit
+相反操作暂存区
+git reset [file name] | git add [file name]
+撤销所有修改包括工作区
+git reset --hard HEAD~
+恢复暂存区文件版本其他不变 精简历史 git reset [ref] -- [file name]
+切换HEAD指针不丢弃工作目录修改
+git checkout [branch name]
+丢弃文件修改 reset,checkout,revert git checkout -- [file name]
+子模块 添加子模块
+git submodule add [url]
+抓取后初始化模块
+git submodule init
+抓取后更新子模块
+git submodule update --remote
+查看子模块日志
+git log -p --submodule
+更新合并
+git submodule update --remote --merge/--rebase
+检查子模块是否推送
+git push --recurse-submodules=check
+批量操作子模块
+git submodule foreach [command]</content></entry><entry><title>Iptables 配置</title><url>/posts/linux-iptables/</url><categories><category>tech</category></categories><tags><tag>iptables</tag><tag>linux</tag><tag>packet filter</tag></tags><content type="html"><![CDATA[  filter,nat,mangle 规则表 filter表 数据包过滤,根据规则决定是否放行数据包（DROP,ACCEPT,REJECT,LOG）
+三条规则链
+INPUT 进入本地的包 FORWARD 不是本地产生且负责转发的包 OUTPUT 本地产生的包 nat表 修改数据包ip地址、端口等信息（SNAT,DNAT,MASQUERADE,REDIRECT）
+三条规则链
+PREROUTING 改变进入数据包的目的地址 OUTPUT 改变本地产生包的目的地址 POSTROUTING 改变发出数据包的源地址 mangle表 修改数据包的TOS，TTL及数据包的Mark
+五个规则链 PREROUTING，POSTROUTING，INPUT，OUTPUT，FORWARD
+raw表 决定数据包是否被状态跟踪机制处理
+两条规则链 OUTPUT,PREROUTING
+四种状态
+NEW 开始一个连接 RELATED 某个已经建立的连接所建立的新连接 ESTABLISHED 发送后接到应答的数据包 INVALID 无法识别的数据包 规则链和规则 在处理各种数据包时，根据防火墙规则的不同时机，iptables供涉及5种默认规则链：
+INPUT 当接收到防火墙本机地址的数据包（入站）时,应用此链中的规则。。 OUTPUT 当防火墙本机向外发送数据包（出站）时，应用此链中的规则。 FORWARD 当接收到需要通过防火墙发送给其他地址的数据包（转发）时，应用此链中的规则。 PREROUTING 在对数据包作路由选择之前，应用此链中的规则，如DNAT。 POSTROUTING 在对数据包作路由选择之后，应用此链中的规则，如SNAT。 --&amp;gt;PREROUTING--&amp;gt;[ROUTE]--&amp;gt;FORWARD--&amp;gt;POSTROUTING--&amp;gt; mangle | mangle ^ mangle nat | filter | nat | | | | v | INPUT OUTPUT | mangle ^ mangle | filter | nat v ------&amp;gt;local-------&amp;gt;| filter 防火墙处理数据包的方式（规则）：
+ACCEPT：允许数据包通过 DROP：直接丢弃数据包，不给任何回应信息 REJECT：拒绝数据包通过，必要时会给数据发送端一 …  ]]></content></entry><entry><title>Introduction of Genetic Algorithm</title><url>/posts/algorithm-ga-en/</url><categories><category>tech</category></categories><tags><tag>genetic algorithm</tag></tags><content type="html"> Outline of GA Outline of the Basic Genetic Algorithm
+[Start] Generate random population of n chromosomes (suitable solutions for the problem)
+[Fitness] Evaluate the fitness f(x) of each chromosome x in the population
+[New population] Create a new population by repeating following steps until the new population is complete
+[Selection] Select two parent chromosomes from a population according to their fitness (the better fitness, the bigger chance to be selected)
+[Crossover] With a crossover probability cross over the parents to form a new offspring (children). If no crossover was performed, offspring is an exact copy of parents.
+[Mutation] With a mutation probability mutate new offspring at each locus (position in chromosome).
+[Accepting] Place new offspring in a new population
+[Replace] Use new generated population for a further run of algorithm
+[Test] If the end condition is satisfied, stop, and return the best solution in current population
+[Loop] Go to step 2
+Selection Roulette Wheel Selection This method have problems when the fitnesses differs very much.
+Rank Selection This method can lead to slower convergence, because the best chromosomes do not differ so much from other ones.
+Steady-state Selection Main idea of this selection is that big part of chromosomes should survive to next generation.
+Elitism Elitism is name of method, which first copies the best chromosome (or a few best chromosomes) to new population. The rest is done in classical way. Elitism can very rapidly increase performance of GA, because it prevents losing the best found solution.
+Encoding Binary Encoding Binary encoding is the most common, mainly because first works about GA used this type of encoding.
+Permutation Encoding Permutation encoding can be used in ordering problems, such as traveling salesman problem or task ordering problem.
+Permutation encoding is only useful for ordering problems. Even for this problems for some types of crossover and mutation corrections must be made to leave the chromosome consistent (i.e. have real sequence in it).
+Value Encoding Direct value encoding can be used in problems, where some complicated value, such as real numbers, are used. Use of binary encoding for this type of problems would be very difficult.
+Tree Encoding Tree encoding is used mainly for evolving programs or expressions, for genetic programming.
+Tree encoding is good for evolving programs. Programing language LISP is often used to this, because programs in it are represented in this form and can be easily parsed as a tree, so the crossover and mutation can be done relatively easily.
+Crossover and Mutation Binary Encoding Crossover
+Single point crossover - one crossover point is selected, binary string from beginning of chromosome to the crossover point is copied from one parent, the rest is copied from the second parent
+Two point crossover - two crossover point are selected, binary string from beginning of chromosome to the first crossover point is copied from one parent, the part from the first to the second crossover point is copied from the second parent and the rest is copied from the first parent
+Uniform crossover - bits are randomly copied from the first or from the second parent
+Arithmetic crossover - some arithmetic operation is performed to make a new offspring
+Mutation
+Bit inversion - selected bits are inverted
+###Permutation Encoding
+Crossover Single point crossover - one crossover point is selected, till this point the permutation is copied from the first parent, then the second parent is scanned and if the number is not yet in the offspring it is added
+Mutation Order changing - two numbers are selected and exchanged
+Value Encoding Crossover All crossovers from binary encoding can be used
+Mutation Adding a small number (for real value encoding) - to selected values is added (or subtracted) a small number
+Tree Encoding Crossover Tree crossover - in both parent one crossover point is selected, parents are divided in that point and exchange part below crossover point to produce new offspring
+Mutation Changing operator, number - selected nodes are changed
+References Traveling Salesman Problem Genetic Algorithm</content></entry></search>

@@ -1,779 +1,516 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-
-
-<title>Pandoc Markdown 文档 | Hugo Blog</title>
-
-<link rel="stylesheet" href="https://cnewbie.github.io/css/styles.css">
-
-<link href="https://cdn.bootcss.com/font-awesome/5.2.0/css/all.css" rel="stylesheet">
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
-
-
-
-<link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/zenburn.min.css" rel="stylesheet">
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-
-<script>hljs.initHighlightingOnLoad();</script>
-<script src="https://cnewbie.github.io/js/highlight.js"></script>
-
-
-
-<link href="https://cdn.bootcss.com/jsSocials/1.4.0/jssocials.css" rel="stylesheet">
-<link href="https://cdn.bootcss.com/jsSocials/1.4.0/jssocials-theme-minima.css" rel="stylesheet">
-
-<script type="text/javascript" src="https://cnewbie.github.io/js/jssocials.js"></script>
-
-
-
-
-<div class="container">
-    <nav class="navbar level">
-      <div class="navbar-brand">
-          <a class="nav-item" href="https://cnewbie.github.io"><h1 class="title is-3">Hugo Blog</h1></a>
-      </div>           
-      <div class="navbar-menu has-text-centered is-active">
-          <div class="navbar-end is-centered">
-              
-                <a href="https://cnewbie.github.io/about" rel="me">
-                  <span class="icon">
-                    <i class="fas fa-info"></i>
-                  </span>
-                </a>
-              
-                <a href="https://github.com/cnewbie/" rel="me">
-                  <span class="icon">
-                    <i class="fab fa-github"></i>
-                  </span>
-                </a>
-              
-           </div>
-      </div>
-    </nav>
-  </div>
-
-<div class="container">
-  <h2 class="subtitle is-6">August 4, 2018</h2>
-  <h1 class="subtitle is-size-4-mobile is-size-3-desktop">Pandoc Markdown 文档</h1>
-  <div class="content">
-    <h1 id="philosophy-哲学">Philosophy 哲学</h1>
-<p>Markdown is designed to be easy to write,and,even more importantly,easy to read.</p>
-<blockquote>
-<p>A Markdown-formatted document should be publishable as-is,as plain text,without looking like it&rsquo;s been marked up with tags or formatting instructions. - <a href="http://daringfireball.net/projects/markdown/syntax#philosophy">John Gruber</a></p>
-</blockquote>
-<h1 id="paragraphs-段落">Paragraphs 段落</h1>
-<p>一个段落包含一行或多行文字，通过行后跟随一个或多个空白行，换行符（newlines）和空格（spaces）作用一样，如果需要硬换行（hard line break），在行后添加两个以上的空格。</p>
-<p>Extension <code>escaped_line_breaks</code></p>
-<p>反斜杠（backslash）后跟随换行符也是一种硬换行</p>
-<p><strong>Note</strong> 在多行和表格中，这种方式是唯一的方式进行硬换行，因为表格中空格会被忽略。</p>
-<h1 id="headers-标题">Headers 标题</h1>
-<h2 id="标题风格">标题风格</h2>
-<p>两种风格的标题 Setext 和 ATX</p>
-<ul>
-<li>Setext 风格</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">A level-one header
-==================
-
-A level-two header
-------------------
-</code></pre></div><ul>
-<li>ATX 风格</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"># A level-one header
-
-<span style="color:#75715e">## A level-two header
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">### A level-three header ###
-</span></code></pre></div><p>Extension <code>blank_before_header</code></p>
-<p>标准 Markdown 语法不需要在标题前空白行，Pandoc 需要 <strong>空白行</strong>（除了在文档开头）。原因是可能由于自动断行后产生歧义。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">I like several of their flavors of ice cream:
-#22, for example, and #5.
-</code></pre></div><p>Extension <code>space_in_atx_header</code></p>
-<p>大多数 Markdown 语法不需要在<code>#</code>与标题文字间添加 <strong>空格</strong>，但是Pandoc需要空格。</p>
-<h2 id="header-identifiers-标题标识符">Header identifiers 标题标识符</h2>
-<p>Extension <code>header_attributes</code></p>
-<p>可以标题文字后添加属性，<code>{#identifier .class .class key=value key=value}</code>。本语法兼容<a href="https://michelf.ca/projects/php-markdown/extra/">PHP Markdown Extra</a></p>
-<p>添加的属性通常用于 <strong>HTML</strong> 或基于 <strong>HTML</strong> 的格式文件如 <strong>EPUB</strong>。</p>
-<p>Extension <code>implicit_header_references</code></p>
-<p>Pandoc 默认为标题创建引用链接,并可直接使用,如果有多个相同标题，引用将指向第一个出现的标题。引用大小写不敏感。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">[Header identifiers in HTML]
-or
-[Header identifiers in HTML][]
-or
-[the section on header identifiers][header identifiers in
-HTML]
-or
-[<span style="color:#f92672">Header identifiers in HTML</span>](<span style="color:#a6e22e">#header-identifiers-in-html</span>)
-</code></pre></div><h1 id="block-quotations-块引用">Block quotations 块引用</h1>
-<p>Markdown 使用 email 传统引用文字，每行前面都有一个<code>&gt;</code>字符和一个可选空格，<code>&gt;</code>符号不需要从最左边开始，但是不应该缩进超过三个空格。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#66d9ef">&gt; </span><span style="font-style:italic">This is a block quote. This
-</span><span style="font-style:italic"></span><span style="color:#66d9ef">&gt; </span><span style="font-style:italic">paragraph has two lines.
-</span><span style="font-style:italic"></span><span style="color:#66d9ef">&gt;
-</span><span style="color:#66d9ef"></span><span style="font-style:italic">&gt; 1. This is a list inside a block quote.
-</span><span style="font-style:italic"></span><span style="color:#66d9ef">&gt; </span><span style="font-style:italic">2. Second item.
-</span></code></pre></div><p>lazy form,需要在块引用的第一行使用<code>&gt;</code>符号即可。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#66d9ef">&gt; </span><span style="font-style:italic">This is a block quote. This
-</span><span style="font-style:italic"></span>paragraph has two lines.
-<span style="color:#66d9ef">
-</span><span style="color:#66d9ef">&gt; </span><span style="font-style:italic">1. This is a list inside a block quote.
-</span><span style="font-style:italic"></span><span style="color:#66d9ef">2.</span> Second item.
-</code></pre></div><p>nested quote,块引用可以多层嵌套</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#66d9ef">&gt; </span><span style="font-style:italic">This is a block quote.
-</span><span style="font-style:italic"></span><span style="color:#66d9ef">&gt;
-</span><span style="color:#66d9ef"></span><span style="font-style:italic">&gt; &gt; A block quote within a block quote.
-</span></code></pre></div><p><strong>Note</strong> 如果在<code>&gt;</code>符号后跟随可选空格，这些空格将被解析为块引用的一部分而不是内容缩进，如果需要产生缩进你需要在<code>&gt;</code>符号后输入 <strong>五个空格</strong></p>
-<p>Extension <code>blank_before_blockquote</code></p>
-<p>标准语法不需要在块引用前添加 <strong>空白行</strong>，Pandoc需要（除了文档开头），原因是自动断行造成歧义，除非指定<code>markdown_strict</code>标志，Pandoc不认为以下代码是引用嵌套。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#66d9ef">&gt; </span><span style="font-style:italic">This is a block quote.
-</span><span style="font-style:italic"></span>&gt;&gt; Nested.
-</code></pre></div><h1 id="verbatimcode-blocks-代码块">Verbatim(code) blocks 代码块</h1>
-<h2 id="indented-code-blocks-缩进代码块">Indented code blocks 缩进代码块</h2>
-<p>文本缩进四个空格或一个tab键，将被视为代码块，保留空格、换行，特殊字符不会触发样式。初始缩进 <strong>四个空格或tab</strong> 将在输出中移除。</p>
-<p><strong>Note</strong> 代码块中空白行不需要四个空格缩进</p>
-<h2 id="fenced-code-blocks-围栏代码块">Fenced code blocks 围栏代码块</h2>
-<p>Extension <code>fenced_code_blocks</code></p>
-<p>除了标准缩进代码块，Pandoc支持围栏代码块，使用<code>~</code>符号，在代码块前后添加一行符号，后行长度至少和起始行一样。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">~~~~~
-if (a &gt; 3) {
-  moveShip(5 * gravity, DOWN);
-}
-~~~~~
-</code></pre></div><p>围栏代码块需要空白行分离周围普通文本，如果代码中包含<code>~</code>符号需要使用更长的波浪线行。</p>
-<p>Extension <code>backtick_code_blocks</code></p>
-<p>同 <code>fenced_code_blocks</code> 使用 <code>`</code> 代替 <code>~</code> 符号</p>
-<p>Extension <code>fenced_code_attributes</code></p>
-<p>围栏代码块可附加属性</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">~~~~ {#mycode .haskell .numberLines startFrom=&#34;100&#34;}
-qsort []     = []
-qsort (x:xs) = qsort (filter (&lt; x) xs) ++ [x] ++
-               qsort (filter (&gt;= x) xs)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-</code></pre></div><p><code>mycode</code> 是标识符，<code>haskell</code>和<code>numberLines</code>表示classes，<code>startForm</code>属性值为100。这些属性值可以用于语法高亮 <a href="http://pandoc.org/MANUAL.html#syntax-highlighting">syntax highlight</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">pre</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mycode&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;haskell numberLines&#34;</span> <span style="color:#a6e22e">startFrom</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;100&#34;</span>&gt;
-  &lt;<span style="color:#f92672">code</span>&gt;
-  ...
-  &lt;/<span style="color:#f92672">code</span>&gt;
-&lt;/<span style="color:#f92672">pre</span>&gt;
-</code></pre></div><p><code>numberLines</code> 将显示代码行数，以下是快捷（shortcut）形式</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">~~~{.haskell}
-qsort [] = []
-~~~
-equal
-~~~haskell
-qsort [] = []
-~~~
-</code></pre></div><p>如果 <code>fenced_code_attributes</code> 拓展关闭，但是文本中包含属性值，这些属性将会被打印。</p>
-<h1 id="line-blocks-行块">Line blocks 行块</h1>
-<p>Extension <code>line_blocks</code></p>
-<p>行块是一系列以垂直符<code>|</code>开头后接空格的文本行，断行、空格将被保留。用于诗词和地址。借鉴与<a href="http://docutils.sourceforge.net/docs/ref/rst/introduction.html">reStructuredText</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">| The limerick packs laughs anatomical
-| In space that is quite economical.
-|    But the good ones I&#39;ve seen
-|    So seldom are clean
-| And the clean ones so seldom are comical
-
-| 200 Main St.
-| Berkeley, CA 94718
-</code></pre></div><h1 id="lists-列表">Lists 列表</h1>
-<h2 id="bullet-lists-项目列表无序列表">Bullet lists 项目列表／无序列表</h2>
-<p>项目列表使用项目符（<code>*</code>,<code>+</code>,<code>-</code>）开头。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#66d9ef">*</span> one
-<span style="color:#66d9ef">*</span> two
-<span style="color:#66d9ef">*</span> three
-</code></pre></div><p>默认生成的项目列表紧凑，如果需要稀疏列表，可以在将列表项格式化为段落，在列表项之间添加空格</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#66d9ef">*</span> one
-
-<span style="color:#66d9ef">*</span> two
-
-<span style="color:#66d9ef">*</span> three
-</code></pre></div><p><strong>Note</strong> 列表不需要左边缘对齐，可以使用一到三个空格缩进，<strong>项目列表符后必须有空格</strong></p>
-<h2 id="block-content-in-list-items-列表内的块">Block content In list items 列表内的块</h2>
-<p>列表项可能包含多个段落或块级内容，然而后续段落必须以 <strong>空白行开头并且缩进以列表标记之后的第一个非空格内容对齐</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">  <span style="color:#66d9ef">*</span> First paragraph.
-
-    Continued.
-
-  <span style="color:#66d9ef">*</span> Second paragraph. With a code block, which must be indented
-    eight spaces:
-
-        { code }
-</code></pre></div><p>Exceptin 如果列表标记后跟随缩进代码块，必须在列表标记后添加 <strong>五个空格</strong>，后续段落必须在列表标记的最后一个字符后 <strong>两个空格缩进</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#66d9ef">*</span>     code
-
-  continuation paragraph
-</code></pre></div><p>列表包含其他列表，前置空白行可以省略，内嵌的列表缩进必须与前一个列表标记后的第一个非空字符对齐。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#66d9ef">*</span> fruits
-  + apples
-    <span style="color:#66d9ef">-</span> macintosh
-    <span style="color:#66d9ef">-</span> red delicious
-  + pears
-  + peaches
-<span style="color:#66d9ef">*</span> vegetables
-  + broccoli
-  + chard
-</code></pre></div><p>懒式（lazily）列表可以省略行前缩进，但如果列表项存在多个段落或其他块，<strong>每段的第一行需要缩进</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">+ A lazy, lazy, list
-item.
-
-+ Another one; this looks
-bad but is legal.
-
-    Second paragraph of second
-list item.
-</code></pre></div><h2 id="ordered-lists-有序列表">Ordered lists 有序列表</h2>
-<p>标准 Markdown 语法，序号是十进制数字后加 <strong><code>.</code>和空格</strong>，序号数字会被忽略。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#66d9ef">1.</span>  one
-<span style="color:#66d9ef">2.</span>  two
-<span style="color:#66d9ef">3.</span>  three
-
-<span style="color:#66d9ef">5.</span>  one
-<span style="color:#66d9ef">7.</span>  two
-<span style="color:#66d9ef">1.</span>  three
-</code></pre></div><p>Extension <code>fancy_lists</code></p>
-<p>Pandoc 允许有序列表使用大小写字母、罗马数字、阿拉伯数字标注，列表标记可能被括号包围、单独一个右括号或者句号，他们必须与列表内容间隔一个空格，如果列表标记是大写字母后接句号则间隔至少两个空格。<code>#</code>同样可以作为符号标记</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">#. one
-#. two
-</code></pre></div><p>Extension <code>startnum</code></p>
-<p>Pandoc 同样支持自定义起始数字，以下列表数字后接右括号，从9开始，并且子列表为小写罗马数字。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">9)  Ninth
-10)  Tenth
-11)  Eleventh
-       i. subone
-      ii. subtwo
-     iii. subthree
-</code></pre></div><p>Pandoc 将不同类型的列表标记重新开始列表，以下是建立三个列表</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">(2) Two
-(5) Three
-<span style="color:#66d9ef">1.</span> Four
-<span style="color:#66d9ef">*</span>  Five
-</code></pre></div><h2 id="definition-lists-列表定义">Definition lists 列表定义</h2>
-<p>Extension <code>definition_lists</code></p>
-<p>Pandoc 支持定义列表，使用<a href="https://michelf.ca/projects/php-markdown/extra/">PHP Markdown Extra</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">Term 1
-
-:   Definition 1
-
-Term 2 with <span style="font-style:italic">*inline markup*</span>
-
-:   Definition 2
-
-        { some code, part of Definition 2 }
-
-    Third paragraph of definition 2.
-</code></pre></div><p>每行定义一个术语，后面可存在空白行，但必须存在一个或多个定义，定义始于冒号或波浪号，可能会存在缩进一两个空格。</p>
-<p>TODO</p>
-<h2 id="numbered-example-lists-编号示例列表">Numbered example lists 编号示例列表</h2>
-<p>Extension <code>example_lists</code></p>
-<p>特殊列表标记符<code>@</code>，列表会依次编号横跨整个文档，后续的新列表使用<code>@</code>标记符，会续接之前的编号</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">(@)  My first example will be numbered (1).
-(@)  My second example will be numbered (2).
-
-Explanation of examples.
-
-(@)  My third example will be numbered (3).
-</code></pre></div><p>编号的示例可以打标签并且在文档中引用</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">(@good)  This is a good example.
-
-As (@good) illustrates, ...
-</code></pre></div><p>标签可以使用任何字母数字下划线和连字符</p>
-<p><strong>Note</strong> 连续段落在示例列表中 <strong>必须缩进四个空格</strong></p>
-<h2 id="compact-and-loose-lists-紧凑稀疏列表">Compact and loose lists 紧凑／稀疏列表</h2>
-<p>Pandoc 与 <code>Markdown.pl</code> 在&quot;边缘情况&rdquo;(edge cases)表现不同</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">+   First
-+   Second:
-    <span style="color:#66d9ef">-</span>   Fee
-    <span style="color:#66d9ef">-</span>   Fie
-    <span style="color:#66d9ef">-</span>   Foe
-
-+   Third
-</code></pre></div><p>Pandoc 解释为紧凑列表（<code>&lt;p&gt;</code> 不包围 <strong>First</strong>, <strong>Second</strong>, <strong>Third</strong> 而 Markdown 不包围 <strong>First</strong> ）因为 <strong>Third</strong> 的空格。Pandoc 遵循简单的规则：如果文本后跟随空格视为段落，<strong>Second</strong> 后没有空行后接列表视为非段落。事实上列表后接空白行是无关的。</p>
-<h2 id="ending-a-list-结束列表">Ending a list 结束列表</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#66d9ef">-</span>   item one
-<span style="color:#66d9ef">-</span>   item two
-
-    { my code block }
-</code></pre></div><p>Pandoc 将代码块视为第二个列表项的第二段而不是代码块</p>
-<p>为了“切断”列表，可以插入不缩进的内容，如HTML注释</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#66d9ef">-</span>   item one
-<span style="color:#66d9ef">-</span>   item two
-
-&lt;!-- end of list --&gt;
-
-    { my code block }
-</code></pre></div><p>你可以使用同样的方法获得两个连续的列表而不是一个</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#66d9ef">1.</span>  one
-<span style="color:#66d9ef">2.</span>  two
-<span style="color:#66d9ef">3.</span>  three
-
-&lt;!-- --&gt;
-
-<span style="color:#66d9ef">1.</span>  uno
-<span style="color:#66d9ef">2.</span>  dos
-<span style="color:#66d9ef">3.</span>  tres
-</code></pre></div><h1 id="horzontal-rules-水平分隔线">Horzontal rules 水平分隔线</h1>
-<p>一行包含三个以上 <code>*</code>,<code>-</code>,<code>_</code> 字符，字符间可插入空格，视为水平分割线</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#66d9ef">*</span>  <span style="font-style:italic">*  *</span>  *
-
----------------
-</code></pre></div><h1 id="tables-表格">Tables 表格</h1>
-<p>四种列表样式，前三种要求等宽（fixed-width）字体,最后一种可以使用等比例（proportionally spaced）字体</p>
-<p>Extension <code>table_captions</code></p>
-<p>选择为所有4种表格提供题注。题注是以字符串Table:(或只是:)开头的段落，它将被剥离,它可能出现在表格之前或之后。</p>
-<p>Extension <code>simple_tables</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">  Right     Left     Center     Default
--------     ------ ----------   -------
-     12     12        12            12
-    123     123       123          123
-      1     1          1             1
-
-Table:  Demonstration of simple table syntax.
-</code></pre></div><p>表头和表行必须各自填充一行。列对齐由表头文本相对于其下方虚线的位置确定</p>
-<ul>
-<li>如果虚线与右侧的表头文本齐平但在左侧超出表头，则该列右对齐</li>
-<li>如果虚线与左侧的表头文本齐平但在右侧超出表头，则该列左对齐</li>
-<li>如果虚线超出两侧的表头文本，则该列居中对齐。</li>
-<li>如果虚线与两侧的表头文本齐平，则使用默认对齐方式（大多数情况是左对齐）</li>
-</ul>
-<p><strong>表格必须以空白行结束或空白行后接虚线行</strong></p>
-<p>如果使用虚线来结束表格，则可以省略列表头</p>
-<pre><code class="language-makrdown" data-lang="makrdown">-------     ------ ----------   -------
-     12     12        12             12
-    123     123       123           123
-      1     1          1              1
--------     ------ ----------   -------
-</code></pre><p>省略标题时，根据表格主体的第一行内容确定列对齐。在上表中，列将分别为右，左，中和右对齐。</p>
-<p>Extension <code>multiline_tables</code></p>
-<p>多行表格允许表头和表行跨越多行文本（但不支持跨越表的多个列或行的单元格）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">-------------------------------------------------------------
- Centered   Default           Right Left
-  Header    Aligned         Aligned Aligned
------------ ------- --------------- -------------------------
-   First    row                12.0 Example of a row that
-                                    spans multiple lines.
-
-  Second    row                 5.0 Here&#39;s another one. Note
-                                    the blank line between
-                                    rows.
--------------------------------------------------------------
-
-Table: Here&#39;s the caption. It, too, may span
-multiple lines.
-</code></pre></div><p>同简单列表类似，但存在以下不同</p>
-<ul>
-<li>它们必须以表头文本之前的一行虚线开头（除非省略表头）</li>
-<li>它们必须以一行虚线结束，然后是空白行</li>
-<li>行之间必须用空行分隔</li>
-</ul>
-<p>多行表可能只有一行，但该行后面应该有一个空行（然后是结束表的虚线行）</p>
-<p>Extension <code>grid_tables</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">: Sample grid table.
-
-+---------------+---------------+--------------------+
-| Fruit         | Price         | Advantages         |
-+===============+===============+====================+
-| Bananas       | $1.34         | - built-in wrapper |
-|               |               | - bright color     |
-+---------------+---------------+--------------------+
-| Oranges       | $2.10         | - cures scurvy     |
-|               |               | - tasty            |
-+---------------+---------------+--------------------+
-</code></pre></div><p><code>=</code>行将表头与表体分开，对于无表头可以省略。网格表的单元格可以包含任意块元素（多个段落，代码块，列表等）,不支持跨多个列或行的单元格。</p>
-<p>通过将冒号放在表头后面的分隔线边界处，类似与<code>pipe tables</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">+---------------+---------------+--------------------+
-| Right         | Left          | Centered           |
-+==============:+:==============+:==================:+
-| Bananas       | $1.34         | built-in wrapper   |
-+---------------+---------------+--------------------+
-</code></pre></div><p>对于无表头，冒号位于顶行</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">+--------------:+:--------------+:------------------:+
-| Right         | Left          | Centered           |
-+---------------+---------------+--------------------+
-</code></pre></div><p><strong>Note</strong> Pandoc不支持具有行跨度或列跨度的网格表。这意味着Pandoc既不支持跨行的可变列数，也不支持跨列的可变行数。所有网格表在每行中必须具有相同的列数，并且每列中的行数必须相同</p>
-<p>Extension <code>pipe_tables</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">| Right | Left | Default | Center |
-|------:|:-----|---------|:------:|
-|   12  |  12  |    12   |    12  |
-|  123  |  123 |   123   |   123  |
-|    1  |    1 |     1   |     1  |
-
-  : Demonstration of pipe table syntax.
-</code></pre></div><p>前后垂直符可省略，表头不能省略。 要模拟无表头表，请包含带有空白单元格的表头。由于垂直线指示列边界，因此列不需要垂直对齐</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">fruit| price
------|-----:
-apple|2.05
-pear|1.37
-orange|3.09
-</code></pre></div><p>表的单元格不能包含段落和列表等块元素，也不能跨越多行。如果表包含可打印内容宽于列宽的行，则表将占用全文宽度，单元格内容将换行，相对单元格宽度由在表格表头与表格主体分隔的行中虚线数量确定。另一方面，如果没有行宽于列宽，则单元格内容将不会包裹，单元格将根据其内容确定大小</p>
-<h1 id="metadata-blocks-元数据块">Metadata blocks 元数据块</h1>
-<p>Extension <code>pandoc_title_block</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">% title
-% author(s) (separated by semicolons)
-% date
-</code></pre></div><p>解析为书目信息，而不是常规文本,如果需要不同的信息，使用空白行分离</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">%
-% Author
-
-% My title
-%
-% June 15, 2006
-</code></pre></div><p>标题可能占用多行，但延续行必须以空格开头</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">% My title
-  on multiple lines
-</code></pre></div><p>如果文档有多个作者，则作者可能被放在具有开头空格的单独行中，或者用分号或两者分隔</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">% Author One
-  Author Two
-
-% Author One; Author Two
-
-% Author One;
-  Author Two
-</code></pre></div><p>日期必须单独一行</p>
-<p>所有三个元数据字段都可能包含标准内联格式（inline format）（斜体，链接，脚注等）</p>
-<p>Extension <code>yaml_metadata_block</code></p>
-<p>顶部的三个连字符<code>---</code>和底部的三个连字符<code>---</code>或三个点<code>...</code>的行分隔。 <strong>YAML</strong>元数据块可能出现在文档中的任何位置，但如果它不在文档开头，则必须以前方存在空白行</p>
-<p>元数据可以包含列表和 <strong>YAML</strong> 对象，Pandoc 将忽略名称以下划线结尾的字段，如果两个元数据块尝试设置相同的字段，则将采用第一个块中的值。</p>
-<p>必须遵循 <strong>YAML</strong> 转义规则,标题包含冒号，则必须引用它。垂直符<code>|</code>在缩进行的行首，该行将按字面解释，无需转义。当文本中包含空行或块级样式时，必须遵守以上规则</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">---
-title:  &#39;This is the title: it contains a colon&#39;
-author:
-<span style="color:#66d9ef">-</span> Author One
-<span style="color:#66d9ef">-</span> Author Two
-tags: [nothing, nothingness]
-abstract: |
-  This is the abstract.
-
-  It consists of two paragraphs.
-...
-</code></pre></div><p>TODO <code>Template variables</code></p>
-<h1 id="backslash-escapes-反斜杠转义">Backslash escapes 反斜杠转义</h1>
-<p>Extension <code>all_symbols_escapable</code></p>
-<p>除了代码块或内联代码之外，任何以反斜杠开头的标点符号或空格字符都将按字面处理，即使它表示格式。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">*\*hello\**
-
-one will get
-
-&lt;em&gt;*hello*&lt;/em&gt;
-
-instead of
-
-&lt;strong&gt;hello&lt;/strong&gt;
-</code></pre></div><p>转义字符<code>\`*_{}[]()&gt;#+-.!</code>，反斜杠转义空格被解析为不间断空格</p>
-<p>反斜杠转义的换行符（即在行尾发生的反斜杠）被解析为硬换行。这是Markdown的“隐形”换行方式，和行后尾随两个空格作用相同</p>
-<p><strong>Note</strong> 反斜杠转义在代码块种不起作用</p>
-<h1 id="inline-formatting-内联样式">Inline formatting 内联样式</h1>
-<h2 id="emphasis-强调">Emphasis 强调</h2>
-<p>单个<code>*</code>或<code>_</code>包围文本表示斜体</p>
-<pre><code class="language-markdwon" data-lang="markdwon">This text is _emphasized with underscores_, and this
-is *emphasized with asterisks*.
-</code></pre><p>两个<code>*</code>或<code>_</code>包围文本表示加重／加粗</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">This is <span style="font-weight:bold">**strong emphasis**</span> and <span style="font-weight:bold">__with underscores__</span>.
-</code></pre></div><p><code>*</code>或<code>_</code>包围文本中 <strong>存在空格或反斜杠转义</strong> 不会产生斜体效果</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">This is <span style="font-style:italic">* not emphasized *</span>, and \*neither is this\*.
-</code></pre></div><p>Extension <code>intraword_underscores</code></p>
-<p>因为<code>_</code>有时在单词和标识符中使用，所以Pandoc不会将由字母、数字包围的名称<code>_</code>处理为斜体，使用<code>*</code>代替</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">feas*ible*, not feas*able*.
-</code></pre></div><h2 id="strikeout-删除线">Strikeout 删除线</h2>
-<p>Extension <code>strikeout</code></p>
-<p>用 <code>~~</code> 开始和结束</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">This <span style="color:#f92672">~~is deleted text.~~</span>
-</code></pre></div><h2 id="superscripts-and-subscripts-上下标">Superscripts and subscripts 上下标</h2>
-<p>Extension <code>superscript</code> <code>subscript</code></p>
-<p>通过<code>^</code>字符包围上标文本来表示上标; 可以通过<code>〜</code>字符围绕下标文本来表示下标</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">H~2~O is a liquid.  2^10^ is 1024.
-</code></pre></div><p>如果上标或下标文本包含空格，则必须使用反斜杠转义这些空格</p>
-<h2 id="verbatim">Verbatim</h2>
-<p>文本放在反引号<code>`</code>中，默认保留所有格式</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">What is the difference between <span style="color:#e6db74">`&gt;&gt;=`</span> and <span style="color:#e6db74">`&gt;&gt;`</span>?
-</code></pre></div><p>如果文本中包含反引号<code>`</code>,使用<code>``</code>代替，包围的前后空格会被忽略</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">Here is a literal backtick `` <span style="color:#e6db74">` `</span>`
-</code></pre></div><p><strong>Note</strong> 反斜杠转义在文本上下文不起作用</p>
-<p>Extension <code>inline_code_attributes</code></p>
-<p>类似于围栏代码块</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#e6db74">`&lt;$&gt;`</span>{.haskell}
-</code></pre></div><h1 id="math-数学公式">Math 数学公式</h1>
-<p>Extension <code>tex_math_dollars</code></p>
-<p>两个<code>$</code>字符之间的任何内容都将被视为TeX数学公式。开头<code>$</code>必须在其右边有一个非空格字符，而结束<code>$</code>必须在其左边有一个非空格字符，并且不能立即跟随一个数字。 如果由于某种原因你需要包含文本<code>$</code>字符中，则反斜杠<code>\</code>转义它们.</p>
-<h1 id="raw-html">Raw HTML</h1>
-<p>Extension <code>raw_html</code></p>
-<p>Markdown允许您在文档中的任何位置插入原始HTML（其中&lt;，&gt;和＆按字面解释）</p>
-<p>Extension <code>markdown_in_html_blocks</code></p>
-<p>Extension <code>native_divs</code></p>
-<p>Extension <code>native_spans</code></p>
-<p>Extension <code>raw_tex</code></p>
-<p><strong>LaTeX</strong> 文本</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">\begin{tabular}{|l|l|}\hline
-Age &amp; Frequency \\ \hline
-18--25  &amp; 15 \\
-26--35  &amp; 33 \\
-36--45  &amp; 22 \\ \hline
-\end{tabular}
-</code></pre></div><h1 id="generic-raw-attribute">Generic raw attribute</h1>
-<p>Extension <code>raw_attribute</code></p>
-<p>具有特殊属性的内联 <code>spans</code> 和围栏代码块将被解析为具有指定格式的内容 <strong>?</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">\```{=ms}
-.MYMACRO
-blah blah
-\```
-</code></pre></div><h1 id="latex-macros">LaTeX macros</h1>
-<p>Extension <code>latex_macros</code></p>
-<p>TODO</p>
-<h1 id="links-链接">Links 链接</h1>
-<h2 id="automatic-links-自动链接">Automatic links 自动链接</h2>
-<p>将<code>URL</code>或<code>email</code> 放在尖括号中</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">&lt;http://google.com&gt;
-&lt;sam@green.eggs.ham&gt;
-</code></pre></div><h2 id="inline-links-内联链接">Inline links 内联链接</h2>
-<p>内联链接由方括号中的链接文本组成，后跟圆括号的URL。（URL后面可以跟引号中的链接标题。）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">This is an [<span style="color:#f92672">inline link</span>](<span style="color:#a6e22e">/url</span>), and here&#39;s [<span style="color:#f92672">one with
-</span><span style="color:#f92672">a title</span>](<span style="color:#a6e22e">http://fsf.org &#34;click here for a good time!&#34;</span>).
-</code></pre></div><p><strong>方括号部分和圆括号部分之间不能有空格</strong> 链接文本可以包含格式，但标题<code>tilte</code>不能。</p>
-<p>内联链接中的电子邮件地址不会被自动检测，因此必须以<code>mailto</code>为前缀</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">[<span style="color:#f92672">Write me!</span>](<span style="color:#a6e22e">mailto:sam@green.eggs.ham</span>)
-</code></pre></div><h2 id="reference-links-参考链接">Reference links 参考链接</h2>
-<p>显式参考链接有两个部分，链接本身和链接定义</p>
-<p>链接由方括号的链接文本，后跟方括号中的标签组成。 链接定义包括方括号标签，后跟 <strong>冒号和空格</strong>，后跟URL，以及可省略的引号或括号中的链接标签。<strong>引用优先于链接标签</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">[my label 1]: /foo/bar.html  &#34;My title, optional&#34;
-[my label 2]: /foo
-[my label 3]: http://fsf.org (The free software foundation)
-[my label 4]: /bar#special  &#39;A title in single quotes&#39;
-[my label 5]: &lt;http://foo.bar.baz&gt;
-[my label 6]: http://fsf.org
-  &#34;The free software foundation&#34;
-</code></pre></div><p>链接标签大小写不敏感</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">Here is [my link][FOO]
-
-[Foo]: /bar/baz
-</code></pre></div><p>隐式参考链接的第二个方括号内容可以省略</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">See [my website][].
-
-[my website]: http://foo.bar.baz
-</code></pre></div><p><strong>Note</strong> 大多数 Markdown 实现不能将参考链接嵌入列表项和块引用中，Pandoc解除了这个限制。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#66d9ef">&gt; </span><span style="font-style:italic">My block [quote].
-</span><span style="font-style:italic"></span><span style="color:#66d9ef">&gt;
-</span><span style="color:#66d9ef"></span><span style="font-style:italic">&gt; [quote]: /foo
-</span></code></pre></div><p>Extension <code>shortcut_reference_links</code></p>
-<p>短参考引用可以省略第二个方括号</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">See [my website].
-
-[my website]: http://foo.bar.baz
-</code></pre></div><h2 id="internal-links-内部链接">Internal links 内部链接</h2>
-<p>内部链接支持链接到自动生成的标题识别符</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">See the [<span style="color:#f92672">Introduction</span>](<span style="color:#a6e22e">#introduction</span>).
-
-See the [Introduction].
-
-[Introduction]: #introduction
-</code></pre></div><h1 id="images-图片">Images 图片</h1>
-<p>一个链接紧接着一个<code>!</code>将被视为插入图像，链接文本将用图像替代文字</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">![<span style="color:#f92672">la lune</span>](<span style="color:#a6e22e">lalune.jpg &#34;Voyage to the moon&#34;</span>)
-
-![movie reel]
-
-[movie reel]: movie.gif
-</code></pre></div><p>Extension <code>implicit_figures</code></p>
-<p>图像存在非空的文字出现在段落中，将渲染成图像题注</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">![<span style="color:#f92672">This is the caption</span>](<span style="color:#a6e22e">/url/of/image.png</span>)
-</code></pre></div><p>Extension <code>link_attributes</code></p>
-<p>图片链接可以设置属性样式</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">An inline ![<span style="color:#f92672">image</span>](<span style="color:#a6e22e">foo.jpg</span>){#id .class width=30 height=20px}
-and a reference ![image][ref] with attributes.
-
-[ref]: foo.jpg &#34;optional title&#34; {#id .class key=val key2=&#34;val 2&#34;}
-</code></pre></div><h1 id="divs-and-spans">Divs and Spans</h1>
-<p>Extension <code>fenced_divs</code></p>
-<p>Pandoc 支持围栏 <code>div</code> 语法,连续三个冒号，后面可跟随属性样式</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">::::: {#special .sidebar}
-Here is a paragraph.
-
-And another.
-:::::
-</code></pre></div><p>围栏 <code>div</code> 可以嵌套使用</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">::: Warning ::::::
-This is a warning.
-
-::: Danger
-This is a warning within a warning.
-:::
-::::::::::::::::::
-</code></pre></div><p>Extension <code>bracketed_spans</code></p>
-<p>行内方括号包围文字可以解释为链接，如果后面跟随属性样式将会解析为 <code>Span</code> 标签</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">[This is <span style="font-style:italic">*some text*</span>]{.class key=&#34;val&#34;}
-</code></pre></div><h1 id="footnotes-脚注">Footnotes 脚注</h1>
-<p>Extension <code>footnotes</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">Here is a footnote reference,[^1] and another.[^longnote]
-
-[^1]: Here is the footnote.
-
-[^longnote]: Here&#39;s one with multiple blocks.
-
-    Subsequent paragraphs are indented to show that they
-belong to the previous footnote.
-
-        { some.code }
-
-    The whole paragraph can be indented, or just the first
-    line.  In this way, multi-paragraph footnotes work like
-    multi-paragraph list items.
-
-This paragraph won&#39;t be part of the note, because it
-isn&#39;t indented.
-</code></pre></div><p>脚注标志符可能不包含空格、tab、回车，输出时脚注会被依次编号。脚注不需要放在文档末位处，每个脚注需要使用空白行与其他内容分离</p>
-<p>Extension <code>inline_notes</code></p>
-<p>行内脚注不能包含多段落内容</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">Here is an inline note.^[Inlines notes are easier to write, since
-you don&#39;t have to pick an identifier and move down to type the
-note.]
-</code></pre></div><h1 id="citations-引用">Citations 引用</h1>
-<p>Extension <code>citations</code></p>
-<p>Pandoc 使用以下命令可以自动生成引用和参考目录</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pandoc --filter pandoc-citeproc myinput.txt
-</code></pre></div><p>TODO</p>
-<h1 id="non-pandoc-extensions">Non-pandoc extensions</h1>
-<p>以下拓展可以默认未开启，如需使用需要在 <code>+EXTENSION</code> 后输入拓展名</p>
-<p>Extension <code>old_dashes</code></p>
-<p>智能解析 <code>-</code> 和 <code>--</code> 符号，pandoc &lt;= 1.8.2.1, <code>textile</code> 输出默认选中</p>
-<p>Extension <code>angle_brackets_escapable</code></p>
-<p>允许 <code>&lt;</code> 和 <code>&gt;</code> 作为转义字符</p>
-<p>Extension <code>lists_without_preceding_blankline</code></p>
-<p>允许列表在段落后出现，没有中间空格</p>
-<p>Extension <code>four_space_rule</code></p>
-<p>列表项后续段落需要四个空格缩进</p>
-<p>Extension <code>spaced_reference_links</code></p>
-<p>允许参考链接的两个括号之间存在空格</p>
-<p>Extension <code>hard_line_breaks</code></p>
-<p>段落中的所有换行符被解释为硬换行符而不是空格</p>
-<p>Extension <code>ignore_line_breaks</code></p>
-<p>导致段落中的换行符被忽略，而不是被视为空格或硬换行符。 此选项适用于东亚语言，其中单词之间不使用空格，但文本被分为行以便于阅读。</p>
-<p>Extension <code>east_asian_line_breaks</code></p>
-<p>同上，对于包含东亚宽字符和其他字符混合的文本，这是一个比 <code>ignore_line_breaks</code> 更好的选择。</p>
-<p>Extension <code>emoji</code></p>
-<p>Pandoc 解析 <code>:smile:</code> 为 Emoji 表情</p>
-<p>Extension <code>tex_math_single_backslash</code></p>
-<p><code>\( \)</code> 和 <code>\[ \]</code> 解析为数学公式，但是会忽略转义的 <code>\(</code> 和 <code>\[</code></p>
-<p>Extension <code>tex_math_double_backslash</code></p>
-<p><code>\\( \\)</code> 和 <code>\\[ \\]</code> 解析为数学公式</p>
-<p>Extension <code>markdown_attribute</code></p>
-<p>默认 Markdown 解析块级属性为文本内容,此拓展只解析 具有 <code>markdown=1</code> 标签的块属性</p>
-<p>Extension <code>mmd_title_block</code></p>
-<p>支持 <a href="http://fletcherpenney.net/multimarkdown/">MultiMarkdown</a> 风格的标题块,如果 <code>pandoc_title_block</code> 和 <code>yaml_metadata_block</code> 选项开启会优先于此拓展</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">Title:   My title
-Author:  John Doe
-Date:    September 1, 2008
-Comment: This is a sample mmd title block, with
-         a field spanning multiple lines.
-</code></pre></div><p>Extension <code>abbreviations</code></p>
-<p>解析 PHP Markdown Extra 缩写键值,Pandoc不支持缩写，缩写键值简单跳过</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">*[HTML]: Hypertext Markup Language
-</code></pre></div><p>Extension <code>autolink_bare_uris</code></p>
-<p>所有绝对路径成为链接，即使没有尖括号<code>&lt;...&gt;</code>包围</p>
-<p>Extension <code>mmd_link_attributes</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">This is a reference ![image][ref] with multimarkdown attributes.
-
-[ref]: http://path.to/image &#34;Image title&#34; width=20px height=30px
-       id=myId class=&#34;myClass1 myClass2&#34;
-</code></pre></div><p>Extension <code>mmd_header_identifiers</code></p>
-<p>Extension <code>compact_definition_lists</code></p>
-<p>兼容性定义列表，pandoc &lt;= 1.2*</p>
-<h1 id="markdown-variants-markdwon-变种">Markdown variants Markdwon 变种</h1>
-<h2 id="markdown_phpextraphp-markdown-extra">markdown_phpextra(PHP Markdown Extra)</h2>
-<blockquote>
-</blockquote>
-<p>footnotes, pipe_tables, raw_html, markdown_attribute, fenced_code_blocks, definition_lists, intraword_underscores, header_attributes, link_attributes, abbreviations, shortcut_reference_links, spaced_reference_links.</p>
-<h2 id="markdown_mmdmultimarkdown">markdown_mmd(MultiMarkdown)</h2>
-<blockquote>
-</blockquote>
-<p>pipe_tables, raw_html, markdown_attribute, mmd_link_attributes, tex_math_double_backslash, intraword_underscores, mmd_title_block, footnotes, definition_lists, all_symbols_escapable, implicit_header_references, auto_identifiers, mmd_header_identifiers, shortcut_reference_links, implicit_figures, superscript, subscript, backtick_code_blocks, spaced_reference_links, raw_attribute.</p>
-<h2 id="markdown_strictmarkdownpl">markdown_strict(Markdown.pl)</h2>
-<blockquote>
-</blockquote>
-<p>raw_html, shortcut_reference_links, spaced_reference_links.</p>
-<h2 id="gfmgithub-flavored-markdown">gfm(GitHub-Flavored Markdown)</h2>
-<blockquote>
-</blockquote>
-<p>pipe_tables, raw_html, fenced_code_blocks, auto_identifiers, ascii_identifiers, backtick_code_blocks, autolink_bare_uris, intraword_underscores, strikeout, hard_line_breaks, emoji, shortcut_reference_links, angle_brackets_escapable.</p>
-<h1 id="常用语法高亮">常用语法高亮</h1>
-<p>常用语法高亮</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">awk
-bash
-bibtex
-c
-cpp
-cmake
-css
-changelog
-coffee
-diff
-djangotemplate
-dockerfile
-doxygen
-doxygenlua
-email
-erlang
-gcc
-go
-html
-haskell
-ini
-json
-jsp
-java
-javascript
-javadoc
-kotlin
-llvm
-latex
-lua
-makefile
-markdown
-matlab
-php
-perl
-postscript
-powershell
-python
-ruby
-sql
-sqlmysql
-scala
-scheme
-texinfo
-mandoc
-xml
-yaml
-zsh
-dot
-sed
-xorg
-</code></pre></div><h1 id="引用">引用</h1>
-<p><a href="http://pandoc.org/MANUAL.html#pandocs-markdown">Pandoc</a></p>
-
-  </div>
-</div>
-<div class="container has-text-centered">
-    
-    <aside><div id="share"></div></aside>
-    <script type="text/javascript">
-        $("#share").jsSocials({
-            showLabel: false,
-            showCount: false,
-            shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
-        });
-    </script>
-    
-</div>
-
-<div class="container has-text-centered">
-  
-</div>
-<section class="section">
-  <div class="container has-text-centered">
-    <p>&copy; <a href="https://github.com/cnewbie/">cnewbie</a> 2018 - 2020</p>
-  </div>
-</section>
-
-
+<!doctype html><html lang=zh-CN data-theme=dark><head><meta charset=UTF-8><meta name=viewport content="width=device-width"><meta name=theme-color content="#222" media="(prefers-color-scheme: dark)"><meta name=generator content="Hugo 0.121.1"><link rel="shortcut icon" type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/png sizes=16x16 href=/imgs/icons/favicon_16x16_next.png><link rel=icon type=image/png sizes=32x32 href=/imgs/icons/favicon_32_32_next.png><link rel=apple-touch-icon sizes=180x180 href=/imgs/icons/apple_touch_icon_next.png><meta itemprop=name content="Pandoc Markdown 文档"><meta itemprop=description content="Pandoc Markdown 文档"><meta itemprop=datePublished zgotmplz><meta itemprop=dateModified zgotmplz><meta itemprop=image content="https://cnewbie.github.io/imgs/hugo_next_avatar.png"><meta itemprop=keywords content="markdown,pandoc,python"><meta property="og:type" content="article"><meta property="og:title" content="Pandoc Markdown 文档"><meta property="og:description" content="Pandoc Markdown 文档"><meta property="og:image" content="/imgs/hugo_next_avatar.png"><meta property="og:image:width" content="312"><meta property="og:image:height" content="312"><meta property="og:image:type" content="image/jpeg/png/svg/jpg"><meta property="og:url" content="https://cnewbie.github.io/posts/markdown-pandoc/"><meta property="og:site_name" content="Hugo NexT Blog"><meta property="og:locale" content="zh-CN"><meta property="article:author" content="cnewbie"><meta property="article:published_time" content="2018-08-04 08:00:00 +0800 CST"><meta property="article:modified_time" content="2018-08-04 08:00:00 +0800 CST"><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/font-awesome/6.1.2/css/all.min.css><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/animate.css/3.1.1/animate.min.css><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.css><link rel=stylesheet href=/css/main.min.613cdd93403a6fc6667e9d7305a30b932cdc5a2fcc77df9f66518c9a9fa56b3c.css><style type=text/css>.post-footer,.flinks-list-footer hr:after{content:"~ 我可是有底线的哟 ~"}</style><script type=text/javascript>(function(){localDB={set:function(e,t,n){if(n===0)return;const s=new Date,o=n*864e5,i={value:t,expiry:s.getTime()+o};localStorage.setItem(e,JSON.stringify(i))},get:function(e){const t=localStorage.getItem(e);if(!t)return void 0;const n=JSON.parse(t),s=new Date;return s.getTime()>n.expiry?(localStorage.removeItem(e),void 0):n.value}},theme={active:function(){const e=localDB.get("theme");if(e==null)return;theme.toggle(e),window.matchMedia("(prefers-color-scheme: dark)").addListener(function(e){theme.toggle(e.matches?"dark":"light")})},toggle:function(e){document.documentElement.setAttribute("data-theme",e),localDB.set("theme",e,2);const t=document.querySelector("iframe.giscus-frame");if(t){const n={setConfig:{theme:e}};t.contentWindow.postMessage({giscus:n},"https://giscus.app")}}},theme.active()})(window)</script><script class=next-config data-name=page type=application/json>{"comments":true,"isHome":false,"isPage":true,"path":"markdown-pandoc","permalink":"https://cnewbie.github.io/posts/markdown-pandoc/","title":"Pandoc Markdown 文档","waline":{"js":[{"alias":"waline","alias_name":"@waline/client","file":"dist/pageview.js","name":"pageview","version":"2.13.0"},{"alias":"waline","alias_name":"@waline/client","file":"dist/comment.js","name":"comment","version":"2.13.0"}]}}</script><script type=text/javascript>document.addEventListener("DOMContentLoaded",()=>{var e=document.createElement("script");e.charset="UTF-8",e.src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",e.async=!1,e.defer=!0,document.head.appendChild(e),e.onload=function(){NexT.utils.fmtBusuanzi()}})</script><title>Pandoc Markdown 文档 - Hugo NexT Blog</title><noscript><link rel=stylesheet href=/css/noscript.css></noscript></head><body itemscope itemtype=http://schema.org/WebPage class=use-motion><div class=headband></div><main class=main><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle aria-label role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div></div><div class=site-meta><a href=/ class=brand rel=start><i class=logo-line></i><h1 class=site-title>Hugo NexT Blog</h1><i class=logo-line></i></a><p class=site-subtitle itemprop=description>cnewbie的小窝</p></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href=/ class=hvr-icon-pulse rel=section><i class="fa fa-home hvr-icon"></i>首页</a></li><li class="menu-item menu-item-about"><a href=/ class=hvr-icon-pulse rel=section><i class="fa fa-user hvr-icon"></i>关于</a></li><li class="menu-item menu-item-archives"><a href=/ class=hvr-icon-pulse rel=section><i class="fa fa-archive hvr-icon"></i>归档
+<span class=badge>20</span></a></li><li class="menu-item menu-item-search"><a role=button class="popup-trigger hvr-icon-pulse"><i class="fa fa-search fa-fw hvr-icon"></i>搜索</a></li></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon><i class="fa fa-search"></i></span><div class=search-input-container><input autocomplete=off autocapitalize=off maxlength=80 placeholder=搜索... spellcheck=false type=search class=search-input></div><span class=popup-btn-close role=button><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class=search-result-icon><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle" role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div><aside class=sidebar><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class=sidebar-nav><li class=sidebar-nav-toc>文章目录</li><li class=sidebar-nav-overview>站点概览</li></ul><div class=sidebar-panel-container><div class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><nav id=TableOfContents><ul><li><a href=#philosophy-哲学>Philosophy 哲学</a></li><li><a href=#paragraphs-段落>Paragraphs 段落</a></li><li><a href=#headers-标题>Headers 标题</a><ul><li><a href=#标题风格>标题风格</a></li><li><a href=#header-identifiers-标题标识符>Header identifiers 标题标识符</a></li></ul></li><li><a href=#block-quotations-块引用>Block quotations 块引用</a></li><li><a href=#verbatimcode-blocks-代码块>Verbatim(code) blocks 代码块</a><ul><li><a href=#indented-code-blocks-缩进代码块>Indented code blocks 缩进代码块</a></li><li><a href=#fenced-code-blocks-围栏代码块>Fenced code blocks 围栏代码块</a></li></ul></li><li><a href=#line-blocks-行块>Line blocks 行块</a></li><li><a href=#lists-列表>Lists 列表</a><ul><li><a href=#bullet-lists-项目列表无序列表>Bullet lists 项目列表／无序列表</a></li><li><a href=#block-content-in-list-items-列表内的块>Block content In list items 列表内的块</a></li><li><a href=#ordered-lists-有序列表>Ordered lists 有序列表</a></li><li><a href=#definition-lists-列表定义>Definition lists 列表定义</a></li><li><a href=#numbered-example-lists-编号示例列表>Numbered example lists 编号示例列表</a></li><li><a href=#compact-and-loose-lists-紧凑稀疏列表>Compact and loose lists 紧凑／稀疏列表</a></li><li><a href=#ending-a-list-结束列表>Ending a list 结束列表</a></li></ul></li><li><a href=#horzontal-rules-水平分隔线>Horzontal rules 水平分隔线</a></li><li><a href=#tables-表格>Tables 表格</a></li><li><a href=#metadata-blocks-元数据块>Metadata blocks 元数据块</a></li><li><a href=#backslash-escapes-反斜杠转义>Backslash escapes 反斜杠转义</a></li><li><a href=#inline-formatting-内联样式>Inline formatting 内联样式</a><ul><li><a href=#emphasis-强调>Emphasis 强调</a></li><li><a href=#strikeout-删除线>Strikeout 删除线</a></li><li><a href=#superscripts-and-subscripts-上下标>Superscripts and subscripts 上下标</a></li><li><a href=#verbatim>Verbatim</a></li></ul></li><li><a href=#math-数学公式>Math 数学公式</a></li><li><a href=#raw-html>Raw HTML</a></li><li><a href=#generic-raw-attribute>Generic raw attribute</a></li><li><a href=#latex-macros>LaTeX macros</a></li><li><a href=#links-链接>Links 链接</a><ul><li><a href=#automatic-links-自动链接>Automatic links 自动链接</a></li><li><a href=#inline-links-内联链接>Inline links 内联链接</a></li><li><a href=#reference-links-参考链接>Reference links 参考链接</a></li><li><a href=#internal-links-内部链接>Internal links 内部链接</a></li></ul></li><li><a href=#images-图片>Images 图片</a></li><li><a href=#divs-and-spans>Divs and Spans</a></li><li><a href=#footnotes-脚注>Footnotes 脚注</a></li><li><a href=#citations-引用>Citations 引用</a></li><li><a href=#non-pandoc-extensions>Non-pandoc extensions</a></li><li><a href=#markdown-variants-markdwon-变种>Markdown variants Markdwon 变种</a><ul><li><a href=#markdown_phpextraphp-markdown-extra>markdown_phpextra(PHP Markdown Extra)</a></li><li><a href=#markdown_mmdmultimarkdown>markdown_mmd(MultiMarkdown)</a></li><li><a href=#markdown_strictmarkdownpl>markdown_strict(Markdown.pl)</a></li><li><a href=#gfmgithub-flavored-markdown>gfm(GitHub-Flavored Markdown)</a></li></ul></li><li><a href=#常用语法高亮>常用语法高亮</a></li><li><a href=#引用>引用</a></li></ul></nav></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author site-overview-item animated" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image alt=cnewbie src=/imgs/img-lazy-loading.gif data-src=/imgs/hugo_next_avatar.png><p class=site-author-name itemprop=name>cnewbie</p><div class=site-description itemprop=description>KISS</div></div><div class="site-state-wrap site-overview-item animated"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/archives/><span class=site-state-item-count>20</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=/categories/><span class=site-state-item-count>1</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/><span class=site-state-item-count>35</span>
+<span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-social site-overview-item animated"><span class=links-of-social-item><a href=https://github.com/cnewbie title="Github → https://github.com/cnewbie" rel=noopener class=hvr-icon-pulse target=_blank><i class="fab fa-github fa-fw hvr-icon"></i>
+Github</a></span></div><div class="cc-license animated" itemprop=license><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh class=cc-opacity rel=noopener target=_blank title=共享知识><img src=/imgs/img-lazy-loading.gif data-src=/imgs/cc/big/by_nc_sa.svg alt=共享知识></a></div><div class="links-of-blogroll site-overview-item animated"><div class=links-of-blogroll-title><i class="fa fa-globe fa-fw"></i>
+友情链接</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://github.com/hugo-next/hugo-theme-next title=https://github.com/hugo-next/hugo-theme-next target=_blank>Hugo-NexT</a></li><li class=links-of-blogroll-item><a href=https://lisenhui.cn title=https://lisenhui.cn target=_blank>凡梦星尘空间站</a></li></ul></div></div></div></div><div id=siteinfo-card-widget class=sidebar-card-widget><div class=item-headline><i class="fas fa-chart-line"></i>
+<span>网站资讯</span></div><div class=siteinfo><div class=siteinfo-item><div class=item-name><i class="fa-solid fa-calendar-check"></i>已运行：</div><div class=item-count id=runTimes data-publishdate=2017-04-12T08:36:54+08:00></div></div><div class=siteinfo-item><div class=item-name><i class="fas fa fa-user"></i>总访客数：</div><div class=item-count id=busuanzi_value_site_uv><i class="fa fa-sync fa-spin"></i></div></div><div class=siteinfo-item><div class=item-name><i class="fas fa fa-eye"></i>页面浏览：</div><div class=item-count id=busuanzi_value_site_pv><i class="fa fa-sync fa-spin"></i></div></div><div class=siteinfo-item><div class=item-name><i class="fa fa-font"></i>总字数：</div><div class=item-count id=wordsCount data-count=79417></div></div><div class=siteinfo-item><div class=item-name><i class="fa fa-mug-hot"></i>阅读约：</div><div class=item-count id=readTimes data-times=170></div></div><div class=siteinfo-item><div class=item-name><i class="fa fa-clock-rotate-left"></i>最后更新于：</div><div class=item-count id=last-push-date data-lastpushdate=2024-01-18T10:13:10+08:00></div></div></div></div></aside><div class=sidebar-dimmer></div></header><div class=tool-buttons><div id=goto-comments class="button goto-comments" title=直达评论><i class="fas fa-comments"></i></div><div id=goto-gtranslate class=button title=多语言翻译><i class="fas fa-globe"></i></div><div id=toggle-theme class=button title=深浅模式切换><i class="fas fa-adjust"></i></div><div class=back-to-top role=button title=返回顶部><i class="fa fa-arrow-up"></i>
+<span>0%</span></div></div><div class=reading-progress-bar></div><a role=button class="book-mark-link book-mark-link-fixed"></a><a href=https://github.com/cnewbie rel="noopener external nofollow noreferrer" target=_blank title="Follow me on GitHub" class="exturl github-corner"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0 0 115 115h15l12 27L250 250V0z"/><path d="M128.3 109C113.8 99.7 119 89.6 119 89.6 122 82.7 120.5 78.6 120.5 78.6 119.2 72 123.4 76.3 123.4 76.3 127.3 80.9 125.5 87.3 125.5 87.3 122.9 97.6 130.6 101.9 134.4 103.2" fill="currentcolor" style="transform-origin:130px 106px" class="octo-arm"/><path d="M115 115C114.9 115.1 118.7 116.5 119.8 115.4l13.9-13.8C136.9 99.2 139.9 98.4 142.2 98.6 133.8 88 127.5 74.4 143.8 58 148.5 53.4 154 51.2 159.7 51 160.3 49.4 163.2 43.6 171.4 40.1 171.4 40.1 176.1 42.5 178.8 56.2 183.1 58.6 187.2 61.8 190.9 65.4 194.5 69 197.7 73.2 200.1 77.6 213.8 80.2 216.3 84.9 216.3 84.9 212.7 93.1 206.9 96 205.4 96.6 205.1 102.4 203 107.8 198.3 112.5 181.9 128.9 168.3 122.5 157.7 114.1 157.9 116.9 156.7 120.9 152.7 124.9L141 136.5C139.8 137.7 141.6 141.9 141.8 141.8z" fill="currentcolor" class="octo-body"/></svg></a><script type=text/javascript src=//sidecar.gitter.im/dist/sidecar.v1.js async></script><script type=text/javascript>((window.gitter={}).chat={}).options={room:"hugo-next/community"}</script><noscript><div class=noscript-warning>Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=https://cnewbie.github.io/posts/markdown-pandoc/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/hugo_next_avatar.png"><meta itemprop=name content="cnewbie"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="cnewbie"><meta itemprop=description content="KISS"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="Pandoc Markdown 文档"><meta itemprop=description content="Pandoc Markdown 文档"></span><header class=post-header><h1 class=post-title itemprop="name headline">Pandoc Markdown 文档</h1><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar"></i>
+</span><span class=post-meta-item-text title=发表于>发表于：
+</span><time title="创建时间：2018-08-04 08:00:00 +0800 CST" itemprop="dateCreated datePublished" datetime="2018-08-04 08:00:00 +0800 CST">2018-08-04
+</time></span><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-folder-open"></i>
+</span><span class=post-meta-item-text title=分类于>分类于：
+</span><span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/tech itemprop=url rel=index><span itemprop=name>tech</span></a></span></span></div><div class=post-meta-items><span class=post-meta-item title=字数><span class=post-meta-item-icon><i class="far fa-file-word"></i>
+</span><span class=post-meta-item-text>字数：</span>
+<span>6406</span>
+</span><span class=post-meta-item title=阅读><span class=post-meta-item-icon><i class="far fa-clock"></i>
+</span><span class=post-meta-item-text>阅读：&ap;</span>
+<span>13分钟</span>
+</span><span class=post-meta-item title=浏览><span class=post-meta-item-icon><i class="far fa-eye"></i>
+</span><span class=post-meta-item-text>浏览：
+</span><span id=busuanzi_value_page_pv data-path=/posts/markdown-pandoc/><i class="fa fa-sync fa-spin"></i></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><h1 id=philosophy-哲学>Philosophy 哲学
+<a class=header-anchor href=#philosophy-%e5%93%b2%e5%ad%a6></a></h1><p>Markdown is designed to be easy to write,and,even more importantly,easy to read.</p><blockquote><p>A Markdown-formatted document should be publishable as-is,as plain text,without looking like it&rsquo;s been marked up with tags or formatting instructions. -
+<a href=http://daringfireball.net/projects/markdown/syntax#philosophy title="John Gruber" rel="noopener external nofollow noreferrer" target=_blank class=exturl>John Gruber
+<i class="fa fa-external-link-alt"></i></a></p></blockquote><h1 id=paragraphs-段落>Paragraphs 段落
+<a class=header-anchor href=#paragraphs-%e6%ae%b5%e8%90%bd></a></h1><p>一个段落包含一行或多行文字，通过行后跟随一个或多个空白行，换行符（newlines）和空格（spaces）作用一样，如果需要硬换行（hard line break），在行后添加两个以上的空格。</p><p>Extension <code>escaped_line_breaks</code></p><p>反斜杠（backslash）后跟随换行符也是一种硬换行</p><p><strong>Note</strong> 在多行和表格中，这种方式是唯一的方式进行硬换行，因为表格中空格会被忽略。</p><h1 id=headers-标题>Headers 标题
+<a class=header-anchor href=#headers-%e6%a0%87%e9%a2%98></a></h1><h2 id=标题风格>标题风格
+<a class=header-anchor href=#%e6%a0%87%e9%a2%98%e9%a3%8e%e6%a0%bc></a></h2><p>两种风格的标题 Setext 和 ATX</p><ul><li>Setext 风格</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>A level-one header
+</span></span><span style=display:flex><span>==================
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>A level-two header
+</span></span><span style=display:flex><span>------------------
+</span></span></code></pre></div><ul><li>ATX 风格</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span># A level-one header
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## A level-two header
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### A level-three header ###
+</span></span></span></code></pre></div><p>Extension <code>blank_before_header</code></p><p>标准 Markdown 语法不需要在标题前空白行，Pandoc 需要 <strong>空白行</strong>（除了在文档开头）。原因是可能由于自动断行后产生歧义。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>I like several of their flavors of ice cream:
+</span></span><span style=display:flex><span>#22, for example, and #5.
+</span></span></code></pre></div><p>Extension <code>space_in_atx_header</code></p><p>大多数 Markdown 语法不需要在<code>#</code>与标题文字间添加 <strong>空格</strong>，但是Pandoc需要空格。</p><h2 id=header-identifiers-标题标识符>Header identifiers 标题标识符
+<a class=header-anchor href=#header-identifiers-%e6%a0%87%e9%a2%98%e6%a0%87%e8%af%86%e7%ac%a6></a></h2><p>Extension <code>header_attributes</code></p><p>可以标题文字后添加属性，<code>{#identifier .class .class key=value key=value}</code>。本语法兼容
+<a href=https://michelf.ca/projects/php-markdown/extra/ title="PHP Markdown Extra" rel="noopener external nofollow noreferrer" target=_blank class=exturl>PHP Markdown Extra
+<i class="fa fa-external-link-alt"></i></a></p><p>添加的属性通常用于 <strong>HTML</strong> 或基于 <strong>HTML</strong> 的格式文件如 <strong>EPUB</strong>。</p><p>Extension <code>implicit_header_references</code></p><p>Pandoc 默认为标题创建引用链接,并可直接使用,如果有多个相同标题，引用将指向第一个出现的标题。引用大小写不敏感。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>[Header identifiers in HTML]
+</span></span><span style=display:flex><span>or
+</span></span><span style=display:flex><span>[Header identifiers in HTML][]
+</span></span><span style=display:flex><span>or
+</span></span><span style=display:flex><span>[the section on header identifiers][header identifiers in
+</span></span><span style=display:flex><span>HTML]
+</span></span><span style=display:flex><span>or
+</span></span><span style=display:flex><span>[<span style=color:#f92672>Header identifiers in HTML</span>](<span style=color:#a6e22e>#header-identifiers-in-html</span>)
+</span></span></code></pre></div><h1 id=block-quotations-块引用>Block quotations 块引用
+<a class=header-anchor href=#block-quotations-%e5%9d%97%e5%bc%95%e7%94%a8></a></h1><p>Markdown 使用 email 传统引用文字，每行前面都有一个<code>></code>字符和一个可选空格，<code>></code>符号不需要从最左边开始，但是不应该缩进超过三个空格。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span><span style=color:#66d9ef>&gt; </span><span style=font-style:italic>This is a block quote. This
+</span></span></span><span style=display:flex><span><span style=font-style:italic></span><span style=color:#66d9ef>&gt; </span><span style=font-style:italic>paragraph has two lines.
+</span></span></span><span style=display:flex><span><span style=font-style:italic></span><span style=color:#66d9ef>&gt;
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef></span><span style=font-style:italic>&gt; 1. This is a list inside a block quote.
+</span></span></span><span style=display:flex><span><span style=font-style:italic></span><span style=color:#66d9ef>&gt; </span><span style=font-style:italic>2. Second item.
+</span></span></span></code></pre></div><p>lazy form,需要在块引用的第一行使用<code>></code>符号即可。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span><span style=color:#66d9ef>&gt; </span><span style=font-style:italic>This is a block quote. This
+</span></span></span><span style=display:flex><span><span style=font-style:italic></span>paragraph has two lines.
+</span></span><span style=display:flex><span><span style=color:#66d9ef>
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>&gt; </span><span style=font-style:italic>1. This is a list inside a block quote.
+</span></span></span><span style=display:flex><span><span style=font-style:italic></span><span style=color:#66d9ef>2.</span> Second item.
+</span></span></code></pre></div><p>nested quote,块引用可以多层嵌套</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span><span style=color:#66d9ef>&gt; </span><span style=font-style:italic>This is a block quote.
+</span></span></span><span style=display:flex><span><span style=font-style:italic></span><span style=color:#66d9ef>&gt;
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef></span><span style=font-style:italic>&gt; &gt; A block quote within a block quote.
+</span></span></span></code></pre></div><p><strong>Note</strong> 如果在<code>></code>符号后跟随可选空格，这些空格将被解析为块引用的一部分而不是内容缩进，如果需要产生缩进你需要在<code>></code>符号后输入 <strong>五个空格</strong></p><p>Extension <code>blank_before_blockquote</code></p><p>标准语法不需要在块引用前添加 <strong>空白行</strong>，Pandoc需要（除了文档开头），原因是自动断行造成歧义，除非指定<code>markdown_strict</code>标志，Pandoc不认为以下代码是引用嵌套。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span><span style=color:#66d9ef>&gt; </span><span style=font-style:italic>This is a block quote.
+</span></span></span><span style=display:flex><span><span style=font-style:italic></span>&gt;&gt; Nested.
+</span></span></code></pre></div><h1 id=verbatimcode-blocks-代码块>Verbatim(code) blocks 代码块
+<a class=header-anchor href=#verbatimcode-blocks-%e4%bb%a3%e7%a0%81%e5%9d%97></a></h1><h2 id=indented-code-blocks-缩进代码块>Indented code blocks 缩进代码块
+<a class=header-anchor href=#indented-code-blocks-%e7%bc%a9%e8%bf%9b%e4%bb%a3%e7%a0%81%e5%9d%97></a></h2><p>文本缩进四个空格或一个tab键，将被视为代码块，保留空格、换行，特殊字符不会触发样式。初始缩进 <strong>四个空格或tab</strong> 将在输出中移除。</p><p><strong>Note</strong> 代码块中空白行不需要四个空格缩进</p><h2 id=fenced-code-blocks-围栏代码块>Fenced code blocks 围栏代码块
+<a class=header-anchor href=#fenced-code-blocks-%e5%9b%b4%e6%a0%8f%e4%bb%a3%e7%a0%81%e5%9d%97></a></h2><p>Extension <code>fenced_code_blocks</code></p><p>除了标准缩进代码块，Pandoc支持围栏代码块，使用<code>~</code>符号，在代码块前后添加一行符号，后行长度至少和起始行一样。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>~~~~~
+</span></span><span style=display:flex><span>if (a &gt; 3) {
+</span></span><span style=display:flex><span>  moveShip(5 * gravity, DOWN);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>~~~~~
+</span></span></code></pre></div><p>围栏代码块需要空白行分离周围普通文本，如果代码中包含<code>~</code>符号需要使用更长的波浪线行。</p><p>Extension <code>backtick_code_blocks</code></p><p>同 <code>fenced_code_blocks</code> 使用 <code>`</code> 代替 <code>~</code> 符号</p><p>Extension <code>fenced_code_attributes</code></p><p>围栏代码块可附加属性</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>~~~~ {#mycode .haskell .numberLines startFrom=&#34;100&#34;}
+</span></span><span style=display:flex><span>qsort []     = []
+</span></span><span style=display:flex><span>qsort (x:xs) = qsort (filter (&lt; <span style=color:#f92672>x</span><span style=color:#960050;background-color:#1e0010>)</span> <span style=color:#a6e22e>xs</span><span style=color:#960050;background-color:#1e0010>)</span> <span style=color:#960050;background-color:#1e0010>++</span> <span style=color:#960050;background-color:#1e0010>[</span><span style=color:#a6e22e>x</span><span style=color:#960050;background-color:#1e0010>]</span> <span style=color:#960050;background-color:#1e0010>++</span>
+</span></span><span style=display:flex><span>               <span style=color:#a6e22e>qsort</span> <span style=color:#960050;background-color:#1e0010>(</span><span style=color:#a6e22e>filter</span> <span style=color:#960050;background-color:#1e0010>(</span>&gt;= x) xs)
+</span></span><span style=display:flex><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span></code></pre></div><p><code>mycode</code> 是标识符，<code>haskell</code>和<code>numberLines</code>表示classes，<code>startForm</code>属性值为100。这些属性值可以用于语法高亮
+<a href=http://pandoc.org/MANUAL.html#syntax-highlighting title="syntax highlight" rel="noopener external nofollow noreferrer" target=_blank class=exturl>syntax highlight
+<i class="fa fa-external-link-alt"></i></a></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-html data-lang=html><span style=display:flex><span>&lt;<span style=color:#f92672>pre</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;mycode&#34;</span> <span style=color:#a6e22e>class</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;haskell numberLines&#34;</span> <span style=color:#a6e22e>startFrom</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;100&#34;</span>&gt;
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>code</span>&gt;
+</span></span><span style=display:flex><span>  ...
+</span></span><span style=display:flex><span>  &lt;/<span style=color:#f92672>code</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>pre</span>&gt;
+</span></span></code></pre></div><p><code>numberLines</code> 将显示代码行数，以下是快捷（shortcut）形式</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>~~~{.haskell}
+</span></span><span style=display:flex><span>qsort [] = []
+</span></span><span style=display:flex><span>~~~
+</span></span><span style=display:flex><span>equal
+</span></span><span style=display:flex><span>~~~haskell
+</span></span><span style=display:flex><span>qsort [] = []
+</span></span><span style=display:flex><span>~~~
+</span></span></code></pre></div><p>如果 <code>fenced_code_attributes</code> 拓展关闭，但是文本中包含属性值，这些属性将会被打印。</p><h1 id=line-blocks-行块>Line blocks 行块
+<a class=header-anchor href=#line-blocks-%e8%a1%8c%e5%9d%97></a></h1><p>Extension <code>line_blocks</code></p><p>行块是一系列以垂直符<code>|</code>开头后接空格的文本行，断行、空格将被保留。用于诗词和地址。借鉴与
+<a href=http://docutils.sourceforge.net/docs/ref/rst/introduction.html title=reStructuredText rel="noopener external nofollow noreferrer" target=_blank class=exturl>reStructuredText
+<i class="fa fa-external-link-alt"></i></a></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>| The limerick packs laughs anatomical
+</span></span><span style=display:flex><span>| In space that is quite economical.
+</span></span><span style=display:flex><span>|    But the good ones I&#39;ve seen
+</span></span><span style=display:flex><span>|    So seldom are clean
+</span></span><span style=display:flex><span>| And the clean ones so seldom are comical
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>| 200 Main St.
+</span></span><span style=display:flex><span>| Berkeley, CA 94718
+</span></span></code></pre></div><h1 id=lists-列表>Lists 列表
+<a class=header-anchor href=#lists-%e5%88%97%e8%a1%a8></a></h1><h2 id=bullet-lists-项目列表无序列表>Bullet lists 项目列表／无序列表
+<a class=header-anchor href=#bullet-lists-%e9%a1%b9%e7%9b%ae%e5%88%97%e8%a1%a8%e6%97%a0%e5%ba%8f%e5%88%97%e8%a1%a8></a></h2><p>项目列表使用项目符（<code>*</code>,<code>+</code>,<code>-</code>）开头。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span><span style=color:#66d9ef>*</span> one
+</span></span><span style=display:flex><span><span style=color:#66d9ef>*</span> two
+</span></span><span style=display:flex><span><span style=color:#66d9ef>*</span> three
+</span></span></code></pre></div><p>默认生成的项目列表紧凑，如果需要稀疏列表，可以在将列表项格式化为段落，在列表项之间添加空格</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span><span style=color:#66d9ef>*</span> one
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>*</span> two
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>*</span> three
+</span></span></code></pre></div><p><strong>Note</strong> 列表不需要左边缘对齐，可以使用一到三个空格缩进，<strong>项目列表符后必须有空格</strong></p><h2 id=block-content-in-list-items-列表内的块>Block content In list items 列表内的块
+<a class=header-anchor href=#block-content-in-list-items-%e5%88%97%e8%a1%a8%e5%86%85%e7%9a%84%e5%9d%97></a></h2><p>列表项可能包含多个段落或块级内容，然而后续段落必须以 <strong>空白行开头并且缩进以列表标记之后的第一个非空格内容对齐</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>  <span style=color:#66d9ef>*</span> First paragraph.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    Continued.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>*</span> Second paragraph. With a code block, which must be indented
+</span></span><span style=display:flex><span>    eight spaces:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        { code }
+</span></span></code></pre></div><p>Exceptin 如果列表标记后跟随缩进代码块，必须在列表标记后添加 <strong>五个空格</strong>，后续段落必须在列表标记的最后一个字符后 <strong>两个空格缩进</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span><span style=color:#66d9ef>*</span>     code
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  continuation paragraph
+</span></span></code></pre></div><p>列表包含其他列表，前置空白行可以省略，内嵌的列表缩进必须与前一个列表标记后的第一个非空字符对齐。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span><span style=color:#66d9ef>*</span> fruits
+</span></span><span style=display:flex><span>  + apples
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>-</span> macintosh
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>-</span> red delicious
+</span></span><span style=display:flex><span>  + pears
+</span></span><span style=display:flex><span>  + peaches
+</span></span><span style=display:flex><span><span style=color:#66d9ef>*</span> vegetables
+</span></span><span style=display:flex><span>  + broccoli
+</span></span><span style=display:flex><span>  + chard
+</span></span></code></pre></div><p>懒式（lazily）列表可以省略行前缩进，但如果列表项存在多个段落或其他块，<strong>每段的第一行需要缩进</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>+ A lazy, lazy, list
+</span></span><span style=display:flex><span>item.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>+ Another one; this looks
+</span></span><span style=display:flex><span>bad but is legal.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    Second paragraph of second
+</span></span><span style=display:flex><span>list item.
+</span></span></code></pre></div><h2 id=ordered-lists-有序列表>Ordered lists 有序列表
+<a class=header-anchor href=#ordered-lists-%e6%9c%89%e5%ba%8f%e5%88%97%e8%a1%a8></a></h2><p>标准 Markdown 语法，序号是十进制数字后加 <strong><code>.</code>和空格</strong>，序号数字会被忽略。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span><span style=color:#66d9ef>1.</span>  one
+</span></span><span style=display:flex><span><span style=color:#66d9ef>2.</span>  two
+</span></span><span style=display:flex><span><span style=color:#66d9ef>3.</span>  three
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>5.</span>  one
+</span></span><span style=display:flex><span><span style=color:#66d9ef>7.</span>  two
+</span></span><span style=display:flex><span><span style=color:#66d9ef>1.</span>  three
+</span></span></code></pre></div><p>Extension <code>fancy_lists</code></p><p>Pandoc 允许有序列表使用大小写字母、罗马数字、阿拉伯数字标注，列表标记可能被括号包围、单独一个右括号或者句号，他们必须与列表内容间隔一个空格，如果列表标记是大写字母后接句号则间隔至少两个空格。<code>#</code>同样可以作为符号标记</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>#. one
+</span></span><span style=display:flex><span>#. two
+</span></span></code></pre></div><p>Extension <code>startnum</code></p><p>Pandoc 同样支持自定义起始数字，以下列表数字后接右括号，从9开始，并且子列表为小写罗马数字。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>9)  Ninth
+</span></span><span style=display:flex><span>10)  Tenth
+</span></span><span style=display:flex><span>11)  Eleventh
+</span></span><span style=display:flex><span>       i. subone
+</span></span><span style=display:flex><span>      ii. subtwo
+</span></span><span style=display:flex><span>     iii. subthree
+</span></span></code></pre></div><p>Pandoc 将不同类型的列表标记重新开始列表，以下是建立三个列表</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>(2) Two
+</span></span><span style=display:flex><span>(5) Three
+</span></span><span style=display:flex><span><span style=color:#66d9ef>1.</span> Four
+</span></span><span style=display:flex><span><span style=color:#66d9ef>*</span>  Five
+</span></span></code></pre></div><h2 id=definition-lists-列表定义>Definition lists 列表定义
+<a class=header-anchor href=#definition-lists-%e5%88%97%e8%a1%a8%e5%ae%9a%e4%b9%89></a></h2><p>Extension <code>definition_lists</code></p><p>Pandoc 支持定义列表，使用
+<a href=https://michelf.ca/projects/php-markdown/extra/ title="PHP Markdown Extra" rel="noopener external nofollow noreferrer" target=_blank class=exturl>PHP Markdown Extra
+<i class="fa fa-external-link-alt"></i></a></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>Term 1
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>:   Definition 1
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Term 2 with <span style=font-style:italic>*inline markup*</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>:   Definition 2
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        { some code, part of Definition 2 }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    Third paragraph of definition 2.
+</span></span></code></pre></div><p>每行定义一个术语，后面可存在空白行，但必须存在一个或多个定义，定义始于冒号或波浪号，可能会存在缩进一两个空格。</p><p>TODO</p><h2 id=numbered-example-lists-编号示例列表>Numbered example lists 编号示例列表
+<a class=header-anchor href=#numbered-example-lists-%e7%bc%96%e5%8f%b7%e7%a4%ba%e4%be%8b%e5%88%97%e8%a1%a8></a></h2><p>Extension <code>example_lists</code></p><p>特殊列表标记符<code>@</code>，列表会依次编号横跨整个文档，后续的新列表使用<code>@</code>标记符，会续接之前的编号</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>(@)  My first example will be numbered (1).
+</span></span><span style=display:flex><span>(@)  My second example will be numbered (2).
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Explanation of examples.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>(@)  My third example will be numbered (3).
+</span></span></code></pre></div><p>编号的示例可以打标签并且在文档中引用</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>(@good)  This is a good example.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>As (@good) illustrates, ...
+</span></span></code></pre></div><p>标签可以使用任何字母数字下划线和连字符</p><p><strong>Note</strong> 连续段落在示例列表中 <strong>必须缩进四个空格</strong></p><h2 id=compact-and-loose-lists-紧凑稀疏列表>Compact and loose lists 紧凑／稀疏列表
+<a class=header-anchor href=#compact-and-loose-lists-%e7%b4%a7%e5%87%91%e7%a8%80%e7%96%8f%e5%88%97%e8%a1%a8></a></h2><p>Pandoc 与 <code>Markdown.pl</code> 在"边缘情况"(edge cases)表现不同</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>+   First
+</span></span><span style=display:flex><span>+   Second:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>-</span>   Fee
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>-</span>   Fie
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>-</span>   Foe
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>+   Third
+</span></span></code></pre></div><p>Pandoc 解释为紧凑列表（<code>&lt;p></code> 不包围 <strong>First</strong>, <strong>Second</strong>, <strong>Third</strong> 而 Markdown 不包围 <strong>First</strong> ）因为 <strong>Third</strong> 的空格。Pandoc 遵循简单的规则：如果文本后跟随空格视为段落，<strong>Second</strong> 后没有空行后接列表视为非段落。事实上列表后接空白行是无关的。</p><h2 id=ending-a-list-结束列表>Ending a list 结束列表
+<a class=header-anchor href=#ending-a-list-%e7%bb%93%e6%9d%9f%e5%88%97%e8%a1%a8></a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span><span style=color:#66d9ef>-</span>   item one
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span>   item two
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    { my code block }
+</span></span></code></pre></div><p>Pandoc 将代码块视为第二个列表项的第二段而不是代码块</p><p>为了“切断”列表，可以插入不缩进的内容，如HTML注释</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span><span style=color:#66d9ef>-</span>   item one
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span>   item two
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>&lt;!-- end of list --&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    { my code block }
+</span></span></code></pre></div><p>你可以使用同样的方法获得两个连续的列表而不是一个</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span><span style=color:#66d9ef>1.</span>  one
+</span></span><span style=display:flex><span><span style=color:#66d9ef>2.</span>  two
+</span></span><span style=display:flex><span><span style=color:#66d9ef>3.</span>  three
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>&lt;!-- --&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>1.</span>  uno
+</span></span><span style=display:flex><span><span style=color:#66d9ef>2.</span>  dos
+</span></span><span style=display:flex><span><span style=color:#66d9ef>3.</span>  tres
+</span></span></code></pre></div><h1 id=horzontal-rules-水平分隔线>Horzontal rules 水平分隔线
+<a class=header-anchor href=#horzontal-rules-%e6%b0%b4%e5%b9%b3%e5%88%86%e9%9a%94%e7%ba%bf></a></h1><p>一行包含三个以上 <code>*</code>,<code>-</code>,<code>_</code> 字符，字符间可插入空格，视为水平分割线</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span><span style=color:#66d9ef>*</span>  <span style=font-style:italic>*  *</span>  *
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>---------------
+</span></span></code></pre></div><h1 id=tables-表格>Tables 表格
+<a class=header-anchor href=#tables-%e8%a1%a8%e6%a0%bc></a></h1><p>四种列表样式，前三种要求等宽（fixed-width）字体,最后一种可以使用等比例（proportionally spaced）字体</p><p>Extension <code>table_captions</code></p><p>选择为所有4种表格提供题注。题注是以字符串Table:(或只是:)开头的段落，它将被剥离,它可能出现在表格之前或之后。</p><p>Extension <code>simple_tables</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>  Right     Left     Center     Default
+</span></span><span style=display:flex><span>-------     ------ ----------   -------
+</span></span><span style=display:flex><span>     12     12        12            12
+</span></span><span style=display:flex><span>    123     123       123          123
+</span></span><span style=display:flex><span>      1     1          1             1
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Table:  Demonstration of simple table syntax.
+</span></span></code></pre></div><p>表头和表行必须各自填充一行。列对齐由表头文本相对于其下方虚线的位置确定</p><ul><li>如果虚线与右侧的表头文本齐平但在左侧超出表头，则该列右对齐</li><li>如果虚线与左侧的表头文本齐平但在右侧超出表头，则该列左对齐</li><li>如果虚线超出两侧的表头文本，则该列居中对齐。</li><li>如果虚线与两侧的表头文本齐平，则使用默认对齐方式（大多数情况是左对齐）</li></ul><p><strong>表格必须以空白行结束或空白行后接虚线行</strong></p><p>如果使用虚线来结束表格，则可以省略列表头</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>-------     ------ ----------   -------
+</span></span><span style=display:flex><span>     12     12        12             12
+</span></span><span style=display:flex><span>    123     123       123           123
+</span></span><span style=display:flex><span>      1     1          1              1
+</span></span><span style=display:flex><span>-------     ------ ----------   -------
+</span></span></code></pre></div><p>省略标题时，根据表格主体的第一行内容确定列对齐。在上表中，列将分别为右，左，中和右对齐。</p><p>Extension <code>multiline_tables</code></p><p>多行表格允许表头和表行跨越多行文本（但不支持跨越表的多个列或行的单元格）</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>-------------------------------------------------------------
+</span></span><span style=display:flex><span> Centered   Default           Right Left
+</span></span><span style=display:flex><span>  Header    Aligned         Aligned Aligned
+</span></span><span style=display:flex><span>----------- ------- --------------- -------------------------
+</span></span><span style=display:flex><span>   First    row                12.0 Example of a row that
+</span></span><span style=display:flex><span>                                    spans multiple lines.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  Second    row                 5.0 Here&#39;s another one. Note
+</span></span><span style=display:flex><span>                                    the blank line between
+</span></span><span style=display:flex><span>                                    rows.
+</span></span><span style=display:flex><span>-------------------------------------------------------------
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Table: Here&#39;s the caption. It, too, may span
+</span></span><span style=display:flex><span>multiple lines.
+</span></span></code></pre></div><p>同简单列表类似，但存在以下不同</p><ul><li>它们必须以表头文本之前的一行虚线开头（除非省略表头）</li><li>它们必须以一行虚线结束，然后是空白行</li><li>行之间必须用空行分隔</li></ul><p>多行表可能只有一行，但该行后面应该有一个空行（然后是结束表的虚线行）</p><p>Extension <code>grid_tables</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>: Sample grid table.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>+---------------+---------------+--------------------+
+</span></span><span style=display:flex><span>| Fruit         | Price         | Advantages         |
+</span></span><span style=display:flex><span>+===============+===============+====================+
+</span></span><span style=display:flex><span>| Bananas       | $1.34         | - built-in wrapper |
+</span></span><span style=display:flex><span>|               |               | - bright color     |
+</span></span><span style=display:flex><span>+---------------+---------------+--------------------+
+</span></span><span style=display:flex><span>| Oranges       | $2.10         | - cures scurvy     |
+</span></span><span style=display:flex><span>|               |               | - tasty            |
+</span></span><span style=display:flex><span>+---------------+---------------+--------------------+
+</span></span></code></pre></div><p><code>=</code>行将表头与表体分开，对于无表头可以省略。网格表的单元格可以包含任意块元素（多个段落，代码块，列表等）,不支持跨多个列或行的单元格。</p><p>通过将冒号放在表头后面的分隔线边界处，类似与<code>pipe tables</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>+---------------+---------------+--------------------+
+</span></span><span style=display:flex><span>| Right         | Left          | Centered           |
+</span></span><span style=display:flex><span>+==============:+:==============+:==================:+
+</span></span><span style=display:flex><span>| Bananas       | $1.34         | built-in wrapper   |
+</span></span><span style=display:flex><span>+---------------+---------------+--------------------+
+</span></span></code></pre></div><p>对于无表头，冒号位于顶行</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>+--------------:+:--------------+:------------------:+
+</span></span><span style=display:flex><span>| Right         | Left          | Centered           |
+</span></span><span style=display:flex><span>+---------------+---------------+--------------------+
+</span></span></code></pre></div><p><strong>Note</strong> Pandoc不支持具有行跨度或列跨度的网格表。这意味着Pandoc既不支持跨行的可变列数，也不支持跨列的可变行数。所有网格表在每行中必须具有相同的列数，并且每列中的行数必须相同</p><p>Extension <code>pipe_tables</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>| Right | Left | Default | Center |
+</span></span><span style=display:flex><span>|------:|:-----|---------|:------:|
+</span></span><span style=display:flex><span>|   12  |  12  |    12   |    12  |
+</span></span><span style=display:flex><span>|  123  |  123 |   123   |   123  |
+</span></span><span style=display:flex><span>|    1  |    1 |     1   |     1  |
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  : Demonstration of pipe table syntax.
+</span></span></code></pre></div><p>前后垂直符可省略，表头不能省略。 要模拟无表头表，请包含带有空白单元格的表头。由于垂直线指示列边界，因此列不需要垂直对齐</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>fruit| price
+</span></span><span style=display:flex><span>-----|-----:
+</span></span><span style=display:flex><span>apple|2.05
+</span></span><span style=display:flex><span>pear|1.37
+</span></span><span style=display:flex><span>orange|3.09
+</span></span></code></pre></div><p>表的单元格不能包含段落和列表等块元素，也不能跨越多行。如果表包含可打印内容宽于列宽的行，则表将占用全文宽度，单元格内容将换行，相对单元格宽度由在表格表头与表格主体分隔的行中虚线数量确定。另一方面，如果没有行宽于列宽，则单元格内容将不会包裹，单元格将根据其内容确定大小</p><h1 id=metadata-blocks-元数据块>Metadata blocks 元数据块
+<a class=header-anchor href=#metadata-blocks-%e5%85%83%e6%95%b0%e6%8d%ae%e5%9d%97></a></h1><p>Extension <code>pandoc_title_block</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>% title
+</span></span><span style=display:flex><span>% author(s) (separated by semicolons)
+</span></span><span style=display:flex><span>% date
+</span></span></code></pre></div><p>解析为书目信息，而不是常规文本,如果需要不同的信息，使用空白行分离</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>%
+</span></span><span style=display:flex><span>% Author
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>% My title
+</span></span><span style=display:flex><span>%
+</span></span><span style=display:flex><span>% June 15, 2006
+</span></span></code></pre></div><p>标题可能占用多行，但延续行必须以空格开头</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>% My title
+</span></span><span style=display:flex><span>  on multiple lines
+</span></span></code></pre></div><p>如果文档有多个作者，则作者可能被放在具有开头空格的单独行中，或者用分号或两者分隔</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>% Author One
+</span></span><span style=display:flex><span>  Author Two
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>% Author One; Author Two
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>% Author One;
+</span></span><span style=display:flex><span>  Author Two
+</span></span></code></pre></div><p>日期必须单独一行</p><p>所有三个元数据字段都可能包含标准内联格式（inline format）（斜体，链接，脚注等）</p><p>Extension <code>yaml_metadata_block</code></p><p>顶部的三个连字符<code>---</code>和底部的三个连字符<code>---</code>或三个点<code>...</code>的行分隔。 <strong>YAML</strong>元数据块可能出现在文档中的任何位置，但如果它不在文档开头，则必须以前方存在空白行</p><p>元数据可以包含列表和 <strong>YAML</strong> 对象，Pandoc 将忽略名称以下划线结尾的字段，如果两个元数据块尝试设置相同的字段，则将采用第一个块中的值。</p><p>必须遵循 <strong>YAML</strong> 转义规则,标题包含冒号，则必须引用它。垂直符<code>|</code>在缩进行的行首，该行将按字面解释，无需转义。当文本中包含空行或块级样式时，必须遵守以上规则</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>---
+</span></span><span style=display:flex><span>title:  &#39;This is the title: it contains a colon&#39;
+</span></span><span style=display:flex><span>author:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Author One
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Author Two
+</span></span><span style=display:flex><span>tags: [nothing, nothingness]
+</span></span><span style=display:flex><span>abstract: |
+</span></span><span style=display:flex><span>  This is the abstract.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  It consists of two paragraphs.
+</span></span><span style=display:flex><span>...
+</span></span></code></pre></div><p>TODO <code>Template variables</code></p><h1 id=backslash-escapes-反斜杠转义>Backslash escapes 反斜杠转义
+<a class=header-anchor href=#backslash-escapes-%e5%8f%8d%e6%96%9c%e6%9d%a0%e8%bd%ac%e4%b9%89></a></h1><p>Extension <code>all_symbols_escapable</code></p><p>除了代码块或内联代码之外，任何以反斜杠开头的标点符号或空格字符都将按字面处理，即使它表示格式。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>*\*hello\**
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>one will get
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>em</span>&gt;*hello*&lt;/<span style=color:#f92672>em</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>instead of
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>strong</span>&gt;hello&lt;/<span style=color:#f92672>strong</span>&gt;
+</span></span></code></pre></div><p>转义字符<code>\`*_{}[]()>#+-.!</code>，反斜杠转义空格被解析为不间断空格</p><p>反斜杠转义的换行符（即在行尾发生的反斜杠）被解析为硬换行。这是Markdown的“隐形”换行方式，和行后尾随两个空格作用相同</p><p><strong>Note</strong> 反斜杠转义在代码块种不起作用</p><h1 id=inline-formatting-内联样式>Inline formatting 内联样式
+<a class=header-anchor href=#inline-formatting-%e5%86%85%e8%81%94%e6%a0%b7%e5%bc%8f></a></h1><h2 id=emphasis-强调>Emphasis 强调
+<a class=header-anchor href=#emphasis-%e5%bc%ba%e8%b0%83></a></h2><p>单个<code>*</code>或<code>_</code>包围文本表示斜体</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>This text is _emphasized with underscores_, and this
+</span></span><span style=display:flex><span>is *emphasized with asterisks*.
+</span></span></code></pre></div><p>两个<code>*</code>或<code>_</code>包围文本表示加重／加粗</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>This is <span style=font-weight:700>**strong emphasis**</span> and <span style=font-weight:700>__with underscores__</span>.
+</span></span></code></pre></div><p><code>*</code>或<code>_</code>包围文本中 <strong>存在空格或反斜杠转义</strong> 不会产生斜体效果</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>This is <span style=font-style:italic>* not emphasized *</span>, and \*neither is this\*.
+</span></span></code></pre></div><p>Extension <code>intraword_underscores</code></p><p>因为<code>_</code>有时在单词和标识符中使用，所以Pandoc不会将由字母、数字包围的名称<code>_</code>处理为斜体，使用<code>*</code>代替</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>feas*ible*, not feas*able*.
+</span></span></code></pre></div><h2 id=strikeout-删除线>Strikeout 删除线
+<a class=header-anchor href=#strikeout-%e5%88%a0%e9%99%a4%e7%ba%bf></a></h2><p>Extension <code>strikeout</code></p><p>用 <code>~~</code> 开始和结束</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>This <span style=color:#f92672>~~is deleted text.~~</span>
+</span></span></code></pre></div><h2 id=superscripts-and-subscripts-上下标>Superscripts and subscripts 上下标
+<a class=header-anchor href=#superscripts-and-subscripts-%e4%b8%8a%e4%b8%8b%e6%a0%87></a></h2><p>Extension <code>superscript</code> <code>subscript</code></p><p>通过<code>^</code>字符包围上标文本来表示上标; 可以通过<code>〜</code>字符围绕下标文本来表示下标</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>H~2~O is a liquid.  2^10^ is 1024.
+</span></span></code></pre></div><p>如果上标或下标文本包含空格，则必须使用反斜杠转义这些空格</p><h2 id=verbatim>Verbatim
+<a class=header-anchor href=#verbatim></a></h2><p>文本放在反引号<code>`</code>中，默认保留所有格式</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>What is the difference between <span style=color:#e6db74>`&gt;&gt;=`</span> and <span style=color:#e6db74>`&gt;&gt;`</span>?
+</span></span></code></pre></div><p>如果文本中包含反引号<code>`</code>,使用<code>``</code>代替，包围的前后空格会被忽略</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>Here is a literal backtick `` <span style=color:#e6db74>` `</span>`
+</span></span></code></pre></div><p><strong>Note</strong> 反斜杠转义在文本上下文不起作用</p><p>Extension <code>inline_code_attributes</code></p><p>类似于围栏代码块</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span><span style=color:#e6db74>`&lt;$&gt;`</span>{.haskell}
+</span></span></code></pre></div><h1 id=math-数学公式>Math 数学公式
+<a class=header-anchor href=#math-%e6%95%b0%e5%ad%a6%e5%85%ac%e5%bc%8f></a></h1><p>Extension <code>tex_math_dollars</code></p><p>两个<code>$</code>字符之间的任何内容都将被视为TeX数学公式。开头<code>$</code>必须在其右边有一个非空格字符，而结束<code>$</code>必须在其左边有一个非空格字符，并且不能立即跟随一个数字。 如果由于某种原因你需要包含文本<code>$</code>字符中，则反斜杠<code>\</code>转义它们.</p><h1 id=raw-html>Raw HTML
+<a class=header-anchor href=#raw-html></a></h1><p>Extension <code>raw_html</code></p><p>Markdown允许您在文档中的任何位置插入原始HTML（其中&lt;，>和＆按字面解释）</p><p>Extension <code>markdown_in_html_blocks</code></p><p>Extension <code>native_divs</code></p><p>Extension <code>native_spans</code></p><p>Extension <code>raw_tex</code></p><p><strong>LaTeX</strong> 文本</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>\begin{tabular}{|l|l|}\hline
+</span></span><span style=display:flex><span>Age <span style=color:#960050;background-color:#1e0010>&amp;</span> Frequency \\ \hline
+</span></span><span style=display:flex><span>18--25  <span style=color:#960050;background-color:#1e0010>&amp;</span> 15 \\
+</span></span><span style=display:flex><span>26--35  <span style=color:#960050;background-color:#1e0010>&amp;</span> 33 \\
+</span></span><span style=display:flex><span>36--45  <span style=color:#960050;background-color:#1e0010>&amp;</span> 22 \\ \hline
+</span></span><span style=display:flex><span>\end{tabular}
+</span></span></code></pre></div><h1 id=generic-raw-attribute>Generic raw attribute
+<a class=header-anchor href=#generic-raw-attribute></a></h1><p>Extension <code>raw_attribute</code></p><p>具有特殊属性的内联 <code>spans</code> 和围栏代码块将被解析为具有指定格式的内容 <strong>?</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>\```{=ms}
+</span></span><span style=display:flex><span>.MYMACRO
+</span></span><span style=display:flex><span>blah blah
+</span></span><span style=display:flex><span>\```
+</span></span></code></pre></div><h1 id=latex-macros>LaTeX macros
+<a class=header-anchor href=#latex-macros></a></h1><p>Extension <code>latex_macros</code></p><p>TODO</p><h1 id=links-链接>Links 链接
+<a class=header-anchor href=#links-%e9%93%be%e6%8e%a5></a></h1><h2 id=automatic-links-自动链接>Automatic links 自动链接
+<a class=header-anchor href=#automatic-links-%e8%87%aa%e5%8a%a8%e9%93%be%e6%8e%a5></a></h2><p>将<code>URL</code>或<code>email</code> 放在尖括号中</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>&lt;<span style=color:#f92672>http:</span><span style=color:#960050;background-color:#1e0010>//</span><span style=color:#a6e22e>google</span><span style=color:#960050;background-color:#1e0010>.</span><span style=color:#a6e22e>com</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>sam</span><span style=color:#960050;background-color:#1e0010>@</span><span style=color:#a6e22e>green</span><span style=color:#960050;background-color:#1e0010>.</span><span style=color:#a6e22e>eggs</span><span style=color:#960050;background-color:#1e0010>.</span><span style=color:#a6e22e>ham</span>&gt;
+</span></span></code></pre></div><h2 id=inline-links-内联链接>Inline links 内联链接
+<a class=header-anchor href=#inline-links-%e5%86%85%e8%81%94%e9%93%be%e6%8e%a5></a></h2><p>内联链接由方括号中的链接文本组成，后跟圆括号的URL。（URL后面可以跟引号中的链接标题。）</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>This is an [<span style=color:#f92672>inline link</span>](<span style=color:#a6e22e>/url</span>), and here&#39;s [<span style=color:#f92672>one with
+</span></span></span><span style=display:flex><span><span style=color:#f92672>a title</span>](<span style=color:#a6e22e>http://fsf.org &#34;click here for a good time!&#34;</span>).
+</span></span></code></pre></div><p><strong>方括号部分和圆括号部分之间不能有空格</strong> 链接文本可以包含格式，但标题<code>tilte</code>不能。</p><p>内联链接中的电子邮件地址不会被自动检测，因此必须以<code>mailto</code>为前缀</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>[<span style=color:#f92672>Write me!</span>](<span style=color:#a6e22e>mailto:sam@green.eggs.ham</span>)
+</span></span></code></pre></div><h2 id=reference-links-参考链接>Reference links 参考链接
+<a class=header-anchor href=#reference-links-%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5></a></h2><p>显式参考链接有两个部分，链接本身和链接定义</p><p>链接由方括号的链接文本，后跟方括号中的标签组成。 链接定义包括方括号标签，后跟 <strong>冒号和空格</strong>，后跟URL，以及可省略的引号或括号中的链接标签。<strong>引用优先于链接标签</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>[my label 1]: /foo/bar.html  &#34;My title, optional&#34;
+</span></span><span style=display:flex><span>[my label 2]: /foo
+</span></span><span style=display:flex><span>[my label 3]: http://fsf.org (The free software foundation)
+</span></span><span style=display:flex><span>[my label 4]: /bar#special  &#39;A title in single quotes&#39;
+</span></span><span style=display:flex><span>[my label 5]: &lt;<span style=color:#f92672>http:</span><span style=color:#960050;background-color:#1e0010>//</span><span style=color:#a6e22e>foo</span><span style=color:#960050;background-color:#1e0010>.</span><span style=color:#a6e22e>bar</span><span style=color:#960050;background-color:#1e0010>.</span><span style=color:#a6e22e>baz</span>&gt;
+</span></span><span style=display:flex><span>[my label 6]: http://fsf.org
+</span></span><span style=display:flex><span>  &#34;The free software foundation&#34;
+</span></span></code></pre></div><p>链接标签大小写不敏感</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>Here is [my link][FOO]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[Foo]: /bar/baz
+</span></span></code></pre></div><p>隐式参考链接的第二个方括号内容可以省略</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>See [my website][].
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[my website]: http://foo.bar.baz
+</span></span></code></pre></div><p><strong>Note</strong> 大多数 Markdown 实现不能将参考链接嵌入列表项和块引用中，Pandoc解除了这个限制。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span><span style=color:#66d9ef>&gt; </span><span style=font-style:italic>My block [quote].
+</span></span></span><span style=display:flex><span><span style=font-style:italic></span><span style=color:#66d9ef>&gt;
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef></span><span style=font-style:italic>&gt; [quote]: /foo
+</span></span></span></code></pre></div><p>Extension <code>shortcut_reference_links</code></p><p>短参考引用可以省略第二个方括号</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>See [my website].
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[my website]: http://foo.bar.baz
+</span></span></code></pre></div><h2 id=internal-links-内部链接>Internal links 内部链接
+<a class=header-anchor href=#internal-links-%e5%86%85%e9%83%a8%e9%93%be%e6%8e%a5></a></h2><p>内部链接支持链接到自动生成的标题识别符</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>See the [<span style=color:#f92672>Introduction</span>](<span style=color:#a6e22e>#introduction</span>).
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>See the [Introduction].
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[Introduction]: #introduction
+</span></span></code></pre></div><h1 id=images-图片>Images 图片
+<a class=header-anchor href=#images-%e5%9b%be%e7%89%87></a></h1><p>一个链接紧接着一个<code>!</code>将被视为插入图像，链接文本将用图像替代文字</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>![<span style=color:#f92672>la lune</span>](<span style=color:#a6e22e>lalune.jpg &#34;Voyage to the moon&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>![movie reel]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[movie reel]: movie.gif
+</span></span></code></pre></div><p>Extension <code>implicit_figures</code></p><p>图像存在非空的文字出现在段落中，将渲染成图像题注</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>![<span style=color:#f92672>This is the caption</span>](<span style=color:#a6e22e>/url/of/image.png</span>)
+</span></span></code></pre></div><p>Extension <code>link_attributes</code></p><p>图片链接可以设置属性样式</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>An inline ![<span style=color:#f92672>image</span>](<span style=color:#a6e22e>foo.jpg</span>){#id .class width=30 height=20px}
+</span></span><span style=display:flex><span>and a reference ![image][ref] with attributes.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[ref]: foo.jpg &#34;optional title&#34; {#id .class key=val key2=&#34;val 2&#34;}
+</span></span></code></pre></div><h1 id=divs-and-spans>Divs and Spans
+<a class=header-anchor href=#divs-and-spans></a></h1><p>Extension <code>fenced_divs</code></p><p>Pandoc 支持围栏 <code>div</code> 语法,连续三个冒号，后面可跟随属性样式</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>::::: {#special .sidebar}
+</span></span><span style=display:flex><span>Here is a paragraph.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>And another.
+</span></span><span style=display:flex><span>:::::
+</span></span></code></pre></div><p>围栏 <code>div</code> 可以嵌套使用</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>::: Warning ::::::
+</span></span><span style=display:flex><span>This is a warning.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>::: Danger
+</span></span><span style=display:flex><span>This is a warning within a warning.
+</span></span><span style=display:flex><span>:::
+</span></span><span style=display:flex><span>::::::::::::::::::
+</span></span></code></pre></div><p>Extension <code>bracketed_spans</code></p><p>行内方括号包围文字可以解释为链接，如果后面跟随属性样式将会解析为 <code>Span</code> 标签</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>[This is <span style=font-style:italic>*some text*</span>]{.class key=&#34;val&#34;}
+</span></span></code></pre></div><h1 id=footnotes-脚注>Footnotes 脚注
+<a class=header-anchor href=#footnotes-%e8%84%9a%e6%b3%a8></a></h1><p>Extension <code>footnotes</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>Here is a footnote reference,[^1] and another.[^longnote]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[^1]: Here is the footnote.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[^longnote]: Here&#39;s one with multiple blocks.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    Subsequent paragraphs are indented to show that they
+</span></span><span style=display:flex><span>belong to the previous footnote.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        { some.code }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    The whole paragraph can be indented, or just the first
+</span></span><span style=display:flex><span>    line.  In this way, multi-paragraph footnotes work like
+</span></span><span style=display:flex><span>    multi-paragraph list items.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>This paragraph won&#39;t be part of the note, because it
+</span></span><span style=display:flex><span>isn&#39;t indented.
+</span></span></code></pre></div><p>脚注标志符可能不包含空格、tab、回车，输出时脚注会被依次编号。脚注不需要放在文档末位处，每个脚注需要使用空白行与其他内容分离</p><p>Extension <code>inline_notes</code></p><p>行内脚注不能包含多段落内容</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>Here is an inline note.^[Inlines notes are easier to write, since
+</span></span><span style=display:flex><span>you don&#39;t have to pick an identifier and move down to type the
+</span></span><span style=display:flex><span>note.]
+</span></span></code></pre></div><h1 id=citations-引用>Citations 引用
+<a class=header-anchor href=#citations-%e5%bc%95%e7%94%a8></a></h1><p>Extension <code>citations</code></p><p>Pandoc 使用以下命令可以自动生成引用和参考目录</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>pandoc --filter pandoc-citeproc myinput.txt
+</span></span></code></pre></div><p>TODO</p><h1 id=non-pandoc-extensions>Non-pandoc extensions
+<a class=header-anchor href=#non-pandoc-extensions></a></h1><p>以下拓展可以默认未开启，如需使用需要在 <code>+EXTENSION</code> 后输入拓展名</p><p>Extension <code>old_dashes</code></p><p>智能解析 <code>-</code> 和 <code>--</code> 符号，pandoc &lt;= 1.8.2.1, <code>textile</code> 输出默认选中</p><p>Extension <code>angle_brackets_escapable</code></p><p>允许 <code>&lt;</code> 和 <code>></code> 作为转义字符</p><p>Extension <code>lists_without_preceding_blankline</code></p><p>允许列表在段落后出现，没有中间空格</p><p>Extension <code>four_space_rule</code></p><p>列表项后续段落需要四个空格缩进</p><p>Extension <code>spaced_reference_links</code></p><p>允许参考链接的两个括号之间存在空格</p><p>Extension <code>hard_line_breaks</code></p><p>段落中的所有换行符被解释为硬换行符而不是空格</p><p>Extension <code>ignore_line_breaks</code></p><p>导致段落中的换行符被忽略，而不是被视为空格或硬换行符。 此选项适用于东亚语言，其中单词之间不使用空格，但文本被分为行以便于阅读。</p><p>Extension <code>east_asian_line_breaks</code></p><p>同上，对于包含东亚宽字符和其他字符混合的文本，这是一个比 <code>ignore_line_breaks</code> 更好的选择。</p><p>Extension <code>emoji</code></p><p>Pandoc 解析 <code>:smile:</code> 为 Emoji 表情</p><p>Extension <code>tex_math_single_backslash</code></p><p><code>\( \)</code> 和 <code>\[ \]</code> 解析为数学公式，但是会忽略转义的 <code>\(</code> 和 <code>\[</code></p><p>Extension <code>tex_math_double_backslash</code></p><p><code>\\( \\)</code> 和 <code>\\[ \\]</code> 解析为数学公式</p><p>Extension <code>markdown_attribute</code></p><p>默认 Markdown 解析块级属性为文本内容,此拓展只解析 具有 <code>markdown=1</code> 标签的块属性</p><p>Extension <code>mmd_title_block</code></p><p>支持
+<a href=http://fletcherpenney.net/multimarkdown/ title=MultiMarkdown rel="noopener external nofollow noreferrer" target=_blank class=exturl>MultiMarkdown
+<i class="fa fa-external-link-alt"></i>
+</a>风格的标题块,如果 <code>pandoc_title_block</code> 和 <code>yaml_metadata_block</code> 选项开启会优先于此拓展</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>Title:   My title
+</span></span><span style=display:flex><span>Author:  John Doe
+</span></span><span style=display:flex><span>Date:    September 1, 2008
+</span></span><span style=display:flex><span>Comment: This is a sample mmd title block, with
+</span></span><span style=display:flex><span>         a field spanning multiple lines.
+</span></span></code></pre></div><p>Extension <code>abbreviations</code></p><p>解析 PHP Markdown Extra 缩写键值,Pandoc不支持缩写，缩写键值简单跳过</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>*[HTML]: Hypertext Markup Language
+</span></span></code></pre></div><p>Extension <code>autolink_bare_uris</code></p><p>所有绝对路径成为链接，即使没有尖括号<code>&lt;...></code>包围</p><p>Extension <code>mmd_link_attributes</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>This is a reference ![image][ref] with multimarkdown attributes.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[ref]: http://path.to/image &#34;Image title&#34; width=20px height=30px
+</span></span><span style=display:flex><span>       id=myId class=&#34;myClass1 myClass2&#34;
+</span></span></code></pre></div><p>Extension <code>mmd_header_identifiers</code></p><p>Extension <code>compact_definition_lists</code></p><p>兼容性定义列表，pandoc &lt;= 1.2*</p><h1 id=markdown-variants-markdwon-变种>Markdown variants Markdwon 变种
+<a class=header-anchor href=#markdown-variants-markdwon-%e5%8f%98%e7%a7%8d></a></h1><h2 id=markdown_phpextraphp-markdown-extra>markdown_phpextra(PHP Markdown Extra)
+<a class=header-anchor href=#markdown_phpextraphp-markdown-extra></a></h2><blockquote></blockquote><p>footnotes, pipe_tables, raw_html, markdown_attribute, fenced_code_blocks, definition_lists, intraword_underscores, header_attributes, link_attributes, abbreviations, shortcut_reference_links, spaced_reference_links.</p><h2 id=markdown_mmdmultimarkdown>markdown_mmd(MultiMarkdown)
+<a class=header-anchor href=#markdown_mmdmultimarkdown></a></h2><blockquote></blockquote><p>pipe_tables, raw_html, markdown_attribute, mmd_link_attributes, tex_math_double_backslash, intraword_underscores, mmd_title_block, footnotes, definition_lists, all_symbols_escapable, implicit_header_references, auto_identifiers, mmd_header_identifiers, shortcut_reference_links, implicit_figures, superscript, subscript, backtick_code_blocks, spaced_reference_links, raw_attribute.</p><h2 id=markdown_strictmarkdownpl>markdown_strict(Markdown.pl)
+<a class=header-anchor href=#markdown_strictmarkdownpl></a></h2><blockquote></blockquote><p>raw_html, shortcut_reference_links, spaced_reference_links.</p><h2 id=gfmgithub-flavored-markdown>gfm(GitHub-Flavored Markdown)
+<a class=header-anchor href=#gfmgithub-flavored-markdown></a></h2><blockquote></blockquote><p>pipe_tables, raw_html, fenced_code_blocks, auto_identifiers, ascii_identifiers, backtick_code_blocks, autolink_bare_uris, intraword_underscores, strikeout, hard_line_breaks, emoji, shortcut_reference_links, angle_brackets_escapable.</p><h1 id=常用语法高亮>常用语法高亮
+<a class=header-anchor href=#%e5%b8%b8%e7%94%a8%e8%af%ad%e6%b3%95%e9%ab%98%e4%ba%ae></a></h1><p>常用语法高亮</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-markdown data-lang=markdown><span style=display:flex><span>awk
+</span></span><span style=display:flex><span>bash
+</span></span><span style=display:flex><span>bibtex
+</span></span><span style=display:flex><span>c
+</span></span><span style=display:flex><span>cpp
+</span></span><span style=display:flex><span>cmake
+</span></span><span style=display:flex><span>css
+</span></span><span style=display:flex><span>changelog
+</span></span><span style=display:flex><span>coffee
+</span></span><span style=display:flex><span>diff
+</span></span><span style=display:flex><span>djangotemplate
+</span></span><span style=display:flex><span>dockerfile
+</span></span><span style=display:flex><span>doxygen
+</span></span><span style=display:flex><span>doxygenlua
+</span></span><span style=display:flex><span>email
+</span></span><span style=display:flex><span>erlang
+</span></span><span style=display:flex><span>gcc
+</span></span><span style=display:flex><span>go
+</span></span><span style=display:flex><span>html
+</span></span><span style=display:flex><span>haskell
+</span></span><span style=display:flex><span>ini
+</span></span><span style=display:flex><span>json
+</span></span><span style=display:flex><span>jsp
+</span></span><span style=display:flex><span>java
+</span></span><span style=display:flex><span>javascript
+</span></span><span style=display:flex><span>javadoc
+</span></span><span style=display:flex><span>kotlin
+</span></span><span style=display:flex><span>llvm
+</span></span><span style=display:flex><span>latex
+</span></span><span style=display:flex><span>lua
+</span></span><span style=display:flex><span>makefile
+</span></span><span style=display:flex><span>markdown
+</span></span><span style=display:flex><span>matlab
+</span></span><span style=display:flex><span>php
+</span></span><span style=display:flex><span>perl
+</span></span><span style=display:flex><span>postscript
+</span></span><span style=display:flex><span>powershell
+</span></span><span style=display:flex><span>python
+</span></span><span style=display:flex><span>ruby
+</span></span><span style=display:flex><span>sql
+</span></span><span style=display:flex><span>sqlmysql
+</span></span><span style=display:flex><span>scala
+</span></span><span style=display:flex><span>scheme
+</span></span><span style=display:flex><span>texinfo
+</span></span><span style=display:flex><span>mandoc
+</span></span><span style=display:flex><span>xml
+</span></span><span style=display:flex><span>yaml
+</span></span><span style=display:flex><span>zsh
+</span></span><span style=display:flex><span>dot
+</span></span><span style=display:flex><span>sed
+</span></span><span style=display:flex><span>xorg
+</span></span></code></pre></div><h1 id=引用>引用
+<a class=header-anchor href=#%e5%bc%95%e7%94%a8></a></h1><p><a href=http://pandoc.org/MANUAL.html#pandocs-markdown title=Pandoc rel="noopener external nofollow noreferrer" target=_blank class=exturl>Pandoc
+<i class="fa fa-external-link-alt"></i></a></p></div><footer class=post-footer><div class=post-tags><a href=/tags/markdown>markdown
+</a><a href=/tags/pandoc>pandoc
+</a><a href=/tags/python>python</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-copyright><img src=/imgs/cc/cc.svg width=75 height=75 align=right alt=共享知识><ul><li class=post-copyright-title><strong>文章标题：</strong>
+Pandoc Markdown 文档</li><li class=post-copyright-author><strong>本文作者： </strong>cnewbie</li><li class=post-copyright-link><strong>本文链接：</strong>
+<a id=post-cr-link href=https://cnewbie.github.io/posts/markdown-pandoc/ title="Pandoc Markdown 文档">https://cnewbie.github.io/posts/markdown-pandoc/</a></li><li class=post-copyright-license><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <i class="fab fa-fw fa-creative-commons"></i><a target=_blank href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh>BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div><div class=followme><span>欢迎关注我的其它发布渠道</span><div class=social-list><div class=social-item><a target=_blank class=social-link href=/rss.xml><span class=icon><i class="fa fa-rss"></i>
+</span><span class=label>RSS</span></a></div></div></div><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/posts/algorithm-sort-algorithms/ rel=next title=常用排序算法总结><i class="fa fa-chevron-left"></i> 常用排序算法总结</a></div><div class="post-nav-prev post-nav-item"><a href=/posts/tools-git/ rel=prev title="Git 命令速查">Git 命令速查
+<i class="fa fa-chevron-right"></i></a></div></div></footer></article></div><div id=comments class=post-comments><div class=comment-head><div class=comment-headline><i class="fas fa-comments fa-fw"></i>
+<span>评论交流</span></div></div><div class=comment-wrap><div><div class=comment-loading><i class="fa fa-sync fa-spin"></i></div><div class=giscus-container></div></div></div></div></div></main><footer class=footer><div class=footer-inner><div id=gtranslate class=google-translate><i class="fa fa-language"></i><div id=google_translate_element></div></div><div class=copyright>&copy;
+<span itemprop=copyrightYear>2010 - 2024
+</span><span class=with-love><i class="fa fa-heart"></i>
+</span><span class=author itemprop=copyrightHolder>cnewbie</span></div><div class=powered-by>由 <a href=https://gohugo.io title=0.121.1 target=_blank>Hugo</a> & <a href=https://github.com/hugo-next/hugo-theme-next title=4.5.3 target=_blank>Hugo NexT.Gemini</a> 强力驱动</div></div></footer><script type=text/javascript src=https://cdn.staticfile.org/animejs/3.2.1/anime.min.js defer></script><script type=text/javascript src=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.js defer></script><script class=next-config data-name=main type=application/json>{"bookmark":{"color":"#222","enable":true,"save":"manual"},"copybtn":true,"darkmode":true,"giscus":{"cfg":{"category":"Comments","categoryid":null,"emit":false,"inputposition":"top","mapping":"title","reactions":false,"repo":"cnewbie/cnewbie.github.io","repoid":null,"theme":"preferred_color_scheme"},"js":"https://giscus.app/client.js"},"hostname":"https://cnewbie.github.io","i18n":{"ds_day":" 天前","ds_days":" 天 ","ds_hour":" 小时前","ds_hours":" 小时 ","ds_just":"刚刚","ds_min":" 分钟前","ds_mins":" 分钟","ds_month":" 个月前","ds_years":" 年 ","empty":"没有找到任何搜索结果：${query}","hits":"找到 ${hits} 个搜索结果","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","placeholder":"搜索..."},"lang":"zh-CN","lazyload":false,"localSearch":{"enable":true,"limit":1e3,"path":"/searchindexes.xml","preload":false,"topnperarticle":-1,"trigger":"auto","unescape":false},"motion":{"async":true,"enable":true,"transition":{"collheader":"fadeInLeft","postblock":"fadeIn","postbody":"fadeInDown","postheader":"fadeInDown","sidebar":"fadeInUp"}},"postmeta":{"comments":{"enable":false,"plugin":"waline"},"views":{"enable":true,"plugin":"busuanzi"}},"root":"/","scheme":"Gemini","sidebar":{"display":"post","offset":12,"padding":18,"position":"left","width":256},"vendor":{"plugins":"qiniu","router":"https://cdn.staticfile.org"},"version":"4.5.3","waline":{"cfg":{"emoji":false,"imguploader":false,"placeholder":"请文明发言哟 ヾ(≧▽≦*)o","reaction":true,"reactiontext":["点赞","踩一下","得意","不屑","尴尬","睡觉"],"reactiontitle":"你认为这篇文章怎么样？","requiredmeta":["nick","mail"],"serverurl":null,"sofa":"快来发表你的意见吧 (≧∀≦)ゞ","wordlimit":200},"css":{"alias":"waline","file":"dist/waline.css","name":"@waline/client","version":"2.13.0"},"js":{"alias":"waline","file":"dist/waline.js","name":"@waline/client","version":"2.13.0"}}}</script><script type=text/javascript src=/js/main.min.b0c78e5a4df586ee46d02716ffa91a4a322e56763e04e91eb2ba052c9469ed02.js defer></script></body></html>
